@@ -1,7 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@krds-ui/**/*.{js,ts,jsx,tsx}", // KRDS 패키지
+    "./.storybook/**/*.{js,ts,jsx,tsx}", // Storybook
+  ],
   theme: {
     extend: {},
   },
