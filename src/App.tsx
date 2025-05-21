@@ -1,5 +1,7 @@
 import { Button } from "@krds-ui/core";
 
+import { Button } from "@krds-ui/core";
+
 function App() {
   return (
     <>
