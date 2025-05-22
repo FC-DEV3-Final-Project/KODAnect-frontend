@@ -27,28 +27,28 @@ function Footer() {
         <div></div>
 
         {/* Footer Inner */}
-        <div>
+        <div className="flex flex-col gap-g9 bg-gray-5 pb-p8 pt-p10">
           {/* Footer Logo */}
           <div>
             <img src={Logo} alt="한국장기조직기증원" className="w-[175px]" />
           </div>
 
           {/* Footer Center */}
-          <div className="mb-g9 mt-g9 flex justify-between">
+          <div className="flex justify-between pr-[98px]">
             {/* Footer Info */}
-            <div>
+            <div className="flex flex-col gap-g5">
               <p className="text-[17px] text-gray-90">
                 서울시 서대문구 충정로 36 국민연금공단
                 <br />
                 충정로사옥5층 한국장기조직기능원 (우)03741
               </p>
-              <ul className="mt-g5 flex flex-col gap-g3 text-[17px]">
-                <li>
-                  <strong>대표전화 </strong>
+              <ul className="flex flex-col gap-g3 text-[17px]">
+                <li className="flex gap-g3">
+                  <strong>대표전화</strong>
                   <span>02-3444-5632</span>
                 </li>
-                <li>
-                  <strong>대표이메일 </strong>
+                <li className="flex gap-g3">
+                  <strong>대표이메일</strong>
                   <span>koda@koda14583.kr</span>
                 </li>
               </ul>
@@ -73,7 +73,7 @@ function Footer() {
           </div>
 
           {/* Footer Bottom */}
-          <div className="flex justify-between border-t border-gray-20 pb-p8 pt-p6 text-[15px]">
+          <div className="flex justify-between border-t border-gray-20 pt-p6 text-[15px]">
             <ul className="flex gap-g3 text-gray-90">
               {["개인정보처리방침", "위치안내", "경영고시", "기증희망등록", "저작권정책"].map(
                 (item, index) => (
