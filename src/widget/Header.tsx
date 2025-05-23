@@ -2,7 +2,6 @@ import { useState } from "react";
 import { LinkButton } from "@krds-ui/core";
 import Logo from "@/assets/logo.svg";
 import Menu from "@/assets/icon/menu.svg";
-import Navbar from "./Navbar";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +29,6 @@ export default function Header() {
           </button>
         </div>
       </header>
-      {isOpen && <Navbar />}
     </>
   );
 }
