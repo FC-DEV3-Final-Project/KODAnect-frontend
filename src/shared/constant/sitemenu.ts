@@ -6,10 +6,6 @@ interface SiteMenu {
 
 export const SITE_MENU: SiteMenu[] = [
   {
-    label: "홈",
-    path: "/",
-  },
-  {
     label: "장기·조직기증",
     children: [
       {
