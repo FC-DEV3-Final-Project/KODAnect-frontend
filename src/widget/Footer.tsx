@@ -21,13 +21,12 @@ function Footer() {
   */
 
   return (
-    <footer className="mt-auto w-full">
+    <footer className="mt-auto w-full bg-gray-5">
+      {/* Footer Quick */}
+      <div></div>
       <div className="mx-auto w-full max-w-[1200px]">
-        {/* Footer Quick */}
-        <div></div>
-
         {/* Footer Inner */}
-        <div className="flex flex-col gap-g9 bg-gray-5 pb-p8 pt-p10">
+        <div className="flex flex-col gap-g9 pb-p8 pt-p10">
           {/* Footer Logo */}
           <div>
             <img src={Logo} alt="한국장기조직기증원" className="w-[175px]" />
