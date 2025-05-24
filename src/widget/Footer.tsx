@@ -1,15 +1,45 @@
 import Logo from "@/assets/logo.svg";
 import Youtube from "@/assets/icon/youtube.svg";
 import FaceBook from "@/assets/icon/facebook.svg";
-import Blog from "@/assets/icon/naver_blog.svg";
+import Blog from "@/assets/icon/naver-blog.svg";
 import Instagram from "@/assets/icon/instagram.svg";
+import Arrow from "@/assets/icon/arrow-down.svg";
+import OpenNewWindow from "@/assets/icon/open-new-window.svg";
+import { useState } from "react";
 
 function Footer() {
+  const [isOpen, setIsOpen] = useState(false);
+  const relatedSites = [
+    { title: "보건복지부", url: "#" },
+    { title: "보건복지 상담센터", url: "#" },
+    { title: "국립장기조직 혈액관리원", url: "#" },
+    { title: "대한이식학회", url: "#" },
+  ];
   const socialLinks = [
-    { href: "#", icon: Youtube, label: "유튜브" },
-    { href: "#", icon: FaceBook, label: "페이스북" },
-    { href: "#", icon: Blog, label: "네이버 블로그" },
-    { href: "#", icon: Instagram, label: "인스타그램" },
+    {
+      href: "#",
+      icon: Youtube,
+      label: "유튜브",
+      alt: "한국장기조직기증원 유튜브 바로가기",
+    },
+    {
+      href: "#",
+      icon: FaceBook,
+      label: "페이스북",
+      alt: "한국장기조직기증원 페이스북 바로가기",
+    },
+    {
+      href: "#",
+      icon: Blog,
+      label: "네이버 블로그",
+      alt: "한국장기조직기증원 네이버 블로그 바로가기",
+    },
+    {
+      href: "#",
+      icon: Instagram,
+      label: "인스타그램",
+      alt: "한국장기조직기증원 인스타그램 바로가기",
+    },
   ];
 
   // layout.tsx 혹은 page.tsx 같은 상위 컴포넌트를 flex로 감싸줘야 footer 하단에 고정됩니다.
@@ -21,71 +51,116 @@ function Footer() {
   */
 
   return (
-    <footer className="mt-auto w-full bg-gray-5">
-      {/* Footer Quick */}
-      <div></div>
-      <div className="mx-auto w-full max-w-[1200px]">
-        {/* Footer Inner */}
-        <div className="flex flex-col gap-g9 pb-p8 pt-p10">
+    <footer className={`mt-auto w-full border-gray-20 ${isOpen ? "border-0" : "border-t"}`}>
+      {/* Footer Related Sites */}
+      <section aria-label="관련 사이트" className="w-full">
+        <ul
+          className={`mx-auto w-full max-w-[1200px] overflow-hidden transition-all duration-300 ${isOpen ? "border-x border-t border-gray-20 py-g6" : "max-h-0 pt-0"}`}
+        >
+          {relatedSites.map(({ title, url }) => (
+            <li key={title} className="mb-p4 last:mb-0">
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mobile:py-0 flex w-full items-center justify-between px-p8 py-p6"
+              >
+                <span className="mobile:text-b-sm text-b-md text-gray-50">{title}</span>
+                <img src={OpenNewWindow} alt={`${title} 바로가기`} className="mobile:w-5 w-6" />
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Related Sites Toggle Button */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "관련 사이트 닫기" : "관련 사이트 펼치기"}
+          className={`mobile:border-x-0 mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 text-b-md ${isOpen ? "border-t" : "border-t-0"}`}
+        >
+          <span>관련 사이트</span>
+          <img
+            src={Arrow}
+            alt={isOpen ? "접기 아이콘" : "펼치기 아이콘"}
+            className={`mobile:w-5 w-6 transition-transform duration-300 ${isOpen ? "rotate-0" : "rotate-180"} `}
+          />
+        </button>
+      </section>
+
+      {/* Footer Inner */}
+      <section className="w-full border border-gray-20 bg-gray-5">
+        <div className="mobile:px-p6 mobile:pt-p8 mx-auto w-full max-w-[1280px] px-p10 pb-p8 pt-p10">
           {/* Footer Logo */}
-          <div>
-            <img src={Logo} alt="한국장기조직기증원" className="w-[175px]" />
-          </div>
+          <img src={Logo} alt="한국장기조직기증원 로고" className="mobile:mb-g5 mb-g9 h-[60px]" />
 
           {/* Footer Center */}
-          <div className="flex justify-between pr-[98px]">
+          <section
+            className="mobile:mb-g5 mobile:flex-col mb-g9 flex w-full justify-between"
+            aria-label="기관 정보 및 SNS 링크"
+          >
             {/* Footer Info */}
-            <div className="flex flex-col gap-g5">
-              <p className="text-[17px] text-gray-90">
-                서울시 서대문구 충정로 36 국민연금공단
-                <br />
+            <address className="mobile:mb-g7 mobile:text-b-sm flex flex-col gap-g5 text-b-md not-italic text-gray-90">
+              <p>
+                서울시 서대문구 충정로 36 국민연금공단 <br />
                 충정로사옥5층 한국장기조직기능원 (우)03741
               </p>
-              <ul className="flex flex-col gap-g3 text-[17px]">
-                <li className="flex gap-g3">
-                  <strong>대표전화</strong>
-                  <span>02-3444-5632</span>
-                </li>
-                <li className="flex gap-g3">
-                  <strong>대표이메일</strong>
-                  <span>koda@koda14583.kr</span>
-                </li>
-              </ul>
-            </div>
+              <dl className="flex flex-col gap-g3">
+                <div className="flex gap-g3">
+                  <dt className="font-bold">대표전화</dt>
+                  <dd>
+                    <a href="tel:02-3444-5632">02-3444-5632</a>
+                  </dd>
+                </div>
+                <div className="flex gap-g3">
+                  <dt className="font-bold">대표이메일</dt>
+                  <dd>
+                    <a href="mailto:koda@koda14583.kr">koda@koda14583.kr</a>
+                  </dd>
+                </div>
+              </dl>
+            </address>
 
             {/* Footer Link */}
-            <div>
+            <nav aria-label="SNS 바로가기">
               <ul className="flex gap-g3">
-                {socialLinks.map(({ href, icon, label }) => (
+                {socialLinks.map(({ href, icon, label, alt }) => (
                   <li key={label}>
                     <a
                       href={href}
-                      className="block rounded-full border border-gray-20 p-p3 transition-colors hover:bg-gray-10"
+                      className="block rounded-full border border-gray-20 p-p3 transition-colors hover:bg-gray-20"
                       aria-label={label}
                     >
-                      <img src={icon} alt="" />
+                      <img src={icon} alt={alt} />
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
+            </nav>
+          </section>
 
           {/* Footer Bottom */}
-          <div className="flex justify-between border-t border-gray-20 pt-p6 text-[15px]">
-            <ul className="flex gap-g3 text-gray-90">
-              {["개인정보처리방침", "위치안내", "경영고시", "기증희망등록", "저작권정책"].map(
-                (item, index) => (
-                  <li key={index} className="pl-p1 pr-p1">
-                    <a href="#">{item}</a>
-                  </li>
-                ),
-              )}
-            </ul>
-            <p className="text-gray-70">Copyright &copy; 2015 All Rights Reserved.</p>
-          </div>
+          <section
+            className="mobile:flex-col mobile:gap-g6 flex w-full justify-between border-t border-gray-20 pt-p6 text-b-sm"
+            aria-label="법적 고지 및 저작권"
+          >
+            <nav aria-label="법적 고지사항">
+              <ul className="flex flex-wrap gap-g3 text-gray-90">
+                {["개인정보처리방침", "위치안내", "경영고시", "기증희망등록", "저작권정책"].map(
+                  (item, index) => (
+                    <li key={index}>
+                      <a href="#">{item}</a>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </nav>
+            <small className="mobile:text-b-xs text-b-sm text-gray-70">
+              Copyright &copy; 2015 All Rights Reserved.
+            </small>
+          </section>
         </div>
-      </div>
+      </section>
     </footer>
   );
 }
