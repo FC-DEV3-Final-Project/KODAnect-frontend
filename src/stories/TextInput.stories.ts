@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
-import { TextInput } from "@krds-ui/core";
+import { TextInput } from "@/shared/components/TextInput";
 
 const meta = {
   title: "Components/TextInput",
@@ -10,9 +9,9 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    length: {
+    height: {
       control: { type: "select" },
-      options: ["x-short", "short", "middle", "long", "full"],
+      options: ["large", "medium", "small"],
     },
     title: {
       control: {
@@ -24,18 +23,52 @@ const meta = {
         type: "text",
       },
     },
-    helpText: {
-      control: {
-        type: "text",
-      },
-    },
     error: {
       control: {
         type: "text",
       },
     },
+    completed: {
+      control: {
+        type: "text",
+      },
+    },
+    focusMessage: {
+      control: {
+        type: "text",
+      },
+    },
+    placeholder: {
+      control: {
+        type: "text",
+      },
+    },
+    iconToggle: {
+      control: {
+        type: "boolean",
+      },
+    },
+    isVisible: {
+      control: {
+        type: "boolean",
+      },
+    },
+    onToggleIconClick: {
+      control: {
+        action: "toggleClicked",
+      },
+    },
+    onFocus: {
+      control: {
+        action: "focused",
+      },
+    },
+    onBlur: {
+      control: {
+        action: "blurred",
+      },
+    },
     onChange: { action: "changed" },
-    maxLength: { control: { type: "number" } },
   },
 } satisfies Meta<typeof TextInput>;
 
@@ -48,11 +81,7 @@ export const Default: Story = {
     title: "이름",
     description: "입력하신 이름이 저장됩니다.",
     placeholder: "이름을 입력하세요",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "long",
-    maxLength: 20,
+    height: "medium",
   },
 };
 
@@ -62,118 +91,77 @@ export const Error: Story = {
     title: "이름",
     description: "입력하신 이름이 저장됩니다.",
     placeholder: "이름을 입력하세요",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "long",
-    maxLength: 20,
     error: "이름을 입력하세요",
+    height: "medium",
   },
 };
 
-export const HelpText: Story = {
+export const Completed: Story = {
   args: {
     id: "text-input3",
     title: "이름",
     description: "입력하신 이름이 저장됩니다.",
     placeholder: "이름을 입력하세요",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "long",
-    maxLength: 20,
-    helpText: "성과 이름을 한번에 입력하세요.",
+    completed: "사용 가능한 이름 입니다.",
+    height: "medium",
   },
 };
 
-export const XShort: Story = {
+export const FocusMessage: Story = {
   args: {
     id: "text-input4",
     title: "이름",
     description: "입력하신 이름이 저장됩니다.",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "x-short",
-    maxLength: 20,
+    placeholder: "영문, 숫자 포함 8자 이상",
+    focusMessage: "8자 이상 입력해야 합니다.",
+    height: "medium",
   },
 };
 
-export const Short: Story = {
+export const ToggleIcon: Story = {
   args: {
     id: "text-input5",
     title: "이름",
     description: "입력하신 이름이 저장됩니다.",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "short",
-    maxLength: 20,
+    placeholder: "비밀번호를 입력해주세요",
+    iconToggle: true,
+    isVisible: false,
+    height: "medium",
   },
 };
 
-export const Middle: Story = {
+export const WithDeleteButton: Story = {
   args: {
     id: "text-input6",
     title: "이름",
-    description: "입력하신 이름이 저장됩니다.",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "middle",
-    maxLength: 20,
-  },
-};
-
-export const Long: Story = {
-  args: {
-    id: "text-input7",
-    title: "이름",
-    description: "입력하신 이름이 저장됩니다.",
+    description: "이름을 입력하면 삭제 아이콘이 생겨요",
     placeholder: "이름을 입력하세요",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "long",
-    maxLength: 20,
-  },
-};
-
-export const Full: Story = {
-  args: {
-    id: "text-input8",
-    title: "이름",
-    description: "입력하신 이름이 저장됩니다.",
-    placeholder: "이름을 입력하세요",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "full",
-    maxLength: 20,
+    height: "medium",
   },
 };
 
 export const NoTitle: Story = {
   args: {
-    id: "text-input9",
+    id: "text-input6",
     description: "입력하신 이름이 저장됩니다.",
-    placeholder: "이름을 입력하세요",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "long",
-    maxLength: 20,
+    placeholder: "이름",
+    height: "medium",
   },
 };
 
 export const NoDescription: Story = {
   args: {
     id: "text-input10",
+    title: "이름",
     placeholder: "이름을 입력하세요",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-    },
-    length: "long",
-    maxLength: 20,
+    height: "medium",
+  },
+};
+
+export const OnlyInput: Story = {
+  args: {
+    id: "text-input11",
+    placeholder: "이름을 입력하세요",
+    height: "medium",
   },
 };

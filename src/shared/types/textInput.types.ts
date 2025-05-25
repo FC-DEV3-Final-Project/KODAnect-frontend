@@ -9,6 +9,9 @@ export type TextInputProps = {
   height?: "large" | "medium" | "small";
   iconToggle?: boolean;
   isVisible?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClear?: () => void;
   onToggleIconClick?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 

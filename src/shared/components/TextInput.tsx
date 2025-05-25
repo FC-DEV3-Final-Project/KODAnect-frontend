@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import { forwardRef, useState } from "react";
 import { Label } from "@/shared/components/Label";
 import DangerIcon from "@/assets/icon/system-danger.svg";
 import CompletedIcon from "@/assets/icon/system-success.svg";
@@ -26,6 +26,9 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       onToggleIconClick,
       onFocus,
       onBlur,
+      value,
+      onChange,
+      onClear,
       ...props
     },
     ref,
@@ -36,7 +39,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     const focusId = `${inputId}-focus`;
 
     const [isFocused, setIsFocused] = useState(false);
-    const [value, setValue] = useState("");
 
     // describedby ids 조합 (접근성)
     const describedByIds = [
@@ -76,6 +78,18 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       }
     };
 
+    const handleClear = () => {
+      if (onClear) {
+        onClear();
+      } else if (onChange) {
+        const syntheticEvent = {
+          target: { value: "" },
+          currentTarget: { value: "" },
+        } as React.ChangeEvent<HTMLInputElement>;
+        onChange(syntheticEvent);
+      }
+    };
+
     return (
       <div
         role="group"
@@ -110,13 +124,13 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
               onBlur?.(e);
             }}
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={onChange}
             {...props}
           />
 
           <div className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-2">
             {value && (
-              <button type="button" onClick={() => setValue("")}>
+              <button type="button" onClick={handleClear}>
                 <img src={DeleteIcon} alt="삭제" className="h-icon3 w-icon3" />
               </button>
             )}
