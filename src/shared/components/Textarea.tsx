@@ -3,16 +3,7 @@ import { Label } from "@/shared/components/Label";
 import DangerIcon from "@/assets/icon/system-danger.svg";
 import CompletedIcon from "@/assets/icon/system-success.svg";
 import FocusIcon from "@/assets/icon/system-info.svg";
-
-type TextAreaProps = {
-  id: string;
-  title?: string;
-  description?: string;
-  maxLength?: number;
-  error?: string;
-  completed?: string;
-  focusMessage?: string;
-} & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+import type { TextAreaProps } from "@/shared/types/textInput.types";
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
