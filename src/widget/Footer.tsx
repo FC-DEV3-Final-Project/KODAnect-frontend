@@ -63,10 +63,14 @@ function Footer() {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mobile:py-0 flex w-full items-center justify-between px-p8 py-p6"
+                className="flex w-full items-center justify-between px-p8 py-p6 mobile:py-0"
               >
-                <span className="mobile:text-b-sm text-b-md text-gray-50">{title}</span>
-                <img src={OpenNewWindow} alt={`${title} 바로가기`} className="mobile:w-5 w-6" />
+                <span className="text-b-md text-gray-50 mobile:text-b-sm">{title}</span>
+                <img
+                  src={OpenNewWindow}
+                  alt={`${title} 바로가기`}
+                  className="w-icon3 mobile:w-icon2"
+                />
               </a>
             </li>
           ))}
@@ -77,30 +81,30 @@ function Footer() {
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-label={isOpen ? "관련 사이트 닫기" : "관련 사이트 펼치기"}
-          className={`mobile:border-x-0 mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 text-b-md ${isOpen ? "border-t" : "border-t-0"}`}
+          className={`mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 text-b-md mobile:border-x-0 ${isOpen ? "border-t" : "border-t-0"}`}
         >
           <span>관련 사이트</span>
           <img
             src={Arrow}
             alt={isOpen ? "접기 아이콘" : "펼치기 아이콘"}
-            className={`mobile:w-5 w-6 transition-transform duration-300 ${isOpen ? "rotate-0" : "rotate-180"} `}
+            className={`w-icon3 transition-transform duration-300 mobile:w-icon2 ${isOpen ? "rotate-0" : "rotate-180"} `}
           />
         </button>
       </section>
 
       {/* Footer Inner */}
       <section className="w-full border border-gray-20 bg-gray-5">
-        <div className="mobile:px-p6 mobile:pt-p8 mx-auto w-full max-w-[1280px] px-p10 pb-p8 pt-p10">
+        <div className="mx-auto w-full max-w-[1280px] px-p10 pb-p8 pt-p10 mobile:px-p6 mobile:pt-p8">
           {/* Footer Logo */}
-          <img src={Logo} alt="한국장기조직기증원 로고" className="mobile:mb-g5 mb-g9 h-[60px]" />
+          <img src={Logo} alt="한국장기조직기증원 로고" className="mb-g9 h-[60px] mobile:mb-g5" />
 
           {/* Footer Center */}
           <section
-            className="mobile:mb-g5 mobile:flex-col mb-g9 flex w-full justify-between"
+            className="mb-g9 flex w-full justify-between mobile:mb-g5 mobile:flex-col"
             aria-label="기관 정보 및 SNS 링크"
           >
             {/* Footer Info */}
-            <address className="mobile:mb-g7 mobile:text-b-sm flex flex-col gap-g5 text-b-md not-italic text-gray-90">
+            <address className="flex flex-col gap-g5 text-b-md not-italic text-gray-90 mobile:mb-g7 mobile:text-b-sm">
               <p>
                 서울시 서대문구 충정로 36 국민연금공단 <br />
                 충정로사옥5층 한국장기조직기능원 (우)03741
@@ -141,7 +145,7 @@ function Footer() {
 
           {/* Footer Bottom */}
           <section
-            className="mobile:flex-col mobile:gap-g6 flex w-full justify-between border-t border-gray-20 pt-p6 text-b-sm"
+            className="flex w-full justify-between border-t border-gray-20 pt-p6 text-b-sm mobile:flex-col mobile:gap-g6"
             aria-label="법적 고지 및 저작권"
           >
             <nav aria-label="법적 고지사항">
@@ -155,7 +159,7 @@ function Footer() {
                 )}
               </ul>
             </nav>
-            <small className="mobile:text-b-xs text-b-sm text-gray-70">
+            <small className="text-b-sm text-gray-70 mobile:text-b-xs">
               Copyright &copy; 2015 All Rights Reserved.
             </small>
           </section>
