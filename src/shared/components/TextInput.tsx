@@ -14,7 +14,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     {
       title,
       description,
-      helpText,
       error,
       focusMessage,
       completed,
@@ -94,7 +93,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <div
         role="group"
         aria-labelledby={`${inputId}-label`}
-        className="flex flex-col justify-center gap-g1"
+        className="flex flex-col justify-center gap-g2"
       >
         {title && (
           <Label id={`${inputId}-label`} htmlFor={inputId} size={"m"} color={"default"}>

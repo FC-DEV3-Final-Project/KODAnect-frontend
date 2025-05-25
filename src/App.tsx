@@ -1,6 +1,7 @@
 import { Button } from "@krds-ui/core";
 import { TextInput } from "@/shared/components/TextInput";
 import { useState } from "react";
+import { TextArea } from "./shared/components/Textarea";
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,6 +23,14 @@ function App() {
         iconToggle
         focusMessage="입력하세요"
         onToggleIconClick={() => setIsVisible((prev) => !prev)}
+      />
+      <TextArea
+        id="textarea"
+        title="제목"
+        description="입력시 필요한 정보를 입력해 주세요"
+        placeholder="내용을 입력하세요"
+        focusMessage="입력하세요"
+        maxLength={100}
       />
     </>
   );

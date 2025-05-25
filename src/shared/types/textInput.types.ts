@@ -2,7 +2,6 @@ export type TextInputProps = {
   id: string;
   title?: string;
   description?: string;
-  helpText?: string;
   error?: string;
   focusMessage?: string;
   completed?: string;
