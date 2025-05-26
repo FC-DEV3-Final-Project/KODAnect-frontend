@@ -1,12 +1,5 @@
 import CheckIcon from "@/assets/icon/check.svg?react";
-
-type CheckboxProps = {
-  id: string;
-  label: string;
-  checked: boolean;
-  onChange: () => void;
-  disabled?: boolean;
-};
+import type { CheckboxProps } from "@/shared/types/checkbox.types";
 
 export function Checkbox({ id, label, checked, onChange, disabled = false }: CheckboxProps) {
   return (
