@@ -45,7 +45,7 @@ function AccordionMenu({ menu, defaultOpen = true }: { menu: SiteMenu; defaultOp
                 onClick={() => {
                   alert(`${child.label} 메뉴 클릭`);
                 }}
-                className="block break-keep py-p3 pr-p6"
+                className="block break-keep py-p3 pr-p6 text-gray-90"
               >
                 {child.label}
               </a>
