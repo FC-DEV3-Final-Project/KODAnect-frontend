@@ -13,7 +13,7 @@ function AccordionMenu({ menu, defaultOpen = true }: { menu: SiteMenu; defaultOp
   const hasChildren = menu.children && menu.children.length > 0;
 
   return (
-    <div className="border-b border-gray-200 text-b-md">
+    <div className="border-b border-gray-200">
       {/* Toggle button for accordion */}
       <button
         className="flex w-full items-center justify-between px-p3 py-p6 font-bold text-gray-95"
@@ -37,14 +37,15 @@ function AccordionMenu({ menu, defaultOpen = true }: { menu: SiteMenu; defaultOp
           {menu.children!.map((child, index) => (
             <li
               key={index}
-              className="hover:rounded-r2 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80"
+              className="relative pl-p9 hover:rounded-r2 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80"
             >
+              <span className="absolute left-p6 top-[20.5px] h-[4px] w-[4px] -translate-y-1/2 rounded-full bg-gray-90 hover:bg-secondary-80" />
               <a
                 href={child.path || "#"}
                 onClick={() => {
                   alert(`${child.label} 메뉴 클릭`);
                 }}
-                className="block px-p6 py-p3"
+                className="block break-keep py-p3 pr-p6"
               >
                 {child.label}
               </a>

@@ -8,7 +8,6 @@ interface SideMenuProps {
 
 function SideMenu({ selectedLabel }: SideMenuProps) {
   const selectedMenu = SITE_MENU.find((menu) => menu.label === selectedLabel);
-  // const firstLabel = SITE_MENU[0]?.label ?? "메뉴";
 
   if (!selectedMenu) return null;
 
@@ -23,14 +22,14 @@ function SideMenu({ selectedLabel }: SideMenuProps) {
   */
 
   return (
-    <aside className="w-[248px] shrink-0 mobile:hidden" aria-label="사이드 메뉴">
+    <aside className="h-screen w-[248px] shrink-0 mobile:hidden" aria-label="사이드 메뉴">
       {/* Top visual area */}
-      <div className="flex h-[125px] w-full items-center justify-center rounded-r-[30px] rounded-bl-[30px] bg-[#D9d9d9]">
+      <div className="flex h-[125px] w-full items-center justify-center rounded-r-[30px] rounded-bl-[30px] bg-secondary-10">
         <span className="text-h-lg font-bold">{selectedMenu.label}</span>
       </div>
 
       {/* Navigation menu */}
-      <nav aria-label={`${selectedMenu.label} 메뉴`}>
+      <nav aria-label={`${selectedMenu.label} 메뉴`} className="bg-white">
         {selectedMenu?.children?.map((menu, index) =>
           menu.children ? (
             <AccordionMenu key={index} menu={menu} defaultOpen />
@@ -38,7 +37,7 @@ function SideMenu({ selectedLabel }: SideMenuProps) {
             <a
               key={index}
               href={menu.path}
-              className="block border-b border-gray-200 px-p3 py-p6 font-bold hover:bg-secondary-5 hover:font-bold hover:text-secondary-80"
+              className="block border-b border-gray-200 px-p3 py-p6 font-bold hover:border-b-[3px] hover:border-secondary-70 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80"
             >
               {menu.label}
             </a>

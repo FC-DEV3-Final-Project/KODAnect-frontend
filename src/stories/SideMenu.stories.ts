@@ -5,7 +5,7 @@ import SideMenu from "@/widget/SideMenu";
 import { SITE_MENU } from "@/shared/constant/mockSiteMenu";
 
 const meta = {
-  title: "KRDS/SideMenu",
+  title: "widget/SideMenu",
   component: SideMenu,
   parameters: {
     layout: "fullscreen",
