@@ -65,7 +65,7 @@ function Footer() {
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-between px-p8 py-p6 mobile:py-0"
               >
-                <span className="text-b-md text-gray-50 mobile:text-b-sm">{title}</span>
+                <span className="text-gray-50 mobile:text-b-sm">{title}</span>
                 <img
                   src={OpenNewWindow}
                   alt={`${title} 바로가기`}
@@ -81,7 +81,7 @@ function Footer() {
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-label={isOpen ? "관련 사이트 닫기" : "관련 사이트 펼치기"}
-          className={`mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 text-b-md mobile:border-x-0 ${isOpen ? "border-t" : "border-t-0"}`}
+          className={`mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 mobile:border-x-0 ${isOpen ? "border-t" : "border-t-0"}`}
         >
           <span>관련 사이트</span>
           <img
@@ -104,7 +104,7 @@ function Footer() {
             aria-label="기관 정보 및 SNS 링크"
           >
             {/* Footer Info */}
-            <address className="flex flex-col gap-g5 text-b-md not-italic text-gray-90 mobile:mb-g7 mobile:text-b-sm">
+            <address className="flex flex-col gap-g5 not-italic text-gray-90 mobile:mb-g7 mobile:text-b-sm">
               <p>
                 서울시 서대문구 충정로 36 국민연금공단 <br />
                 충정로사옥5층 한국장기조직기능원 (우)03741
