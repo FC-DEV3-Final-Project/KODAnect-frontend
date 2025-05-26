@@ -37,7 +37,7 @@ function SideMenu({ selectedLabel }: SideMenuProps) {
             <a
               key={index}
               href={menu.path}
-              className="block border-b border-gray-200 px-p3 py-p6 font-bold hover:border-b-[3px] hover:border-secondary-70 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80"
+              className="block border-b border-gray-200 px-p3 py-p6 font-bold hover:border-secondary-70 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80 hover:shadow-[inset_0_-2px_0_0_theme('colors.secondary.70')]"
             >
               {menu.label}
             </a>

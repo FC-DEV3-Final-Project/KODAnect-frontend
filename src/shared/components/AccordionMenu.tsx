@@ -37,7 +37,7 @@ function AccordionMenu({ menu, defaultOpen = true }: { menu: SiteMenu; defaultOp
           {menu.children!.map((child, index) => (
             <li
               key={index}
-              className="relative pl-p9 hover:rounded-r2 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80"
+              className="relative pl-p9 hover:rounded-r3 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80"
             >
               <span className="absolute left-p6 top-[20.5px] h-[4px] w-[4px] -translate-y-1/2 rounded-full bg-gray-90 hover:bg-secondary-80" />
               <a
