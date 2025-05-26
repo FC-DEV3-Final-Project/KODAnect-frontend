@@ -22,6 +22,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    selectedLabel: SITE_MENU[0]?.label ?? "장기·조직기증",
+    selectedLabel: SITE_MENU[5]?.label ?? "참여·정보",
   },
 };
