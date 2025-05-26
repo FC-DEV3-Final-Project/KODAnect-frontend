@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Header from "@/widget/Header";
 
 const meta = {
-  title: "KRDS/Header",
+  title: "widget/Header",
   component: Header,
   parameters: {
     layout: "fullscreen",
     backgrounds: {
-      default: "light ",
+      default: "light",
     },
   },
   tags: ["autodocs"],
