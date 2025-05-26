@@ -223,7 +223,7 @@ module.exports = plugin(
       },
     });
     addBase({
-      "@media (min-width: 768px)": {
+      "@media (max-width: 767px)": {
         ":root": {
           "--krds-font-display-large": "6rem",
           "--krds-font-display-medium": "4.4rem",
