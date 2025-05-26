@@ -8,6 +8,14 @@ interface SideMenuProps {
 
 function SideMenu({ selectedLabel }: SideMenuProps) {
   const selectedMenu = SITE_MENU.find((menu) => menu.label === selectedLabel);
+  const topVisual = [
+    { label: "장기·조직기증", imageUrl: "/src/assets/images/장기·조직기증.png" },
+    { label: "참여·정보", imageUrl: "/src/assets/images/참여·정보.png" },
+    { label: "홍보·알림", imageUrl: "/src/assets/images/홍보·알림.png" },
+  ];
+  const selectedVisual = selectedMenu
+    ? topVisual.find((item) => item.label === selectedMenu.label)
+    : undefined;
 
   if (!selectedMenu) return null;
 
@@ -24,8 +32,13 @@ function SideMenu({ selectedLabel }: SideMenuProps) {
   return (
     <aside className="h-screen w-[248px] shrink-0 mobile:hidden" aria-label="사이드 메뉴">
       {/* Top visual area */}
-      <div className="flex h-[125px] w-full items-center justify-center rounded-r-[30px] rounded-bl-[30px] bg-secondary-10">
-        <span className="text-h-lg font-bold">{selectedMenu.label}</span>
+      <div
+        className="flex h-[125px] w-full items-center justify-center rounded-r-[30px] rounded-bl-[30px] bg-cover bg-center"
+        style={{
+          backgroundImage: selectedVisual ? `url(${selectedVisual.imageUrl})` : undefined,
+        }}
+      >
+        <span className="text-h-lg font-bold text-secondary-80">{selectedMenu.label}</span>
       </div>
 
       {/* Navigation menu */}
