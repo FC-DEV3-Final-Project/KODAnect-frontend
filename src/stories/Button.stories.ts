@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-
-import { Button } from "@krds-ui/core";
+import { Button } from "@/shared/components/Button";
 
 const meta = {
-  title: "KRDS/Button",
+  title: "Components/Button",
   component: Button,
   parameters: {
     layout: "centered",
