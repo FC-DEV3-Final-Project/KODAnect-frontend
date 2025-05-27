@@ -40,7 +40,7 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
           role="listbox"
           id="dropdown-listbox"
           aria-labelledby="dropdown-button"
-          className="absolute z-10 mt-1 w-[12.1rem] rounded-r4 border border-gray-20 bg-white p-p3"
+          className="absolute z-10 mt-[0.7rem] w-[12.1rem] rounded-r4 border border-gray-20 bg-white p-p3 mobile:w-[11.2rem]"
         >
           {options.map((option) => (
             <li
