@@ -1,5 +1,12 @@
 import CheckIcon from "@/assets/icon/check.svg?react";
-import type { CheckboxProps } from "@/shared/types/checkbox.types";
+
+type CheckboxProps = {
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: () => void;
+  disabled?: boolean;
+};
 
 export function Checkbox({ id, label, checked, onChange, disabled = false }: CheckboxProps) {
   return (
@@ -20,15 +27,15 @@ export function Checkbox({ id, label, checked, onChange, disabled = false }: Che
       />
 
       <div
-        className={`mobile:w-[1.6rem] mobile:h-[1.6rem] flex h-[2rem] w-[2rem] items-center justify-center rounded-r2 border border-gray-60 bg-white transition-colors duration-150 peer-checked:border-primary-50 peer-checked:bg-primary-50 peer-disabled:bg-gray-10`}
+        className={`flex h-[2rem] w-[2rem] items-center justify-center rounded-r2 border border-gray-60 bg-white transition-colors duration-150 peer-checked:border-primary-50 peer-checked:bg-primary-50 peer-disabled:bg-gray-10 mobile:h-[1.6rem] mobile:w-[1.6rem]`}
       >
         {checked && (
-          <CheckIcon className="mobile:h-icon1 mobile:w-icon1 h-icon2 w-icon2 text-white" />
+          <CheckIcon className="h-icon2 w-icon2 text-white mobile:h-icon1 mobile:w-icon1" />
         )}
       </div>
 
       {/* 라벨 텍스트 */}
-      <span className="mobile:text-b-md text-b-lg text-gray-95">{label}</span>
+      <span className="text-b-lg text-gray-95 mobile:text-b-md">{label}</span>
     </label>
   );
 }
