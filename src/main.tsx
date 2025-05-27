@@ -1,6 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "@krds-ui/core/dist/style.css";
 import "@/shared/styles/index.css";
 import App from "./App.tsx";
 

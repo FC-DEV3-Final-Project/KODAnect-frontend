@@ -25,7 +25,7 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
         aria-expanded={isOpen}
         aria-controls="dropdown-listbox"
         onClick={() => setIsOpen(!isOpen)}
-        className="mobile:text-b-sm mobile:h-[4rem] mobile:w-[8.6rem] flex h-[4.8rem] w-[12.1rem] items-center justify-between gap-g2 rounded-r3 border border-gray-60 bg-white px-p4 text-left text-b-md text-gray-90 shadow-s1 focus:border-2 focus:border-primary-50 focus:outline-none"
+        className="flex h-[4.8rem] w-[12.1rem] items-center justify-between gap-g2 rounded-r3 border border-gray-60 bg-white px-p4 text-left text-b-md text-gray-90 shadow-s1 focus:border-2 focus:border-primary-50 focus:outline-none mobile:h-[4rem] mobile:w-[8.6rem] mobile:text-b-sm"
       >
         {value || placeholder}
         <img
@@ -51,9 +51,9 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
                 onChange(option);
                 setIsOpen(false);
               }}
-              className={`mobile:text-b-sm flex h-[4.6rem] w-full cursor-pointer items-center gap-g3 rounded-r3 px-p2 py-p4 text-b-md ${
+              className={`flex h-[4.6rem] w-full cursor-pointer items-center gap-g3 rounded-r3 px-p2 py-p4 text-b-md mobile:text-b-sm ${
                 option === value
-                  ? "bg-secondary-5 font-bold text-secondary-80"
+                  ? "bg-secondary-5 text-secondary-80"
                   : "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10"
               }`}
             >
