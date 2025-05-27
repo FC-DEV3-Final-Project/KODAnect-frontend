@@ -1,7 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
 import "@/shared/styles/index.css"; // Tailwind CSS 포함된 글로벌 스타일 경로
-import "@krds-ui/core/dist/style.css";
 
 const KODA_VIEWPORTS = {
   kodaPC: {
