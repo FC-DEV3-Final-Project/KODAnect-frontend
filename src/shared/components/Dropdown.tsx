@@ -2,8 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import ArrowIcon from "@/assets/icon/arrow-down.svg";
 import CheckIcon from "@/assets/icon/check.svg";
 
+type DropdownOption = {
+  label: string;
+  value: string;
+};
+
 type DropdownProps = {
-  options: string[];
+  options: DropdownOption[];
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
@@ -32,7 +37,7 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
         onClick={() => setIsOpen(!isOpen)}
         className="flex h-[4.8rem] w-[12.1rem] items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p5 text-left text-b-md text-gray-90 focus:border-2 focus:border-primary-50 focus:outline-none mobile:h-[4rem] mobile:w-[11.2rem] mobile:text-b-sm"
       >
-        {value || placeholder}
+        {options.find((opt) => opt.value === value)?.label || placeholder}
         <img
           src={ArrowIcon}
           alt="arrow"
@@ -50,24 +55,24 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
           {options.map((option) => (
             <li
               role="option"
-              aria-selected={option === value}
-              key={option}
+              aria-selected={option.value === value}
+              key={option.value}
               onClick={() => {
-                onChange(option);
+                onChange(option.value);
                 setIsOpen(false);
               }}
               className={`flex h-[4.6rem] w-full cursor-pointer items-center gap-g3 rounded-r3 px-p2 py-p4 text-b-md mobile:text-b-sm ${
-                option === value
+                option.value === value
                   ? "bg-secondary-5 text-secondary-80"
                   : "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10"
               }`}
             >
-              {option === value && (
+              {option.value === value && (
                 <span className="mr-1">
                   <img src={CheckIcon} className="h-icon1 w-icon1" />
                 </span>
               )}
-              {option}
+              {option.label}
             </li>
           ))}
         </ul>
