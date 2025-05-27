@@ -16,11 +16,7 @@ interface AllMenuProps {
   setIsOpenMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function AllMenu({
-  items,
-  isOpenMobileMenu,
-  setIsOpenMobileMenu,
-}: AllMenuProps) {
+export default function AllMenu({ items, isOpenMobileMenu, setIsOpenMobileMenu }: AllMenuProps) {
   // 모바일 메뉴 활성화되면 body에 스크롤 제거
   useBodyScrollLock(767);
 
@@ -88,7 +84,7 @@ export default function AllMenu({
         {selectedDepth1 !== null && (
           <>
             {/* 2depth 메뉴 리스트 */}
-            <ul className="h-[calc(100%-71.5px)] w-full overflow-scroll bg-white p-p6">
+            <ul className="h-[calc(100%-71.5px)] w-full overflow-y-scroll bg-white p-p6">
               {secondLevelItems.map((secondLevelItem, idx) => (
                 <li key={secondLevelItem.label}>
                   {secondLevelItem.children && secondLevelItem.children.length > 0 ? (
