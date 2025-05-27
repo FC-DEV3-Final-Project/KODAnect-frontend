@@ -1,6 +1,7 @@
 import AccordionMenu from "@/widget/sideMenu/AccordionMenu";
 // 추후 sitemenu.ts 파일 merge되면 경로 수정 예정
 import { SITE_MENU } from "@/shared/constant/mockSiteMenu";
+import OpenNewWindow from "@/assets/icon/open-new-window.svg";
 
 interface SideMenuProps {
   selectedLabel: string;
@@ -42,7 +43,7 @@ function SideMenu({ selectedLabel }: SideMenuProps) {
       </div>
 
       {/* Navigation menu */}
-      <nav aria-label={`${selectedMenu.label} 메뉴`} className="bg-white">
+      <nav aria-label={`${selectedMenu.label} 메뉴`} className="bg-white text-gray-90">
         {selectedMenu?.children?.map((menu, index) =>
           menu.children ? (
             <AccordionMenu key={index} menu={menu} defaultOpen />
@@ -50,9 +51,16 @@ function SideMenu({ selectedLabel }: SideMenuProps) {
             <a
               key={index}
               href={menu.path}
-              className="block border-b border-gray-200 px-p3 py-p6 font-bold hover:border-secondary-70 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80 hover:shadow-[inset_0_-2px_0_0_theme('colors.secondary.70')]"
+              className="flex justify-between border-b border-gray-200 px-p3 py-p6 font-bold hover:border-secondary-70 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80 hover:shadow-[inset_0_-2px_0_0_theme('colors.secondary.70')]"
             >
-              {menu.label}
+              <span>{menu.label}</span>
+              {menu.label === "공공데이터개방" && (
+                <img
+                  src={OpenNewWindow} // 아이콘 이미지
+                  alt="새 창에서 열기"
+                  className="w-icon3"
+                />
+              )}
             </a>
           ),
         )}

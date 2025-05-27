@@ -16,7 +16,7 @@ function AccordionMenu({ menu, defaultOpen = true }: { menu: SiteMenu; defaultOp
     <div className="border-b border-gray-200">
       {/* Toggle button for accordion */}
       <button
-        className="flex w-full items-center justify-between px-p3 py-p6 font-bold text-gray-95"
+        className="flex w-full items-center justify-between px-p3 py-p6 font-bold text-gray-90"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-label={`${menu.label} 하위 메뉴 ${isOpen ? "닫기" : "펼치기"}`}
