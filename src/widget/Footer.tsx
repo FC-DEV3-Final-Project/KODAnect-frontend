@@ -51,19 +51,19 @@ function Footer() {
   */
 
   return (
-    <footer className={`mt-auto w-full border-gray-20 ${isOpen ? "border-0" : "border-t"}`}>
+    <footer className="mt-auto w-full">
       {/* Footer Related Sites */}
       <section aria-label="관련 사이트" className="w-full">
         <ul
           className={`mx-auto w-full max-w-[1200px] overflow-hidden transition-all duration-300 ${isOpen ? "border-x border-t border-gray-20 py-g6" : "max-h-0 pt-0"}`}
         >
           {relatedSites.map(({ title, url }) => (
-            <li key={title} className="mb-p4 last:mb-0">
+            <li key={title} className="mb-p4 last:mb-0 hover:bg-gray-5 hover:font-bold mobile:mb-0">
               <a
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-full items-center justify-between px-p8 py-p6 mobile:py-0"
+                className="flex w-full items-center justify-between px-p8 py-p6 mobile:py-p3"
               >
                 <span className="text-gray-50 mobile:text-b-sm">{title}</span>
                 <img
@@ -77,24 +77,26 @@ function Footer() {
         </ul>
 
         {/* Related Sites Toggle Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          aria-expanded={isOpen}
-          aria-label={isOpen ? "관련 사이트 닫기" : "관련 사이트 펼치기"}
-          className={`mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 mobile:border-x-0 ${isOpen ? "border-t" : "border-t-0"}`}
-        >
-          <span>관련 사이트</span>
-          <img
-            src={Arrow}
-            alt={isOpen ? "접기 아이콘" : "펼치기 아이콘"}
-            className={`w-icon3 transition-transform duration-300 mobile:w-icon2 ${isOpen ? "rotate-0" : "rotate-180"} `}
-          />
-        </button>
+        <div className="w-full border-t border-gray-20">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-label={isOpen ? "관련 사이트 닫기" : "관련 사이트 펼치기"}
+            className={`mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 mobile:border-x-0`}
+          >
+            <span>관련 사이트</span>
+            <img
+              src={Arrow}
+              alt={isOpen ? "접기 아이콘" : "펼치기 아이콘"}
+              className={`w-icon3 transition-transform duration-300 mobile:w-icon2 ${isOpen ? "rotate-0" : "rotate-180"} `}
+            />
+          </button>
+        </div>
       </section>
 
       {/* Footer Inner */}
-      <section className="w-full border border-gray-20 bg-gray-5">
-        <div className="mx-auto w-full max-w-[1280px] px-p10 pb-p8 pt-p10 mobile:px-p6 mobile:pt-p8">
+      <section className="w-full border-y border-gray-20 bg-gray-5">
+        <div className="mx-auto w-full max-w-[1200px] pb-p8 pt-p10 mobile:px-p6 mobile:pt-p8">
           {/* Footer Logo */}
           <img src={Logo} alt="한국장기조직기증원 로고" className="mb-g9 h-[60px] mobile:mb-g5" />
 
