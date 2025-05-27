@@ -53,9 +53,28 @@ function Footer() {
   return (
     <footer className="mt-auto w-full">
       {/* Footer Related Sites */}
-      <section aria-label="관련 사이트" className="w-full">
+      <section aria-label="관련 사이트" className="relative flex w-full flex-col-reverse">
+        {/* Related Sites Toggle Button */}
+        <div className="w-full border-t border-gray-20">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-label={isOpen ? "관련 사이트 닫기" : "관련 사이트 펼치기"}
+            className={`mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 mobile:border-x-0`}
+          >
+            <span>관련 사이트</span>
+            <img
+              src={Arrow}
+              alt={isOpen ? "접기 아이콘" : "펼치기 아이콘"}
+              className={`w-icon3 transition-transform duration-300 mobile:w-icon2 ${isOpen ? "rotate-0" : "rotate-180"} `}
+            />
+          </button>
+        </div>
+
         <ul
-          className={`mx-auto w-full max-w-[1200px] overflow-hidden transition-all duration-300 ${isOpen ? "border-x border-t border-gray-20 py-g6" : "max-h-0 pt-0"}`}
+          className={`absolute bottom-full left-1/2 z-10 w-full max-w-[1200px] -translate-x-1/2 overflow-hidden bg-white transition-all duration-300 ${
+            isOpen ? "border-x border-t border-gray-20 py-g6" : "max-h-0"
+          }`}
         >
           {relatedSites.map(({ title, url }) => (
             <li key={title} className="mb-p4 last:mb-0 hover:bg-gray-5 hover:font-bold mobile:mb-0">
@@ -75,23 +94,6 @@ function Footer() {
             </li>
           ))}
         </ul>
-
-        {/* Related Sites Toggle Button */}
-        <div className="w-full border-t border-gray-20">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            aria-expanded={isOpen}
-            aria-label={isOpen ? "관련 사이트 닫기" : "관련 사이트 펼치기"}
-            className={`mx-auto flex w-full max-w-[1200px] items-center justify-between border-x border-gray-20 px-p8 py-p6 mobile:border-x-0`}
-          >
-            <span>관련 사이트</span>
-            <img
-              src={Arrow}
-              alt={isOpen ? "접기 아이콘" : "펼치기 아이콘"}
-              className={`w-icon3 transition-transform duration-300 mobile:w-icon2 ${isOpen ? "rotate-0" : "rotate-180"} `}
-            />
-          </button>
-        </div>
       </section>
 
       {/* Footer Inner */}
@@ -111,20 +113,16 @@ function Footer() {
                 서울시 서대문구 충정로 36 국민연금공단 <br />
                 충정로사옥5층 한국장기조직기능원 (우)03741
               </p>
-              <dl className="flex flex-col gap-g3">
-                <div className="flex gap-g3">
-                  <dt className="font-bold">대표전화</dt>
-                  <dd>
-                    <a href="tel:02-3444-5632">02-3444-5632</a>
-                  </dd>
-                </div>
-                <div className="flex gap-g3">
-                  <dt className="font-bold">대표이메일</dt>
-                  <dd>
-                    <a href="mailto:koda@koda14583.kr">koda@koda14583.kr</a>
-                  </dd>
-                </div>
-              </dl>
+              <ul>
+                <li className="mb-g3 flex gap-g3">
+                  <span className="font-bold">대표전화</span>
+                  <a href="tel:02-3444-5632">02-3444-5632</a>
+                </li>
+                <li className="flex gap-g3">
+                  <span className="font-bold">대표이메일</span>
+                  <a href="mailto:koda@koda14583.kr">koda@koda14583.kr</a>
+                </li>
+              </ul>
             </address>
 
             {/* Footer Link */}
