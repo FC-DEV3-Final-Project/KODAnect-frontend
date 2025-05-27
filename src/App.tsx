@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "@krds-ui/core";
 import { Checkbox } from "@/shared/components/Checkbox";
 
 function App() {
