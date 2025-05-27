@@ -7,7 +7,21 @@ import Visible from "@/assets/icon/visibility.svg";
 import Unvisible from "@/assets/icon/visibility-off.svg";
 import DeleteIcon from "@/assets/icon/delete.svg";
 
-import type { TextInputProps } from "@/shared/types/textInput.types";
+type TextInputProps = {
+  id: string;
+  title?: string;
+  description?: string;
+  error?: string;
+  focusMessage?: string;
+  completed?: string;
+  height?: "large" | "medium" | "small";
+  iconToggle?: boolean;
+  isVisible?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClear?: () => void;
+  onToggleIconClick?: () => void;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (

@@ -1,4 +1,10 @@
-import type { LabelProps } from "@/shared/types/textInput.types";
+type LabelProps<E extends React.ElementType> = {
+  size?: "m" | "s";
+  weight?: "regular" | "bold";
+  color?: "default" | "danger" | "success" | "info";
+  children: React.ReactNode;
+  className?: string;
+} & React.ComponentPropsWithoutRef<E>;
 
 export const Label = <E extends React.ElementType = "label">({
   size = "m",
