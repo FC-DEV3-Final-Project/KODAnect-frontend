@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Header from "@/widget/Header";
+import Header from "@/widget/header/Header";
 
 const meta = {
   title: "widget/Header",
