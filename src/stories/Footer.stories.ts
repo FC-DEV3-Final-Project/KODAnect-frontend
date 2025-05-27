@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Footer from "@/widget/Footer";
 
 const meta = {
-  title: "KRDS/Footer",
+  title: "layout/Footer",
   component: Footer,
   parameters: {
     layout: "fullscreen",
