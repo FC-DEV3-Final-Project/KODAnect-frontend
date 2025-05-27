@@ -2,7 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import ArrowIcon from "@/assets/icon/arrow-down.svg";
 import CheckIcon from "@/assets/icon/check.svg";
 
-import type { DropdownProps } from "@/shared/types/dropdown.types";
+type DropdownProps = {
+  options: string[];
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+};
 
 export function Dropdown({ options, value, onChange, placeholder }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
