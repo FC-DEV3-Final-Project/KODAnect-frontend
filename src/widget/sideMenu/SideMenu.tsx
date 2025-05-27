@@ -1,4 +1,4 @@
-import AccordionMenu from "@/shared/components/AccordionMenu";
+import AccordionMenu from "@/widget/sideMenu/AccordionMenu";
 // 추후 sitemenu.ts 파일 merge되면 경로 수정 예정
 import { SITE_MENU } from "@/shared/constant/mockSiteMenu";
 

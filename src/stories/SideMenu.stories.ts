@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import SideMenu from "@/widget/SideMenu";
+import SideMenu from "@/widget/sideMenu/SideMenu";
 // 추후 sitemenu.ts 파일 merge되면 경로 수정 예정
 import { SITE_MENU } from "@/shared/constant/mockSiteMenu";
 
