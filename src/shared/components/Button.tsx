@@ -1,4 +1,11 @@
-import type { ButtonProps } from "@/shared/types/Button.types";
+type ButtonProps<E extends React.ElementType> = {
+  type?: "button" | "submit" | "reset";
+  variant?: "primary" | "secondary" | "tertiary" | "text";
+  size?: "x-small" | "small" | "medium" | "large" | "x-large";
+  children: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
+} & React.ComponentPropsWithoutRef<E>;
 
 export const Button = <E extends React.ElementType = "button">({
   type = "button",
