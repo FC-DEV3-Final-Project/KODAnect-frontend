@@ -27,7 +27,7 @@ export default function HeaderMenu({ items }: { items: SiteMenu[] }) {
     <nav ref={menuRef} id="nav-pc" className="mobile:hidden">
       {/* 1depth 메뉴 영역 */}
       <div className="border-b border-gray-20">
-        <ul className="m-auto flex max-w-[1280px] flex-wrap gap-g4 px-p10 text-b-lg font-bold text-gray-70 mobile:px-p6">
+        <ul className="lg:justify-between m-auto flex max-w-[1280px] flex-wrap px-p10 text-b-lg font-bold text-gray-70 mobile:px-p6">
           {items.map((item, idx) => {
             const isOpen = selectedDepth1 === idx;
             const hasChildren = item.children && item.children.length > 0;
@@ -38,7 +38,7 @@ export default function HeaderMenu({ items }: { items: SiteMenu[] }) {
                 <li key={item.label} className="relative">
                   <button
                     type="button"
-                    className={`flex w-full cursor-pointer items-center justify-between px-p6 py-p5 hover:bg-secondary-5 active:bg-secondary-10`}
+                    className={`flex w-full cursor-pointer items-center justify-between gap-g3 px-p6 py-p5 hover:bg-secondary-5 active:bg-secondary-10`}
                     onClick={() => handleDepth1Click(idx)}
                     aria-expanded={isOpen}
                     aria-label={`${item.label} 하위 메뉴 ${isOpen ? "닫기" : "펼치기"}`}
@@ -47,7 +47,7 @@ export default function HeaderMenu({ items }: { items: SiteMenu[] }) {
                     <img
                       src={Arrow}
                       alt={isOpen ? "펼치기 아이콘" : "접기 아이콘"}
-                      className={`ml-g3 w-8 transition-transform duration-300 mobile:w-5 ${
+                      className={`w-8 transition-transform duration-300 mobile:w-5 ${
                         isOpen ? "rotate-180" : "rotate-0"
                       }`}
                     />
