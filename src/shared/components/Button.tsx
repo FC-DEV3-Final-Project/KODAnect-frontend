@@ -1,4 +1,4 @@
-import type { ButtonProps } from "../types/button.types";
+import type { ButtonProps } from "@/shared/types/Button.types";
 
 export const Button = <E extends React.ElementType = "button">({
   type = "button",

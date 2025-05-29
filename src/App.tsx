@@ -1,9 +1,9 @@
-import DateInput from "./shared/components/calendar/DateInput";
+import DatePicker from "./shared/components/calendar/DatePicker";
 
 function App() {
   return (
     <div>
-      <DateInput placeholder="YYYY.MM.DD" onClick={console.log} />
+      <DatePicker />
     </div>
   );
 }
