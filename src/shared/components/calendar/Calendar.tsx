@@ -60,7 +60,7 @@ function Calendar({
     <div className="flex h-[48.2rem] w-[38.4rem] flex-col rounded-r6 border border-gray-30 bg-white">
       <div className="h-[41rem] rounded-t-r6 bg-secondary-5 pt-p6">
         {/* 헤더 */}
-        <div className="relative flex items-center justify-between px-8 py-3">
+        <div className="relative flex items-center justify-between px-p8 py-p3">
           <button
             onClick={() => navigateMonth("prev")}
             aria-label="이전 달"
@@ -68,7 +68,7 @@ function Calendar({
           >
             <Arrow className="h-icon5 w-icon5" />
           </button>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-g5">
             {/* 연도 드롭다운 */}
             <div className="relative">
               <button
@@ -169,7 +169,7 @@ function Calendar({
         </div>
 
         {/* 날짜 */}
-        <div className="flex-1 gap-y-g3 overflow-y-auto px-p6 py-p6">
+        <div className="flex-1 gap-y-g3 px-p6 py-p6">
           <table className="w-full border-collapse" role="grid" aria-label="날짜 선택 달력">
             <thead>
               <tr>
@@ -225,11 +225,11 @@ function Calendar({
       </div>
 
       {/* 하단 버튼 */}
-      <div className="flex items-center justify-between gap-g5 border-t border-gray-200 px-8 py-6">
+      <div className="flex items-center justify-between gap-g5 border-t border-gray-20 px-p8 py-p6">
         <button
           onClick={onTodayClick}
           aria-label="오늘 날짜로 이동"
-          className="text-gray-600 hover:text-gray-800"
+          className="text-b-sm text-gray-90 hover:text-gray-50"
         >
           오늘
         </button>

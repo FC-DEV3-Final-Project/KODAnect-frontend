@@ -56,7 +56,7 @@ export default function DateRangePicker() {
             if (range.from) setCurrentMonth(range.from);
           }}
         />
-        <span className="text-b-md text-gray-40">-</span>
+        <span className="text-b-sm text-gray-70">-</span>
         <DateInput
           aria-haspopup="dialog"
           aria-expanded={open === "to"}
@@ -76,7 +76,7 @@ export default function DateRangePicker() {
           role="dialog"
           aria-modal="true"
           aria-label="날짜 선택 달력"
-          className="absolute z-50 mt-2 w-80"
+          className="z-50 mt-2"
         >
           <Calendar
             selected={open === "from" ? (range.from ?? undefined) : (range.to ?? undefined)}
