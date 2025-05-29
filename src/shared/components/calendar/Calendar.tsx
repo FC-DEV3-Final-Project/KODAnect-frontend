@@ -57,7 +57,7 @@ function Calendar({
   }
 
   return (
-    <div className="flex h-[48.2rem] w-[38.4rem] flex-col rounded-r6 border border-gray-30 bg-white">
+    <div className="flex h-[48.2rem] w-[38.4rem] flex-col rounded-r6 border border-gray-30 bg-white mobile:w-[32.8rem]">
       <div className="h-[41rem] rounded-t-r6 bg-secondary-5 pt-p6">
         {/* 헤더 */}
         <div className="relative flex items-center justify-between px-p8 py-p3">
@@ -170,7 +170,11 @@ function Calendar({
 
         {/* 날짜 */}
         <div className="flex-1 gap-y-g3 px-p6 py-p6">
-          <table className="w-full border-collapse" role="grid" aria-label="날짜 선택 달력">
+          <table
+            className="w-full table-fixed border-collapse"
+            role="grid"
+            aria-label="날짜 선택 달력"
+          >
             <thead>
               <tr>
                 {weekdays.map((day) => (
@@ -178,7 +182,7 @@ function Calendar({
                     key={day}
                     scope="col"
                     role="columnheader"
-                    className="h-[4.4rem] w-[4.4rem] text-center text-b-sm text-gray-90"
+                    className="h-[4.4rem] w-[4.4rem] px-p6 text-center text-b-sm text-gray-90 mobile:w-[4rem]"
                   >
                     {day}
                   </th>
@@ -199,7 +203,7 @@ function Calendar({
                           aria-label={format(date, "yyyy년 M월 d일")}
                           aria-selected={isSelectedDate}
                           className={clsx(
-                            "relative flex h-[4.4rem] w-[4.4rem] items-center justify-center rounded-full text-b-md transition-all duration-150",
+                            "relative flex h-[4.4rem] w-[4.4rem] items-center justify-center rounded-full text-b-md transition-all duration-150 mobile:w-[4rem]",
                             {
                               "bg-secondary-80 text-white": isSelectedDate,
                               "bg-white text-blue-700": isTodayDate && !isSelectedDate,
