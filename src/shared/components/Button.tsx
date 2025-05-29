@@ -1,4 +1,11 @@
-import type { ButtonProps } from "../types/button.types";
+type ButtonProps<E extends React.ElementType> = {
+  type?: "button" | "submit" | "reset";
+  variant?: "primary" | "secondary" | "tertiary" | "text";
+  size?: "x-small" | "small" | "medium" | "large" | "x-large";
+  children: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
+} & React.ComponentPropsWithoutRef<E>;
 
 export const Button = <E extends React.ElementType = "button">({
   type = "button",
@@ -38,19 +45,19 @@ export const Button = <E extends React.ElementType = "button">({
 
   const sizeStyles: { style: string } = {
     "x-small": {
-      style: "px-[10px] min-w-[60px] min-h-[32px] rounded-2 text-b-sm",
+      style: "px-[10px] min-w-[60px] min-h-[32px] rounded-r2 text-b-sm",
     },
     "small": {
-      style: "px-[12px] min-w-[64px] min-h-[40px] rounded-3 text-b-sm",
+      style: "px-[12px] min-w-[64px] min-h-[40px] rounded-r3 text-b-sm",
     },
     "medium": {
-      style: "px-[16px] min-w-[78px] min-h-[48px] rounded-3 text-b-md",
+      style: "px-[16px] min-w-[78px] min-h-[48px] rounded-r3 text-b-md",
     },
     "large": {
-      style: "px-[20px] min-w-[90px] min-h-[56px] rounded-4 text-b-lg",
+      style: "px-[20px] min-w-[90px] min-h-[56px] rounded-r4 text-b-lg",
     },
     "x-large": {
-      style: "px-[24px] min-w-[98px] min-h-[64px] rounded-4 text-b-lg",
+      style: "px-[24px] min-w-[98px] min-h-[64px] rounded-r4 text-b-lg",
     },
   }[size];
 
