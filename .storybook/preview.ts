@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { withRouter } from "storybook-addon-remix-react-router";
 import "@/shared/styles/index.css"; // Tailwind CSS 포함된 글로벌 스타일 경로
 
 const KODA_VIEWPORTS = {
@@ -34,6 +35,7 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [withRouter],
 };
 
 export default preview;
