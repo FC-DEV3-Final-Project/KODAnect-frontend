@@ -2,6 +2,20 @@ import { useState, useRef, useEffect } from "react";
 import DateInput from "@/shared/components/calendar/DateInput";
 import Calendar from "@/shared/components/calendar/Calendar";
 
+/**
+ * Example usage:
+ *
+ * const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
+ *   from: null,
+ *   to: null,
+ * });
+ *
+ * <DatePicker range={range} onRangeChange={setRange} />
+ *
+ * - `range`: 날짜 범위 객체 (from, to)
+ * - `onRangeChange`: 날짜가 선택될 때 호출되는 콜백
+ */
+
 type DateRange = { from: Date | null; to: Date | null };
 
 type DatePickerProps = {
