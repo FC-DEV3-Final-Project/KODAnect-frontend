@@ -1,11 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import DateInput from "@/shared/components/calendar/DateInput";
 import Calendar from "@/shared/components/calendar/Calendar";
-function DatePicker() {
-  const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
-    from: null,
-    to: null,
-  });
+
+type DateRange = { from: Date | null; to: Date | null };
+
+type DatePickerProps = {
+  range: DateRange;
+  onRangeChange: (range: DateRange) => void;
+};
+
+function DatePicker({ range, onRangeChange }: DatePickerProps) {
   const [open, setOpen] = useState<"from" | "to" | null>(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const ref = useRef<HTMLDivElement>(null);
@@ -22,10 +26,10 @@ function DatePicker() {
 
   const handleSelect = (date: Date) => {
     if (open === "from") {
-      setRange((prev) => ({ ...prev, from: date }));
+      onRangeChange({ ...range, from: date });
       setOpen(null);
     } else if (open === "to") {
-      setRange((prev) => ({ ...prev, to: date }));
+      onRangeChange({ ...range, to: date });
       setOpen(null);
     }
   };
@@ -35,9 +39,9 @@ function DatePicker() {
 
     setCurrentMonth(today); // 오늘 날짜가 있는 월로 이동
     if (open === "from") {
-      setRange((prev) => ({ ...prev, from: today }));
+      onRangeChange({ ...range, from: today });
     } else if (open === "to") {
-      setRange((prev) => ({ ...prev, to: today }));
+      onRangeChange({ ...range, to: today });
     }
   };
 
