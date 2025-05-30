@@ -79,7 +79,7 @@ function DatePicker({ range, onRangeChange }: DatePickerProps) {
           role="dialog"
           aria-modal="true"
           aria-label="날짜 선택 달력"
-          className="z-50 mt-2"
+          className="absolute z-50 mt-2"
         >
           <Calendar
             selected={open === "from" ? (range.from ?? undefined) : (range.to ?? undefined)}
