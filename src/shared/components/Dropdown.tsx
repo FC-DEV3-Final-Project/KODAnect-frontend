@@ -2,6 +2,26 @@ import { useState, useRef, useEffect } from "react";
 import ArrowIcon from "@/assets/icon/arrow-down.svg";
 import CheckIcon from "@/assets/icon/check.svg";
 
+/**
+ * Example usage:
+ *
+ * const [selected, setSelected] = useState("");
+ *
+ * <Dropdown
+ *   options={[
+ *     { label: "공지사항", value: "notice" },
+ *   ]}
+ *   value={selected}
+ *   onChange={setSelected}
+ *   placeholder="전체"
+ * />
+ *
+ * - `options`: label, value 형태의 선택 옵션 배열
+ * - `value`: 현재 선택된 항목의 value
+ * - `onChange`: 선택 항목이 바뀔 때 호출되는 함수
+ * - `placeholder`: 선택되지 않았을 때 표시할 텍스트
+ */
+
 type DropdownOption = {
   label: string;
   value: string;
