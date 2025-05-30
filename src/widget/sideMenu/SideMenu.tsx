@@ -1,19 +1,23 @@
 import AccordionMenu from "@/widget/sideMenu/AccordionMenu";
-// 추후 sitemenu.ts 파일 merge되면 경로 수정 예정
-import { SITE_MENU } from "@/shared/constant/mockSiteMenu";
+import { SITE_MENU } from "@/shared/constant/sitemenu.ts";
 import OpenNewWindow from "@/assets/icon/open-new-window.svg";
+import { useCurrentTopMenuLabel } from "@/shared/hooks/useCurrentTopMenuLabel";
+import { useMemo } from "react";
+import { Link } from "react-router-dom";
 
-interface SideMenuProps {
-  selectedLabel: string;
-}
+function SideMenu() {
+  const topMenuLabel = useCurrentTopMenuLabel();
+  const selectedMenu = useMemo(
+    () => SITE_MENU.find((menu) => menu.label === topMenuLabel),
+    [topMenuLabel],
+  );
 
-function SideMenu({ selectedLabel }: SideMenuProps) {
-  const selectedMenu = SITE_MENU.find((menu) => menu.label === selectedLabel);
   const topVisual = [
-    { label: "장기·조직기증", imageUrl: "/src/assets/images/organ.png.png" },
-    { label: "참여·정보", imageUrl: "/src/assets/images/participation.png.png" },
-    { label: "홍보·알림", imageUrl: "/src/assets/images/announcement.png.png" },
+    { label: "장기·조직기증", imageUrl: "/src/assets/images/organ.png" },
+    { label: "참여·정보", imageUrl: "/src/assets/images/participation.png" },
+    { label: "홍보·알림", imageUrl: "/src/assets/images/announcement.png" },
   ];
+
   const selectedVisual = selectedMenu
     ? topVisual.find((item) => item.label === selectedMenu.label)
     : undefined;
@@ -50,9 +54,9 @@ function SideMenu({ selectedLabel }: SideMenuProps) {
           menu.children ? (
             <AccordionMenu key={index} menu={menu} defaultOpen />
           ) : (
-            <a
+            <Link
               key={index}
-              href={menu.path}
+              to={menu.path ?? "#"}
               className="flex justify-between border-b border-gray-200 px-p3 py-p6 font-bold hover:border-secondary-70 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80 hover:shadow-[inset_0_-2px_0_0_theme('colors.secondary.70')]"
             >
               <span>{menu.label}</span>
@@ -63,7 +67,7 @@ function SideMenu({ selectedLabel }: SideMenuProps) {
                   className="w-icon3"
                 />
               )}
-            </a>
+            </Link>
           ),
         )}
       </nav>

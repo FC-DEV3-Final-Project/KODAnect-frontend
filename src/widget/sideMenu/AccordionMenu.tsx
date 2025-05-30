@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Arrow from "@/assets/icon/arrow-down.svg";
+import { Link } from "react-router-dom";
 
 interface SiteMenu {
   label: string;
@@ -40,15 +41,9 @@ function AccordionMenu({ menu, defaultOpen = true }: { menu: SiteMenu; defaultOp
               className="relative pl-p9 hover:rounded-r3 hover:bg-secondary-5 hover:font-bold hover:text-secondary-80"
             >
               <span className="absolute left-p6 top-[20.5px] h-[4px] w-[4px] -translate-y-1/2 rounded-full bg-gray-90 hover:bg-secondary-80"></span>
-              <a
-                href={child.path || "#"}
-                onClick={() => {
-                  alert(`${child.label} 메뉴 클릭`);
-                }}
-                className="block break-keep py-p3 pr-p6 text-gray-90"
-              >
+              <Link to={child.path || "#"} className="block break-keep py-p3 pr-p6 text-gray-90">
                 {child.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
