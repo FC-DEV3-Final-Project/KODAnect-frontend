@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import DateInput from "@/shared/components/calendar/DateInput";
 import Calendar from "@/shared/components/calendar/Calendar";
-
-export default function DateRangePicker() {
+function DatePicker() {
   const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
     from: null,
     to: null,
@@ -91,3 +90,5 @@ export default function DateRangePicker() {
     </div>
   );
 }
+
+export default DatePicker;
