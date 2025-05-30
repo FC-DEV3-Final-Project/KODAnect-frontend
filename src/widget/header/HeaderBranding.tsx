@@ -4,16 +4,18 @@ import Logo from "@/assets/logo.svg";
 import Menu from "@/assets/icon/menu.svg";
 
 interface HeaderBrandingProps {
+  buttonRef: React.RefObject<HTMLButtonElement | null>;
   isOpenMobileMenu: boolean;
   setIsOpenMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function HeaderBranding({
+  buttonRef,
   isOpenMobileMenu,
   setIsOpenMobileMenu,
 }: HeaderBrandingProps) {
   return (
-    <div className="border-b border-gray-20">
+    <div className="relative z-50 border-b border-gray-20 bg-white">
       {/* Header Branding Inner */}
       <div className="m-auto flex max-w-[1280px] justify-between px-p10 py-p6 mobile:px-p6">
         {/* Header Branding Contents */}
@@ -23,6 +25,7 @@ export default function HeaderBranding({
           </Link>
         </h2>
         <button
+          ref={buttonRef}
           type="button"
           className="flex cursor-pointer items-center gap-g3 px-p5 py-p4 text-gray-90"
           title="전체메뉴"

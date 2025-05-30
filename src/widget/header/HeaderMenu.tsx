@@ -14,6 +14,7 @@ export default function HeaderMenu({ items }: { items: SiteMenu[] }) {
   const location = useLocation();
 
   const {
+    isChildMenuOpen,
     selectedDepth1,
     selectedDepth2,
     setSelectedDepth2,
@@ -24,10 +25,10 @@ export default function HeaderMenu({ items }: { items: SiteMenu[] }) {
   } = useMenuState(items);
 
   return (
-    <nav ref={menuRef} id="nav-pc" className="mobile:hidden">
+    <nav ref={menuRef} id="nav-pc" className="relative z-50 bg-white mobile:hidden">
       {/* 1depth 메뉴 영역 */}
       <div className="border-b border-gray-20">
-        <ul className="lg:justify-between m-auto flex max-w-[1280px] flex-wrap px-p10 text-b-lg font-bold text-gray-70 mobile:px-p6">
+        <ul className="m-auto flex max-w-[1280px] flex-wrap px-p10 text-b-lg font-bold text-gray-70 mobile:px-p6 lg:justify-between">
           {items.map((item, idx) => {
             const isOpen = selectedDepth1 === idx;
             const hasChildren = item.children && item.children.length > 0;
@@ -79,7 +80,7 @@ export default function HeaderMenu({ items }: { items: SiteMenu[] }) {
       </div>
 
       {/* 2depth, 3depth 메뉴 영역 (1depth 메뉴가 선택된 경우) */}
-      {selectedDepth1 !== null && (
+      {isChildMenuOpen && (
         <div className="relative text-gray-90">
           <div className="absolute w-full border-b border-gray-20 bg-white py-p5">
             <div className="m-auto flex max-w-[1280px] px-p10 mobile:px-p6">
@@ -103,18 +104,25 @@ export default function HeaderMenu({ items }: { items: SiteMenu[] }) {
 
                   return (
                     <li key={item.label}>
-                      <button
-                        type="button"
-                        className={`${baseClass} ${activeClass} ${locationMatchClass}`}
-                        onClick={() => setSelectedDepth2(idx)}
-                        aria-expanded={isOpen}
-                        aria-label={`${item.label} 하위 메뉴 ${isOpen ? "닫기" : "펼치기"}`}
-                      >
-                        {item.label}
-                        {hasChildren && (
+                      {hasChildren ? (
+                        <button
+                          type="button"
+                          className={`${baseClass} ${activeClass} ${locationMatchClass}`}
+                          onClick={() => setSelectedDepth2(idx)}
+                          aria-expanded={isOpen}
+                          aria-label={`${item.label} 하위 메뉴 ${isOpen ? "닫기" : "펼치기"}`}
+                        >
+                          {item.label}
                           <img src={Arrow} alt="더보기 아이콘" className="h-6 w-6 -rotate-90" />
-                        )}
-                      </button>
+                        </button>
+                      ) : (
+                        <a
+                          href={item.path}
+                          className={`${baseClass} ${activeClass} ${locationMatchClass}`}
+                        >
+                          {item.label}
+                        </a>
+                      )}
                     </li>
                   );
                 })}
