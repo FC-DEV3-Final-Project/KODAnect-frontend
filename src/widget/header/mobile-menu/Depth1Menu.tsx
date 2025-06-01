@@ -38,7 +38,7 @@ function Depth1Menu({ items, selectedDepth1, onClick }: Depth1MenuProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={menuStyle}
-                aria-label={`${item.label} 바로가기`}
+                aria-label={`${item.label} 새창열기`}
               >
                 {item.label}
                 <img src={NewWindow} alt="" aria-hidden="true" className={iconStyle} />
