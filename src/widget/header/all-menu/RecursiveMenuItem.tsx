@@ -20,13 +20,7 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
         className="mb-g9 flex items-start text-gray-90"
         aria-label={`${item.label} 관련 메뉴`}
       >
-        <div
-          role="heading"
-          aria-level={1}
-          className="min-w-[165px] py-p6 pr-p6 text-h-lg font-bold"
-        >
-          {item.label}
-        </div>
+        <h1 className="min-w-[165px] py-p6 pr-p6 text-h-lg font-bold">{item.label}</h1>
         <div className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6">
           {hasChildren ? (
             item.children!.map((child) => (
@@ -59,13 +53,9 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
       <li className="min-w-[180px] max-w-[205px] flex-1">
         {hasChildren ? (
           <>
-            <div
-              role="heading"
-              aria-level={2}
-              className="block w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold"
-            >
+            <h2 className="block w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold">
               {item.label}
-            </div>
+            </h2>
             <ul className="mt-g5 min-w-[180px] max-w-[205px] flex-1 break-keep">
               {item.children!.map((child) => (
                 <RecursiveMenuItem key={child.label} item={child} depth={depth + 1} />
