@@ -20,18 +20,28 @@ const menuActiveStyle =
 
 function Depth1Menu({ items, selectedDepth1, onClick }: Depth1MenuProps) {
   return (
-    <ul className="m-auto flex max-w-[1280px] flex-wrap px-p10 text-b-lg font-bold text-gray-70 lg:justify-between">
+    <ul
+      className="m-auto flex max-w-[1280px] flex-wrap px-p10 text-b-lg font-bold text-gray-70 lg:justify-between"
+      role="menu"
+      aria-label="1차 메뉴"
+    >
       {items.map((item, index) => {
         const isActive = selectedDepth1 === index;
 
         return (
-          <li key={index} onClick={() => onClick(index)} className="relative">
+          <li key={index} className="relative" role="menuitem">
             {item.children ? (
-              <button type="button" className={clsx(menuStyle, isActive && menuActiveStyle)}>
+              <button
+                type="button"
+                className={clsx(menuStyle, isActive && menuActiveStyle)}
+                onClick={() => onClick(index)}
+                aria-label={`${item.label} 메뉴 더보기`}
+              >
                 {item.label}
                 <img
                   src={Arrow}
-                  alt="메뉴 더보기 아이콘"
+                  alt=""
+                  aria-hidden="true"
                   className={clsx(
                     iconStyle,
                     "transition-transform duration-300",
@@ -40,9 +50,15 @@ function Depth1Menu({ items, selectedDepth1, onClick }: Depth1MenuProps) {
                 />
               </button>
             ) : (
-              <a href={item.path!} target="_blank" className={menuStyle}>
+              <a
+                href={item.path!}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={menuStyle}
+                aria-label={`${item.label} 새창열기`}
+              >
                 {item.label}
-                <img src={NewWindow} alt="새창열기 아이콘" className={iconStyle} />
+                <img src={NewWindow} alt="" aria-hidden="true" className={iconStyle} />
               </a>
             )}
           </li>
