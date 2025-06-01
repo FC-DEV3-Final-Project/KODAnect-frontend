@@ -7,6 +7,36 @@ import Visible from "@/assets/icon/visibility.svg";
 import Unvisible from "@/assets/icon/visibility-off.svg";
 import DeleteIcon from "@/assets/icon/delete.svg";
 
+/**
+ * Example usage:
+ *
+ * const [inputValue, setInputValue] = useState("");
+ * const [isVisible, setIsVisible] = useState(false);
+ *
+ * <div className="w-[30rem]">
+ *   <TextInput
+ *     id="password"
+ *     height="medium"
+ *     title="레이블"
+ *     description="입력시 필요한 정보를 입력해 주세요"
+ *     placeholder="비밀번호를 입력하세요"
+ *     type={isVisible ? "text" : "password"}
+ *     value={inputValue}
+ *     onChange={(e) => setInputValue(e.target.value)}
+ *     isVisible={isVisible}
+ *     iconToggle
+ *     focusMessage="입력하세요"
+ *     onToggleIconClick={() => setIsVisible((prev) => !prev)}
+ *   />
+ * </div>
+ *
+ * - `height`: "large" | "medium" | "small" (기본값: "medium")
+ * - `iconToggle`: 비밀번호 보기/숨기기 토글 버튼 여부
+ * - `focusMessage`: input 포커스 시 보조 문구
+ * - `completed`, `error`: 상태 메시지 표시
+ * - 너비는 부모 요소에서 지정 (`w-full`, `min-w-[...]` 등)
+ */
+
 type TextInputProps = {
   id: string;
   title?: string;
@@ -119,7 +149,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             {description}
           </Label>
         )}
-        <div className="relative w-[36rem]">
+        <div className="relative">
           <input
             ref={ref}
             id={inputId}

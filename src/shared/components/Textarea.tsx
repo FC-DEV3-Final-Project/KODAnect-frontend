@@ -4,6 +4,19 @@ import DangerIcon from "@/assets/icon/system-danger.svg";
 import CompletedIcon from "@/assets/icon/system-success.svg";
 import FocusIcon from "@/assets/icon/system-info.svg";
 
+/**
+ * Example usage
+ *
+ * <TextArea
+ *   id="textarea"
+ *   title="제목"
+ *   description="입력시 필요한 정보를 입력해 주세요"
+ *   placeholder="내용을 입력하세요"
+ *   focusMessage="입력하세요"
+ *   maxLength={100}
+ * />
+ */
+
 type TextAreaProps = {
   id: string;
   title?: string;
@@ -49,32 +62,31 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setCharCount(e.target.value.length);
-      if (onChange) {
-        onChange(e);
-      }
+      onChange?.(e);
     };
 
     return (
       <div
         role="group"
         aria-labelledby={`${id}-label`}
-        className="flex flex-col justify-center gap-g2"
+        className="flex h-full w-full flex-col justify-center gap-g2"
       >
         {title && (
-          <Label id={`${id}-label`} htmlFor={id} color={"default"}>
+          <Label id={`${id}-label`} htmlFor={id} color="default">
             {title}
           </Label>
         )}
         {description && (
-          <Label size={"s"} color="default">
+          <Label size="s" color="default">
             {description}
           </Label>
         )}
-        <div className="relative w-[36rem]">
+
+        <div className="relative flex h-full w-full flex-col">
           <textarea
             ref={ref}
             id={id}
-            className={`rounded-4 focus:border-primary focus:ring-primary h-[14.4rem] w-full resize-none border px-4 py-3 text-gray-70 transition duration-150 ease-in-out focus:outline-none focus:ring-1 ${error ? "border-danger focus:ring-danger border-2" : "focus:ring-primary border-gray-60"}`}
+            className={`w-full flex-1 resize-none rounded-r3 border px-p6 py-p3 text-gray-70 transition duration-150 ease-in-out focus:outline-none focus:ring-1 ${error ? "border-danger focus:ring-danger border-2" : "focus:ring-primary border-gray-60"} `}
             placeholder={placeholder}
             maxLength={maxLength}
             onFocus={(e) => {
@@ -91,15 +103,15 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             {...props}
           />
 
-          <div className="flex min-h-[2rem] items-center justify-between">
+          <div className="flex min-h-[2rem] flex-shrink-0 items-center justify-between">
             {error ? (
               <p
                 id={errorId}
                 role="status"
                 aria-live="assertive"
-                className="flex items-center gap-2"
+                className="flex items-center gap-g2"
               >
-                <img src={DangerIcon} alt="에러" className="h-5 w-5" />
+                <img src={DangerIcon} alt="에러" className="h-icon2 w-icon2" />
                 <Label size="s" color="danger">
                   {error}
                 </Label>
@@ -109,28 +121,27 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                 id={completedId}
                 role="status"
                 aria-live="polite"
-                className="flex items-center gap-2"
+                className="flex items-center gap-g2"
               >
-                <img src={CompletedIcon} alt="완료" className="h-5 w-5" />
+                <img src={CompletedIcon} alt="완료" className="h-icon2 w-icon2" />
                 <Label size="s" color="success">
                   {completed}
                 </Label>
               </p>
             ) : isFocused && focusMessage ? (
-              <p id={focusId} role="status" aria-live="polite" className="flex items-center gap-2">
-                <img src={FocusIcon} alt="포커스" className="h-5 w-5" />
+              <p id={focusId} role="status" aria-live="polite" className="flex items-center gap-g2">
+                <img src={FocusIcon} alt="포커스" className="h-icon2 w-icon2" />
                 <Label size="s" color="info">
                   {focusMessage}
                 </Label>
               </p>
             ) : (
-              <div className="w-[1px]" /> // 빈 상태에도 오른쪽 카운트를 밀어주는 역할
+              <div className="w-[1px]" />
             )}
 
-            {/* 글자 수 카운트 */}
             {maxLength && (
-              <div className="flex items-center gap-1">
-                <Label size="s" color="default">
+              <div className="flex items-center gap-g1">
+                <Label size="s" color={error ? "danger" : "length"}>
                   {charCount}
                 </Label>
                 <Label size="s">/{maxLength}</Label>
