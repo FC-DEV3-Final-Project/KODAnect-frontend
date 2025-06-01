@@ -21,7 +21,11 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
         aria-label={`${item.label} 관련 메뉴`}
       >
         <h1 className="min-w-[165px] py-p6 pr-p6 text-h-lg font-bold">{item.label}</h1>
-        <ul className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6">
+        <ul
+          className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6"
+          role="menu"
+          aria-label="2차 메뉴"
+        >
           {hasChildren ? (
             item.children!.map((child) => (
               <RecursiveMenuItem key={child.label} item={child} depth={depth + 1} />
@@ -50,13 +54,17 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
 
   if (depth === 2) {
     return (
-      <li className="min-w-[180px] max-w-[205px] flex-1">
+      <li className="min-w-[180px] max-w-[205px] flex-1" role="menuitem">
         {hasChildren ? (
           <>
             <h2 className="block w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold">
               {item.label}
             </h2>
-            <ul className="mt-g5 min-w-[180px] max-w-[205px] flex-1 break-keep">
+            <ul
+              className="mt-g5 min-w-[180px] max-w-[205px] flex-1 break-keep"
+              role="menu"
+              aria-label="3차 메뉴"
+            >
               {item.children!.map((child) => (
                 <RecursiveMenuItem key={child.label} item={child} depth={depth + 1} />
               ))}
@@ -77,7 +85,7 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
 
   // depth === 3 이상 (마지막 depth)
   return (
-    <li className="min-w-[180px] max-w-[205px] flex-1">
+    <li className="min-w-[180px] max-w-[205px] flex-1" role="menuitem">
       <Link
         to={item.path!}
         aria-label={`${item.label} 페이지`}
