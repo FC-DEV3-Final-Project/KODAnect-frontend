@@ -12,16 +12,22 @@ interface Depth2MenuProps {
 
 function Depth2Menu({ item }: Depth2MenuProps) {
   return (
-    <li className="mb-g6 list-none">
+    <li className="mb-g6 list-none" role="menuitem">
       {item.children ? (
         <>
-          <div className={baseMobileDepth2Style}>{item.label}</div>
-          <ul className="py-p3">
-            {item.children.map((menu, index) => {
+          <div className={baseMobileDepth2Style} role="heading" aria-level={2}>
+            {item.label}
+          </div>
+          <ul className="py-p3" role="menu" aria-label="3차 메뉴">
+            {item.children.map((child, index) => {
               return (
-                <li key={index}>
-                  <Link to={menu.path!} className="block px-p3 py-p4">
-                    {menu.label}
+                <li key={index} role="menuitem">
+                  <Link
+                    to={child.path!}
+                    aria-label={`${item.label} 페이지`}
+                    className="block px-p3 py-p4"
+                  >
+                    {child.label}
                   </Link>
                 </li>
               );
@@ -29,7 +35,11 @@ function Depth2Menu({ item }: Depth2MenuProps) {
           </ul>
         </>
       ) : (
-        <Link to={item.path!} className={clsx(baseMobileDepth2Style, "block")}>
+        <Link
+          to={item.path!}
+          aria-label={`${item.label} 페이지`}
+          className={clsx(baseMobileDepth2Style, "block")}
+        >
           {item.label}
         </Link>
       )}

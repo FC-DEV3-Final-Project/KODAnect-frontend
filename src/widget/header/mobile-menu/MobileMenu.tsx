@@ -16,42 +16,32 @@ interface MobileMenuProps {
 export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
   const subMenuRef = useRef<HTMLDivElement>(null);
 
-  const { selectedDepth1, setSelectedDepth1, resetMenu } = useMenuStore();
+  const { selectedDepth1, setSelectedDepth1 } = useMenuStore();
 
-  // 외부 클릭시 메뉴 닫기
+  // 메뉴 열릴 때 첫 번째 메뉴 자동 선택
   useEffect(() => {
-    if (selectedDepth1 === null) return;
-
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        selectedDepth1 !== null &&
-        subMenuRef.current &&
-        !subMenuRef.current.contains(event.target as Node)
-      ) {
-        resetMenu();
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [selectedDepth1, resetMenu]);
-
-  // 열릴때 첫번째 메뉴 활성화
-  useEffect(() => {
-    if (selectedDepth1 === null) setSelectedDepth1(0);
-  });
+    if (isOpen && selectedDepth1 === null) {
+      setSelectedDepth1(0);
+    }
+  }, [isOpen, selectedDepth1, setSelectedDepth1]);
 
   return (
     <>
       {isOpen && (
-        <nav ref={subMenuRef} className="fixed top-0 z-50 h-dvh w-full bg-white">
+        <nav
+          ref={subMenuRef}
+          className="fixed top-0 z-50 h-dvh w-full bg-white"
+          aria-label="모바일 전체 메뉴"
+          role="navigation"
+        >
           <div className="flex justify-end border-b border-gray-20 p-p6">
             <button
               type="button"
               className="m-g3 flex gap-p3 text-b-sm font-bold"
               onClick={() => setIsOpen(false)}
+              aria-label="전체메뉴 닫기"
             >
-              <img src={Close} className="w-8" alt="닫기 아이콘" />
+              <img src={Close} className="w-8" alt="" aria-hidden="true" />
               닫기
             </button>
           </div>
@@ -63,7 +53,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
               onClick={setSelectedDepth1}
             />
             {selectedDepth1 !== null && (
-              <ul className="overflow-y-auto p-p6">
+              <ul className="overflow-y-auto p-p6" role="menu" aria-label="2차 메뉴">
                 {SITE_MENU[selectedDepth1].children?.map((item, index) => {
                   return <Depth2Menu item={item} key={index} />;
                 })}
