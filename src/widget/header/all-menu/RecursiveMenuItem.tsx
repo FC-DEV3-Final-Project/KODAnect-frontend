@@ -1,0 +1,87 @@
+import clsx from "clsx";
+
+import { Link } from "react-router-dom";
+import type { MenuItem } from "@/shared/types/Menu.types";
+import { baseIconStyle, menuDotStyle } from "@/widget/header/menuStyles";
+
+import NewWindow from "@/assets/icon/open-new-window.svg";
+
+interface RecursiveMenuItemProps {
+  item: MenuItem;
+  depth?: number; // 기본값 1로 할 예정
+}
+
+export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItemProps) {
+  const hasChildren = item.children && item.children.length > 0;
+
+  if (depth === 1) {
+    return (
+      <div className="mb-g9 flex items-start text-gray-90">
+        <div className="min-w-[165px] py-p6 pr-p6 text-h-lg font-bold">{item.label}</div>
+        <div className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6">
+          {hasChildren ? (
+            item.children!.map((child) => (
+              <RecursiveMenuItem key={child.label} item={child} depth={depth + 1} />
+            ))
+          ) : (
+            <a
+              href={item.path}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-w-[180px] max-w-[205px] flex-1 items-center justify-center rounded-r3 border border-gray-20 bg-white px-p6 py-p3 text-b-lg font-bold"
+              aria-label={`${item.label} 바로가기`}
+            >
+              {item.label}
+              <img
+                src={NewWindow}
+                alt="새창열기 아이콘"
+                className={clsx(baseIconStyle, "ml-g3 w-8")}
+              />
+            </a>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (depth === 2) {
+    return (
+      <li className="min-w-[180px] max-w-[205px] flex-1">
+        {hasChildren ? (
+          <>
+            <p className="w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold">
+              {item.label}
+            </p>
+            <ul className="mt-g5 min-w-[180px] max-w-[205px] flex-1 break-keep">
+              {item.children!.map((child) => (
+                <RecursiveMenuItem key={child.label} item={child} depth={depth + 1} />
+              ))}
+            </ul>
+          </>
+        ) : (
+          <Link
+            to={item.path!}
+            className="block w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold"
+          >
+            {item.label}
+          </Link>
+        )}
+      </li>
+    );
+  }
+
+  // depth === 3 이상 (마지막 depth)
+  return (
+    <li className="min-w-[180px] max-w-[205px] flex-1">
+      <Link
+        to={item.path!}
+        className={clsx(
+          menuDotStyle,
+          "flex items-start gap-g3 rounded-r3 px-p6 py-p3 before:mt-[10px]",
+        )}
+      >
+        {item.label}
+      </Link>
+    </li>
+  );
+}
