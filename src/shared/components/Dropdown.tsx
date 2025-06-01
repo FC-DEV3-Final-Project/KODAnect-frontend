@@ -7,14 +7,17 @@ import CheckIcon from "@/assets/icon/check.svg";
  *
  * const [selected, setSelected] = useState("");
  *
- * <Dropdown
- *   options={[
- *     { label: "공지사항", value: "notice" },
- *   ]}
- *   value={selected}
- *   onChange={setSelected}
- *   placeholder="전체"
- * />
+ * <div className="h-[4.8rem] w-[15rem]">
+ *     <Dropdown
+ *        options={[
+ *         { label: "공지사항", value: "notice" },
+ *         { label: "이벤트", value: "event" },
+ *       ]}
+ *       value={selected}
+ *       onChange={setSelected}
+ *       placeholder="전체"
+ *     />
+ *   </div>
  *
  * - `options`: label, value 형태의 선택 옵션 배열
  * - `value`: 현재 선택된 항목의 value
@@ -48,20 +51,25 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const selectedLabel = options.find((opt) => opt.value === value)?.label || placeholder;
+
   return (
-    <div ref={dropdownRef} className="relative w-full">
+    <div
+      ref={dropdownRef}
+      className="relative w-full min-w-[8rem] mobile:w-full mobile:min-w-[8rem]"
+    >
       <button
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls="dropdown-listbox"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex h-[4.8rem] w-[12.1rem] items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p5 text-left text-b-md text-gray-90 focus:border-2 focus:border-primary-50 focus:outline-none mobile:h-[4rem] mobile:w-[11.2rem] mobile:text-b-sm"
+        className="flex w-full items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p6 py-p4 text-b-md text-gray-90 focus:border-2 focus:border-primary-50 focus:outline-none mobile:h-full mobile:w-full mobile:text-b-sm"
       >
-        {options.find((opt) => opt.value === value)?.label || placeholder}
+        {selectedLabel}
         <img
           src={ArrowIcon}
           alt="arrow"
-          className={`ml-auto h-icon2 w-icon2 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`h-icon2 w-icon2 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -70,31 +78,32 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
           role="listbox"
           id="dropdown-listbox"
           aria-labelledby="dropdown-button"
-          className="absolute z-10 mt-[0.7rem] w-[12.1rem] rounded-r4 border border-gray-20 bg-white p-p3 mobile:w-[11.2rem]"
+          className="absolute z-10 mt-2 w-fit min-w-[13rem] rounded-r4 border border-gray-20 bg-white p-p3 shadow-s2 mobile:w-full"
         >
-          {options.map((option) => (
-            <li
-              role="option"
-              aria-selected={option.value === value}
-              key={option.value}
-              onClick={() => {
-                onChange(option.value);
-                setIsOpen(false);
-              }}
-              className={`flex h-[4.6rem] w-full cursor-pointer items-center gap-g3 rounded-r3 px-p2 py-p4 text-b-md mobile:text-b-sm ${
-                option.value === value
-                  ? "bg-secondary-5 text-secondary-80"
-                  : "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10"
-              }`}
-            >
-              {option.value === value && (
-                <span className="mr-1">
-                  <img src={CheckIcon} className="h-icon1 w-icon1" />
-                </span>
-              )}
-              {option.label}
-            </li>
-          ))}
+          {options.map((option) => {
+            const isSelected = option.value === value;
+            return (
+              <li
+                role="option"
+                aria-selected={isSelected}
+                key={option.value}
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
+                className={`flex w-full cursor-pointer items-center gap-g3 rounded-r3 px-p6 py-p4 text-b-md mobile:text-b-sm ${
+                  isSelected
+                    ? "bg-secondary-5 text-secondary-80"
+                    : "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10"
+                }`}
+              >
+                {isSelected && (
+                  <img src={CheckIcon} className="mr-1 h-icon2 w-icon2" alt="선택됨" />
+                )}
+                {option.label}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
