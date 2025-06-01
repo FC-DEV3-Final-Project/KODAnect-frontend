@@ -28,18 +28,19 @@ export default function Header() {
     <header aria-label="사이트 헤더" className="bg-white text-gray-90">
       <div className="border-b border-gray-20">
         <div className="m-auto flex max-w-[1280px] items-center justify-between px-p10 py-p6 mobile:px-p6">
-          <h2>
-            <Link to={"/home"}>
+          <h1>
+            <Link to={"/home"} aria-label="메인 페이지">
               <img src={Logo} className="h-[60px] mobile:h-[40px]" alt="한국장기기증원 로고" />
             </Link>
-          </h2>
+          </h1>
           <button
             ref={buttonRef}
             type="button"
             onClick={() => setIsOpenAllMenu(true)}
             className="flex h-full items-center gap-g3 font-bold"
+            aria-label="전체메뉴 열기"
           >
-            <img src={Menu} alt="전체메뉴 아이콘" className={baseIconStyle} />
+            <img src={Menu} alt="" aria-hidden="true" className={baseIconStyle} />
             전체메뉴
           </button>
         </div>
