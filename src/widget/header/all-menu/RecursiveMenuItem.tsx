@@ -21,7 +21,7 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
         aria-label={`${item.label} 관련 메뉴`}
       >
         <h1 className="min-w-[165px] py-p6 pr-p6 text-h-lg font-bold">{item.label}</h1>
-        <div className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6">
+        <ul className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6">
           {hasChildren ? (
             item.children!.map((child) => (
               <RecursiveMenuItem key={child.label} item={child} depth={depth + 1} />
@@ -43,7 +43,7 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
               />
             </a>
           )}
-        </div>
+        </ul>
       </section>
     );
   }

@@ -27,11 +27,9 @@ export default function AllMenu({ isOpen, setIsOpen }: AllMenuProps) {
           </button>
         </div>
         <nav className="max-h-[calc(100dvh_-_200px)] overflow-y-auto px-p10 pb-p10">
-          <ul className="list-none">
-            {SITE_MENU.map((item, idx) => (
-              <RecursiveMenuItem key={idx} item={item} />
-            ))}
-          </ul>
+          {SITE_MENU.map((item, idx) => (
+            <RecursiveMenuItem key={idx} item={item} />
+          ))}
         </nav>
       </div>
     </div>,
