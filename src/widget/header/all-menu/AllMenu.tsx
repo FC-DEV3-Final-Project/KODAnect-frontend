@@ -22,8 +22,8 @@ export default function AllMenu({ isOpen, setIsOpen }: AllMenuProps) {
       <div className={modalStyle} onClick={(event) => event.stopPropagation()}>
         <div className="mb-g8 flex items-center justify-between px-p10 pt-p10">
           <h2 className="text-d-md font-bold">전체메뉴</h2>
-          <button type="button" onClick={() => setIsOpen(false)}>
-            <img src={Close} className="w-icon5" alt="전체메뉴 닫기 아이콘" />
+          <button type="button" onClick={() => setIsOpen(false)} aria-label="전체메뉴 닫기">
+            <img src={Close} className="w-icon5" alt="" aria-hidden="true" />
           </button>
         </div>
         <nav className="max-h-[calc(100dvh_-_200px)] overflow-y-auto px-p10 pb-p10">
@@ -35,6 +35,6 @@ export default function AllMenu({ isOpen, setIsOpen }: AllMenuProps) {
         </nav>
       </div>
     </div>,
-    document.querySelector("body")!,
+    document.body,
   );
 }

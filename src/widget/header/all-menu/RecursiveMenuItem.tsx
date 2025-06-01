@@ -16,8 +16,17 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
 
   if (depth === 1) {
     return (
-      <div className="mb-g9 flex items-start text-gray-90">
-        <div className="min-w-[165px] py-p6 pr-p6 text-h-lg font-bold">{item.label}</div>
+      <section
+        className="mb-g9 flex items-start text-gray-90"
+        aria-label={`${item.label} 관련 메뉴`}
+      >
+        <div
+          role="heading"
+          aria-level={1}
+          className="min-w-[165px] py-p6 pr-p6 text-h-lg font-bold"
+        >
+          {item.label}
+        </div>
         <div className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6">
           {hasChildren ? (
             item.children!.map((child) => (
@@ -34,13 +43,14 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
               {item.label}
               <img
                 src={NewWindow}
-                alt="새창열기 아이콘"
+                alt=""
+                aria-hidden="true"
                 className={clsx(baseIconStyle, "ml-g3 w-8")}
               />
             </a>
           )}
         </div>
-      </div>
+      </section>
     );
   }
 
@@ -49,9 +59,13 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
       <li className="min-w-[180px] max-w-[205px] flex-1">
         {hasChildren ? (
           <>
-            <p className="w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold">
+            <div
+              role="heading"
+              aria-level={2}
+              className="block w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold"
+            >
               {item.label}
-            </p>
+            </div>
             <ul className="mt-g5 min-w-[180px] max-w-[205px] flex-1 break-keep">
               {item.children!.map((child) => (
                 <RecursiveMenuItem key={child.label} item={child} depth={depth + 1} />
@@ -61,6 +75,7 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
         ) : (
           <Link
             to={item.path!}
+            aria-label={`${item.label} 페이지`}
             className="block w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold"
           >
             {item.label}
@@ -75,6 +90,7 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
     <li className="min-w-[180px] max-w-[205px] flex-1">
       <Link
         to={item.path!}
+        aria-label={`${item.label} 페이지`}
         className={clsx(
           menuDotStyle,
           "flex items-start gap-g3 rounded-r3 px-p6 py-p3 before:mt-[10px]",
