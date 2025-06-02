@@ -137,7 +137,7 @@ function Calendar({
                   id="month-listbox"
                   role="listbox"
                   aria-labelledby="month-button"
-                  className="absolute left-1/2 top-full z-10 mt-[0.4rem] w-[10rem] -translate-x-1/2 rounded-r4 border border-gray-30 bg-white p-p3 shadow-s3"
+                  className="absolute left-1/2 top-full z-10 mt-[0.4rem] w-[14.4rem] -translate-x-1/2 rounded-r4 border border-gray-30 bg-white p-p3 shadow-s3"
                 >
                   {months.map((m) => (
                     <li
@@ -206,9 +206,10 @@ function Calendar({
                             "relative flex h-[4.4rem] w-[4.4rem] items-center justify-center rounded-full text-b-md transition-all duration-150 mobile:w-[4rem]",
                             {
                               "bg-secondary-80 text-white": isSelectedDate,
-                              "bg-white text-blue-700": isTodayDate && !isSelectedDate,
-                              "text-gray-90 hover:text-blue-600":
+                              "bg-white": isTodayDate && !isSelectedDate,
+                              "text-gray-90 hover:bg-white":
                                 !isTodayDate && isCurrentMonth && !isSelectedDate,
+                              "active:bg-secondary-10": !isSelectedDate,
                               "text-gray-30": !isTodayDate && !isCurrentMonth && !isSelectedDate,
                             },
                           )}
