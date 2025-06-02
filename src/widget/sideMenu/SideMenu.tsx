@@ -23,16 +23,6 @@ function SideMenu() {
 
   if (!selectedMenu) return null;
 
-  // 레이아웃을 flex로 감싸야 사이드 메뉴가 좌측에 정상적으로 표시됩니다.
-  /*
-  <div className="flex">
-    <SideMenu selectedLabel="장기·조직기증" />
-    <main className="flex-grow">
-      {children}
-    </main>
-  </div>
-  */
-
   return (
     <aside className="w-[248px] shrink-0 mobile:hidden" aria-label="사이드 메뉴">
       {/* Top visual area */}
