@@ -36,7 +36,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     totalPages: 10,
-    currentPage: 1,
+    currentPage: 4,
     onPageChange: (page: number) => console.log(`Clicked page ${page}`),
     visiblePages: 10,
   },
@@ -45,7 +45,7 @@ export const Default: Story = {
 export const Short: Story = {
   args: {
     totalPages: 99,
-    currentPage: 99,
+    currentPage: 4,
     onPageChange: (page: number) => console.log(`Clicked page ${page}`),
     visiblePages: 8,
   },
