@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import clsx from "clsx";
 import ArrowIcon from "@/assets/icon/arrow-down.svg?react";
 import EllipsisIcon from "@/assets/icon/ellipsis-vertical.svg?react";
 
