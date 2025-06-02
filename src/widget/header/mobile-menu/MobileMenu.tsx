@@ -40,6 +40,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
               className="m-g3 flex gap-p3 text-b-sm font-bold"
               onClick={() => setIsOpen(false)}
               aria-label="전체메뉴 닫기"
+              aria-expanded={isOpen}
             >
               <img src={Close} className="w-8" alt="" aria-hidden="true" />
               닫기

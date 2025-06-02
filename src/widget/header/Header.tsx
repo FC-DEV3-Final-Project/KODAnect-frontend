@@ -39,6 +39,7 @@ export default function Header() {
             onClick={() => setIsOpenAllMenu(true)}
             className="flex h-full items-center gap-g3 font-bold"
             aria-label="전체메뉴 열기"
+            aria-expanded={isOpenAllMenu}
           >
             <img src={Menu} alt="" aria-hidden="true" className={baseIconStyle} />
             전체메뉴

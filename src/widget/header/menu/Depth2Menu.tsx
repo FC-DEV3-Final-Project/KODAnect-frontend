@@ -34,6 +34,7 @@ function Depth2Menu({ items, selectedDepth2, onClick }: Depth2MenuProps) {
                 className={clsx(menuStyle, isSelected && menuActiveStyle)}
                 onClick={() => onClick(index)}
                 aria-label={`${item.label} 메뉴 더보기`}
+                aria-expanded={isSelected}
               >
                 {item.label}
                 <img src={Arrow} alt="" aria-hidden="true" className={iconStyle} />

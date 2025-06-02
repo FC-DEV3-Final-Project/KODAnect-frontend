@@ -29,6 +29,8 @@ function Depth1Menu({ items, selectedDepth1, onClick }: Depth1MenuProps) {
                 type="button"
                 className={clsx(menuStyle, isActive && menuActiveStyle)}
                 onClick={() => onClick(index)}
+                aria-label={`${item.label} 메뉴 더보기`}
+                aria-expanded={isActive}
               >
                 {item.label}
               </button>
