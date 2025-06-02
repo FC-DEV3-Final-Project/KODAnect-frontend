@@ -1,6 +1,6 @@
 type ButtonProps<E extends React.ElementType> = {
   type?: "button" | "submit" | "reset";
-  variant?: "primary" | "secondary" | "tertiary" | "text";
+  variant?: "primary" | "secondary" | "tertiary";
   size?: "x-small" | "small" | "medium" | "large" | "x-large";
   children: React.ReactNode;
   className?: string;
@@ -36,10 +36,6 @@ export const Button = <E extends React.ElementType = "button">({
     tertiary: {
       style: "bg-gray-0 hover:bg-gray-5 text-gray-90 border border-gray-60",
       disabledStyle: disabledStyles,
-    },
-    text: {
-      style: "bg-transparent",
-      disabledStyle: "bg-transparent",
     },
   }[variant];
 
