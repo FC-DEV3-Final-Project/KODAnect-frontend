@@ -68,7 +68,7 @@ function Footer() {
           <img src={Logo} alt="한국장기조직기증원 로고" className="mb-g9 h-[60px] mobile:mb-g5" />
 
           {/* Footer Center */}
-          <section
+          <div
             className="mb-g9 flex w-full justify-between mobile:mb-g5 mobile:flex-col"
             aria-label="기관 정보 및 SNS 링크"
           >
@@ -108,7 +108,7 @@ function Footer() {
                 ))}
               </ul>
             </nav>
-          </section>
+          </div>
 
           {/* Footer Bottom */}
           <section
