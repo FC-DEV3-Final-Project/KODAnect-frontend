@@ -154,7 +154,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             ref={ref}
             id={inputId}
             type={props.type}
-            className={`w-full ${heightClasses} ${radiusClass} ${fontSizeClass} focus:border-primary focus:ring-primary border py-6 pl-4 ${getPaddingRightClass()} text-gray-95 focus:outline-none focus:ring-1 ${error ? "border-danger focus:ring-danger border-2" : "focus:ring-primary border border-gray-60"} transition duration-150 ease-in-out`}
+            className={`w-full ${heightClasses} ${radiusClass} ${fontSizeClass} focus:border-primary border py-p6 pl-p6 ${getPaddingRightClass()} text-gray-95 focus:outline-none ${error ? "border-2 border-danger-50" : "border border-gray-60"} transition duration-150 ease-in-out`}
             placeholder={placeholder}
             aria-describedby={describedByIds || undefined}
             aria-invalid={error ? "true" : "false"}
@@ -171,7 +171,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             {...props}
           />
 
-          <div className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-2">
+          <div className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-g3">
             {value && (
               <button type="button" onClick={handleClear}>
                 <img src={DeleteIcon} alt="삭제" className="h-icon3 w-icon3" />
@@ -194,9 +194,9 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             id={errorId}
             role="status"
             aria-live="assertive"
-            className="mt-1 flex items-center gap-2"
+            className="mt-1 flex items-center gap-g2"
           >
-            <img src={DangerIcon} alt="에러" className="h-5 w-5" />
+            <img src={DangerIcon} alt="에러" className="h-icon2 w-icon2" />
             <Label size="s" color="danger">
               {error}
             </Label>
@@ -208,9 +208,9 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             id={completedId}
             role="status"
             aria-live="polite"
-            className="mt-1 flex items-center gap-2"
+            className="mt-1 flex items-center gap-g2"
           >
-            <img src={CompletedIcon} alt="완료" className="h-5 w-5" />
+            <img src={CompletedIcon} alt="완료" className="h-icon2 w-icon2" />
             <Label size="s" color="success">
               {completed}
             </Label>
@@ -218,8 +218,13 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         )}
 
         {!error && !completed && isFocused && focusMessage && (
-          <p id={focusId} role="status" aria-live="polite" className="mt-1 flex items-center gap-2">
-            <img src={FocusIcon} alt="포커스" className="h-5 w-5" />
+          <p
+            id={focusId}
+            role="status"
+            aria-live="polite"
+            className="mt-1 flex items-center gap-g2"
+          >
+            <img src={FocusIcon} alt="포커스" className="h-icon2 w-icon2" />
             <Label size="s" color="info">
               {focusMessage}
             </Label>
