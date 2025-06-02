@@ -5,7 +5,7 @@ export const baseIconStyle = "w-8";
 // All Menu
 export const overlayStyle =
   "fixed inset-0 z-50 bg-black bg-opacity-25 flex items-center justify-center";
-export const modalStyle = "m-g9 w-full rounded-r6 bg-white";
+export const modalStyle = "max-w-[1280px] m-g9 w-full rounded-r6 bg-white";
 
 // Mobile
 export const baseMobileMenuStyle = "flex items-center";
