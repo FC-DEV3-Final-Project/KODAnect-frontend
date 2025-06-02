@@ -24,7 +24,7 @@ function SideMenu() {
   if (!selectedMenu) return null;
 
   return (
-    <aside className="w-[248px] shrink-0 mobile:hidden" aria-label="사이드 메뉴">
+    <aside className="mt-[-40px] w-[248px] shrink-0 mobile:hidden" aria-label="사이드 메뉴">
       {/* Top visual area */}
       <div
         className="flex h-[125px] w-full items-center justify-center rounded-r-[30px] rounded-bl-[30px] bg-secondary-10 bg-cover bg-center"
