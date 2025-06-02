@@ -52,7 +52,8 @@ function Footer() {
                 <span className="text-gray-50 mobile:text-b-sm">{title}</span>
                 <img
                   src={OpenNewWindow}
-                  alt={`${title} 바로가기`}
+                  alt=""
+                  aria-hidden="true"
                   className="w-icon3 mobile:w-icon2"
                 />
               </a>
