@@ -19,9 +19,17 @@ export default function AllMenu({ isOpen, setIsOpen }: AllMenuProps) {
 
   return createPortal(
     <div className={overlayStyle} onClick={() => setIsOpen(false)}>
-      <div className={modalStyle} onClick={(event) => event.stopPropagation()}>
+      <div
+        className={modalStyle}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="mb-g8 flex items-center justify-between px-p10 pt-p10">
-          <h2 className="text-d-md font-bold">전체메뉴</h2>
+          <h2 id="modal-title" className="text-d-md font-bold">
+            전체메뉴
+          </h2>
           <button type="button" onClick={() => setIsOpen(false)} aria-label="전체메뉴 닫기">
             <img src={Close} className="w-icon5" alt="" aria-hidden="true" />
           </button>
