@@ -2,11 +2,11 @@ import clsx from "clsx";
 
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import type { MenuItem } from "@/shared/types/Menu.types";
+import type { SiteMenu } from '@/shared/types/SiteMenu.types';
 import { baseMenuStyle, menuDotStyle } from "@/widget/header/menuStyles";
 
 interface Depth3MenuProps {
-  items: MenuItem[];
+  items: SiteMenu[];
 }
 
 const menuStyle = clsx(baseMenuStyle, "px-p3 py-p4 rounded-r3");

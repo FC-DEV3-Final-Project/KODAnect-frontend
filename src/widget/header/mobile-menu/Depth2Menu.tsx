@@ -2,12 +2,12 @@ import clsx from "clsx";
 
 import React from "react";
 import { Link } from "react-router-dom";
-import type { MenuItem } from "@/shared/types/Menu.types";
+import type { SiteMenu } from "@/shared/types/SiteMenu.types";
 
 import { baseMobileDepth2Style } from "@/widget/header/menuStyles";
 
 interface Depth2MenuProps {
-  item: MenuItem;
+  item: SiteMenu;
 }
 
 function Depth2Menu({ item }: Depth2MenuProps) {

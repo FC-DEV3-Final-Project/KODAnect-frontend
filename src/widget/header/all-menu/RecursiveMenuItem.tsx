@@ -1,13 +1,13 @@
 import clsx from "clsx";
 
 import { Link } from "react-router-dom";
-import type { MenuItem } from "@/shared/types/Menu.types";
+import type { SiteMenu } from '@/shared/types/SiteMenu.types';
 import { baseIconStyle, menuDotStyle } from "@/widget/header/menuStyles";
 
 import NewWindow from "@/assets/icon/open-new-window.svg";
 
 interface RecursiveMenuItemProps {
-  item: MenuItem;
+  item: SiteMenu;
   depth?: number; // 기본값 1로 할 예정
 }
 

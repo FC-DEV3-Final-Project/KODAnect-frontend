@@ -1,13 +1,13 @@
 import clsx from "clsx";
 
 import React from "react";
-import type { MenuItem } from "@/shared/types/Menu.types";
+import type { SiteMenu } from '@/shared/types/SiteMenu.types';
 
 import NewWindow from "@/assets/icon/open-new-window.svg";
 import { baseIconStyle, baseMobileMenuStyle } from "@/widget/header/menuStyles";
 
 interface Depth1MenuProps {
-  items: MenuItem[];
+  items: SiteMenu[];
   selectedDepth1: number | null;
   onClick: (index: number) => void;
 }

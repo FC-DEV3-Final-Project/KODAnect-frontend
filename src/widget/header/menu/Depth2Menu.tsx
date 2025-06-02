@@ -2,13 +2,13 @@ import clsx from "clsx";
 
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import type { MenuItem } from "@/shared/types/Menu.types";
+import type { SiteMenu } from '@/shared/types/SiteMenu.types';
 
 import Arrow from "@/assets/icon/arrow-down.svg";
 import { baseIconStyle, baseMenuStyle } from "@/widget/header/menuStyles";
 
 interface Depth2MenuProps {
-  items: MenuItem[];
+  items: SiteMenu[];
   selectedDepth2: number | null;
   onClick: (index: number) => void;
 }
