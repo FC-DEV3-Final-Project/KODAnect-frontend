@@ -13,6 +13,7 @@ import clsx from "clsx";
 import Arrow from "@/assets/icon/round-arrow.svg?react";
 import ArrowDropdown from "@/assets/icon/arrow-drop-down.svg?react";
 import { Button } from "@/shared/components/Button";
+import CheckIcon from "@/assets/icon/check.svg?react";
 
 type CalendarProps = {
   selected: Date | undefined;
@@ -94,22 +95,35 @@ function Calendar({
                   aria-labelledby="year-button"
                   className="absolute left-1/2 top-full z-10 mt-[0.4rem] w-[14.4rem] -translate-x-1/2 rounded-r4 border border-gray-30 bg-white p-p3 shadow-s3"
                 >
-                  {years.map((y) => (
-                    <li
-                      key={y}
-                      role="option"
-                      aria-selected={y === currentMonth.getFullYear()}
-                      onClick={() => {
-                        const newDate = new Date(currentMonth);
-                        newDate.setFullYear(y);
-                        onMonthChange(newDate);
-                        setYearOpen(false);
-                      }}
-                      className="h-[4.2rem] cursor-pointer rounded-r3 p-p4 text-center text-b-sm text-gray-90 hover:bg-secondary-5 active:bg-secondary-10"
-                    >
-                      {y}년
-                    </li>
-                  ))}
+                  {years.map((y) => {
+                    const isSelectedYear = y === currentMonth.getFullYear();
+                    return (
+                      <li
+                        key={y}
+                        role="option"
+                        aria-selected={isSelectedYear}
+                        onClick={() => {
+                          const newDate = new Date(currentMonth);
+                          newDate.setFullYear(y);
+                          onMonthChange(newDate);
+                          setYearOpen(false);
+                        }}
+                        className={clsx(
+                          "flex h-[4.2rem] cursor-pointer items-center rounded-r3 px-p4 text-b-sm",
+                          {
+                            "bg-secondary-10": isSelectedYear,
+                            "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10":
+                              !isSelectedYear,
+                          },
+                        )}
+                      >
+                        <div className="flex w-full items-center justify-center gap-g3">
+                          {isSelectedYear && <CheckIcon className="h-icon2 w-icon2" />}
+                          <span>{y}년</span>
+                        </div>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </div>
@@ -137,24 +151,37 @@ function Calendar({
                   id="month-listbox"
                   role="listbox"
                   aria-labelledby="month-button"
-                  className="absolute left-1/2 top-full z-10 mt-[0.4rem] w-[14.4rem] -translate-x-1/2 rounded-r4 border border-gray-30 bg-white p-p3 shadow-s3"
+                  className="absolute left-1/2 top-full z-10 mt-[0.4rem] w-[10rem] -translate-x-1/2 rounded-r4 border border-gray-30 bg-white p-p3 shadow-s3"
                 >
-                  {months.map((m) => (
-                    <li
-                      key={m}
-                      role="option"
-                      aria-selected={m === currentMonth.getMonth() + 1}
-                      onClick={() => {
-                        const newDate = new Date(currentMonth);
-                        newDate.setMonth(m - 1);
-                        onMonthChange(newDate);
-                        setMonthOpen(false);
-                      }}
-                      className="h-[4.2rem] cursor-pointer rounded-r3 p-p4 text-center text-b-sm text-gray-90 hover:bg-secondary-5 active:bg-secondary-10"
-                    >
-                      {m}월
-                    </li>
-                  ))}
+                  {months.map((m) => {
+                    const isSelectedMonth = m === currentMonth.getMonth() + 1;
+                    return (
+                      <li
+                        key={m}
+                        role="option"
+                        aria-selected={isSelectedMonth}
+                        onClick={() => {
+                          const newDate = new Date(currentMonth);
+                          newDate.setMonth(m - 1);
+                          onMonthChange(newDate);
+                          setMonthOpen(false);
+                        }}
+                        className={clsx(
+                          "flex h-[4.2rem] cursor-pointer items-center rounded-r3 px-p4 text-b-sm",
+                          {
+                            "bg-secondary-5": isSelectedMonth,
+                            "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10":
+                              !isSelectedMonth,
+                          },
+                        )}
+                      >
+                        <div className="flex w-full items-center justify-center gap-g3">
+                          {isSelectedMonth && <CheckIcon className="h-icon2 w-icon2" />}
+                          <span>{m}월</span>
+                        </div>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </div>
@@ -206,7 +233,7 @@ function Calendar({
                             "relative flex h-[4.4rem] w-[4.4rem] items-center justify-center rounded-full text-b-md transition-all duration-150 mobile:w-[4rem]",
                             {
                               "bg-secondary-80 text-white": isSelectedDate,
-                              "bg-white": isTodayDate && !isSelectedDate,
+                              "bg-white text-blue-700": isTodayDate && !isSelectedDate,
                               "text-gray-90 hover:bg-white":
                                 !isTodayDate && isCurrentMonth && !isSelectedDate,
                               "active:bg-secondary-10": !isSelectedDate,

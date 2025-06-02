@@ -50,13 +50,7 @@ function DatePicker({ range, onRangeChange }: DatePickerProps) {
 
   const handleTodayClick = () => {
     const today = new Date();
-
-    setCurrentMonth(today); // 오늘 날짜가 있는 월로 이동
-    if (open === "from") {
-      onRangeChange({ ...range, from: today });
-    } else if (open === "to") {
-      onRangeChange({ ...range, to: today });
-    }
+    setCurrentMonth(today);
   };
 
   return (
