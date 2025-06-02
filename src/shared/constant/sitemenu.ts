@@ -1,8 +1,4 @@
-interface SiteMenu {
-  label: string;
-  path?: string;
-  children?: SiteMenu[];
-}
+import type { SiteMenu } from '@/shared/types/SiteMenu.types';
 
 export const SITE_MENU: SiteMenu[] = [
   {
