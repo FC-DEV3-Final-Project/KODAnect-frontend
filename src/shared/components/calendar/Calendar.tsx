@@ -11,9 +11,8 @@ import {
 } from "date-fns";
 import clsx from "clsx";
 import Arrow from "@/assets/icon/round-arrow.svg?react";
-import ArrowDropdown from "@/assets/icon/arrow-drop-down.svg?react";
 import { Button } from "@/shared/components/Button";
-import CheckIcon from "@/assets/icon/check.svg?react";
+import { DropdownSelect } from "@/shared/components/calendar/DropdownSelect";
 
 type CalendarProps = {
   selected: Date | undefined;
@@ -40,9 +39,8 @@ function Calendar({
   onCancel,
   onTodayClick,
 }: CalendarProps) {
+  const [openDropdown, setOpenDropdown] = useState<"year" | "month" | null>(null);
   const calendarDays = getCalendarDays(currentMonth);
-  const [yearOpen, setYearOpen] = useState(false);
-  const [monthOpen, setMonthOpen] = useState(false);
   const years = Array.from({ length: 6 }, (_, i) => 2020 + i).reverse(); // 2020~2025
   const months = Array.from({ length: 12 }, (_, i) => i + 1); //1 ~ 12
 
@@ -72,118 +70,36 @@ function Calendar({
           <div className="flex items-center gap-g5">
             {/* 연도 드롭다운 */}
             <div className="relative">
-              <button
-                id="year-button"
-                aria-haspopup="listbox"
-                aria-expanded={yearOpen}
-                aria-controls="year-listbox"
-                onClick={() => {
-                  setYearOpen((prev) => !prev);
-                  setMonthOpen(false);
+              <DropdownSelect
+                items={years}
+                selectedItem={currentMonth.getFullYear()}
+                formatItem={(y) => `${y}년`}
+                onSelect={(y) => {
+                  const newDate = new Date(currentMonth);
+                  newDate.setFullYear(y);
+                  onMonthChange(newDate);
                 }}
-                className="flex items-center gap-g2 text-h-sm font-bold text-gray-70"
-              >
-                {format(currentMonth, "yyyy년")}
-                <ArrowDropdown className="h-icon2 w-icon2" />
-              </button>
-
-              {/* 연도  선택 드롭다운*/}
-              {yearOpen && (
-                <ul
-                  id="year-listbox"
-                  role="listbox"
-                  aria-labelledby="year-button"
-                  className="absolute left-1/2 top-full z-10 mt-[0.4rem] w-[14.4rem] -translate-x-1/2 rounded-r4 border border-gray-30 bg-white p-p3 shadow-s3"
-                >
-                  {years.map((y) => {
-                    const isSelectedYear = y === currentMonth.getFullYear();
-                    return (
-                      <li
-                        key={y}
-                        role="option"
-                        aria-selected={isSelectedYear}
-                        onClick={() => {
-                          const newDate = new Date(currentMonth);
-                          newDate.setFullYear(y);
-                          onMonthChange(newDate);
-                          setYearOpen(false);
-                        }}
-                        className={clsx(
-                          "flex h-[4.2rem] cursor-pointer items-center rounded-r3 px-p4 text-b-sm",
-                          {
-                            "bg-secondary-10": isSelectedYear,
-                            "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10":
-                              !isSelectedYear,
-                          },
-                        )}
-                      >
-                        <div className="flex w-full items-center justify-center gap-g3">
-                          {isSelectedYear && <CheckIcon className="h-icon2 w-icon2" />}
-                          <span>{y}년</span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+                buttonLabel={format(currentMonth, "yyyy년")}
+                open={openDropdown === "year"}
+                onToggle={() => setOpenDropdown((prev) => (prev === "year" ? null : "year"))}
+              />
             </div>
 
             {/* 월 드롭다운 */}
             <div className="relative">
-              <button
-                id="month-button"
-                aria-haspopup="listbox"
-                aria-expanded={monthOpen}
-                aria-controls="month-listbox"
-                onClick={() => {
-                  setMonthOpen((prev) => !prev);
-                  setYearOpen(false);
+              <DropdownSelect
+                items={months}
+                selectedItem={currentMonth.getMonth() + 1}
+                formatItem={(m) => `${m}월`}
+                onSelect={(m) => {
+                  const newDate = new Date(currentMonth);
+                  newDate.setMonth(m - 1);
+                  onMonthChange(newDate);
                 }}
-                className="relative flex items-center gap-g2 text-h-sm font-bold text-gray-70"
-              >
-                {format(currentMonth, "M월")}
-                <ArrowDropdown className="h-icon2 w-icon2" />
-              </button>
-
-              {/* 월 선택 드롭다운 */}
-              {monthOpen && (
-                <ul
-                  id="month-listbox"
-                  role="listbox"
-                  aria-labelledby="month-button"
-                  className="absolute left-1/2 top-full z-10 mt-[0.4rem] w-[10rem] -translate-x-1/2 rounded-r4 border border-gray-30 bg-white p-p3 shadow-s3"
-                >
-                  {months.map((m) => {
-                    const isSelectedMonth = m === currentMonth.getMonth() + 1;
-                    return (
-                      <li
-                        key={m}
-                        role="option"
-                        aria-selected={isSelectedMonth}
-                        onClick={() => {
-                          const newDate = new Date(currentMonth);
-                          newDate.setMonth(m - 1);
-                          onMonthChange(newDate);
-                          setMonthOpen(false);
-                        }}
-                        className={clsx(
-                          "flex h-[4.2rem] cursor-pointer items-center rounded-r3 px-p4 text-b-sm",
-                          {
-                            "bg-secondary-5": isSelectedMonth,
-                            "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10":
-                              !isSelectedMonth,
-                          },
-                        )}
-                      >
-                        <div className="flex w-full items-center justify-center gap-g3">
-                          {isSelectedMonth && <CheckIcon className="h-icon2 w-icon2" />}
-                          <span>{m}월</span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+                buttonLabel={format(currentMonth, "M월")}
+                open={openDropdown === "month"}
+                onToggle={() => setOpenDropdown((prev) => (prev === "month" ? null : "month"))}
+              />
             </div>
           </div>
           <button
