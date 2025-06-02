@@ -1,23 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import type { SiteMenu } from "@/shared/types/SiteMenu.types";
 import Arrow from "@/assets/icon/arrow-down.svg";
 
-interface SiteMenu {
-  label: string;
-  path?: string;
-  children?: SiteMenu[];
-}
-
-function AccordionMenu({
-  menu,
-  defaultOpen = true,
-  currentPath,
-}: {
+interface AccordionMenuProps {
   menu: SiteMenu;
   defaultOpen?: boolean;
   currentPath: string;
-}) {
+}
+function AccordionMenu({ menu, defaultOpen = true, currentPath }: AccordionMenuProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const hasChildren = menu.children && menu.children.length > 0;
@@ -55,7 +47,7 @@ function AccordionMenu({
                 <Link
                   to={child.path || "#"}
                   className="block break-keep py-p3 pr-p6 text-gray-90"
-                  aria-current="page"
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {child.label}
                 </Link>
