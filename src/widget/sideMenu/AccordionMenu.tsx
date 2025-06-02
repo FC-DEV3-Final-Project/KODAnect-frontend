@@ -52,7 +52,11 @@ function AccordionMenu({
             return (
               <li key={index} className={`${baseClass} ${isActive ? activeClass : ""}`}>
                 <span className="absolute left-p6 top-[20.5px] h-[4px] w-[4px] -translate-y-1/2 rounded-full bg-gray-90 hover:bg-secondary-80"></span>
-                <Link to={child.path || "#"} className="block break-keep py-p3 pr-p6 text-gray-90">
+                <Link
+                  to={child.path || "#"}
+                  className="block break-keep py-p3 pr-p6 text-gray-90"
+                  aria-current="page"
+                >
                   {child.label}
                 </Link>
               </li>

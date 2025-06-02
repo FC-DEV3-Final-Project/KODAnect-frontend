@@ -66,6 +66,7 @@ function SideMenu() {
                 key={index}
                 to={menu.path ?? "#"}
                 className={`${baseClass} ${isActive ? activeClass : ""}`}
+                aria-current="page"
               >
                 <span>{menu.label}</span>
                 {menu.label === "공공데이터개방" && (
