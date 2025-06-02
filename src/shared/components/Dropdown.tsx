@@ -63,7 +63,7 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
         aria-expanded={isOpen}
         aria-controls="dropdown-listbox"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p6 py-p4 text-b-md text-gray-90 focus:border-2 focus:border-primary-50 focus:outline-none mobile:h-full mobile:w-full mobile:text-b-sm"
+        className="flex w-full items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p6 py-p4 text-b-md text-gray-90 focus:outline focus:outline-2 focus:outline-primary-50 mobile:h-full mobile:text-b-sm"
       >
         {selectedLabel}
         <img
