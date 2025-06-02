@@ -86,7 +86,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           <textarea
             ref={ref}
             id={id}
-            className={`w-full flex-1 resize-none rounded-r3 border px-p6 py-p3 text-gray-70 transition duration-150 ease-in-out focus:outline-none ${error ? "border-2 border-danger-50" : "border-gray-60"} `}
+            className={`w-full flex-1 resize-none rounded-r3 border px-p6 py-p3 text-gray-70 transition duration-150 ease-in-out focus:border-2 focus:border-primary-50 focus:outline-none ${error ? "border-2 border-danger-50" : "border-gray-60"} `}
             placeholder={placeholder}
             maxLength={maxLength}
             onFocus={(e) => {
