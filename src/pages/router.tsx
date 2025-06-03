@@ -3,18 +3,18 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "@/widget/layout/Layout";
 import SideMenuLayout from "@/widget/layout/SideMenuLayout";
 
-import Home from "./Home";
-import Empty from "./Empty";
-import Members from "./remembrance/Members";
-import Letters from "./remembrance/Letters";
-import Recipients from "./remembrance/Recipients";
-import Stories from "./remembrance/Stories";
-import Notices from "./announcement/Notices";
-import Donors from "./participation/Donors";
-import Comparison from "./participation/Comparison";
-import YearlyTrend from "./participation/YearlyTrend";
-import OrganDonation from "./organ/info/OrganDonation";
-import BrainDeath from "./organ/info/BrainDeath";
+import Home from "@/pages/Home";
+import Empty from "@/pages/Empty";
+import Members from "@/pages/remembrance/Members";
+import Letters from "@/pages/remembrance/Letters";
+import Recipients from "@/pages/remembrance/Recipients";
+import Stories from "@/pages/remembrance/Stories";
+import Notices from "@/pages/announcement/Notices";
+import Donors from "@/pages/participation/Donors";
+import Comparison from "@/pages/participation/Comparison";
+import YearlyTrend from "@/pages/participation/YearlyTrend";
+import OrganDonation from "@/pages/organ/info/OrganDonation";
+import BrainDeath from "@/pages/organ/info/BrainDeath";
 
 // 필요에 따라 페이지 컴포넌트 추가 import
 
