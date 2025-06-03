@@ -1,14 +1,18 @@
+import clsx from "clsx";
 import { Outlet } from "react-router-dom";
-import Header from "../header/Header";
-import SideMenu from "../sideMenu/SideMenu";
-import Footer from "../Footer";
+import { useIsMobile } from "@/shared/hooks/useIsMobile";
+import Header from "@/widget/header/Header";
+import SideMenu from "@/widget/sideMenu/SideMenu";
+import Footer from "@/widget/Footer";
 
 export default function SideMenuLayout() {
+  const isMobile = useIsMobile(1058);
+
   return (
     <>
       <Header />
 
-      <main>
+      <main className={clsx(isMobile ? "pt-[92px]" : "pt-[146px]", "mobile:pt-[72px]")}>
         {/* BreadCrumb */}
         <div className="bg-gray-5 py-p8 mobile:py-p5">
           <div className="mx-auto max-w-[1280px] pl-[328px] mobile:pl-p6">
