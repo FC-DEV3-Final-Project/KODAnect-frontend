@@ -64,7 +64,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const renderPageNumbers = () => (
     <ul className="flex items-center gap-g3 mobile:order-3 mobile:mt-2 mobile:w-full mobile:justify-center mobile:gap-g2">
       {pageNumbers.map((page, index) => (
-        <li key={index}>
+        <li key={`${page}-${index}`}>
           {page === "ellipsis" ? (
             <EllipsisIcon className="rotate-90" />
           ) : (
