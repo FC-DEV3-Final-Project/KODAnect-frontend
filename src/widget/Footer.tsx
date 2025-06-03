@@ -7,14 +7,6 @@ import { RELATED_SITES, SOCIAL_LINKS, POLICY_LINKS } from "@/shared/constant/foo
 function Footer() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // layout.tsx 혹은 page.tsx 같은 상위 컴포넌트를 flex로 감싸줘야 footer 하단에 고정됩니다.
-  /*
-  <body className="flex min-h-screen flex-col">
-    <main className="flex-grow"> 페이지 내용 </main>
-    <Footer />
-  </body>
-  */
-
   return (
     <footer className="mt-auto w-full">
       {/* Footer Related Sites */}
@@ -64,7 +56,7 @@ function Footer() {
 
       {/* Footer Inner */}
       <section className="w-full border-y border-gray-20 bg-gray-5">
-        <div className="mx-auto w-full max-w-[1200px] pb-p8 pt-p10 mobile:px-p6 mobile:pt-p8">
+        <div className="mx-auto w-full max-w-[1248px] px-p8 pb-p8 pt-p10 mobile:px-p6 mobile:pt-p8">
           {/* Footer Logo */}
           <img src={Logo} alt="한국장기조직기증원 로고" className="mb-g9 h-[60px] mobile:mb-g5" />
 
