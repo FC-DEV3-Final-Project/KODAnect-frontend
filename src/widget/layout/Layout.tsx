@@ -5,7 +5,7 @@ import Header from "@/widget/header/Header";
 import Footer from "@/widget/Footer";
 
 export default function Layout() {
-  const isMobile = useIsMobile(1058);
+  const isMobile = useIsMobile(1075);
 
   return (
     <>

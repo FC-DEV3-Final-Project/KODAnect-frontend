@@ -6,7 +6,7 @@ import SideMenu from "@/widget/sideMenu/SideMenu";
 import Footer from "@/widget/Footer";
 
 export default function SideMenuLayout() {
-  const isMobile = useIsMobile(1058);
+  const isMobile = useIsMobile(1075);
 
   return (
     <>

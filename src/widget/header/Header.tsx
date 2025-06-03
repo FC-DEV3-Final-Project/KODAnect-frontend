@@ -15,7 +15,7 @@ import AllMenu from "./all-menu/AllMenu";
 export default function Header() {
   const { key } = useLocation();
 
-  const isMobile = useIsMobile(1058);
+  const isMobile = useIsMobile(1075);
   const [isOpenAllMenu, setIsOpenAllMenu] = useState(false);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
