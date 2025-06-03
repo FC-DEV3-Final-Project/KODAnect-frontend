@@ -66,7 +66,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {pageNumbers.map((page, index) => (
         <li key={index}>
           {page === "ellipsis" ? (
-            <EllipsisIcon transform="rotate(90)" />
+            <EllipsisIcon className="rotate-90" />
           ) : (
             <button
               type="button"
@@ -101,10 +101,10 @@ export const Pagination: React.FC<PaginationProps> = ({
         aria-label="이전 페이지"
       >
         <ArrowIcon
-          transform="rotate(90)"
-          width="20"
-          height="20"
-          className={clsx(currentPage === 1 ? "text-gray-40" : "text-gray-80")}
+          className={clsx(
+            "h-icon3 w-icon3 rotate-90",
+            currentPage === 1 ? "text-gray-40" : "text-gray-80",
+          )}
         />
         이전
       </button>
@@ -120,10 +120,10 @@ export const Pagination: React.FC<PaginationProps> = ({
       >
         다음
         <ArrowIcon
-          transform="rotate(-90)"
-          width="20"
-          height="20"
-          className={clsx(currentPage === totalPages ? "text-gray-40" : "text-gray-80")}
+          className={clsx(
+            "h-icon3 w-icon3 -rotate-90",
+            currentPage === totalPages ? "text-gray-40" : "text-gray-80",
+          )}
         />
       </button>
     </nav>
