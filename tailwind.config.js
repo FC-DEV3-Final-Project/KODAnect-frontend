@@ -6,7 +6,6 @@ module.exports = {
     screens: {
       // 모바일 전용 스타일에 사용할 브레이크포인트
       mobile: { max: "767px" },
-      ...require("tailwindcss/defaultTheme").screens,
     },
     extend: {},
   },
