@@ -24,7 +24,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
               {index > 0 && (
                 <ArrowIcon
                   transform="rotate(-90)"
-                  className="h-[16px] w-[16px] mobile:h-[12px] mobile:w-[12px]"
+                  className="h-icon2 w-icon2 mobile:h-icon1 mobile:w-icon1"
                 />
               )}
               {isLast ? (
@@ -38,7 +38,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
                   className="flex items-center gap-g2 px-p2 text-b-sm text-gray-90 underline mobile:gap-g3 mobile:text-b-xs"
                 >
                   {isFirst && (
-                    <HomeIcon className="h-[16px] w-[16px] mobile:h-[12px] mobile:w-[12px]" />
+                    <HomeIcon className="h-icon2 w-icon2 mobile:h-icon1 mobile:w-icon1" />
                   )}
                   {item.label}
                 </button>
