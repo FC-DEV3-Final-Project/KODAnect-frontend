@@ -7,6 +7,7 @@ import Close from "@/assets/icon/close.svg";
 
 import Depth1Menu from "./Depth1Menu";
 import Depth2Menu from "./Depth2Menu";
+import { useBodyScrollLock } from "@/shared/hooks/useBodyScrollLock";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -14,6 +15,8 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
+  useBodyScrollLock(isOpen);
+
   const subMenuRef = useRef<HTMLDivElement>(null);
 
   const { selectedDepth1, setSelectedDepth1 } = useMenuStore();

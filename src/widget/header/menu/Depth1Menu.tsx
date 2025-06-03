@@ -21,7 +21,7 @@ const menuActiveStyle =
 function Depth1Menu({ items, selectedDepth1, onClick }: Depth1MenuProps) {
   return (
     <ul
-      className="m-auto flex max-w-[1280px] flex-wrap px-p10 text-b-lg font-bold text-gray-70 lg:justify-between"
+      className="m-auto flex max-w-[1280px] flex-wrap px-p10 text-b-lg font-bold text-gray-70 justify-between"
       role="menu"
       aria-label="1차 메뉴"
     >
