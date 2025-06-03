@@ -11,6 +11,8 @@ type CommentItemProps = {
 };
 
 function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemProps) {
+  const dropdownId = `comment-dropdown-${author}-${date}`;
+
   return (
     <article className="flex flex-col gap-g7 rounded-r6 border border-gray-30 px-6 py-p7 mobile:gap-g4 mobile:p-p6">
       <div className="flex items-start justify-between">
@@ -18,7 +20,10 @@ function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemPro
         <div className="relative">
           <button
             type="button"
-            aria-label="댓글 옵션"
+            aria-haspopup="menu"
+            aria-expanded={isOpen}
+            aria-controls={dropdownId}
+            aria-label="댓글 옵션 열기"
             onClick={onToggle}
             className="flex items-center justify-center"
           >
@@ -27,9 +32,11 @@ function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemPro
 
           {isOpen && (
             <ul className="absolute left-1/2 top-full z-10 mt-g2 w-[8.6rem] -translate-x-1/2 rounded-r3 border border-gray-30 bg-white p-p3 shadow-s1">
-              {dropdownItems.map((label) => (
+              {dropdownItems.map((label, idx) => (
                 <li
-                  key={label}
+                  key={`${label}-${idx}`}
+                  role="menuitem"
+                  tabIndex={0}
                   className="flex cursor-pointer items-center justify-center px-p4 py-p3 text-b-sm text-gray-90 hover:rounded-r3 hover:bg-secondary-5 active:bg-secondary-10"
                 >
                   {label}
@@ -41,7 +48,7 @@ function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemPro
       </div>
 
       <div className="flex items-center gap-g2 text-b-sm text-gray-60 mobile:text-b-xs">
-        <span>{date?.slice(0, 10)}</span>
+        <time>{date?.slice(0, 10)}</time>
         <span className="px-p5 text-gray-40">|</span>
         <span>{author}</span>
       </div>

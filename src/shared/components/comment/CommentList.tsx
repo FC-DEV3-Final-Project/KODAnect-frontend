@@ -28,13 +28,16 @@ function CommentList() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-col gap-g5 px-p10 mobile:px-0">
-      <h3>
+    <section
+      className="flex flex-col gap-g5 px-p10 mobile:px-0"
+      aria-labelledby="comment-list-heading"
+    >
+      <h3 id="comment-list-heading">
         <span className="text-h-sm font-bold text-gray-90">등록된 댓글</span>
         <span className="ml-[7px] text-b-md text-gray-70">{dummyComments.length}</span>
       </h3>
 
-      <ul className="flex flex-col gap-g3">
+      <ul className="flex flex-col gap-g3" aria-label="댓글 목록">
         {[...dummyComments]
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .map((item) => (
@@ -51,15 +54,19 @@ function CommentList() {
       </ul>
       {dummyComments.length > 2 && (
         <div className="flex justify-center">
-          <Button variant="secondary" size="medium" className="w-full">
+          <Button variant="secondary" size="medium" className="w-full" aria-label="댓글 더보기">
             <span className="text-b-md mobile:text-b-sm">더보기</span>
             <span>
-              <PlusIcon className="w-cion3 h-icon3 text-primary-50 mobile:h-icon2 mobile:w-icon2" />
+              <PlusIcon
+                className="w-cion3 h-icon3 text-primary-50 mobile:h-icon2 mobile:w-icon2"
+                aria-hidden="true"
+                focusable="false"
+              />
             </span>
           </Button>
         </div>
       )}
-    </div>
+    </section>
   );
 }
 

@@ -9,10 +9,16 @@ function CommentForm() {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <form
-      aria-label="댓글 작성 폼"
+      aria-labelledby="comment-form-heading"
       className="flex h-auto w-full flex-col gap-g5 rounded-r6 bg-gray-5 px-p10 py-p8 mobile:p-p6"
     >
-      <div className="flex max-w-[48.5rem] flex-row gap-g7 mobile:flex-col">
+      {/* 폼 제목: 스크린리더용 */}
+      <h3 id="comment-form-heading" className="sr-only">
+        댓글 작성 폼
+      </h3>
+
+      <fieldset className="flex max-w-[48.5rem] flex-row gap-g7 mobile:flex-col">
+        <legend className="sr-only">작성자 정보</legend>
         <div className="w-full">
           <TextInput id="writer" title="추모자" height="medium" placeholder="한글/ 영문만 입력" />
         </div>
@@ -28,7 +34,7 @@ function CommentForm() {
             onToggleIconClick={() => setIsVisible((prev) => !prev)}
           />
         </div>
-      </div>
+      </fieldset>
 
       <div className="h-[18.5rem] w-full">
         <TextArea
@@ -39,8 +45,10 @@ function CommentForm() {
         />
       </div>
 
-      <div className="flex flex-col gap-g3">
-        <label className="text-b-md text-gray-70 mobile:text-b-sm">자동입력 방지</label>
+      <fieldset className="flex flex-col gap-g3" aria-labelledby="captcha-heading">
+        <label id="captcha-heading" className="text-b-md text-gray-70 mobile:text-b-sm">
+          자동입력 방지
+        </label>
 
         <div className="flex w-full flex-row mobile:flex-col mobile:gap-g3">
           {/* 좌측 영역 */}
@@ -84,7 +92,7 @@ function CommentForm() {
             등록하기
           </Button>
         </div>
-      </div>
+      </fieldset>
     </form>
   );
 }
