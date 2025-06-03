@@ -47,7 +47,7 @@ export default function LetterCard({ isNew = false, size = "sm" }: LetterCardPro
           preset.gap
         }
       >
-        <header className={"relative flex items-center " + preset.gapIcon}>
+        <div className={"relative flex items-center " + preset.gapIcon}>
           <Mail className={preset.icon} aria-hidden="true" />
           <span className={`${size === "sm" ? "text-b-xs" : ""} text-gray-70`}>11793번째 편지</span>
           {isNew && (
@@ -59,7 +59,7 @@ export default function LetterCard({ isNew = false, size = "sm" }: LetterCardPro
               N
             </span>
           )}
-        </header>
+        </div>
         <h3 className={"min-h-[46px] font-bold " + preset.fontTitle}>
           요즘은 잘 지내는지 궁금하네
         </h3>
