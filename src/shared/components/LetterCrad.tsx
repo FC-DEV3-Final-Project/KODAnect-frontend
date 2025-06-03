@@ -13,10 +13,11 @@ const letterCardPresets = {
     minWidth: "min-w-[282px]",
     gap: "gap-g5",
     fontTitle: "text-h-sm",
-    fontDate: "text-gray-70",
+    fontDate: "",
     icon: "h-[30px] w-[30px]",
     badge: "rounded-r2 px-p3",
     gapIcon: "gap-g3",
+    lineHeight: "h-[25.5px]",
     label: "",
     valueFont: "",
   },
@@ -24,10 +25,11 @@ const letterCardPresets = {
     minWidth: "min-w-[230px]",
     gap: "gap-g4",
     fontTitle: "text-b-sm",
-    fontDate: "text-b-xs text-gray-70",
+    fontDate: "text-b-xs",
     icon: "h-icon4 w-icon4",
     badge: "rounded-r1 px-p2 text-b-xs",
     gapIcon: "gap-g2",
+    lineHeight: "h-[19.5px]",
     label: "text-b-xs",
     valueFont: "text-b-xs",
   },
@@ -41,7 +43,7 @@ export default function LetterCard({ isNew = false, size = "sm" }: LetterCardPro
       <a
         href="#"
         className={
-          "flex flex-col rounded-r6 border bg-gray-0 p-p8 shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')] " +
+          "flex flex-col rounded-r6 bg-gray-0 p-p8 text-gray-90 shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')] " +
           preset.minWidth +
           " " +
           preset.gap
@@ -63,13 +65,13 @@ export default function LetterCard({ isNew = false, size = "sm" }: LetterCardPro
         <h3 className={"min-h-[46px] font-bold " + preset.fontTitle}>
           요즘은 잘 지내는지 궁금하네
         </h3>
-        <span className={preset.fontDate}>2025-05-21</span>
+        <span className={"text-gray-70 " + preset.fontDate}>2025-05-21</span>
         <div className="relative flex flex-col gap-g2" aria-label="기증자 정보">
-          <div>
+          <div className={"flex items-center " + preset.lineHeight}>
             <span className={"mr-g3 text-gray-40 " + preset.label}>기증자</span>
             <span className={preset.valueFont}>홍길동</span>
           </div>
-          <div>
+          <div className={"flex items-center " + preset.lineHeight}>
             <span className={"mr-g3 text-gray-40 " + preset.label}>추모자</span>
             <span className={preset.valueFont}>홍길동</span>
           </div>
