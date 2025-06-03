@@ -12,7 +12,7 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["primary", "secondary", "tertiary", "text"],
+      options: ["primary", "secondary", "tertiary"],
     },
     size: {
       control: { type: "select" },
@@ -52,12 +52,6 @@ export const Tertiary: Story = {
   },
 };
 
-export const Text: Story = {
-  args: {
-    variant: "text",
-  },
-};
-
 export const Disabled: Story = {
   args: {
     disabled: true,
@@ -67,6 +61,24 @@ export const Disabled: Story = {
 export const XSmall: Story = {
   args: {
     size: "x-small",
+  },
+};
+
+export const Small: Story = {
+  args: {
+    size: "small",
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    size: "medium",
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: "large",
   },
 };
 
