@@ -12,7 +12,7 @@ type CommentItemProps = {
 
 function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemProps) {
   return (
-    <article className="flex flex-col gap-g7 rounded-r6 border border-gray-30 px-6 py-p7">
+    <article className="flex flex-col gap-g7 rounded-r6 border border-gray-30 px-6 py-p7 mobile:gap-g4 mobile:p-p6">
       <div className="flex items-start justify-between">
         <p className="text-b-md text-gray-90 mobile:text-b-sm">{content}</p>
         <div className="relative">
@@ -26,11 +26,11 @@ function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemPro
           </button>
 
           {isOpen && (
-            <ul className="absolute right-0 top-full z-10 mt-g2 w-[8.6rem] rounded-r3 border border-gray-30 bg-white p-p3 shadow-s1">
+            <ul className="absolute left-1/2 top-full z-10 mt-g2 w-[8.6rem] -translate-x-1/2 rounded-r3 border border-gray-30 bg-white p-p3 shadow-s1">
               {dropdownItems.map((label) => (
                 <li
                   key={label}
-                  className="flex cursor-pointer items-center justify-center px-p4 py-p3 text-b-sm text-gray-90 hover:bg-gray-10"
+                  className="flex cursor-pointer items-center justify-center px-p4 py-p3 text-b-sm text-gray-90 hover:rounded-r3 hover:bg-secondary-5 active:bg-secondary-10"
                 >
                   {label}
                 </li>

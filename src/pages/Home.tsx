@@ -4,7 +4,9 @@ export default function Home() {
   return (
     <div>
       Home
-      <CommentArea />
+      <div className="flex items-center justify-center">
+        <CommentArea />
+      </div>
     </div>
   );
 }

@@ -10,9 +10,9 @@ function CommentForm() {
   return (
     <form
       aria-label="댓글 작성 폼"
-      className="flex h-auto w-full flex-col gap-g5 rounded-r6 bg-gray-5 px-p10 py-p8"
+      className="flex h-auto w-full flex-col gap-g5 rounded-r6 bg-gray-5 px-p10 py-p8 mobile:p-p6"
     >
-      <div className="md:flex-row flex max-w-[48.5rem] flex-col gap-g7">
+      <div className="flex max-w-[48.5rem] flex-row gap-g7 mobile:flex-col">
         <div className="w-full">
           <TextInput id="writer" title="추모자" height="medium" placeholder="한글/ 영문만 입력" />
         </div>
@@ -39,29 +39,32 @@ function CommentForm() {
         />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-g3">
         <label className="text-b-md text-gray-70 mobile:text-b-sm">자동입력 방지</label>
 
-        <div className="md:flex-row md:items-center flex w-full flex-col">
+        <div className="flex w-full flex-row mobile:flex-col mobile:gap-g3">
           {/* 좌측 영역 */}
-          <div className="flex w-full flex-1 items-center gap-g3">
-            <div className="h-[48px] w-[211px] bg-gray-60"></div>
+          <div className="flex w-full flex-1 items-center gap-g3 mobile:flex-col mobile:items-start">
+            <div className="flex items-center gap-g3">
+              <div className="h-[48px] w-[211px] bg-gray-60 mobile:w-[183px]"></div>
 
-            <button
-              type="button"
-              aria-label="자동입력 음성 듣기"
-              className="flex h-[48px] w-[48px] items-center justify-center rounded-r3 border border-gray-60 bg-white"
-            >
-              <SoundIcon className="h-icon4 w-icon4" />
-            </button>
-            <button
-              type="button"
-              aria-label="자동입력 새로고침"
-              className="flex h-[48px] w-[48px] items-center justify-center rounded-r3 border border-gray-60 bg-white"
-            >
-              <ResetIcon className="h-icon4 w-icon4 text-gray-40" />
-            </button>
-            <div className="min-w-[26.4rem]">
+              <button
+                type="button"
+                aria-label="자동입력 음성 듣기"
+                className="flex h-[48px] w-[48px] items-center justify-center rounded-r3 border border-gray-60 bg-white"
+              >
+                <SoundIcon className="h-icon4 w-icon4" />
+              </button>
+              <button
+                type="button"
+                aria-label="자동입력 새로고침"
+                className="flex h-[48px] w-[48px] items-center justify-center rounded-r3 border border-gray-60 bg-white"
+              >
+                <ResetIcon className="h-icon4 w-icon4 text-gray-40" />
+              </button>
+            </div>
+
+            <div className="min-w-[26.4rem] mobile:w-full">
               <TextInput
                 id="captcha"
                 placeholder="자동입력 방지 숫자 입력"
@@ -72,7 +75,12 @@ function CommentForm() {
           </div>
 
           {/* 우측 버튼 영역 */}
-          <Button type="submit" variant="primary" size="medium" className="mobile:max-w-[9.1rem]">
+          <Button
+            type="submit"
+            variant="primary"
+            size="medium"
+            className="mobile:max-w-[9.1rem] mobile:self-end"
+          >
             등록하기
           </Button>
         </div>

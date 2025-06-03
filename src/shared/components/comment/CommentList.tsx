@@ -28,7 +28,7 @@ function CommentList() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-col gap-g5 px-p10">
+    <div className="flex flex-col gap-g5 px-p10 mobile:px-0">
       <h3>
         <span className="text-h-sm font-bold text-gray-90">등록된 댓글</span>
         <span className="ml-[7px] text-b-md text-gray-70">{dummyComments.length}</span>
