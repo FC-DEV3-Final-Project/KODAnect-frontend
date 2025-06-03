@@ -22,10 +22,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
           return (
             <li key={index} className="flex items-center gap-g2">
               {index > 0 && (
-                <ArrowIcon
-                  transform="rotate(-90)"
-                  className="h-icon2 w-icon2 mobile:h-icon1 mobile:w-icon1"
-                />
+                <ArrowIcon className="h-icon2 w-icon2 -rotate-90 mobile:h-icon1 mobile:w-icon1" />
               )}
               {isLast ? (
                 <span className="flex items-center gap-g2 px-p2 text-b-sm text-gray-90 mobile:gap-g3 mobile:text-b-xs">
