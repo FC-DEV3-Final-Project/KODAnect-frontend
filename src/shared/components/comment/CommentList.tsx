@@ -32,9 +32,9 @@ function CommentList() {
       className="flex flex-col gap-g5 px-p10 mobile:px-0"
       aria-labelledby="comment-list-heading"
     >
-      <h3 id="comment-list-heading">
-        <span className="text-h-sm font-bold text-gray-90">등록된 댓글</span>
-        <span className="ml-[7px] text-b-md text-gray-70">{dummyComments.length}</span>
+      <h3 id="comment-list-heading" className="text-h-sm font-bold text-gray-90">
+        등록된 댓글
+        <span className="ml-[7px] text-b-md font-normal text-gray-70">{dummyComments.length}</span>
       </h3>
 
       <ul className="flex flex-col gap-g3" aria-label="댓글 목록">
