@@ -48,10 +48,10 @@ function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemPro
       </div>
 
       <div className="flex items-center text-b-sm text-gray-60 mobile:text-b-xs">
-        <time className="after:px-p5 after:text-gray-40 after:content-['|']">
+        <time className="relative pr-p5 after:absolute after:right-0 after:top-1/2 after:h-[16px] after:w-[1px] after:-translate-y-1/2 after:bg-gray-20 after:content-['']">
           {date?.slice(0, 10)}
         </time>
-        <span>{author}</span>
+        <span className="ml-p5">{author}</span>
       </div>
     </article>
   );
