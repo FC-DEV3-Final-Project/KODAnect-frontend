@@ -53,7 +53,7 @@ type TextInputProps = {
   onToggleIconClick?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       title,
@@ -234,3 +234,5 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     );
   },
 );
+
+export default TextInput;
