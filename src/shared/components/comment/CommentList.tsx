@@ -56,13 +56,11 @@ function CommentList() {
         <div className="flex justify-center">
           <Button variant="secondary" size="medium" className="w-full" aria-label="댓글 더보기">
             <span className="text-b-md mobile:text-b-sm">더보기</span>
-            <span>
-              <PlusIcon
-                className="w-cion3 h-icon3 text-primary-50 mobile:h-icon2 mobile:w-icon2"
-                aria-hidden="true"
-                focusable="false"
-              />
-            </span>
+            <PlusIcon
+              className="w-cion3 h-icon3 text-primary-50 mobile:h-icon2 mobile:w-icon2"
+              aria-hidden="true"
+              focusable="false"
+            />
           </Button>
         </div>
       )}
