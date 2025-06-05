@@ -23,7 +23,7 @@ const chunkArray = (arr: Agency[], size: number) => {
 
 export default function AgencySlideList({ items }: AgencySlideListProps) {
   const isMobile = useIsMobile();
-  const groupedItems = chunkArray(items, isMobile ? 4 : 6); // 슬라이드 한 장에 6개씩
+  const groupedItems = chunkArray(items, isMobile ? 4 : 6); // 슬라이드 한 장에 6개씩(PC), 4개씩(Mobile)
 
   const settings = {
     dots: false,
