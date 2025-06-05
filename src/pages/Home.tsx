@@ -1,9 +1,9 @@
-import TopVisiaul from "@/shared/components/TopVisual";
+import TopVisual from "@/shared/components/TopVisual";
 
 export default function Home() {
   return (
     <div>
-      <TopVisiaul type="receiver" />
+      <TopVisual type="donor" />
       Home
     </div>
   );
