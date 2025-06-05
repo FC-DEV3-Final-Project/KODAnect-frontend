@@ -62,15 +62,17 @@ function TopVisual({ type }: TopVisualProps) {
 
       {content.isRepeatImage ? (
         <div className="absolute inset-0 flex" aria-hidden="true">
-          <img src={content.imgUrl} className="h-full w-[99rem] object-cover" />
-          <img src={content.imgUrl} className="h-full w-[93.1rem] object-cover" />
+          <img src={content.imgUrl} className="h-full w-[99rem] object-cover" loading="lazy" />
+          <img src={content.imgUrl} className="h-full w-[93.1rem] object-cover" loading="lazy" />
           {/* 검정 오버레이 */}
-          <div className="pointer-events-none absolute inset-0 bg-black opacity-60" />
+          <div className="pointer-events-none absolute inset-0 bg-black opacity-60"></div>
         </div>
       ) : (
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${imgUrl})` }}
+        <img
+          src={imgUrl}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
           aria-hidden="true"
         />
       )}
