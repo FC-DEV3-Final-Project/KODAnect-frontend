@@ -18,6 +18,8 @@ import BrainDeath from "@/pages/organ/info/BrainDeath";
 
 // 필요에 따라 페이지 컴포넌트 추가 import
 
+// 필요에 따라 페이지 컴포넌트 추가 import
+
 export const router = createBrowserRouter([
   {
     path: "/",
