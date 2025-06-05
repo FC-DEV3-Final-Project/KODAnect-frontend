@@ -34,7 +34,7 @@ function SideMenu() {
             : {}),
         }}
       >
-        <span className="text-h-lg font-bold text-secondary-80">{selectedMenu.label}</span>
+        <span className="text-h-md font-bold text-secondary-80">{selectedMenu.label}</span>
       </div>
 
       {/* Navigation menu */}

@@ -1,3 +1,10 @@
+import TopVisual from "@/shared/components/TopVisual";
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <TopVisual type="donor" />
+      Home
+    </div>
+  );
 }

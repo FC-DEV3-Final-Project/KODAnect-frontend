@@ -145,8 +145,6 @@ module.exports = plugin(
         "--krds-number-21": "9.6rem",
         "--krds-number-max": "100rem",
 
-        /* Font sizes - PC 기준 */
-
         "--krds-font-display-large": "6rem",
         "--krds-font-display-medium": "4.4rem",
         "--krds-font-display-small": "3.6rem",
