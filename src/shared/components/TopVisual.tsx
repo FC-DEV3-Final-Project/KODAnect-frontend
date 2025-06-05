@@ -2,11 +2,16 @@ import memorialImg from "@/assets/images/memorial.gif";
 import heavenImg from "@/assets/images/heaven.png";
 import receiverImg from "@/assets/images/receiver.png";
 import donorImg from "@/assets/images/donor.png";
+import heavenMobile from "@/assets/images/heaven_m.png";
+import receiverMobile from "@/assets/images/receiver_m.png";
+import donorMobile from "@/assets/images/donor_m.png";
+import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 type ContentType = {
   imgUrl: string;
   title: string;
   description: string | string[];
+  mobileImgUrl?: string;
   isRepeatImage?: boolean;
 };
 
@@ -17,29 +22,35 @@ type TopVisualProps = {
 const CONTENT: Record<TopVisualProps["type"], ContentType> = {
   memorial: {
     imgUrl: memorialImg,
+    mobileImgUrl: heavenMobile,
     title: "기증자 추모관",
     description: ["생명 나눔을 실천한 분들의 고귀한 뜻,", "잊지 않겠습니다."],
     isRepeatImage: true,
   },
   heaven: {
     imgUrl: heavenImg,
+    mobileImgUrl: heavenMobile,
     title: "하늘나라 편지",
     description: ["하늘에 있는 그리운 당신에게 편지를 보냅니다.", "당신이 보고 싶습니다."],
   },
   receiver: {
     imgUrl: receiverImg,
+    mobileImgUrl: receiverMobile,
     title: "수혜자 편지",
-    description: "감사합니다.",
+    description: "감사  합니다.",
   },
   donor: {
     imgUrl: donorImg,
-    title: "기증 후 스토리",
+    mobileImgUrl: donorMobile,
+    title: "기증자 스토리",
     description: ["영원히 기억될 기증자의 숭고한 나눔의 순간과", "아름다운 이야기"],
   },
 } as const;
 
 function TopVisual({ type }: TopVisualProps) {
   const content = CONTENT[type];
+  const isMobile = useIsMobile();
+  const imgUrl = isMobile && content.mobileImgUrl ? content.mobileImgUrl : content.imgUrl;
 
   return (
     <header className="relative mx-auto h-[27.6rem] max-w-[1920px] overflow-hidden mobile:h-[32rem]">
@@ -55,7 +66,7 @@ function TopVisual({ type }: TopVisualProps) {
       ) : (
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${content.imgUrl})` }}
+          style={{ backgroundImage: `url(${imgUrl})` }}
           aria-hidden="true"
         />
       )}

@@ -3,7 +3,7 @@ import TopVisual from "@/shared/components/TopVisual";
 export default function Home() {
   return (
     <div>
-      <TopVisual type="donor" />
+      <TopVisual type="receiver" />
       Home
     </div>
   );
