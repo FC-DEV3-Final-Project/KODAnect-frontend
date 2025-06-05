@@ -1,10 +1,10 @@
 import memorialImg from "@/assets/images/memorial.gif";
-import heavenImg from "@/assets/images/heaven.png";
-import receiverImg from "@/assets/images/receiver.png";
-import donorImg from "@/assets/images/donor.png";
-import heavenMobile from "@/assets/images/heaven_m.png";
-import receiverMobile from "@/assets/images/receiver_m.png";
-import donorMobile from "@/assets/images/donor_m.png";
+import heavenImg from "@/assets/images/heaven.webp";
+import receiverImg from "@/assets/images/receiver.webp";
+import donorImg from "@/assets/images/donor.webp";
+import heavenMobile from "@/assets/images/heaven_m.webp";
+import receiverMobile from "@/assets/images/receiver_m.webp";
+import donorMobile from "@/assets/images/donor_m.webp";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 type ContentType = {
