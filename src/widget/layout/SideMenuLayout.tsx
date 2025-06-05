@@ -4,6 +4,7 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import Header from "@/widget/header/Header";
 import SideMenu from "@/widget/sideMenu/SideMenu";
 import Footer from "@/widget/Footer";
+import { Breadcrumb } from "@/shared/components/Breadcrumb";
 
 export default function SideMenuLayout() {
   const isMobile = useIsMobile(1075);
@@ -16,8 +17,7 @@ export default function SideMenuLayout() {
         {/* BreadCrumb */}
         <div className="bg-gray-5 py-p8 mobile:py-p5">
           <div className="mx-auto max-w-[1280px] pl-[328px] mobile:pl-p6">
-            {/* <BreadCrumb /> */}
-            {/* 예시로 넣어뒀습니다. 컴포넌트 추가 시 빼주세요! */}홈 &gt; 홍보·알림 &gt; 공지사항
+            <Breadcrumb />
           </div>
         </div>
 
