@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import Slider from "react-slick";
 import SliderNextArrow from "../common/SliderNextArrow";
+import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 interface Agency {
   name: string;
@@ -21,7 +22,8 @@ const chunkArray = (arr: Agency[], size: number) => {
 };
 
 export default function AgencySlideList({ items }: AgencySlideListProps) {
-  const groupedItems = chunkArray(items, 6); // 슬라이드 한 장에 6개씩
+  const isMobile = useIsMobile();
+  const groupedItems = chunkArray(items, isMobile ? 4 : 6); // 슬라이드 한 장에 6개씩
 
   const settings = {
     dots: false,
@@ -37,7 +39,7 @@ export default function AgencySlideList({ items }: AgencySlideListProps) {
     <Slider {...settings}>
       {groupedItems.map((group, index) => (
         <div key={index}>
-          <div className="grid grid-cols-3 gap-4 p-4">
+          <div className="grid grid-cols-3 gap-4 p-4 mobile:grid-cols-2">
             {group.map((agency, index) => (
               <div
                 key={index}
