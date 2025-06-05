@@ -49,7 +49,7 @@ export default function AgencySlideList({ items }: AgencySlideListProps) {
                 <img
                   src={`src/assets/images/partners/${agency.imageSrc}`}
                   alt={agency.name}
-                  className="h-full"
+                  className="h-full object-contain"
                 />
               </div>
             ))}
