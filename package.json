@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@tanstack/react-query": "^5.76.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
