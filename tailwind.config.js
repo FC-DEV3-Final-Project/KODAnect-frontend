@@ -9,5 +9,9 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require("./plugins/krds-theme.js")],
+  plugins: [
+    require("./plugins/krds-theme.js"),
+    require("tailwind-scrollbar-hide"),
+    require("@tailwindcss/line-clamp"),
+  ],
 };
