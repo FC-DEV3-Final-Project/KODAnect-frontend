@@ -145,14 +145,15 @@ module.exports = plugin(
         "--krds-number-21": "9.6rem",
         "--krds-number-max": "100rem",
 
-        /* Font sizes - Mobile 기준 */
-        "--krds-font-display-large": "4.4rem",
-        "--krds-font-display-medium": "3.2rem",
-        "--krds-font-display-small": "2.8rem",
+        /* Font sizes - PC 기준 */
 
-        "--krds-font-heading-xlarge": "2.8rem",
-        "--krds-font-heading-large": "2.4rem",
-        "--krds-font-heading-medium": "2.2rem",
+        "--krds-font-display-large": "6rem",
+        "--krds-font-display-medium": "4.4rem",
+        "--krds-font-display-small": "3.6rem",
+
+        "--krds-font-heading-xlarge": "4rem",
+        "--krds-font-heading-large": "3.2rem",
+        "--krds-font-heading-medium": "2.4rem",
         "--krds-font-heading-small": "1.9rem",
         "--krds-font-heading-xsmall": "1.7rem",
         "--krds-font-heading-xxsmall": "1.5rem",
@@ -225,13 +226,13 @@ module.exports = plugin(
     addBase({
       "@media (max-width: 767px)": {
         ":root": {
-          "--krds-font-display-large": "6rem",
-          "--krds-font-display-medium": "4.4rem",
-          "--krds-font-display-small": "3.6rem",
+          "--krds-font-display-large": "4.4rem",
+          "--krds-font-display-medium": "3.2rem",
+          "--krds-font-display-small": "2.8rem",
 
-          "--krds-font-heading-xlarge": "4rem",
-          "--krds-font-heading-large": "3.2rem",
-          "--krds-font-heading-medium": "2.4rem",
+          "--krds-font-heading-xlarge": "2.8rem",
+          "--krds-font-heading-large": "2.4rem",
+          "--krds-font-heading-medium": "2.2rem",
           "--krds-font-heading-small": "1.9rem",
           "--krds-font-heading-xsmall": "1.7rem",
           "--krds-font-heading-xxsmall": "1.5rem",

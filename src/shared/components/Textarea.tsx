@@ -27,7 +27,7 @@ type TextAreaProps = {
   focusMessage?: string;
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       title,
@@ -153,3 +153,5 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     );
   },
 );
+
+export default TextArea;
