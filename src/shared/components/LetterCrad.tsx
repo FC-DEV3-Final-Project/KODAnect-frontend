@@ -25,16 +25,16 @@ interface LetterCardProps {
 // 스타일 프리셋
 const letterCardPresets = {
   lg: {
-    layout: "gap-g5 mobile:gap-g4 mobile:w-[160px] mobile:p-p6",
+    layout: "gap-g5 mobile:gap-g4 w-[282px] mobile:w-[160px] mobile:p-p6",
     fontTitle: "text-h-sm mobile:text-h-xs",
     fontDate: "mobile:text-b-xs",
     icon: "h-[30px] w-[30px] mobile:w-icon3 mobile:h-icon3",
-    gapIcon: "gap-g3",
+    gapIcon: "gap-g3 mobile:flex-col mobile:items-start",
     label: "mobile:text-b-xs",
     valueFont: "mobile:text-b-xs",
   },
   sm: {
-    layout: "gap-g4",
+    layout: "gap-g4 w-[230px] mobile:w-[208px]",
     fontTitle: "text-b-sm",
     fontDate: "text-b-xs",
     icon: "h-icon4 w-icon4",
@@ -76,11 +76,7 @@ export default function LetterCard({
       }
     >
       {/* 상단: 아이콘, 편지 번호, N 뱃지 */}
-      <div
-        className={
-          "relative flex items-center mobile:flex-col mobile:items-start " + preset.gapIcon
-        }
-      >
+      <div className={"relative flex items-center " + preset.gapIcon}>
         <Mail className={preset.icon} aria-hidden="true" />
         {/* 편지 번호 */}
         <span className={`${size === "sm" ? "text-b-xs" : ""} text-gray-70 mobile:text-b-xs`}>
