@@ -52,7 +52,7 @@ function TopVisual({ type }: TopVisualProps) {
   const imgUrl = isMobile && content.mobileImgUrl ? content.mobileImgUrl : content.imgUrl;
 
   return (
-    <header
+    <section
       className="relative mx-auto h-[27.6rem] max-w-[1920px] overflow-hidden mobile:h-[32rem]"
       role="region"
       aria-label="상단 비주얼 영역"
@@ -76,15 +76,12 @@ function TopVisual({ type }: TopVisualProps) {
 
       {/* 텍스트 콘텐츠 */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white mobile:items-start mobile:px-p9 mobile:text-left">
-        <h1
-          className="text-d-md font-bold leading-tight tracking-1 mobile:text-d-md"
-          aria-level={1}
-        >
+        <h1 className="text-d-md font-bold leading-tight tracking-1 mobile:text-d-md">
           {content.title}
         </h1>
         <p
           className="mt-g3 text-b-lg leading-snug mobile:max-w-[27.5rem] mobile:text-b-sm"
-          aria-describedby="description"
+          id="description"
         >
           {Array.isArray(content.description)
             ? isMobile
@@ -98,7 +95,7 @@ function TopVisual({ type }: TopVisualProps) {
             : content.description}
         </p>
       </div>
-    </header>
+    </section>
   );
 }
 
