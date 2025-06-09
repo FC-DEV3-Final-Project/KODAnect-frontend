@@ -15,7 +15,8 @@ type Story = StoryObj<typeof DonorCard>;
 
 export const Default: Story = {
   args: {
-    donorName: "홍길동 (F,30)",
+    donorName: "홍길동",
+    donorAge: "(F,30)",
     donationDate: "2025-06-09",
     messageCount: 5,
     letterCount: 10,
