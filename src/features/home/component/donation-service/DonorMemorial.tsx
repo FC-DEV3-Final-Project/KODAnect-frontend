@@ -1,14 +1,15 @@
-import clsx from "clsx";
+import { useRef } from "react";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { useRef } from "react";
+import clsx from "clsx";
 
-import Slider from "react-slick";
-import BlackRibbon from "@/assets/images/black-ribbon.png";
 import { NewBadge } from "@/shared/components/NewBadge";
-import SliderNextArrow from "../common/SliderNextArrow";
-import { donorData } from "./mock-data";
+import BlackRibbon from "@/assets/images/black-ribbon.png";
+import { MoreButton } from "@/features/home/component/common/MoreButton";
+import SliderNextArrow from "@/features/home/component/common/SliderNextArrow";
+import { donorData } from "@/features/home/component/donation-service/mock-data";
 
 export default function DonorMemorial() {
   const sliderRef = useRef<Slider | null>(null);
@@ -33,8 +34,7 @@ export default function DonorMemorial() {
           <h2 id="donor-memorial-heading" className="text-h-md font-bold mobile:text-h-sm">
             기증자 추모
           </h2>
-          {/* 지선님 컴포넌트로 교체 예정 */}
-          <span className="text-b-sm">더보기</span>
+          <MoreButton className="text-b-sm" />
         </div>
         <p className="text-b-sm text-gray-70 mobile:text-b-xs">
           생명 나눔을 실천한 분들의 고귀한 뜻, 잊지 않겠습니다.
@@ -64,7 +64,10 @@ export default function DonorMemorial() {
               aria-label={`기증자 ${item.donorName}`}
             >
               {/* 상세 페이지 이동 필요하면 donateSeq, Link 사용하면 될것 같습니다 */}
-              <NewBadge donateDate={item.donateDate} />
+              <NewBadge
+                date={item.donateDate}
+                className="right-[16px] top-[16px] py-p1 mobile:right-[12px] mobile:top-[12px] mobile:py-0 mobile:text-b-xs"
+              />
               <img src={BlackRibbon} alt="검은 리본 이미지" className="h-full mobile:w-[45px]" />
               <div>
                 <p className="mb-g2 text-b-lg font-bold text-gray-90 mobile:text-b-sm">

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import Slider from "react-slick";
 
 import { lettersData } from "@/features/home/component/letter/mock-data";
-import LetterCard from "@/features/home/component/letter/LetterCard";
+import LetterCard from "@/shared/components/LetterCard";
 import clsx from "clsx";
 
 interface Letter {
