@@ -27,7 +27,7 @@ export default function AllMenu({ isOpen, setIsOpen }: AllMenuProps) {
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-g8 flex items-center justify-between px-p10 pt-p10">
-          <h2 id="modal-title" className="text-d-md font-bold">
+          <h2 id="modal-title" className="text-h-lg font-bold">
             전체메뉴
           </h2>
           <button type="button" onClick={() => setIsOpen(false)} aria-label="전체메뉴 닫기">
