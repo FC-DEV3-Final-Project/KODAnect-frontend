@@ -10,13 +10,22 @@ interface TabsProps {
   tabs: TabProps[];
 }
 
-const TabButton: React.FC<{
+interface TabButtonProps {
   label: string;
   isSelected: boolean;
   onClick: () => void;
   id: string;
   panelId: string;
-}> = ({ label, isSelected, onClick, id, panelId }) => {
+}
+
+interface TabPanelProps {
+  children: React.ReactNode;
+  id: string;
+  tabId: string;
+  isSelected: boolean;
+}
+
+function TabButton({ label, isSelected, onClick, id, panelId }: TabButtonProps) {
   return (
     <button
       role="tab"
@@ -33,14 +42,9 @@ const TabButton: React.FC<{
       {isSelected && <span className="sr-only">선택됨</span>}
     </button>
   );
-};
+}
 
-const TabPanel: React.FC<{
-  children: React.ReactNode;
-  id: string;
-  tabId: string;
-  isSelected: boolean;
-}> = ({ children, id, tabId, isSelected }) => {
+function TabPanel({ children, id, tabId, isSelected }: TabPanelProps) {
   return (
     <div
       role="tabpanel"
@@ -51,9 +55,9 @@ const TabPanel: React.FC<{
       {children}
     </div>
   );
-};
+}
 
-export const Tab: React.FC<TabsProps> = ({ tabs }) => {
+export function Tab({ tabs }: TabsProps) {
   const [selectedTab, setSelectedTab] = useState(0);
 
   return (
@@ -99,4 +103,4 @@ export const Tab: React.FC<TabsProps> = ({ tabs }) => {
       ))}
     </>
   );
-};
+}
