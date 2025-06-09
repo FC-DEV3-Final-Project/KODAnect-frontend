@@ -15,8 +15,8 @@ export const Label = <E extends React.ElementType = "label">({
   ...props
 }: LabelProps<E>) => {
   const sizeClass = {
-    m: "text-b-sm",
-    s: "text-b-xs",
+    m: "text-b-md mobile:text-b-sm",
+    s: "text-b-sm mobile:text-b-xs",
   }[size];
 
   const weightClass = {
