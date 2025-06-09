@@ -5,10 +5,7 @@ interface DescriptionProps {
   checkItems: string[];
 }
 
-export const Description: React.FC<DescriptionProps> = ({
-  startBefore,
-  checkItems,
-}: DescriptionProps) => {
+export function Description({ startBefore, checkItems }: DescriptionProps) {
   return (
     <section className="rounded-r6 border border-secondary-10 bg-secondary-5 px-p9 py-p10 mobile:px-p6 mobile:py-p8">
       <div className="pb-p8 mobile:pb-p6">
@@ -32,4 +29,4 @@ export const Description: React.FC<DescriptionProps> = ({
       </div>
     </section>
   );
-};
+}
