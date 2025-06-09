@@ -1,5 +1,5 @@
+import clsx from "clsx";
 import { NewBadge } from "@/shared/components/NewBadge";
-
 import Mail from "@/assets/icon/mail.svg?react";
 import Visibility from "@/assets/icon/visibility.svg?react";
 
@@ -59,27 +59,37 @@ export default function LetterCard({
   const infoCount = displayInfoItems?.length ?? 0;
 
   // infoItems가 2줄 이상이면 mb와 조회수 위치 유지, 1줄이면 mb 제거 및 조회수 바로 아래
-  const infoAreaClass =
-    (size === "lg" ? "relative " : "") +
-    "flex flex-col gap-g2 " +
-    (size === "lg" && infoCount > 1 ? "mobile:mb-[20px]" : "");
-  const viewsClass =
-    "absolute right-0 flex gap-g2 text-gray-50 mobile:text-b-xs " +
-    (infoCount > 1 ? "bottom-0 mobile:bottom-[-20px]" : "bottom-0");
+  const infoAreaClass = clsx(
+    size === "lg" && "relative",
+    "flex flex-col gap-g2",
+    size === "lg" && infoCount > 1 && "mobile:mb-[20px]"
+  );
+  const viewsClass = clsx(
+    "absolute right-0 flex gap-g2 text-gray-50 mobile:text-b-xs",
+    infoCount > 1 ? "bottom-0 mobile:bottom-[-20px]" : "bottom-0"
+  );
 
   return (
     <a
       href="#"
-      className={
-        "flex flex-col rounded-r6 border-2 border-transparent bg-gray-0 p-p8 text-gray-90 shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')] hover:border-2 hover:border-primary-40 active:border-2 active:border-primary-40 active:bg-secondary-5 " +
+      className={clsx(
+        // 카드 전체 레이아웃
+        "flex flex-col rounded-r6 border-2 border-transparent bg-gray-0 p-p8 text-gray-90",
+        "shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')]",
+        "hover:border-2 hover:border-primary-40 active:border-2 active:border-primary-40 active:bg-secondary-5",
         preset.layout
-      }
+      )}
     >
       {/* 상단: 아이콘, 편지 번호, N 뱃지 */}
-      <div className={"relative flex items-center " + preset.gapIcon}>
+      <div className={clsx("relative flex items-center", preset.gapIcon)}>
         <Mail className={preset.icon} aria-hidden="true" />
         {/* 편지 번호 */}
-        <span className={`${size === "sm" ? "text-b-xs" : ""} text-gray-70 mobile:text-b-xs`}>
+        <span
+          className={clsx(
+            size === "sm" && "text-b-xs",
+            "text-gray-70 mobile:text-b-xs"
+          )}
+        >
           {letterNumber}
           {labelType === "story" ? "번째 이야기" : "번째 편지"}
         </span>
@@ -87,17 +97,25 @@ export default function LetterCard({
         <NewBadge size="sm" date={date} />
       </div>
       {/* 편지 제목 */}
-      <h3 className={"line-clamp-2 min-h-[46px] font-bold " + preset.fontTitle}>{title}</h3>
+      <h3 className={clsx("line-clamp-2 min-h-[46px] font-bold", preset.fontTitle)}>
+        {title}
+      </h3>
       {/* 날짜 */}
-      <time className={"text-gray-70 " + preset.fontDate}>{date}</time>
+      <time className={clsx("text-gray-70", preset.fontDate)}>{date}</time>
       {/* 정보 영역 */}
       <div className={infoAreaClass}>
         {displayInfoItems?.map((item, index) => {
-          const infoItemClass =
-            infoCount === 1 ? "flex items-start mobile:flex-col" : "flex items-center";
+          // infoItems가 1개면 flex-col, 2개 이상이면 flex-row
+          const infoItemClass = clsx(
+            infoCount === 1
+              ? "flex items-start mobile:flex-col"
+              : "flex items-center"
+          );
           return (
             <div key={index} className={infoItemClass}>
-              <span className={"mr-g3 text-gray-40 " + preset.label}>{item.label}</span>
+              <span className={clsx("mr-g3 text-gray-40", preset.label)}>
+                {item.label}
+              </span>
               <span className={preset.valueFont}>{item.value}</span>
             </div>
           );
