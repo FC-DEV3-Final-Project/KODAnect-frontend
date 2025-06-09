@@ -1,0 +1,38 @@
+export const donorData = [
+  {
+    donateSeq: 4370,
+    donorName: "박경준",
+    anonymityFlag: "N",
+    donateDate: "2025-06-05",
+    genderFlag: "M",
+    donateAge: 55,
+    replyCount: 0,
+  },
+  {
+    donateSeq: 4367,
+    donorName: "신민우",
+    anonymityFlag: "N",
+    donateDate: "2022-07-12",
+    genderFlag: "M",
+    donateAge: 30,
+    replyCount: 0,
+  },
+  {
+    donateSeq: 4369,
+    donorName: "정지홍",
+    anonymityFlag: "N",
+    donateDate: "2022-07-14",
+    genderFlag: "M",
+    donateAge: 51,
+    replyCount: 0,
+  },
+  {
+    donateSeq: 4366,
+    donorName: "하선희",
+    anonymityFlag: "N",
+    donateDate: "2022-07-13",
+    genderFlag: "F",
+    donateAge: 48,
+    replyCount: 0,
+  },
+];
