@@ -2,6 +2,7 @@ import memorialImg from "@/assets/images/memorial.gif";
 import heavenImg from "@/assets/images/heaven.webp";
 import receiverImg from "@/assets/images/receiver.webp";
 import donorImg from "@/assets/images/donor.webp";
+import memorialMobile from "@/assets/images/memorial_m.gif";
 import heavenMobile from "@/assets/images/heaven_m.webp";
 import receiverMobile from "@/assets/images/receiver_m.webp";
 import donorMobile from "@/assets/images/donor_m.webp";
@@ -12,7 +13,6 @@ type ContentType = {
   title: string;
   description: string | string[];
   mobileImgUrl?: string;
-  isRepeatImage?: boolean;
 };
 
 type TopVisualProps = {
@@ -22,10 +22,9 @@ type TopVisualProps = {
 const CONTENT: Record<TopVisualProps["type"], ContentType> = {
   memorial: {
     imgUrl: memorialImg,
-    mobileImgUrl: heavenMobile,
+    mobileImgUrl: memorialMobile,
     title: "기증자 추모관",
     description: ["생명 나눔을 실천한 분들의 고귀한 뜻,", "잊지 않겠습니다."],
-    isRepeatImage: true,
   },
   heaven: {
     imgUrl: heavenImg,
@@ -59,18 +58,18 @@ function TopVisual({ type }: TopVisualProps) {
       aria-label="상단 비주얼 영역"
     >
       {/* 배경 이미지 */}
-      {content.isRepeatImage ? (
-        <div className="absolute inset-0 flex" aria-hidden="true">
-          <img src={content.imgUrl} className="h-full w-[99rem] object-cover" loading="lazy" />
-          <img src={content.imgUrl} className="h-full w-[93.1rem] object-cover" loading="lazy" />
-          <div className="pointer-events-none absolute inset-0 bg-black opacity-60"></div>
-        </div>
-      ) : (
-        <img
-          src={imgUrl}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
+      <img
+        src={imgUrl}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+        aria-hidden="true"
+      />
+
+      {/* memorial 전용 오버레이 */}
+      {type === "memorial" && (
+        <div
+          className="pointer-events-none absolute inset-0 bg-black opacity-60"
           aria-hidden="true"
         />
       )}
