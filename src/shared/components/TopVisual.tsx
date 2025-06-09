@@ -37,7 +37,7 @@ const CONTENT: Record<TopVisualProps["type"], ContentType> = {
     imgUrl: receiverImg,
     mobileImgUrl: receiverMobile,
     title: "수혜자 편지",
-    description: "감사  합니다.",
+    description: "감사 합니다.",
   },
   donor: {
     imgUrl: donorImg,
@@ -58,13 +58,11 @@ function TopVisual({ type }: TopVisualProps) {
       role="region"
       aria-label="상단 비주얼 영역"
     >
-      {/* 배경 이미지*/}
-
+      {/* 배경 이미지 */}
       {content.isRepeatImage ? (
         <div className="absolute inset-0 flex" aria-hidden="true">
           <img src={content.imgUrl} className="h-full w-[99rem] object-cover" loading="lazy" />
           <img src={content.imgUrl} className="h-full w-[93.1rem] object-cover" loading="lazy" />
-          {/* 검정 오버레이 */}
           <div className="pointer-events-none absolute inset-0 bg-black opacity-60"></div>
         </div>
       ) : (
@@ -90,12 +88,14 @@ function TopVisual({ type }: TopVisualProps) {
           aria-describedby="description"
         >
           {Array.isArray(content.description)
-            ? content.description.map((line, i) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))
+            ? isMobile
+              ? content.description.map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))
+              : content.description.join(" ")
             : content.description}
         </p>
       </div>
