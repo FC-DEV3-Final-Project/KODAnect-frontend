@@ -10,8 +10,6 @@ import Letter from "@/features/home/component/letter/Letter";
 import Story from "@/features/home/component/story/Story";
 import Announcement from "@/features/home/component/announcement/Announcement";
 
-import LetterBg from "@/assets/images/letters-bg.svg";
-
 export default function Home() {
   const isMobile = useIsMobile(1075);
 
@@ -32,9 +30,6 @@ export default function Home() {
         <div className="min-w-0 basis-2/5">
           <KodaNews />
         </div>
-      </div>
-      <div className="pointer-events-none absolute left-1/2 top-[1475px] -z-10 h-full w-full -translate-x-1/2">
-        <img src={LetterBg} alt="" className="h-full w-full object-cover" draggable={false} />
       </div>
       <Letter />
       <Story />
