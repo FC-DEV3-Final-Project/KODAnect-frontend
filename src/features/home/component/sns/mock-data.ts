@@ -1,6 +1,6 @@
-import snsImage1 from "@/assets/images/sns-image_1.png";
-import snsImage2 from "@/assets/images/sns-image_2.png";
-import snsImage3 from "@/assets/images/sns-image_3.png";
+import snsImage1 from "@/assets/images/sns/sns-image-01.png";
+import snsImage2 from "@/assets/images/sns/sns-image-02.png";
+import snsImage3 from "@/assets/images/sns/sns-image-03.png";
 
 export const snsData = [
   {

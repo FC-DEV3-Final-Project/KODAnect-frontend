@@ -45,14 +45,10 @@ export default function AgencySlideList({ items }: AgencySlideListProps) {
                 key={index}
                 className={clsx(
                   "!flex h-[85px] w-full shrink-0 items-center justify-center gap-g5 mobile:h-[70px] mobile:gap-g4",
-                  "shadow-1 relative z-10 rounded-r6 bg-white p-p5",
+                  "relative z-10 rounded-r6 bg-white p-p5 shadow-1",
                 )}
               >
-                <img
-                  src={`src/assets/images/partners/${agency.imageSrc}`}
-                  alt={agency.name}
-                  className="h-full object-contain"
-                />
+                <img src={agency.imageSrc} alt={agency.name} className="h-full object-contain" />
               </div>
             ))}
           </div>

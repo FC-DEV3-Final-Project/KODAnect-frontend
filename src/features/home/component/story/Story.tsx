@@ -65,7 +65,13 @@ export default function Story() {
           )}
         >
           {storiesData.map((item, index) => (
-            <StoryCard key={index} title={item.title} date={item.date} view={item.view} />
+            <StoryCard
+              key={index}
+              imageUrl={item.imageUrl}
+              title={item.title}
+              date={item.date}
+              view={item.view}
+            />
           ))}
         </Slider>
       </div>

@@ -8,9 +8,9 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import Play from "@/assets/icon/play.svg";
 import Stop from "@/assets/icon/stop.svg";
 import BannerLogo from "@/assets/images/banner-logo.svg";
-import Banner01 from "@/assets/images/main-banner-01.png";
-import Banner02 from "@/assets/images/main-banner-02.png";
-import Banner03 from "@/assets/images/main-banner-03.png";
+import Banner01 from "@/assets/images/mainBanner/main-banner-01.png";
+import Banner02 from "@/assets/images/mainBanner/main-banner-02.png";
+import Banner03 from "@/assets/images/mainBanner/main-banner-03.png";
 
 import Slider from "react-slick";
 import QuickInfoCard from "./QuickInfoCard";
