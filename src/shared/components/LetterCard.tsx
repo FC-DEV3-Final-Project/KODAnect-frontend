@@ -1,3 +1,5 @@
+import { NewBadge } from "@/shared/components/NewBadge";
+
 import Mail from "@/assets/icon/mail.svg?react";
 import Visibility from "@/assets/icon/visibility.svg?react";
 
@@ -27,7 +29,6 @@ const letterCardPresets = {
     fontTitle: "text-h-sm",
     fontDate: "",
     icon: "h-[30px] w-[30px]",
-    badge: "rounded-r2 px-p3",
     gapIcon: "gap-g3",
     lineHeight: "h-[25.5px]",
     label: "",
@@ -38,7 +39,6 @@ const letterCardPresets = {
     fontTitle: "text-b-sm",
     fontDate: "text-b-xs",
     icon: "h-icon4 w-icon4",
-    badge: "rounded-r1 px-p2 text-b-xs",
     gapIcon: "gap-g2",
     lineHeight: "h-[19.5px]",
     label: "text-b-xs",
@@ -59,11 +59,6 @@ export default function LetterCard({
   const preset = letterCardPresets[size];
   const displayInfoItems = infoItems;
 
-  // NewBadge
-  const now = new Date();
-  const wrote = new Date(date ?? "");
-  const diffDays = (now.getTime() - wrote.getTime()) / (1000 * 60 * 60 * 24);
-
   return (
     <div>
       <a
@@ -82,16 +77,7 @@ export default function LetterCard({
             {labelType === "story" ? "번째 이야기" : "번째 편지"}
           </span>
           {/* 새 편지 뱃지 */}
-          {/* 유진님 브랜치와 병합 후 common 에 있는 NewBadge 컴포넌트 수정하여 사용 */}
-          {diffDays <= 7 ? (
-            <span
-              className={"absolute right-0 bg-primary-5 text-primary-60 " + preset.badge}
-              aria-label="새로운 편지"
-              title="새로운 편지"
-            >
-              N
-            </span>
-          ) : null}
+          <NewBadge size="sm" date={date} />
         </div>
         {/* 편지 제목 */}
         <h3 className={"min-h-[46px] font-bold " + preset.fontTitle}>{title}</h3>

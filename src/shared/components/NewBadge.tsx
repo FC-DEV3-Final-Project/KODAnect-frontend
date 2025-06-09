@@ -1,16 +1,39 @@
+type BadgeSize = "lg" | "sm";
+
 type NewBadgeProps = {
-  donateDate: string;
+  size?: BadgeSize;
+  date?: string | Date;
+  className?: string;
 };
 
-export const NewBadge = ({ donateDate }: NewBadgeProps) => {
+const badgePresets = {
+  lg: {
+    badge: "px-p3 text-b-sm mobile:rounded-r1 px-p2 text-b-xs",
+  },
+  sm: {
+    badge: "px-p2 text-b-xs",
+  },
+} as const;
+
+export const NewBadge = ({ size = "lg", date, className = "" }: NewBadgeProps) => {
+  const preset = badgePresets[size];
+
+  if (!date) return null;
+
   const now = new Date();
-  const donated = new Date(donateDate);
+  const donated = typeof date === "string" ? new Date(date) : date;
   const diffDays = (now.getTime() - donated.getTime()) / (1000 * 60 * 60 * 24);
 
   if (diffDays > 7) return null;
 
   return (
-    <span className="absolute right-[16px] top-[16px] rounded-r3 mobile:rounded-r2 bg-primary-5 px-p3 py-p1 text-b-sm text-primary-60 mobile:right-[12px] mobile:top-[12px] mobile:px-p2 mobile:py-0 mobile:text-b-xs">
+    <span
+      className={
+        "absolute right-0 rounded-r2 bg-primary-5 text-primary-60 " +
+        preset.badge +
+        (className ? " " + className : " ")
+      }
+    >
       N
     </span>
   );
