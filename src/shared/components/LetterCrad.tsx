@@ -68,54 +68,52 @@ export default function LetterCard({
     (infoCount > 1 ? "bottom-0 mobile:bottom-[-20px]" : "bottom-0");
 
   return (
-    <div>
-      <a
-        href="#"
+    <a
+      href="#"
+      className={
+        "flex flex-col rounded-r6 border-2 border-transparent bg-gray-0 p-p8 text-gray-90 shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')] hover:border-2 hover:border-primary-40 active:border-2 active:border-primary-40 active:bg-secondary-5 " +
+        preset.layout
+      }
+    >
+      {/* 상단: 아이콘, 편지 번호, N 뱃지 */}
+      <div
         className={
-          "flex flex-col rounded-r6 bg-gray-0 p-p8 text-gray-90 shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')] " +
-          preset.layout
+          "relative flex items-center mobile:flex-col mobile:items-start " + preset.gapIcon
         }
       >
-        {/* 상단: 아이콘, 편지 번호, N 뱃지 */}
-        <div
-          className={
-            "relative flex items-center mobile:flex-col mobile:items-start " + preset.gapIcon
-          }
-        >
-          <Mail className={preset.icon} aria-hidden="true" />
-          {/* 편지 번호 */}
-          <span className={`${size === "sm" ? "text-b-xs" : ""} text-gray-70 mobile:text-b-xs`}>
-            {letterNumber}
-            {labelType === "story" ? "번째 이야기" : "번째 편지"}
-          </span>
-          {/* 새 편지 뱃지 */}
-          <NewBadge size="sm" date={date} />
-        </div>
-        {/* 편지 제목 */}
-        <h3 className={"line-clamp-2 min-h-[46px] font-bold " + preset.fontTitle}>{title}</h3>
-        {/* 날짜 */}
-        <time className={"text-gray-70 " + preset.fontDate}>{date}</time>
-        {/* 정보 영역 */}
-        <div className={infoAreaClass}>
-          {displayInfoItems?.map((item, index) => {
-            const infoItemClass =
-              infoCount === 1 ? "flex items-start mobile:flex-col" : "flex items-center";
-            return (
-              <div key={index} className={infoItemClass}>
-                <span className={"mr-g3 text-gray-40 " + preset.label}>{item.label}</span>
-                <span className={preset.valueFont}>{item.value}</span>
-              </div>
-            );
-          })}
-          {/* 조회수: lg 카드에서만 표시 (API 데이터로 대체 가능) */}
-          {size === "lg" && (
-            <div className={viewsClass}>
-              <Visibility className="h-icon4 w-icon4 mobile:h-icon3 mobile:w-icon3" />
-              <span>{views}</span>
+        <Mail className={preset.icon} aria-hidden="true" />
+        {/* 편지 번호 */}
+        <span className={`${size === "sm" ? "text-b-xs" : ""} text-gray-70 mobile:text-b-xs`}>
+          {letterNumber}
+          {labelType === "story" ? "번째 이야기" : "번째 편지"}
+        </span>
+        {/* 새 편지 뱃지 */}
+        <NewBadge size="sm" date={date} />
+      </div>
+      {/* 편지 제목 */}
+      <h3 className={"line-clamp-2 min-h-[46px] font-bold " + preset.fontTitle}>{title}</h3>
+      {/* 날짜 */}
+      <time className={"text-gray-70 " + preset.fontDate}>{date}</time>
+      {/* 정보 영역 */}
+      <div className={infoAreaClass}>
+        {displayInfoItems?.map((item, index) => {
+          const infoItemClass =
+            infoCount === 1 ? "flex items-start mobile:flex-col" : "flex items-center";
+          return (
+            <div key={index} className={infoItemClass}>
+              <span className={"mr-g3 text-gray-40 " + preset.label}>{item.label}</span>
+              <span className={preset.valueFont}>{item.value}</span>
             </div>
-          )}
-        </div>
-      </a>
-    </div>
+          );
+        })}
+        {/* 조회수: lg 카드에서만 표시 (API 데이터로 대체 가능) */}
+        {size === "lg" && (
+          <div className={viewsClass}>
+            <Visibility className="h-icon4 w-icon4 mobile:h-icon3 mobile:w-icon3" />
+            <span>{views}</span>
+          </div>
+        )}
+      </div>
+    </a>
   );
 }
