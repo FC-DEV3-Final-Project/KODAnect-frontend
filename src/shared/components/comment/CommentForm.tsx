@@ -89,7 +89,7 @@ function CommentForm() {
             size="medium"
             className="mobile:max-w-[9.1rem] mobile:self-end"
           >
-            등록하기
+            추모하기
           </Button>
         </div>
       </fieldset>
