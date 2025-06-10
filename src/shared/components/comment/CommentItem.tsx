@@ -1,16 +1,24 @@
 import OptionIcon from "@/assets/icon/ellipsis-vertical.svg?react";
 
-const dropdownItems = ["수정", "삭제"];
-
 type CommentItemProps = {
   content: string;
   date: string;
   author: string;
   isOpen: boolean;
   onToggle: () => void;
+  onEdit?: () => void;
+  onDelete?: () => void;
 };
 
-function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemProps) {
+function CommentItem({
+  content,
+  date,
+  author,
+  isOpen,
+  onToggle,
+  onEdit,
+  onDelete,
+}: CommentItemProps) {
   const dropdownId = `comment-dropdown-${author}-${date}`;
 
   return (
@@ -32,16 +40,22 @@ function CommentItem({ content, date, author, isOpen, onToggle }: CommentItemPro
 
           {isOpen && (
             <ul className="absolute left-1/2 top-full z-10 mt-g2 w-[8.6rem] -translate-x-1/2 rounded-r3 border border-gray-30 bg-white p-p3 shadow-s1">
-              {dropdownItems.map((label, idx) => (
-                <li
-                  key={`${label}-${idx}`}
-                  role="menuitem"
-                  tabIndex={0}
-                  className="flex cursor-pointer items-center justify-center px-p4 py-p3 text-b-sm text-gray-90 hover:rounded-r3 hover:bg-secondary-5 active:bg-secondary-10"
-                >
-                  {label}
-                </li>
-              ))}
+              <li
+                role="menuitem"
+                tabIndex={0}
+                onClick={onEdit}
+                className="flex cursor-pointer items-center justify-center px-p4 py-p3 text-b-sm text-gray-90 hover:rounded-r3 hover:bg-secondary-5 active:bg-secondary-10"
+              >
+                수정
+              </li>
+              <li
+                role="menuitem"
+                tabIndex={0}
+                onClick={onDelete}
+                className="flex cursor-pointer items-center justify-center px-p4 py-p3 text-b-sm text-gray-90 hover:rounded-r3 hover:bg-secondary-5 active:bg-secondary-10"
+              >
+                삭제
+              </li>
             </ul>
           )}
         </div>

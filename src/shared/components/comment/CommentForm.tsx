@@ -5,10 +5,20 @@ import ResetIcon from "@/assets/icon/reset.svg?react";
 import SoundIcon from "@/assets/icon/sound.svg?react";
 import { Button } from "@/shared/components/Button";
 
-function CommentForm() {
+type CommentFormProps = {
+  onSubmit?: () => void;
+};
+
+function CommentForm({ onSubmit }: CommentFormProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit?.(); // 외부에서 넘긴 함수 실행
+  };
+
   return (
     <form
+      onSubmit={handleSubmit}
       aria-labelledby="comment-form-heading"
       className="flex h-auto w-full flex-col gap-g5 rounded-r6 bg-gray-5 px-p10 py-p8 mobile:p-p6"
     >

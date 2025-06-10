@@ -14,9 +14,13 @@ function CommentArea() {
         </span>
       </div>
       <div className="mb-g9">
-        <CommentForm />
+        <CommentForm
+          onSubmit={() => {
+            // 댓글 등록 API 호출 또는 유효성 검사 등 처리
+            console.log("댓글 제출됨");
+          }}
+        />
       </div>
-
       <CommentList />
     </section>
   );

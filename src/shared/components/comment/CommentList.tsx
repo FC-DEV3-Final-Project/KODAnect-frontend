@@ -48,6 +48,8 @@ function CommentList() {
                 author={item.author}
                 isOpen={openId === item.id}
                 onToggle={() => setOpenId(openId === item.id ? null : item.id)}
+                onEdit={() => console.log("수정 클릭됨")}
+                onDelete={() => console.log("삭제 클릭됨")}
               />
             </li>
           ))}
