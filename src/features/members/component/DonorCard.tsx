@@ -6,17 +6,19 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 interface DonorCardProps {
   donorName?: string;
-  donorAge?: string;
+  genderFlag?: string;
+  donorAge?: number;
   donationDate?: string;
-  messageCount?: number;
+  replyCount?: number;
   letterCount?: number;
 }
 
 export default function DonorCard({
   donorName = "홍길동",
-  donorAge = "(F,30)",
+  genderFlag = "F",
+  donorAge = 30,
   donationDate = "2025-06-09",
-  messageCount = 5,
+  replyCount = 5,
   letterCount = 10,
 }: DonorCardProps) {
   const isMobile = useIsMobile(768);
@@ -50,9 +52,11 @@ export default function DonorCard({
         <div className="flex flex-col gap-g2">
           <div className="flex h-[52px] items-center mobile:h-[40px]">
             <span className="mr-g3 text-b-xs text-gray-40">기증자</span>
-            <p className="   text-h-2xs font-bold">
+            <p className="text-h-2xs font-bold">
               {donorName}
-              <span className="ml-g2">{donorAge}</span>
+              <span className="ml-g2">
+                ({genderFlag}/{donorAge})
+              </span>
             </p>
           </div>
           {/* 기증일 */}
@@ -68,7 +72,7 @@ export default function DonorCard({
         <div className="flex gap-g3">
           <Message className="h-icon3 w-icon3 text-gray-40" />
           <span className="text-b-xs text-gray-70">추모 메시지</span>
-          <span className="text-b-xs text-gray-40">{messageCount}</span>
+          <span className="text-b-xs text-gray-40">{replyCount}</span>
         </div>
         {/* 하늘나라 편지 */}
         <div className="flex gap-g3">
