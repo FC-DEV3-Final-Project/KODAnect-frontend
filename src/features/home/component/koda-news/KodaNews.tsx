@@ -9,7 +9,7 @@ export default function KodaNews() {
       <h2 id="koda-news-heading" className="mb-g5 text-h-md font-bold mobile:text-h-sm">
         한국장기조직기증원 소식
       </h2>
-      <article className="relative flex flex-1 flex-col gap-g5 rounded-r6 border border-gray-30 bg-alpha-white100 px-p8 pb-8 pt-p5">
+      <article className="relative flex flex-1 flex-col gap-g5 rounded-r6 border border-gray-30 bg-white px-p8 pb-8 pt-p5">
         <TabPanel tabs={["공지사항", "보도자료"]}>
           <Table items={notices} label="공지사항 목록" />
           <Table items={pressReleases} label="보도자료 목록" />

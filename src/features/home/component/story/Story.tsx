@@ -23,6 +23,7 @@ export default function Story() {
     slidesToScroll: 1,
     arrows: false,
     draggable: false,
+    variableWidth: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -85,7 +86,7 @@ export default function Story() {
         <div className="flex gap-g2 rounded-full border border-gray-20 px-p6 py-p3 font-bold">
           <span className="text-secondary-80">{currentSlide + 1}</span>
           <span>/</span>
-          <span>8</span>
+          <span>{storiesData.length}</span>
         </div>
 
         <button onClick={() => sliderRef.current?.slickNext()} aria-label="다음">

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Slider from "react-slick";
 
 import clsx from "clsx";
@@ -8,19 +8,16 @@ import { SnsCard } from "@/features/home/component/sns/SnsCard";
 import Arrow from "@/assets/icon/round-arrow.svg?react";
 
 export default function SocialNetwork() {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef<Slider | null>(null);
 
   const settings = {
-    afterChange: (index: number) => {
-      setCurrentSlide(index);
-    },
     dots: false,
     arrows: false,
-    infinite: false,
+    infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     draggable: false,
+    variableWidth: true,
   };
 
   return (
@@ -47,27 +44,11 @@ export default function SocialNetwork() {
 
         {/* custom-button */}
         <div className="absolute right-0 top-[-1px] flex gap-g5">
-          <button
-            onClick={() => sliderRef.current?.slickPrev()}
-            aria-label="이전"
-            disabled={currentSlide === 0}
-            className={clsx(
-              "transition-opacity",
-              currentSlide === 0 && "pointer-events-none opacity-60",
-            )}
-          >
+          <button onClick={() => sliderRef.current?.slickPrev()} aria-label="이전">
             <Arrow className="h-icon5 w-icon5" />
           </button>
 
-          <button
-            onClick={() => sliderRef.current?.slickNext()}
-            aria-label="다음"
-            disabled={currentSlide === snsData.length - 1}
-            className={clsx(
-              "transition-opacity",
-              currentSlide === snsData.length - 1 && "pointer-events-none opacity-60",
-            )}
-          >
+          <button onClick={() => sliderRef.current?.slickNext()} aria-label="다음">
             <Arrow className="h-icon5 w-icon5 rotate-180" />
           </button>
         </div>
