@@ -21,7 +21,7 @@ export default function SideMenuLayout() {
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-[1280px] gap-g9 px-p10 mobile:px-p6">
+        <div className="mx-auto flex max-w-[1280px] gap-[54px] px-p10 mobile:px-p6">
           <SideMenu />
           <div className="flex-1 py-p10 mobile:py-p9">
             <Outlet />
