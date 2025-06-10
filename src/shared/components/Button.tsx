@@ -16,8 +16,7 @@ export const Button = <E extends React.ElementType = "button">({
   disabled = false,
   ...props
 }: ButtonProps<E>) => {
-  const baseStyles =
-    "inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200";
+  const baseStyles = "inline-flex items-center justify-center transition-colors duration-200";
 
   const disabledStyles = "bg-gray-20 text-gray-50";
 
@@ -30,7 +29,7 @@ export const Button = <E extends React.ElementType = "button">({
       disabledStyle: disabledStyles,
     },
     secondary: {
-      style: "bg-primary-5 hover:bg-primary-10 text-primary-60 border border-primary-50",
+      style: "bg-secondary-5 hover:bg-secondary-10 text-secondary-60 border border-secondary-50",
       disabledStyle: disabledStyles,
     },
     tertiary: {
