@@ -82,7 +82,7 @@ export default function LetterCard({
       </div>
 
       {/* 중간 영역: 제목, 작성일 */}
-      <div className="flex flex-col gap-g2">
+      <div className="flex flex-col gap-g5 mobile:gap-g2">
         <h3 className={clsx("line-clamp-2 min-h-[46px] font-bold", preset.fontTitle)}>{title}</h3>
         <time
           className={clsx("text-gray-70", preset.fontDate)}
