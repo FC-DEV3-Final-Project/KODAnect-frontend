@@ -130,7 +130,7 @@ export default function MainBanner() {
                   className={clsx(
                     "h-[8px] rounded-full transition-all duration-300",
                     activeIndex === index
-                      ? "w-[20px] rounded-r4 bg-primary-50"
+                      ? "w-[20px] rounded-r4 bg-secondary-50"
                       : "w-[8px] bg-gray-50",
                   )}
                   onClick={() => sliderRef.current?.slickGoTo(index)}
