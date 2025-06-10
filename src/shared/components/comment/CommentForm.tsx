@@ -72,7 +72,7 @@ function CommentForm() {
               </button>
             </div>
 
-            <div className="min-w-[26.4rem] mobile:w-full">
+            <div className="min-w-[29.6rem] mobile:w-full">
               <TextInput
                 id="captcha"
                 placeholder="자동입력 방지 숫자 입력"
@@ -89,7 +89,7 @@ function CommentForm() {
             size="medium"
             className="mobile:max-w-[9.1rem] mobile:self-end"
           >
-            등록하기
+            추모하기
           </Button>
         </div>
       </fieldset>

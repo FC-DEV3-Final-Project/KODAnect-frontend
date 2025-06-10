@@ -29,7 +29,7 @@ function CommentList() {
 
   return (
     <section
-      className="flex flex-col gap-g5 px-p10 mobile:px-0"
+      className="mb-g11 flex flex-col gap-g5 px-p10 mobile:mb-[6rem] mobile:px-0"
       aria-labelledby="comment-list-heading"
     >
       <h3 id="comment-list-heading" className="text-h-sm font-bold text-gray-90">
