@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import Slider from "react-slick";
 
 import { lettersData } from "@/features/home/component/letter/mock-data";
-import LetterCard from "@/shared/components/LetterCard";
+import LetterCard from "@/shared/components/LetterCrad";
 import clsx from "clsx";
 
 interface Letter {
@@ -39,7 +39,7 @@ export default function LetterCardList() {
   return (
     <>
       {/* PC: 전체 카드 노출 */}
-      <div className="grid w-full grid-cols-5 gap-g4 mobile:hidden">
+      <div className="flex w-full flex-wrap items-center gap-g4 mobile:hidden">
         {lettersData.map((item, index) => (
           <LetterCard
             key={index}
@@ -61,7 +61,7 @@ export default function LetterCardList() {
             "[&_.slick-track]:!flex",
             "[&_.slick-track]:!whitespace-nowrap",
             "[&_.slick-track]:!gap-0",
-            "[&_.slick-slide]:!w-[208px]",
+            "[&_.slick-slide]:!w-[216px]",
             "[&_.slick-slide]:!shrink-0",
             "[&_.slick-slide]:py-p3",
             "[&_.slick-slide]:px-p2",
@@ -92,7 +92,9 @@ export default function LetterCardList() {
               key={index}
               className={clsx(
                 "h-[8px] rounded-full transition-all duration-300",
-                activeIndex === index ? "w-[20px] rounded-r4 bg-primary-50" : "w-[8px] bg-gray-50",
+                activeIndex === index
+                  ? "w-[20px] rounded-r4 bg-secondary-50"
+                  : "w-[8px] bg-gray-50",
               )}
               onClick={() => sliderRef.current?.slickGoTo(index)}
               aria-current={activeIndex === index ? "true" : undefined}
