@@ -49,12 +49,12 @@ interface PaginationProps {
   visiblePages?: number;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
+export function Pagination({
   totalPages,
   currentPage,
   onPageChange,
   visiblePages: propVisiblePages = 5,
-}) => {
+}: PaginationProps) {
   const visiblePages = Math.max(
     propVisiblePages % 2 === 0 ? propVisiblePages + 1 : propVisiblePages,
     1,
@@ -128,4 +128,4 @@ export const Pagination: React.FC<PaginationProps> = ({
       </button>
     </nav>
   );
-};
+}
