@@ -4,6 +4,15 @@ import CommentArea from "@/shared/components/comment/CommentArea";
 import { StoryLetter } from "@/features/remembrance/letter-view/components/mockLetter";
 
 function StoryView() {
+  const handleCommentEdit = (commentId: string) => {
+    console.log("댓글 수정:", commentId);
+    // 수정 로직 (예: 모달 열기 등)
+  };
+
+  const handleCommentDelete = (commentId: string) => {
+    console.log("댓글 삭제:", commentId);
+    // 삭제 확인 후 API 호출 등
+  };
   return (
     <div className="mx-auto max-w-[1200px] mobile:px-p6">
       <Description
@@ -21,7 +30,11 @@ function StoryView() {
         onEdit={() => console.log("편지 수정")}
         onDelete={() => console.log("편지 삭제")}
       />
-      <CommentArea />
+      <CommentArea
+        onCommentSubmit={() => console.log("댓글 등록!")}
+        onCommentEdit={handleCommentEdit}
+        onCommentDelete={handleCommentDelete}
+      />
     </div>
   );
 }

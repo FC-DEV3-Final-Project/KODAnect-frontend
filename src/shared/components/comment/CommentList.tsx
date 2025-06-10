@@ -3,6 +3,11 @@ import CommentItem from "@/shared/components/comment/CommentItem";
 import { Button } from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
+type CommentListProps = {
+  onEdit?: (commentId: string) => void;
+  onDelete?: (commentId: string) => void;
+};
+
 const dummyComments = [
   {
     id: "1",
@@ -24,7 +29,7 @@ const dummyComments = [
   },
 ];
 
-function CommentList() {
+function CommentList({ onEdit, onDelete }: CommentListProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
@@ -48,8 +53,8 @@ function CommentList() {
                 author={item.author}
                 isOpen={openId === item.id}
                 onToggle={() => setOpenId(openId === item.id ? null : item.id)}
-                onEdit={() => console.log("수정 클릭됨")}
-                onDelete={() => console.log("삭제 클릭됨")}
+                onEdit={() => onEdit?.(item.id)}
+                onDelete={() => onDelete?.(item.id)}
               />
             </li>
           ))}
