@@ -47,7 +47,7 @@ function SearchInput({ onSubmit, placeholder }: SearchInputProps) {
           value={inputValue}
           placeholder={placeholder}
           onChange={(e) => setInputValue(e.target.value)}
-          className={`${getPaddingRight()} w-full rounded-r3 border border-gray-60 py-p4 pl-p6 text-b-md text-gray-90 placeholder:text-gray-40 focus:outline-2 focus:outline-primary-50`}
+          className={`${getPaddingRight()} w-full rounded-r3 border border-gray-60 py-p4 pl-p6 text-b-md text-gray-90 placeholder:text-gray-40 focus:outline-2 focus:outline-secondary-50`}
         />
         {/* 삭제 버튼 */}
         {inputValue && (
@@ -63,7 +63,7 @@ function SearchInput({ onSubmit, placeholder }: SearchInputProps) {
         <SearchIcon
           onClick={() => handleSubmit()}
           role="button"
-          className="absolute right-p6 top-1/2 h-icon3 w-icon3 -translate-y-1/2 cursor-pointer hover:text-primary-50"
+          className="absolute right-p6 top-1/2 h-icon3 w-icon3 -translate-y-1/2 cursor-pointer hover:text-secondary-50"
           aria-label="검색"
         />
       </div>

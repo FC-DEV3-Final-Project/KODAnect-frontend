@@ -159,7 +159,7 @@ function Calendar({
                         >
                           {date.getDate()}
                           {isTodayDate && !isSelectedDate && (
-                            <span className="absolute bottom-[0.6rem] h-[0.4rem] w-[0.4rem] rounded-full bg-point-50" />
+                            <span className="absolute bottom-[0.6rem] h-[0.4rem] w-[0.4rem] rounded-full bg-secondary-50" />
                           )}
                         </button>
                       </td>
