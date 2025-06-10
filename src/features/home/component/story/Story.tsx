@@ -49,6 +49,22 @@ export default function Story() {
           가슴 따뜻해지는 생명나눔 이야기를 소개합니다.
         </p>
         <MoreButton className="text-b-sm mobile:absolute mobile:right-0 mobile:top-0 mobile:text-b-xs" />
+        {/* pagination + custom-button */}
+        <div className="absolute bottom-[70px] right-0 flex gap-g5 mobile:hidden">
+          <button onClick={() => sliderRef.current?.slickPrev()} aria-label="이전">
+            <Arrow className="h-icon6 w-icon6" />
+          </button>
+
+          <div className="flex gap-g2 rounded-full border border-gray-20 px-p6 py-p3 font-bold">
+            <span className="text-secondary-80">{currentSlide + 1}</span>
+            <span>/</span>
+            <span>{storiesData.length}</span>
+          </div>
+
+          <button onClick={() => sliderRef.current?.slickNext()} aria-label="다음">
+            <Arrow className="h-icon6 w-icon6 rotate-180" />
+          </button>
+        </div>
       </div>
 
       <div className="relative basis-2/3 overflow-x-hidden">
@@ -75,23 +91,6 @@ export default function Story() {
             />
           ))}
         </Slider>
-      </div>
-
-      {/* pagination + custom-button */}
-      <div className="absolute bottom-[70px] left-[215px] flex gap-g5 mobile:hidden">
-        <button onClick={() => sliderRef.current?.slickPrev()} aria-label="이전">
-          <Arrow className="h-icon6 w-icon6" />
-        </button>
-
-        <div className="flex gap-g2 rounded-full border border-gray-20 px-p6 py-p3 font-bold">
-          <span className="text-secondary-80">{currentSlide + 1}</span>
-          <span>/</span>
-          <span>{storiesData.length}</span>
-        </div>
-
-        <button onClick={() => sliderRef.current?.slickNext()} aria-label="다음">
-          <Arrow className="h-icon6 w-icon6 rotate-180" />
-        </button>
       </div>
     </section>
   );
