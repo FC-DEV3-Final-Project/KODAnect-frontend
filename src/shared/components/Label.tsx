@@ -29,7 +29,7 @@ export const Label = <E extends React.ElementType = "label">({
     danger: "text-danger-60",
     success: "text-success-60",
     info: "text-information-60",
-    length: "text-primary-60",
+    length: "text-secondary-60",
   }[color];
 
   return (

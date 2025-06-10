@@ -57,7 +57,7 @@ function CommentList() {
           <Button variant="secondary" size="medium" className="w-full" aria-label="댓글 더보기">
             <span className="text-b-md mobile:text-b-sm">더보기</span>
             <PlusIcon
-              className="w-cion3 h-icon3 text-primary-50 mobile:h-icon2 mobile:w-icon2"
+              className="h-icon3 w-icon3 text-secondary-50 mobile:h-icon2 mobile:w-icon2"
               aria-hidden="true"
               focusable="false"
             />
