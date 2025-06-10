@@ -27,7 +27,7 @@ export default function DonorCard({
     <li
       className={clsx(
         "flex w-[284px] flex-col gap-g6 rounded-r6 border-2 border-transparent bg-white p-p8 text-gray-90",
-        "shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')]",
+        "shadow-[0_0_2px_0_theme('colors.secondary.10'),0_8px_16px_0_theme('colors.secondary.10')]",
         "mobile:w-[160px] mobile:p-p6",
       )}
     >
