@@ -16,29 +16,29 @@ type ContentType = {
 };
 
 type TopVisualProps = {
-  type: "memorial" | "heaven" | "receiver" | "donor";
+  type: "members" | "letters" | "recipients" | "stories";
 };
 
 const CONTENT: Record<TopVisualProps["type"], ContentType> = {
-  memorial: {
+  members: {
     imgUrl: memorialImg,
     mobileImgUrl: memorialMobile,
     title: "기증자 추모관",
     description: ["생명 나눔을 실천한 분들의 고귀한 뜻,", "잊지 않겠습니다."],
   },
-  heaven: {
+  letters: {
     imgUrl: heavenImg,
     mobileImgUrl: heavenMobile,
     title: "하늘나라 편지",
     description: ["하늘에 있는 그리운 당신에게 편지를 보냅니다.", "당신이 보고 싶습니다."],
   },
-  receiver: {
+  recipients: {
     imgUrl: receiverImg,
     mobileImgUrl: receiverMobile,
     title: "수혜자 편지",
     description: "감사 합니다.",
   },
-  donor: {
+  stories: {
     imgUrl: donorImg,
     mobileImgUrl: donorMobile,
     title: "기증자 스토리",
@@ -66,8 +66,8 @@ function TopVisual({ type }: TopVisualProps) {
         aria-hidden="true"
       />
 
-      {/* memorial 전용 오버레이 */}
-      {type === "memorial" && (
+      {/* members 전용 오버레이 */}
+      {type === "members" && (
         <div
           className="pointer-events-none absolute inset-0 bg-black opacity-60"
           aria-hidden="true"
@@ -75,7 +75,7 @@ function TopVisual({ type }: TopVisualProps) {
       )}
 
       {/* 텍스트 콘텐츠 */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white mobile:items-start mobile:px-p9 mobile:text-left">
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center text-center text-white mobile:items-start mobile:px-p9 mobile:text-left">
         <h1 className="text-d-md font-bold leading-tight tracking-1 mobile:text-d-md">
           {content.title}
         </h1>
