@@ -1,9 +1,7 @@
-export const mockLetter = {
+// api 연결 전 제거 예정
+
+export const heavenLetter = {
   title: "비와..",
-  donorName: "홍길동",
-  receiver: "아빠",
-  date: "2025-05-15",
-  views: 3,
   content: `아빠 ~ 딸왔어 ㅎㅎ
   
 
@@ -25,4 +23,46 @@ export const mockLetter = {
 어제는 엄마가 멸치 쌈밥을 해줬거덩. 동이네랑 이모랑 다 같이 모여서 먹었는데.
 
 `,
+  infoItems: [
+    { label: "기증자", value: "홍길동" },
+    { label: "추모자", value: "아빠" },
+    { label: "등록일 ", value: "2025-05-15" },
+    { label: "조회", value: 3 },
+  ],
+};
+
+export const recipientLetter = {
+  title: "춥지도 뜨겁지도 않은 곳에서 잘 지내줘...",
+  content: `한 사람의 희생으로 또한 사람이 따뜻한 마음으로 같은 하늘 아래서 잘 살아가고 있다고 헤아리시어
+
+  고인께서 헛되지 않은 결정에 위로를 받으셨음 하는 바램입니다.
+
+  다시 한번 고인의 평안한 영면을 빌며, 가내로 밝은 빛이 넘치도록 비춰지길 진심으로 기원합니다.
+
+  감사합니다.
+`,
+  infoItems: [
+    { label: "수혜자", value: "조아름" },
+    { label: "수혜장기 / 연도", value: "폐 / 2025" },
+    { label: "작성일 ", value: "2025-05-15" },
+    { label: "조회", value: 3 },
+  ],
+};
+
+export const StoryLetter = {
+  title: "춥지도 뜨겁지도 않은 곳에서 잘 지내줘...",
+  content: `한 사람의 희생으로 또한 사람이 따뜻한 마음으로 같은 하늘 아래서 잘 살아가고 있다고 헤아리시어
+
+  고인께서 헛되지 않은 결정에 위로를 받으셨음 하는 바램입니다.
+
+  다시 한번 고인의 평안한 영면을 빌며, 가내로 밝은 빛이 넘치도록 비춰지길 진심으로 기원합니다.
+
+  감사합니다.
+`,
+  infoItems: [
+    { label: "코디네이터", value: "조아름" },
+    { label: "등록일", value: "2025-05-07" },
+    { label: "권역", value: "1권역 (수도권, 강원, 제주)" },
+    { label: "조회", value: 148 },
+  ],
 };

@@ -1,9 +1,28 @@
-import { mockLetter } from "@/features/remembrance/letter-view/components/mockLetter";
 import { Button } from "@/shared/components/Button";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
-function LetterContent() {
-  const { title, donorName, receiver, date, views, content } = mockLetter;
+type InfoItem = {
+  label: string;
+  value: string | number;
+};
+
+type LetterContentProps = {
+  title: string;
+  content: string;
+  infoItems: InfoItem[];
+  onGoList?: () => void;
+  onEdit?: () => void;
+  onDelete?: () => void;
+};
+
+function LetterContent({
+  title,
+  content,
+  infoItems,
+  onGoList,
+  onEdit,
+  onDelete,
+}: LetterContentProps) {
   const isMobile = useIsMobile();
 
   return (
@@ -15,19 +34,14 @@ function LetterContent() {
         {title}
       </h2>
 
-      <dl className="mb-p10 grid gap-y-g5 border-y border-gray-20 py-p8 mobile:gap-y-g4 mobile:px-p4">
-        {[
-          { label: "기증자", value: donorName },
-          { label: "추모자", value: receiver },
-          { label: "등록일", value: date },
-          { label: "조회", value: views },
-        ].map(({ label, value }) => (
+      <dl className="grid gap-y-g5 border-y border-gray-20 py-p8 mobile:gap-y-g4 mobile:px-p4">
+        {infoItems.map(({ label, value }) => (
           <div
             key={label}
             role="group"
             className="grid grid-cols-[auto_1fr] gap-g7 text-b-lg text-gray-95 mobile:text-b-sm"
           >
-            <dt className="w-[18rem] font-bold mobile:w-[6rem]">{label}</dt>
+            <dt className="w-[18rem] font-bold mobile:w-[10rem]">{label}</dt>
             <dd>{value}</dd>
           </div>
         ))}
@@ -41,15 +55,15 @@ function LetterContent() {
       </article>
 
       <div className="flex items-center justify-between">
-        <Button variant="tertiary" size={isMobile ? "small" : "large"}>
+        <Button variant="tertiary" size={isMobile ? "small" : "large"} onClick={onGoList}>
           목록
         </Button>
 
         <div className="flex gap-g5 mobile:gap-g3">
-          <Button variant="secondary" size={isMobile ? "small" : "large"}>
+          <Button variant="primary" size={isMobile ? "small" : "large"} onClick={onEdit}>
             수정
           </Button>
-          <Button variant="primary" size={isMobile ? "small" : "large"}>
+          <Button variant="tertiary" size={isMobile ? "small" : "large"} onClick={onDelete}>
             삭제
           </Button>
         </div>

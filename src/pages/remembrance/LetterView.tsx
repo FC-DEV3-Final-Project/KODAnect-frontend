@@ -1,6 +1,7 @@
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/remembrance/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
+import { heavenLetter } from "@/features/remembrance/letter-view/components/mockLetter";
 
 function LetterView() {
   return (
@@ -13,7 +14,14 @@ function LetterView() {
           "하늘나라편지에 쓰신 글은 한국장기조직기증원 뉴스레터에 익명 표기와 뜻을 훼손하지 않는 범위의 수정을 통해 게재될 수 있습니다.",
         ]}
       />
-      <LetterContent />
+      <LetterContent
+        title={heavenLetter.title}
+        content={heavenLetter.content}
+        onGoList={() => console.log("목록 페이지로 이동")}
+        infoItems={heavenLetter.infoItems}
+        onEdit={() => console.log("편지 수정")}
+        onDelete={() => console.log("편지 삭제")}
+      />
       <CommentArea />
     </div>
   );
