@@ -61,8 +61,8 @@ export default function LetterCard({
       href="#"
       className={clsx(
         "flex flex-col rounded-r6 border-2 border-transparent bg-gray-0 p-p8 text-gray-90",
-        "shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')]",
-        "hover:border-2 hover:border-primary-40 active:border-2 active:border-primary-40 active:bg-secondary-5",
+        "shadow-[0_0_2px_0_theme('colors.secondary.10'),0_8px_16px_0_theme('colors.secondary.10')]",
+        "hover:border-2 hover:border-secondary-40 active:border-2 active:border-secondary-40 active:bg-secondary-5",
         preset.layout,
       )}
     >
