@@ -1,8 +1,9 @@
 import clsx from "clsx";
+import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { Button } from "@/shared/components/Button";
+import { NewBadge } from "@/shared/components/NewBadge";
 import Message from "@/assets/icon/inquiry.svg?react";
 import Letter from "@/assets/icon/mail.svg?react";
-import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 
 interface DonorCardProps {
@@ -35,12 +36,11 @@ export default function DonorCard({
       <div
         className={clsx("relative flex items-center gap-g4", "mobile:flex-col mobile:items-start")}
       >
-        {/*
-        <NewBadge size="sm" date={donationDate} className="-right-p2 -top-p2 mobile:top-0 mobile:right-p2"/>
-        */}
-        <span className="absolute -right-p2 -top-p2 rounded-r2 bg-primary-5 px-p2 text-b-xs text-primary-60 mobile:right-p2 mobile:top-0">
-          N
-        </span>
+        <NewBadge
+          size="sm"
+          date={donationDate}
+          className="-right-p2 -top-p2 mobile:right-p2 mobile:top-0"
+        />
 
         {/* 추모리본 이미지 */}
         <img
