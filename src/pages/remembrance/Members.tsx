@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 import clsx from "clsx";
+import PlusIcon from "@/assets/icon/btn-more.svg?react";
+
 import { Tab } from "@/shared/components/Tab";
 import DatePicker from "@/shared/components/calendar/DatePicker";
 import TextInput from "@/shared/components/TextInput";
 import TopVisual from "@/shared/components/TopVisual";
 import { Button } from "@/shared/components/Button";
-import DonorCard from "@/features/members/component/MemberCard";
+
+import DonorCard from "@/features/members/component/DonorCard";
 
 export default function Members() {
   const isMobile = useIsMobile(768);
@@ -78,9 +81,16 @@ export default function Members() {
           <Button
             size={isMobile ? "medium" : "large"}
             variant="secondary"
-            children={`더보기`}
-            className="w-full"
-          />
+            aria-label="댓글 더보기"
+            className="flex w-full gap-g2"
+          >
+            <span className="text-b-lg text-secondary-60 mobile:text-b-md">더보기</span>
+            <PlusIcon
+              className="h-icon4 w-icon4 text-secondary-50 mobile:h-icon3 mobile:w-icon3"
+              aria-hidden="true"
+              focusable="false"
+            />
+          </Button>
         </div>
       </div>
     </>
