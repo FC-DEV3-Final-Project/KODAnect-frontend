@@ -32,6 +32,7 @@ export default function LetterCardList() {
     infinite: false,
     slidesToShow: 1,
     slidesToScroll: 1,
+    variableWidth: true,
     beforeChange: (_oldIndex: number, newIndex: number) => setActiveIndex(newIndex),
   };
 
