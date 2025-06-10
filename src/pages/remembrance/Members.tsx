@@ -39,7 +39,7 @@ export default function Members() {
       </div>
       <TopVisual type="memorial" />
 
-      <div className="mx-auto mb-g5 mt-[102px] max-w-[1280px] px-p10 mobile:mb-[35px] mobile:mt-[56px] mobile:px-p6">
+      <div className="mx-auto mb-g12 mt-[102px] max-w-[1280px] px-p10 mobile:mb-[60px] mobile:mt-[56px] mobile:px-p6">
         {/* 기증일 & 기증자 검색 영역 */}
         <div className="flex gap-g7 text-gray-90 mobile:flex-col mobile:gap-g5">
           <div className="flex items-center gap-g4 mobile:flex-col mobile:items-start mobile:gap-g3">
@@ -73,6 +73,22 @@ export default function Members() {
         {/* 추모 카드 영역 */}
         <div className="flex flex-col items-center gap-g8 mobile:gap-g5">
           <ul className="flex flex-wrap gap-g6 mobile:gap-x-3 mobile:gap-y-g5">
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
+            <DonorCard />
             <DonorCard />
             <DonorCard />
             <DonorCard />
