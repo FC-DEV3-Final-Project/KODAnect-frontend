@@ -3,6 +3,7 @@ import { Button } from "@/shared/components/Button";
 import Message from "@/assets/icon/inquiry.svg?react";
 import Letter from "@/assets/icon/mail.svg?react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
+import blackRibbon from "@/assets/images/black-ribbon.png";
 
 interface DonorCardProps {
   donorName?: string;
@@ -42,12 +43,11 @@ export default function DonorCard({
         </span>
 
         {/* 추모리본 이미지 */}
-        <div
-          className={clsx(
-            "h-[66px] w-[66px] rounded-r4 bg-gray-10",
-            "mobile:h-[59px] mobile:w-[59px]",
-          )}
-        ></div>
+        <img
+          src={blackRibbon}
+          alt="추모리본"
+          className={clsx("h-[66px] w-[66px] rounded-r4", "mobile:h-[59px] mobile:w-[59px]")}
+        />
         {/* 기증자 */}
         <div className="flex flex-col gap-g2">
           <div className="flex h-[52px] items-center mobile:h-[40px]">
