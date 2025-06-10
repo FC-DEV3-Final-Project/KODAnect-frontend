@@ -27,7 +27,7 @@ export function Checkbox({ id, label, checked, onChange, disabled = false }: Che
       />
 
       <div
-        className={`flex h-[2rem] w-[2rem] items-center justify-center rounded-r2 border border-gray-60 bg-white transition-colors duration-150 peer-checked:border-primary-50 peer-checked:bg-primary-50 peer-disabled:bg-gray-10 mobile:h-[1.6rem] mobile:w-[1.6rem]`}
+        className={`flex h-[2rem] w-[2rem] items-center justify-center rounded-r2 border border-gray-60 bg-white transition-colors duration-150 peer-checked:border-secondary-50 peer-checked:bg-secondary-50 peer-disabled:bg-gray-10 mobile:h-[1.6rem] mobile:w-[1.6rem]`}
       >
         {checked && (
           <CheckIcon className="h-icon2 w-icon2 text-white mobile:h-icon1 mobile:w-icon1" />
