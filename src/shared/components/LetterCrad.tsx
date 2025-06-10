@@ -48,82 +48,70 @@ const letterCardPresets = {
 export default function LetterCard({
   labelType = "letter",
   size = "lg",
-  infoItems, // lg에서만 사용, 없으면 기본값
+  infoItems,
   letterNumber,
   title,
   date,
   views,
 }: LetterCardProps) {
   const preset = letterCardPresets[size];
-  const displayInfoItems = infoItems;
-  const infoCount = displayInfoItems?.length ?? 0;
-
-  // infoItems가 2줄 이상이면 mb와 조회수 위치 유지, 1줄이면 mb 제거 및 조회수 바로 아래
-  const infoAreaClass = clsx(
-    size === "lg" && "relative",
-    "flex flex-col gap-g2",
-    size === "lg" && infoCount > 1 && "mobile:mb-[20px]"
-  );
-  const viewsClass = clsx(
-    "absolute right-0 flex gap-g2 text-gray-50 mobile:text-b-xs",
-    infoCount > 1 ? "bottom-0 mobile:bottom-[-20px]" : "bottom-0"
-  );
 
   return (
     <a
       href="#"
       className={clsx(
-        // 카드 전체 레이아웃
         "flex flex-col rounded-r6 border-2 border-transparent bg-gray-0 p-p8 text-gray-90",
         "shadow-[0_0_2px_0_theme('colors.primary.10'),0_8px_16px_0_theme('colors.primary.10')]",
         "hover:border-2 hover:border-primary-40 active:border-2 active:border-primary-40 active:bg-secondary-5",
-        preset.layout
+        preset.layout,
       )}
     >
-      {/* 상단: 아이콘, 편지 번호, N 뱃지 */}
+      {/* 상단 영역: 아이콘, 편지 번호, 새 편지(N) 뱃지 */}
       <div className={clsx("relative flex items-center", preset.gapIcon)}>
-        <Mail className={preset.icon} aria-hidden="true" />
-        {/* 편지 번호 */}
+        <Mail className={preset.icon} aria-hidden="true" focusable="false" />
         <span
-          className={clsx(
-            size === "sm" && "text-b-xs",
-            "text-gray-70 mobile:text-b-xs"
-          )}
+          className={clsx("text-gray-70 mobile:text-b-xs", size === "sm" && "text-b-xs")}
+          aria-label={
+            labelType === "story" ? `${letterNumber}번째 이야기` : `${letterNumber}번째 편지`
+          }
         >
           {letterNumber}
           {labelType === "story" ? "번째 이야기" : "번째 편지"}
         </span>
-        {/* 새 편지 뱃지 */}
         <NewBadge size="sm" date={date} />
       </div>
-      {/* 편지 제목 */}
-      <h3 className={clsx("line-clamp-2 min-h-[46px] font-bold", preset.fontTitle)}>
-        {title}
-      </h3>
-      {/* 날짜 */}
-      <time className={clsx("text-gray-70", preset.fontDate)}>{date}</time>
-      {/* 정보 영역 */}
-      <div className={infoAreaClass}>
-        {displayInfoItems?.map((item, index) => {
-          // infoItems가 1개면 flex-col, 2개 이상이면 flex-row
-          const infoItemClass = clsx(
-            infoCount === 1
-              ? "flex items-start mobile:flex-col"
-              : "flex items-center"
-          );
-          return (
-            <div key={index} className={infoItemClass}>
-              <span className={clsx("mr-g3 text-gray-40", preset.label)}>
-                {item.label}
-              </span>
-              <span className={preset.valueFont}>{item.value}</span>
-            </div>
-          );
-        })}
-        {/* 조회수: lg 카드에서만 표시 (API 데이터로 대체 가능) */}
+
+      {/* 중간 영역: 제목, 작성일 */}
+      <div className="flex flex-col gap-g2">
+        <h3 className={clsx("line-clamp-2 min-h-[46px] font-bold", preset.fontTitle)}>{title}</h3>
+        <time
+          className={clsx("text-gray-70", preset.fontDate)}
+          dateTime={date}
+          aria-label={`작성일: ${date}`}
+        >
+          {date}
+        </time>
+      </div>
+
+      {/* 하단 정보 영역 */}
+      <div className={clsx("flex flex-col gap-g2", size === "lg" && "relative mobile:mb-[20px]")}>
+        {infoItems?.map((item, index) => (
+          <div key={index} className="flex items-center">
+            <span className={clsx("mr-g3 text-gray-40", preset.label)}>{item.label}</span>
+            <span className={preset.valueFont}>{item.value}</span>
+          </div>
+        ))}
+        {/* 조회수: size가 'lg'일 때만 우측 하단에 표시 */}
         {size === "lg" && (
-          <div className={viewsClass}>
-            <Visibility className="h-icon4 w-icon4 mobile:h-icon3 mobile:w-icon3" />
+          <div
+            className="absolute bottom-0 right-0 flex gap-g2 text-gray-50 mobile:bottom-[-20px] mobile:text-b-xs"
+            aria-label="조회수"
+          >
+            <Visibility
+              className="h-icon4 w-icon4 mobile:h-icon3 mobile:w-icon3"
+              aria-hidden="true"
+              focusable="false"
+            />
             <span>{views}</span>
           </div>
         )}
