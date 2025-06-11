@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { Button } from "@/shared/components/Button";
 
@@ -7,17 +8,34 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 export default function Empty() {
   const isMobile = useIsMobile(768);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // 이전 페이지로 이동
+  const handleGoBack = () => {
+    // history stack이 비어있지 않으면 뒤로가기, 아니면 홈으로
+    if (location.key !== "default") {
+      navigate(-1);
+    } else {
+      navigate("/home");
+    }
+  };
+
+  // 홈으로 이동
+  const handleGoHome = () => {
+    navigate("/home");
+  };
 
   return (
     <section
       className={clsx(
-        "flex w-full flex-col items-center pb-[200px] pt-[175px] text-gray-90",
+        "flex w-full flex-col items-center pb-[500px] pt-[175px] text-gray-90",
         "mobile:pb-[158px] mobile:pt-[68px]",
       )}
     >
       <img
         src={construction}
-        className={clsx("h-[277px] w-[277px]", "h-[108px] mobile:w-[108px]")}
+        className={clsx("h-[277px] w-[277px]", "mobile:h-[108px] mobile:w-[108px]")}
       />
       <h2 className={clsx("mt-[45px] flex items-center gap-g4", "mobile:mt-[42px] mobile:gap-g3")}>
         <Notification className={clsx("h-icon5 w-icon5 text-gray-80", "w-icon4 mobile:h-icon4")} />
@@ -38,8 +56,18 @@ export default function Empty() {
         감사합니다.
       </p>
       <div className={clsx("flex gap-g6", "mobile:gap-g5")}>
-        <Button size={isMobile ? "small" : "large"} variant="tertiary" children="이전 페이지로" />
-        <Button size={isMobile ? "small" : "large"} variant="primary" children="홈으로 가기" />
+        <Button
+          size={isMobile ? "small" : "large"}
+          variant="tertiary"
+          onClick={handleGoBack}
+          children="이전 페이지로"
+        />
+        <Button
+          size={isMobile ? "small" : "large"}
+          variant="primary"
+          onClick={handleGoHome}
+          children="홈으로 가기"
+        />
       </div>
     </section>
   );
