@@ -16,11 +16,10 @@ import { donorData } from "@/features/members/mock-data";
 
 export default function Members() {
   const isMobile = useIsMobile(768);
-  const initialCount = isMobile ? 16 : 20;
-  const loadMoreCount = isMobile ? 16 : 20;
+  const pageCardCount = isMobile ? 16 : 20;
 
   const [inputValue, setInputValue] = useState("");
-  const [cardCount, setCardCount] = useState(initialCount);
+  const [cardCount, setCardCount] = useState(pageCardCount);
   const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
     from: null,
     to: null,
@@ -34,7 +33,7 @@ export default function Members() {
 
   // 더보기 버튼 클릭 핸들러
   const handleLoadMore = () => {
-    setCardCount((prev) => prev + loadMoreCount);
+    setCardCount((prev) => prev + pageCardCount);
   };
 
   return (
@@ -75,8 +74,8 @@ export default function Members() {
               size="m"
               weight="bold"
               children="기증자명"
-              className="min-w-[60px]"
               htmlFor="donorName"
+              className="min-w-[60px]"
             ></Label>
             <TextInput
               id="donorName"
@@ -88,10 +87,13 @@ export default function Members() {
           </div>
           <div className="mobile:flex mobile:justify-end">
             <Button
+              type="submit"
               size={isMobile ? "small" : "medium"}
-              children="검색"
+              aria-label="기증자 검색"
               className="w-[70px] mobile:-mt-g1"
-            />
+            >
+              검색
+            </Button>
           </div>
         </div>
 
@@ -104,7 +106,7 @@ export default function Members() {
 
         {/* 추모 카드 영역 */}
         <div className="flex flex-col items-center gap-g8 mobile:gap-g5">
-          <ul className="flex flex-wrap gap-g6 mobile:gap-x-g3 mobile:gap-y-g5">
+          <div className="flex flex-wrap gap-g6 mobile:gap-x-g3 mobile:gap-y-g5">
             {sortedData.slice(0, cardCount).map((item, index) => (
               <DonorCard
                 key={index}
@@ -116,11 +118,11 @@ export default function Members() {
                 letterCount={item.letterCount}
               />
             ))}
-          </ul>
+          </div>
           <Button
             size={isMobile ? "medium" : "large"}
             variant="secondary"
-            aria-label="카드 더보기"
+            aria-label="추모 카드 더보기"
             className="flex w-full gap-g2"
             onClick={handleLoadMore}
           >

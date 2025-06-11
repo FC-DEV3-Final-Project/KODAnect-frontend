@@ -17,11 +17,10 @@ import { letterData } from "@/features/letters/mock-data";
 
 export default function Letters() {
   const isMobile = useIsMobile(768);
-  const initialCount = isMobile ? 16 : 20;
-  const loadMoreCount = isMobile ? 16 : 20;
+  const pageCardCount = isMobile ? 16 : 20;
 
   const [selected, setSelected] = useState("");
-  const [letterCount, setLetterCount] = useState(initialCount);
+  const [letterCount, setLetterCount] = useState(pageCardCount);
 
   const sortedData = [...letterData].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
@@ -29,7 +28,7 @@ export default function Letters() {
 
   // 더보기 버튼 클릭 핸들러
   const handleLoadMore = () => {
-    setLetterCount((prev) => prev + loadMoreCount);
+    setLetterCount((prev) => prev + pageCardCount);
   };
 
   return (
