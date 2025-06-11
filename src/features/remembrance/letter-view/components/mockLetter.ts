@@ -26,7 +26,7 @@ export const heavenLetter = {
     { label: "기증자", value: "홍길동" },
     { label: "추모자", value: "아빠" },
     { label: "등록일 ", value: "2025-05-15" },
-    { label: "조회", value: 3 },
+    { label: "조회수", value: 3 },
   ],
 };
 
@@ -44,7 +44,7 @@ export const recipientLetter = {
     { label: "수혜자", value: "조아름" },
     { label: "수혜장기 / 연도", value: "폐 / 2025" },
     { label: "작성일 ", value: "2025-05-15" },
-    { label: "조회", value: 3 },
+    { label: "조회수", value: 3 },
   ],
 };
 

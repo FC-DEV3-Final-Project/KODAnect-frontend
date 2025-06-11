@@ -31,6 +31,7 @@ function RecipientLetterView() {
         infoItems={recipientLetter.infoItems}
         onEdit={() => console.log("편지 수정")}
         onDelete={() => console.log("편지 삭제")}
+        mobileWidth="10rem"
       />
       <CommentArea
         onCommentSubmit={() => console.log("댓글 등록!")}

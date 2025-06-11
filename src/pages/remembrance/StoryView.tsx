@@ -29,6 +29,7 @@ function StoryView() {
         infoItems={StoryLetter.infoItems}
         onEdit={() => console.log("편지 수정")}
         onDelete={() => console.log("편지 삭제")}
+        mobileWidth="7rem"
       />
       <CommentArea
         onCommentSubmit={() => console.log("댓글 등록!")}

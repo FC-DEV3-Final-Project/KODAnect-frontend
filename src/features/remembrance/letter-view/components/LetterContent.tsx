@@ -11,6 +11,7 @@ type LetterContentProps = {
   content: string;
   infoItems: InfoItem[];
   imageUrls?: string[];
+  mobileWidth?: string;
   onGoList?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
@@ -21,6 +22,7 @@ function LetterContent({
   content,
   infoItems,
   imageUrls,
+  mobileWidth,
   onGoList,
   onEdit,
   onDelete,
@@ -43,7 +45,12 @@ function LetterContent({
             role="group"
             className="grid grid-cols-[auto_1fr] gap-g7 text-b-lg text-gray-95 mobile:text-b-sm"
           >
-            <dt className="w-[18rem] font-bold mobile:w-[10rem]">{label}</dt>
+            <dt
+              className="w-[18rem] font-bold"
+              style={isMobile ? { width: mobileWidth } : undefined}
+            >
+              {label}
+            </dt>
             <dd>{value}</dd>
           </div>
         ))}
