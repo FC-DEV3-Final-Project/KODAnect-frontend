@@ -10,6 +10,7 @@ type LetterContentProps = {
   title: string;
   content: string;
   infoItems: InfoItem[];
+  imageUrls?: string[];
   onGoList?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
@@ -19,6 +20,7 @@ function LetterContent({
   title,
   content,
   infoItems,
+  imageUrls,
   onGoList,
   onEdit,
   onDelete,
@@ -52,6 +54,18 @@ function LetterContent({
         className="mb-g9 whitespace-pre-line border-b border-gray-20 px-p4 py-p10 text-b-md text-black mobile:mb-g6 mobile:px-p5 mobile:text-b-sm"
       >
         {content}
+
+        {imageUrls && imageUrls.length > 0 && (
+          <div className="mt-g7">
+            <ul className="flex flex-col gap-g7">
+              {imageUrls.map((url, idx) => (
+                <li key={idx}>
+                  <img src={url} alt={`편지 이미지 ${idx + 1}`} className="h-auto max-w-full" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </article>
 
       <div className="flex items-center justify-between">

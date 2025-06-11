@@ -1,9 +1,10 @@
-import StoryView from "./remembrance/StoryView";
+import LetterView from "./remembrance/LetterView";
+
 export default function Home() {
   return (
     <div>
       Home
-      <StoryView />
+      <LetterView />
     </div>
   );
 }

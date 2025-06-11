@@ -31,6 +31,7 @@ function LetterView() {
         infoItems={heavenLetter.infoItems}
         onEdit={() => console.log("편지 수정")}
         onDelete={() => console.log("편지 삭제")}
+        imageUrls={["https://i.pinimg.com/236x/6e/96/40/6e9640eced76dc560f9cbafe9f4e89f3.jpg"]}
       />
       <CommentArea
         onCommentSubmit={() => console.log("댓글 등록!")}

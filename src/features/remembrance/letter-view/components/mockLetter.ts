@@ -21,7 +21,6 @@ export const heavenLetter = {
 
 
 어제는 엄마가 멸치 쌈밥을 해줬거덩. 동이네랑 이모랑 다 같이 모여서 먹었는데.
-
 `,
   infoItems: [
     { label: "기증자", value: "홍길동" },
