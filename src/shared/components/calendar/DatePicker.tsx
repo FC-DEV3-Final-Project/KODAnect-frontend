@@ -54,8 +54,8 @@ function DatePicker({ range, onRangeChange }: DatePickerProps) {
   };
 
   return (
-    <div className="relative" ref={ref}>
-      <div className="inline-flex items-center gap-g3">
+    <div className="relative w-full" ref={ref}>
+      <div className="inline-flex w-full items-center gap-g3">
         <DateInput
           aria-haspopup="dialog"
           aria-expanded={open === "from"}
