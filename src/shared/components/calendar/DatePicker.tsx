@@ -10,10 +10,14 @@ import Calendar from "@/shared/components/calendar/Calendar";
  *   to: null,
  * });
  *
- * <DatePicker range={range} onRangeChange={setRange} />
+ * const fromRef = useRef<HTMLButtonElement>(null);
+ *
+ * <Label onClick={() => fromRef.current?.focus()}>시작일</Label>
+ * <DatePicker range={range} onRangeChange={setRange} fromRef={fromRef}/>
  *
  * - `range`: 날짜 범위 객체 (from, to)
  * - `onRangeChange`: 날짜가 선택될 때 호출되는 콜백
+ * - `fromRef`: label 클릭 시 포커스 이동을 위한 버튼 참조
  */
 
 type DateRange = { from: Date | null; to: Date | null };
@@ -21,9 +25,10 @@ type DateRange = { from: Date | null; to: Date | null };
 type DatePickerProps = {
   range: DateRange;
   onRangeChange: (range: DateRange) => void;
+  fromRef?: React.Ref<HTMLButtonElement>;
 };
 
-function DatePicker({ range, onRangeChange }: DatePickerProps) {
+function DatePicker({ range, onRangeChange, fromRef }: DatePickerProps) {
   const [open, setOpen] = useState<"from" | "to" | null>(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const ref = useRef<HTMLDivElement>(null);
@@ -57,6 +62,7 @@ function DatePicker({ range, onRangeChange }: DatePickerProps) {
     <div className="relative w-full" ref={ref}>
       <div className="inline-flex w-full items-center gap-g3">
         <DateInput
+          ref={fromRef}
           aria-haspopup="dialog"
           aria-expanded={open === "from"}
           aria-controls="calendar-dialog"
