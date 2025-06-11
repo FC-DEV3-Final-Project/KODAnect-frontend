@@ -1,9 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-<<<<<<< HEAD
-import { TextArea } from "@/shared/components/Textarea";
-=======
 import TextArea from "@/shared/components/Textarea";
->>>>>>> dev
 
 const meta = {
   title: "Components/TextArea",
