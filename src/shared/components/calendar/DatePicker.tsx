@@ -72,6 +72,10 @@ function DatePicker({ range, onRangeChange, fromRef }: DatePickerProps) {
             setOpen("from");
             if (range.from) setCurrentMonth(range.from);
           }}
+          onOpen={() => {
+            setOpen("from");
+            if (range.from) setCurrentMonth(range.from);
+          }}
         />
         <span className="text-b-sm text-gray-70">-</span>
         <DateInput

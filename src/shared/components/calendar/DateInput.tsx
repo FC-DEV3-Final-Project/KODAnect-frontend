@@ -6,16 +6,21 @@ type DateInputProps = {
   value?: Date;
   placeholder: string;
   onClick: () => void;
+  onOpen?: () => void;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "value">;
 
 const DateInput = forwardRef<HTMLButtonElement, DateInputProps>(
-  ({ value, placeholder, onClick, ...props }, ref) => {
+  ({ value, placeholder, onClick, onOpen, ...props }, ref) => {
     const formatted = value ? format(value, "yyyy.MM.dd") : placeholder;
 
     return (
       <button
         ref={ref}
-        onClick={onClick}
+        onClick={() => {
+          onClick;
+          onOpen?.();
+        }}
+        onFocus={onOpen}
         aria-label={
           value
             ? `${formatted} 선택됨. 날짜 변경하려면 클릭하세요.`
