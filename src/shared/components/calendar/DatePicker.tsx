@@ -1,0 +1,106 @@
+import { useState, useRef, useEffect } from "react";
+import DateInput from "@/shared/components/calendar/DateInput";
+import Calendar from "@/shared/components/calendar/Calendar";
+
+/**
+ * Example usage:
+ *
+ * const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
+ *   from: null,
+ *   to: null,
+ * });
+ *
+ * <DatePicker range={range} onRangeChange={setRange} />
+ *
+ * - `range`: 날짜 범위 객체 (from, to)
+ * - `onRangeChange`: 날짜가 선택될 때 호출되는 콜백
+ */
+
+type DateRange = { from: Date | null; to: Date | null };
+
+type DatePickerProps = {
+  range: DateRange;
+  onRangeChange: (range: DateRange) => void;
+};
+
+function DatePicker({ range, onRangeChange }: DatePickerProps) {
+  const [open, setOpen] = useState<"from" | "to" | null>(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const closeOnClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(null);
+      }
+    };
+    document.addEventListener("mousedown", closeOnClickOutside);
+    return () => document.removeEventListener("mousedown", closeOnClickOutside);
+  }, []);
+
+  const handleSelect = (date: Date) => {
+    if (open === "from") {
+      onRangeChange({ ...range, from: date });
+      setOpen(null);
+    } else if (open === "to") {
+      onRangeChange({ ...range, to: date });
+      setOpen(null);
+    }
+  };
+
+  const handleTodayClick = () => {
+    const today = new Date();
+    setCurrentMonth(today);
+  };
+
+  return (
+    <div className="relative" ref={ref}>
+      <div className="inline-flex items-center gap-g3">
+        <DateInput
+          aria-haspopup="dialog"
+          aria-expanded={open === "from"}
+          aria-controls="calendar-dialog"
+          value={range.from ?? undefined}
+          placeholder="YYYY.MM.DD"
+          onClick={() => {
+            setOpen("from");
+            if (range.from) setCurrentMonth(range.from);
+          }}
+        />
+        <span className="text-b-sm text-gray-70">-</span>
+        <DateInput
+          aria-haspopup="dialog"
+          aria-expanded={open === "to"}
+          aria-controls="calendar-dialog"
+          value={range.to ?? undefined}
+          placeholder="YYYY.MM.DD"
+          onClick={() => {
+            setOpen("to");
+            if (range.to) setCurrentMonth(range.to);
+          }}
+        />
+      </div>
+
+      {open && (
+        <div
+          id="calendar-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-label="날짜 선택 달력"
+          className="absolute z-50 mt-2"
+        >
+          <Calendar
+            selected={open === "from" ? (range.from ?? undefined) : (range.to ?? undefined)}
+            onSelect={handleSelect}
+            currentMonth={currentMonth}
+            onMonthChange={setCurrentMonth}
+            onCancel={() => setOpen(null)}
+            onTodayClick={handleTodayClick}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default DatePicker;

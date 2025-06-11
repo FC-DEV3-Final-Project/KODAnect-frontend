@@ -1,4 +1,11 @@
-import type { ButtonProps } from "@/shared/types/Button.types";
+type ButtonProps<E extends React.ElementType> = {
+  type?: "button" | "submit" | "reset";
+  variant?: "primary" | "secondary" | "tertiary";
+  size?: "x-small" | "small" | "medium" | "large" | "x-large";
+  children: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
+} & React.ComponentPropsWithoutRef<E>;
 
 export const Button = <E extends React.ElementType = "button">({
   type = "button",
@@ -9,8 +16,7 @@ export const Button = <E extends React.ElementType = "button">({
   disabled = false,
   ...props
 }: ButtonProps<E>) => {
-  const baseStyles =
-    "inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200";
+  const baseStyles = "inline-flex items-center justify-center transition-colors duration-200";
 
   const disabledStyles = "bg-gray-20 text-gray-50";
 
@@ -23,34 +29,30 @@ export const Button = <E extends React.ElementType = "button">({
       disabledStyle: disabledStyles,
     },
     secondary: {
-      style: "bg-primary-5 hover:bg-primary-10 text-primary-60 border border-primary-50",
+      style: "bg-secondary-5 hover:bg-secondary-10 text-secondary-60 border border-secondary-50",
       disabledStyle: disabledStyles,
     },
     tertiary: {
       style: "bg-gray-0 hover:bg-gray-5 text-gray-90 border border-gray-60",
       disabledStyle: disabledStyles,
     },
-    text: {
-      style: "bg-transparent",
-      disabledStyle: "bg-transparent",
-    },
   }[variant];
 
   const sizeStyles: { style: string } = {
     "x-small": {
-      style: "px-[10px] min-w-[60px] min-h-[32px] rounded-2 text-b-sm",
+      style: "px-[10px] min-w-[60px] min-h-[32px] rounded-r2 text-b-sm",
     },
     "small": {
-      style: "px-[12px] min-w-[64px] min-h-[40px] rounded-3 text-b-sm",
+      style: "px-[12px] min-w-[64px] min-h-[40px] rounded-r3 text-b-sm",
     },
     "medium": {
-      style: "px-[16px] min-w-[78px] min-h-[48px] rounded-3 text-b-md",
+      style: "px-[16px] min-w-[78px] min-h-[48px] rounded-r3 text-b-md",
     },
     "large": {
-      style: "px-[20px] min-w-[90px] min-h-[56px] rounded-4 text-b-lg",
+      style: "px-[20px] min-w-[90px] min-h-[56px] rounded-r4 text-b-lg",
     },
     "x-large": {
-      style: "px-[24px] min-w-[98px] min-h-[64px] rounded-4 text-b-lg",
+      style: "px-[24px] min-w-[98px] min-h-[64px] rounded-r4 text-b-lg",
     },
   }[size];
 

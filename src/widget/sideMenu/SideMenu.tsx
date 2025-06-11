@@ -23,18 +23,8 @@ function SideMenu() {
 
   if (!selectedMenu) return null;
 
-  // 레이아웃을 flex로 감싸야 사이드 메뉴가 좌측에 정상적으로 표시됩니다.
-  /*
-  <div className="flex">
-    <SideMenu selectedLabel="장기·조직기증" />
-    <main className="flex-grow">
-      {children}
-    </main>
-  </div>
-  */
-
   return (
-    <aside className="w-[248px] shrink-0 mobile:hidden" aria-label="사이드 메뉴">
+    <aside className="mt-[-40px] w-[248px] shrink-0 mobile:hidden" aria-label="사이드 메뉴">
       {/* Top visual area */}
       <div
         className="flex h-[125px] w-full items-center justify-center rounded-r-[30px] rounded-bl-[30px] bg-secondary-10 bg-cover bg-center"
@@ -44,7 +34,7 @@ function SideMenu() {
             : {}),
         }}
       >
-        <span className="text-h-lg font-bold text-secondary-80">{selectedMenu.label}</span>
+        <span className="text-h-md font-bold text-secondary-80">{selectedMenu.label}</span>
       </div>
 
       {/* Navigation menu */}
