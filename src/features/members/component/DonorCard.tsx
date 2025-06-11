@@ -7,21 +7,21 @@ import Letter from "@/assets/icon/mail.svg?react";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 
 interface DonorCardProps {
-  donorName?: string;
-  genderFlag?: string;
-  donorAge?: number;
-  donationDate?: string;
-  replyCount?: number;
-  letterCount?: number;
+  donorName: string;
+  genderFlag: string;
+  donorAge: number;
+  donationDate: string;
+  replyCount: number;
+  letterCount: number;
 }
 
 export default function DonorCard({
-  donorName = "홍길동",
-  genderFlag = "F",
-  donorAge = 30,
-  donationDate = "2025-06-09",
-  replyCount = 5,
-  letterCount = 10,
+  donorName,
+  genderFlag,
+  donorAge,
+  donationDate,
+  replyCount,
+  letterCount,
 }: DonorCardProps) {
   const isMobile = useIsMobile(768);
 
@@ -30,7 +30,7 @@ export default function DonorCard({
       className={clsx(
         "flex w-[284px] flex-col gap-g6 rounded-r6 border-2 border-transparent bg-white p-p8 text-gray-90",
         "shadow-[0_0_2px_0_theme('colors.secondary.10'),0_8px_16px_0_theme('colors.secondary.10')]",
-        "mobile:w-[160px] mobile:p-p6",
+        "mobile:w-[160px] mobile:py-p6 mobile:pl-p6 mobile:pr-p5",
       )}
     >
       <div
@@ -51,17 +51,17 @@ export default function DonorCard({
         {/* 기증자 */}
         <div className="flex flex-col gap-g2">
           <div className="flex h-[52px] items-center mobile:h-[40px]">
-            <span className="mr-g3 text-b-xs text-gray-40">기증자</span>
+            <span className="mr-g3 text-b-xs text-gray-40 mobile:min-w-[34px]">기증자</span>
             <p className="text-h-2xs font-bold">
-              {donorName}
-              <span className="ml-g2">
+              <span className="mr-g1">{donorName}</span>
+              <span>
                 ({genderFlag}/{donorAge})
               </span>
             </p>
           </div>
           {/* 기증일 */}
           <div>
-            <span className="mr-g3 text-b-xs text-gray-40">기증일</span>
+            <span className="mr-g3 text-b-xs text-gray-40 mobile:min-w-[34px]">기증일</span>
             <span className="text-b-sm mobile:text-b-xs">{donationDate}</span>
           </div>
         </div>
