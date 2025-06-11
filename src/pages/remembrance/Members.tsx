@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 import { Label } from "@/shared/components/Label";
@@ -8,11 +8,13 @@ import { Button } from "@/shared/components/Button";
 import DonorCard from "@/features/members/component/DonorCard";
 
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
+import clsx from "clsx";
 
 export default function Members() {
   const [inputValue, setInputValue] = useState("");
 
   const isMobile = useIsMobile(768);
+  const fromRef = useRef<HTMLButtonElement>(null);
   const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
     from: null,
     to: null,
@@ -22,26 +24,49 @@ export default function Members() {
     <>
       {/* 상단 배너 & 탭 메뉴 */}
 
-      <div className="mx-auto mb-g12 mt-[102px] max-w-[1280px] px-p10 mobile:mb-[60px] mobile:mt-[56px] mobile:px-p6">
+      <div
+        className={clsx(
+          "mx-auto mb-g12 mt-[102px] max-w-[1280px] px-p10",
+          "mobile:mb-[60px] mobile:mt-[56px] mobile:px-p6",
+        )}
+      >
         {/* 기증일 & 기증자 검색 영역 */}
-        <div className="flex gap-g7 text-gray-90 mobile:flex-col mobile:gap-g5">
-          <div className="flex items-center gap-g4 mobile:flex-col mobile:items-start mobile:gap-g3">
-            <Label size="m" weight="bold" children="기증일"></Label>
-            {/* <span className="font-bold mobile:text-b-sm">기증일</span> */}
-            <DatePicker range={range} onRangeChange={setRange} />
+        <div className={clsx("flex gap-g7 text-gray-90", "mobile:flex-col mobile:gap-g5")}>
+          <div
+            className={clsx(
+              "flex items-center gap-g4",
+              "mobile:flex-col mobile:items-start mobile:gap-g3",
+            )}
+          >
+            <Label
+              size="m"
+              weight="bold"
+              children="기증일"
+              className="min-w-[45px]"
+              onClick={() => fromRef.current?.focus()}
+            ></Label>
+            <DatePicker range={range} onRangeChange={setRange} fromRef={fromRef} />
           </div>
-          <div className="flex items-center gap-g4 mobile:flex-col mobile:items-start mobile:gap-g3">
-            <Label size="m" weight="bold" children="기증자명"></Label>
-            {/* <span className="font-bold mobile:text-b-sm">기증자명</span> */}
-            <div className="w-[313px] mobile:w-full">
-              <TextInput
-                id=""
-                placeholder="성함을 입력해주세요"
-                height={isMobile ? "small" : "medium"}
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-            </div>
+          <div
+            className={clsx(
+              "flex items-center gap-g4",
+              "mobile:flex-col mobile:items-start mobile:gap-g3",
+            )}
+          >
+            <Label
+              size="m"
+              weight="bold"
+              children="기증자명"
+              className="min-w-[60px]"
+              htmlFor="donorName"
+            ></Label>
+            <TextInput
+              id="donorName"
+              placeholder="성함을 입력해주세요"
+              height={isMobile ? "small" : "medium"}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
           </div>
           <div className="mobile:flex mobile:justify-end">
             <Button
@@ -89,9 +114,9 @@ export default function Members() {
             aria-label="댓글 더보기"
             className="flex w-full gap-g2"
           >
-            <span className="text-b-lg text-secondary-60 mobile:text-b-md">더보기</span>
+            <span className={clsx("text-b-lg text-secondary-60", "mobile:text-b-md")}>더보기</span>
             <PlusIcon
-              className="h-icon4 w-icon4 text-secondary-50 mobile:h-icon3 mobile:w-icon3"
+              className={clsx("h-icon4 w-icon4 text-secondary-50", "mobile:h-icon3 mobile:w-icon3")}
               aria-hidden="true"
               focusable="false"
             />
