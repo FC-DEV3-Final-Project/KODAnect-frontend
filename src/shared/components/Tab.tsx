@@ -48,6 +48,8 @@ export function Tab({ type }: TabProps) {
 
   useEffect(() => {
     const index = TABS.findIndex((tab) => tab.type === type);
+
+    if (index === selectedTab) return;
     if (index !== -1) setSelectedTab(index);
   }, [type]);
 
