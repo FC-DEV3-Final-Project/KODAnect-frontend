@@ -137,7 +137,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <div
         role="group"
         aria-labelledby={`${inputId}-label`}
-        className="flex flex-col justify-center gap-g2"
+        className="flex w-full flex-col justify-center gap-g2"
       >
         {title && (
           <Label id={`${inputId}-label`} htmlFor={inputId} size={"m"} color={"default"}>
@@ -149,7 +149,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             {description}
           </Label>
         )}
-        <div className="relative">
+        <div className="relative w-full">
           <input
             ref={ref}
             id={inputId}
