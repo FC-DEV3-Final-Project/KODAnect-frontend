@@ -4,7 +4,7 @@ import { Tab, TABS } from "@/shared/components/Tab";
 
 export function TopArea() {
   const { pathname } = useLocation();
-  const activeTab = TABS.find((tab) => tab.path === pathname) ?? TABS[0];
+  const activeTab = TABS.find((tab) => pathname.startsWith(tab.path)) ?? TABS[0];
 
   return (
     <div className="relative">
