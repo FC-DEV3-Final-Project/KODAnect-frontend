@@ -1,13 +1,7 @@
 import CommentForm from "@/shared/components/comment/CommentForm";
 import CommentList from "@/shared/components/comment/CommentList";
 
-type CommentAreaProps = {
-  onCommentSubmit?: () => void;
-  onCommentEdit?: (commentId: string) => void;
-  onCommentDelete?: (commentId: string) => void;
-};
-
-function CommentArea({ onCommentEdit, onCommentDelete }: CommentAreaProps) {
+function CommentArea() {
   return (
     <section className="mx-auto h-full w-full max-w-[1200px]" aria-labelledby="comment-heading">
       <div className="mb-6 gap-g3">
@@ -20,14 +14,9 @@ function CommentArea({ onCommentEdit, onCommentDelete }: CommentAreaProps) {
         </span>
       </div>
       <div className="mb-g9">
-        <CommentForm
-          onSubmit={() => {
-            // 댓글 등록 API 호출 또는 유효성 검사 등 처리
-            console.log("댓글 제출됨");
-          }}
-        />
+        <CommentForm />
       </div>
-      <CommentList onEdit={onCommentEdit} onDelete={onCommentDelete} />
+      <CommentList />
     </section>
   );
 }

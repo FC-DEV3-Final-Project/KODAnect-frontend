@@ -1,19 +1,55 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import TextInput from "@/shared/components/TextInput";
 import TextArea from "@/shared/components/Textarea";
 import ResetIcon from "@/assets/icon/reset.svg?react";
 import SoundIcon from "@/assets/icon/sound.svg?react";
 import { Button } from "@/shared/components/Button";
 
-type CommentFormProps = {
-  onSubmit?: () => void;
+// 상태 정의
+type FormState = {
+  writer: string;
+  password: string;
+  content: string;
 };
 
-function CommentForm({ onSubmit }: CommentFormProps) {
+// 액션 정리
+type FormAction = { type: "SET_FIELD"; field: keyof FormState; value: string } | { type: "RESET" };
+
+const initialState: FormState = {
+  writer: "",
+  password: "",
+  content: "",
+};
+
+// reducer 함수
+function reducer(state: FormState, action: FormAction): FormState {
+  switch (action.type) {
+    case "SET_FIELD":
+      return { ...state, [action.field]: action.value };
+    case "RESET":
+      return initialState;
+    default:
+      return state;
+  }
+}
+
+function CommentForm() {
   const [isVisible, setIsVisible] = useState(false);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit?.(); // 외부에서 넘긴 함수 실행
+    try {
+      await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state),
+      });
+      dispatch({ type: "RESET" });
+      console.log("댓글 등록 완료");
+    } catch (err) {
+      console.error("댓글 등록 실패", err);
+    }
   };
 
   return (
@@ -30,7 +66,16 @@ function CommentForm({ onSubmit }: CommentFormProps) {
       <fieldset className="flex max-w-[48.5rem] flex-row gap-g7 mobile:flex-col">
         <legend className="sr-only">작성자 정보</legend>
         <div className="w-full">
-          <TextInput id="writer" title="추모자" height="medium" placeholder="한글/ 영문만 입력" />
+          <TextInput
+            id="writer"
+            title="추모자"
+            height="medium"
+            placeholder="한글/ 영문만 입력"
+            value={state.writer}
+            onChange={(e) =>
+              dispatch({ type: "SET_FIELD", field: "writer", value: e.target.value })
+            }
+          />
         </div>
         <div className="w-full">
           <TextInput
@@ -41,6 +86,10 @@ function CommentForm({ onSubmit }: CommentFormProps) {
             type={isVisible ? "text" : "password"}
             iconToggle
             isVisible={isVisible}
+            value={state.password}
+            onChange={(e) =>
+              dispatch({ type: "SET_FIELD", field: "password", value: e.target.value })
+            }
             onToggleIconClick={() => setIsVisible((prev) => !prev)}
           />
         </div>
@@ -52,6 +101,8 @@ function CommentForm({ onSubmit }: CommentFormProps) {
           title="내용"
           placeholder="기증자에 대한 추모 분위기를 해치거나, 비방의 글 등이 게시가 될 경우 관리자에 의해 삭제 될 수 있습니다."
           maxLength={100}
+          value={state.content}
+          onChange={(e) => dispatch({ type: "SET_FIELD", field: "content", value: e.target.value })}
         />
       </div>
 

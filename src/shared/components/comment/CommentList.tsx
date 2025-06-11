@@ -3,11 +3,6 @@ import CommentItem from "@/shared/components/comment/CommentItem";
 import { Button } from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
-type CommentListProps = {
-  onEdit?: (commentId: string) => void;
-  onDelete?: (commentId: string) => void;
-};
-
 const dummyComments = [
   {
     id: "1",
@@ -29,7 +24,7 @@ const dummyComments = [
   },
 ];
 
-function CommentList({ onEdit, onDelete }: CommentListProps) {
+function CommentList() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
@@ -48,13 +43,12 @@ function CommentList({ onEdit, onDelete }: CommentListProps) {
           .map((item) => (
             <li key={item.id}>
               <CommentItem
+                id={item.id}
                 content={item.content}
                 date={item.date}
                 author={item.author}
                 isOpen={openId === item.id}
                 onToggle={() => setOpenId(openId === item.id ? null : item.id)}
-                onEdit={() => onEdit?.(item.id)}
-                onDelete={() => onDelete?.(item.id)}
               />
             </li>
           ))}
