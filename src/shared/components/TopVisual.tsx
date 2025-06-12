@@ -36,7 +36,7 @@ const CONTENT: Record<TopVisualProps["type"], ContentType> = {
     imgUrl: receiverImg,
     mobileImgUrl: receiverMobile,
     title: "수혜자 편지",
-    description: "감사 합니다.",
+    description: "감사합니다.",
   },
   stories: {
     imgUrl: donorImg,
