@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tab } from "@/shared/components/Tab";
+import { Tab, TABS } from "@/shared/components/Tab";
 
 const meta = {
   title: "Components/Tab",
@@ -9,9 +9,10 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    tabs: {
+    type: {
       control: {
-        type: "object",
+        type: "select",
+        options: TABS.map((tab) => tab.type),
       },
     },
   },
@@ -22,23 +23,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    tabs: [
-      {
-        label: "Tab1",
-        content: "Tab1 Content",
-      },
-      {
-        label: "Tab2",
-        content: "Tab2 Content",
-      },
-      {
-        label: "Tab3",
-        content: "Tab3 Content",
-      },
-      {
-        label: "Tab4",
-        content: "Tab4 Content",
-      },
-    ],
+    type: "members",
   },
 };
