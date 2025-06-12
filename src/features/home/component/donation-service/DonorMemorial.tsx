@@ -59,7 +59,7 @@ export default function DonorMemorial() {
               key={item.donateSeq}
               className={clsx(
                 "!flex w-full shrink-0 items-center gap-g5 mobile:gap-g4",
-                "relative z-10 rounded-r6 bg-white p-p6 shadow-2",
+                "shadow-2 relative z-10 rounded-r6 bg-white p-p6",
               )}
               aria-label={`기증자 ${item.donorName}`}
             >
@@ -68,7 +68,11 @@ export default function DonorMemorial() {
                 date={item.donateDate}
                 className="right-[16px] top-[16px] py-p1 mobile:right-[12px] mobile:top-[12px] mobile:py-0 mobile:text-b-xs"
               />
-              <img src={BlackRibbon} alt="검은 리본 이미지" className="h-full mobile:w-[45px]" />
+              <img
+                src={BlackRibbon}
+                alt="검은 리본 이미지"
+                className="h-[87px] w-[65px] object-cover mobile:h-[60px] mobile:w-[45px]"
+              />
               <div>
                 <p className="mb-g2 text-b-lg font-bold text-gray-90 mobile:text-b-sm">
                   {item.donorName}
