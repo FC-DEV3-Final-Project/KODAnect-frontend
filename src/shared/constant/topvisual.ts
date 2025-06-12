@@ -1,7 +1,7 @@
-import organImg from "@/assets/images/organ.png";
-import participationImg from "@/assets/images/participation.png";
-import announcementImg from "@/assets/images/announcement.png";
-import aboutImg from "@/assets/images/about.png";
+import organImg from "@/assets/images/sideMenu/organ.png";
+import participationImg from "@/assets/images/sideMenu/participation.png";
+import announcementImg from "@/assets/images/sideMenu/announcement.png";
+import aboutImg from "@/assets/images/sideMenu/about.png";
 
 export const TOP_VISUAL = [
   { label: "장기·조직기증", imageUrl: organImg },
