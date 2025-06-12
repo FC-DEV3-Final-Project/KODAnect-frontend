@@ -1,7 +1,7 @@
 import { Description } from "@/shared/components/Description";
-import LetterContent from "@/features/remembrance/letter-view/components/LetterContent";
+import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
-import { StoryLetter } from "@/features/remembrance/letter-view/components/mockLetter";
+import { StoryLetter } from "@/features/letter-view/mock-data";
 import { TopArea } from "@/shared/components/TopArea";
 
 function StoryView() {

@@ -17,7 +17,7 @@ import OrganDonation from "@/pages/organ/info/OrganDonation";
 import BrainDeath from "@/pages/organ/info/BrainDeath";
 
 import LetterView from "@/pages/remembrance/LetterView";
-import RecipientLetterView from "@/pages/remembrance/RecipientLetterView";
+import RecipientView from "@/pages/remembrance/RecipientView";
 import StoryView from "@/pages/remembrance/StoryView";
 
 // 필요에 따라 페이지 컴포넌트 추가 import
@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
           { path: "letters", element: <Letters /> },
           { path: "letters-view", element: <LetterView /> },
           { path: "recipients", element: <Recipients /> },
-          { path: "recipients-view", element: <RecipientLetterView /> },
+          { path: "recipients-view", element: <RecipientView /> },
           { path: "stories", element: <Stories /> },
           { path: "stories-view", element: <StoryView /> },
         ],

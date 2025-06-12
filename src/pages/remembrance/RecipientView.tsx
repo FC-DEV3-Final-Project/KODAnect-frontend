@@ -1,10 +1,10 @@
 import { Description } from "@/shared/components/Description";
-import LetterContent from "@/features/remembrance/letter-view/components/LetterContent";
+import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
-import { recipientLetter } from "@/features/remembrance/letter-view/components/mockLetter";
+import { recipientLetter } from "@/features/letter-view/mock-data";
 import { TopArea } from "@/shared/components/TopArea";
 
-function RecipientLetterView() {
+function RecipientView() {
   return (
     <div className="mx-auto w-full">
       <TopArea />
@@ -33,4 +33,4 @@ function RecipientLetterView() {
   );
 }
 
-export default RecipientLetterView;
+export default RecipientView;

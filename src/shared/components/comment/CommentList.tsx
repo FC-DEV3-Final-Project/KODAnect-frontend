@@ -3,7 +3,14 @@ import CommentItem from "@/shared/components/comment/CommentItem";
 import { Button } from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
-const dummyComments = [
+type Comment = {
+  id: string;
+  content: string;
+  date: string;
+  author: string;
+};
+
+const dummyComments: Comment[] = [
   {
     id: "1",
     content: "감사합니다.",
@@ -26,6 +33,9 @@ const dummyComments = [
 
 function CommentList() {
   const [openId, setOpenId] = useState<string | null>(null);
+  const comments = [...dummyComments].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 
   return (
     <section
@@ -34,36 +44,43 @@ function CommentList() {
     >
       <h3 id="comment-list-heading" className="text-h-sm font-bold text-gray-90">
         등록된 댓글
-        <span className="ml-[7px] text-b-md font-normal text-gray-70">{dummyComments.length}</span>
+        {comments.length > 0 && (
+          <span className="ml-[7px] text-b-md font-normal text-gray-70">{comments.length}</span>
+        )}
       </h3>
 
-      <ul className="flex flex-col gap-g3" aria-label="댓글 목록">
-        {[...dummyComments]
-          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-          .map((item) => (
-            <li key={item.id}>
-              <CommentItem
-                id={item.id}
-                content={item.content}
-                date={item.date}
-                author={item.author}
-                isOpen={openId === item.id}
-                onToggle={() => setOpenId(openId === item.id ? null : item.id)}
-              />
-            </li>
-          ))}
-      </ul>
-      {dummyComments.length > 2 && (
-        <div className="flex justify-center">
-          <Button variant="secondary" size="medium" className="w-full" aria-label="댓글 더보기">
-            <span className="text-b-md mobile:text-b-sm">더보기</span>
-            <PlusIcon
-              className="h-icon3 w-icon3 text-secondary-50 mobile:h-icon2 mobile:w-icon2"
-              aria-hidden="true"
-              focusable="false"
-            />
-          </Button>
-        </div>
+      {comments.length === 0 ? (
+        <p className="mt-[8px] text-center text-b-lg text-gray-40">아직 등록된 댓글이 없습니다.</p>
+      ) : (
+        <>
+          <ul className="flex flex-col gap-g3" aria-label="댓글 목록">
+            {comments.map((item) => (
+              <li key={item.id}>
+                <CommentItem
+                  id={item.id}
+                  content={item.content}
+                  date={item.date}
+                  author={item.author}
+                  isOpen={openId === item.id}
+                  onToggle={() => setOpenId(openId === item.id ? null : item.id)}
+                />
+              </li>
+            ))}
+          </ul>
+
+          {comments.length > 2 && (
+            <div className="flex justify-center">
+              <Button variant="secondary" size="medium" className="w-full" aria-label="댓글 더보기">
+                <span className="text-b-md mobile:text-b-sm">더보기</span>
+                <PlusIcon
+                  className="h-icon3 w-icon3 text-secondary-50 mobile:h-icon2 mobile:w-icon2"
+                  aria-hidden="true"
+                  focusable="false"
+                />
+              </Button>
+            </div>
+          )}
+        </>
       )}
     </section>
   );
