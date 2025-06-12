@@ -97,10 +97,17 @@ export function Modal({
         </div>
 
         {/* 텍스트 설명 */}
-        {type === "text" && description && (
-          <p className="mb-g7 flex justify-center text-center text-h-sm text-gray-80 mobile:whitespace-pre-line mobile:text-b-md">
-            {description}
-          </p>
+        {type === "text" && (
+          <div className="mb-g7 text-center">
+            {title && (
+              <h2 className="mb-g5 text-h-md font-bold text-gray-90 mobile:text-h-sm">{title}</h2>
+            )}
+            {description && (
+              <p className="text-h-sm text-gray-80 mobile:whitespace-pre-line mobile:text-b-md">
+                {description}
+              </p>
+            )}
+          </div>
         )}
 
         {/* 타이틀 + 입력창 */}
