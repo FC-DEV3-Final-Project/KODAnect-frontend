@@ -7,8 +7,10 @@ import { NewBadge } from "@/shared/components/NewBadge";
 import Message from "@/assets/icon/inquiry.svg?react";
 import Letter from "@/assets/icon/mail.svg?react";
 import blackRibbon from "@/assets/images/black-ribbon.png";
+import { useNavigate } from "react-router-dom";
 
 interface DonorCardProps {
+  donorId: number;
   donorName: string;
   genderFlag: string;
   donorAge: number;
@@ -18,6 +20,7 @@ interface DonorCardProps {
 }
 
 export default function DonorCard({
+  donorId,
   donorName,
   genderFlag,
   donorAge,
@@ -26,6 +29,22 @@ export default function DonorCard({
   letterCount,
 }: DonorCardProps) {
   const isMobile = useIsMobile(768);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/remembrance/members-view/${donorId}`, {
+      state: {
+        donor: {
+          donorName,
+          genderFlag,
+          donorAge,
+          donationDate,
+          replyCount,
+          letterCount,
+        },
+      },
+    });
+  };
 
   return (
     <article
@@ -35,6 +54,7 @@ export default function DonorCard({
         "mobile:w-[160px] mobile:py-p6 mobile:pl-p6 mobile:pr-p5",
       )}
       aria-label={`기증자 ${donorName} 정보 카드`}
+      key={donorId}
     >
       <div
         className={clsx("relative flex items-center gap-g4", "mobile:flex-col mobile:items-start")}
@@ -93,6 +113,7 @@ export default function DonorCard({
           children="추모관"
           className="flex-1 mobile:text-b-xs"
           aria-label={`${donorName} 추모관 바로가기`}
+          onClick={handleClick}
         />
         {/* 하늘나라 편지쓰기 버튼 */}
         <Button

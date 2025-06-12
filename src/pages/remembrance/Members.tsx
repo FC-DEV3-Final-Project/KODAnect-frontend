@@ -25,7 +25,7 @@ export default function Members() {
     to: null,
   });
 
-  const fromRef = useRef<HTMLButtonElement>(null);
+  const fromRef = useRef<HTMLButtonElement>(null); 
 
   const sortedData = [...donorData].sort(
     (a, b) => new Date(b.donationDate).getTime() - new Date(a.donationDate).getTime(),
@@ -110,6 +110,7 @@ export default function Members() {
             {sortedData.slice(0, cardCount).map((item, index) => (
               <DonorCard
                 key={index}
+                donorId={item.donorId}
                 donorName={item.donorName}
                 genderFlag={item.genderFlag}
                 donorAge={item.donorAge}
