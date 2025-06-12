@@ -20,7 +20,7 @@ export default function HeavenLetterList() {
 
   return (
     <section className="mx-auto mb-g11 w-full max-w-[1200px]" aria-labelledby="letter-heading">
-      <div className="mb-4 mb-g5 flex items-center justify-between">
+      <div className="mb-g5 flex items-center justify-between">
         <h2 id="letter-heading" className="text-h-md font-bold text-gray-90">
           하늘나라 편지
         </h2>
