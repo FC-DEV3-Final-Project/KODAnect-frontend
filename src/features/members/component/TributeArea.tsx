@@ -34,7 +34,7 @@ interface TributeAreaProps {
 
 export default function TributeArea({ donor }: TributeAreaProps) {
   if (!donor) {
-    return <div>기증자 정보가 없습니다.</div>;
+    return <section>기증자 정보가 없습니다.</section>;
   }
   const isMobile = useIsMobile(768);
   const navigate = useNavigate();
@@ -73,14 +73,14 @@ export default function TributeArea({ donor }: TributeAreaProps) {
               "mobile:mb-g7 mobile:mt-g5 mobile:flex-col mobile:gap-g4",
             )}
           >
-            <p className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
+            <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
               <span className="font-bold">기증자</span>
               <span>{donor.donorName}</span>
-            </p>
-            <p className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
+            </div>
+            <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
               <span className="font-bold">기증일</span>
               <time>{formatDateToDotNotation(donor.donationDate)}</time>
-            </p>
+            </div>
           </div>
 
           {/* 추모글 */}
@@ -113,18 +113,20 @@ export default function TributeArea({ donor }: TributeAreaProps) {
       <div className={clsx("flex justify-end gap-g7", "mobile:gap-g4")}>
         <Button
           size={isMobile ? "small" : "large"}
-          children="하늘나라 편지쓰기"
           className="mobile:text-b-xs"
           aria-label={`${donor.donorName}에게 하늘나라 편지 쓰기`}
-        />
+        >
+          하늘나라 편지쓰기
+        </Button>
         <Button
           variant="tertiary"
           size={isMobile ? "small" : "large"}
-          children="목록"
           className="mobile:text-b-xs"
           aria-label={`${donor.donorName}에게 하늘나라 편지 쓰기`}
           onClick={handleClick}
-        />
+        >
+          목록
+        </Button>
       </div>
     </article>
   );

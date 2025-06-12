@@ -66,7 +66,7 @@ export default function Letters() {
         </div>
 
         {/* 검색 결과 및 편지쓰기 버튼 */}
-        <div className="flex items-end justify-between mobile:items-center">
+        <div className={clsx("flex items-end justify-between", "mobile:items-center")}>
           <p className="text-b-lg font-bold text-gray-90">
             검색 결과 <span className="text-primary-60">12510</span>개
           </p>
@@ -77,7 +77,7 @@ export default function Letters() {
         <div
           className={clsx("mt-g7 flex flex-col items-center gap-g7", "mobile:mt-g8 mobile:gap-g7")}
         >
-          <div className="flex flex-wrap gap-g7 mobile:gap-x-g3 mobile:gap-y-g4">
+          <div className={clsx("flex flex-wrap gap-g7", "mobile:gap-x-g3 mobile:gap-y-g4")}>
             {sortedData.slice(0, letterCount).map((item, index) => (
               <LetterCard
                 key={index}
@@ -93,12 +93,12 @@ export default function Letters() {
             size={isMobile ? "medium" : "large"}
             variant="secondary"
             aria-label="카드 더보기"
-            className="flex w-full gap-g2"
+            className={clsx("flex w-full gap-g2 text-b-lg text-secondary-60", "mobile:text-b-md")}
             onClick={handleLoadMore}
           >
-            <span className="text-b-lg text-secondary-60 mobile:text-b-md">더보기</span>
+            더보기
             <PlusIcon
-              className="h-icon4 w-icon4 text-secondary-50 mobile:h-icon3 mobile:w-icon3"
+              className={clsx("h-icon4 w-icon4 text-secondary-50", "mobile:h-icon3 mobile:w-icon3")}
               aria-hidden="true"
               focusable="false"
             />

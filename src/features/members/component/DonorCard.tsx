@@ -62,7 +62,7 @@ export default function DonorCard({
         <NewBadge
           size="sm"
           date={donationDate}
-          className="-right-p2 -top-p2 mobile:right-p2 mobile:top-0"
+          className={clsx("-right-p2 -top-p2", "mobile:right-p2 mobile:top-0")}
         />
 
         {/* 추모리본 이미지 */}
@@ -73,18 +73,20 @@ export default function DonorCard({
         />
         {/* 기증자 */}
         <div className="flex flex-col gap-g2">
-          <div className="flex h-[52px] items-center mobile:h-[40px]">
-            <h2 className="mr-g3 text-b-xs text-gray-40 mobile:min-w-[34px]">기증자</h2>
+          <div className={clsx("flex h-[52px] items-center", "mobile:h-[40px]")}>
+            <h2 className={clsx("mr-g3 text-b-xs text-gray-40", "mobile:min-w-[34px]")}>기증자</h2>
             <p className="text-h-2xs font-bold">
               <span className="mr-g1">{donorName}</span>
               <span>
-                ({genderFlag}/{donorAge})
+                ({genderFlag},{donorAge})
               </span>
             </p>
           </div>
           {/* 기증일 */}
           <div>
-            <span className="mr-g3 text-b-xs text-gray-40 mobile:min-w-[34px]">기증일</span>
+            <span className={clsx("mr-g3 text-b-xs text-gray-40", "mobile:min-w-[34px]")}>
+              기증일
+            </span>
             <time className="text-b-sm mobile:text-b-xs">{donationDate}</time>
           </div>
         </div>
@@ -110,19 +112,21 @@ export default function DonorCard({
         <Button
           variant="secondary"
           size={isMobile ? "x-small" : "small"}
-          children="추모관"
           className="flex-1 mobile:text-b-xs"
           aria-label={`${donorName} 추모관 바로가기`}
           onClick={handleClick}
-        />
+        >
+          추모관
+        </Button>
         {/* 하늘나라 편지쓰기 버튼 */}
         <Button
           variant="tertiary"
           size={isMobile ? "x-small" : "small"}
-          children="하늘나라 편지쓰기"
           className="mobile:text-b-xs"
           aria-label={`${donorName}에게 하늘나라 편지 쓰기`}
-        />
+        >
+          하늘나라 편지쓰기
+        </Button>
       </div>
     </article>
   );

@@ -25,7 +25,7 @@ export default function Members() {
     to: null,
   });
 
-  const fromRef = useRef<HTMLButtonElement>(null); 
+  const fromRef = useRef<HTMLButtonElement>(null);
 
   const sortedData = [...donorData].sort(
     (a, b) => new Date(b.donationDate).getTime() - new Date(a.donationDate).getTime(),
@@ -98,15 +98,15 @@ export default function Members() {
         </div>
 
         {/* 검색 결과 표시 영역 */}
-        <div className="mb-p8 mt-p10 mobile:mb-g5 mobile:mt-p8">
+        <div className={clsx("mb-p8 mt-p10", "mobile:mb-g5 mobile:mt-p8")}>
           <p className="text-b-lg font-bold text-gray-90">
             검색 결과 <span className="text-primary-60">12510</span>개
           </p>
         </div>
 
         {/* 추모 카드 영역 */}
-        <div className="flex flex-col items-center gap-g8 mobile:gap-g5">
-          <div className="flex flex-wrap gap-g6 mobile:gap-x-g3 mobile:gap-y-g5">
+        <div className={clsx("flex flex-col items-center gap-g8", "mobile:gap-g5")}>
+          <div className={clsx("flex flex-wrap gap-g6", "mobile:gap-x-g3 mobile:gap-y-g5")}>
             {sortedData.slice(0, cardCount).map((item, index) => (
               <DonorCard
                 key={index}
@@ -124,10 +124,10 @@ export default function Members() {
             size={isMobile ? "medium" : "large"}
             variant="secondary"
             aria-label="추모 카드 더보기"
-            className="flex w-full gap-g2"
+            className={clsx("flex w-full gap-g2 text-b-lg text-secondary-60", "mobile:text-b-md")}
             onClick={handleLoadMore}
           >
-            <span className={clsx("text-b-lg text-secondary-60", "mobile:text-b-md")}>더보기</span>
+            더보기
             <PlusIcon
               className={clsx("h-icon4 w-icon4 text-secondary-50", "mobile:h-icon3 mobile:w-icon3")}
               aria-hidden="true"
