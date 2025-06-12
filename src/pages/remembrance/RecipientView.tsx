@@ -1,10 +1,19 @@
+import { useParams } from "react-router-dom";
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
-import { recipientLetter } from "@/features/letter-view/mock-data";
+import { recipientLetters } from "@/features/recipient-view/mock-data";
 import { TopArea } from "@/shared/components/TopArea";
+import { getRecipientInfoItems } from "@/features/recipient-view/utils/getRecipientInfoItems";
 
 function RecipientView() {
+  const { id } = useParams<{ id: string }>();
+  const letter = recipientLetters.find((l) => l.letterSeq === Number(id));
+
+  if (!letter) {
+    return <p className="mt-10 text-center">편지를 찾을 수 없습니다.</p>;
+  }
+
   return (
     <div className="mx-auto w-full">
       <TopArea />
@@ -19,10 +28,10 @@ function RecipientView() {
           ]}
         />
         <LetterContent
-          title={recipientLetter.title}
-          content={recipientLetter.content}
+          title={letter.letterTitle}
+          content={letter.letterContents}
+          infoItems={getRecipientInfoItems(letter)}
           onGoList={() => console.log("목록 페이지로 이동")}
-          infoItems={recipientLetter.infoItems}
           onEdit={() => console.log("편지 수정")}
           onDelete={() => console.log("편지 삭제")}
           mobileWidth="10rem"

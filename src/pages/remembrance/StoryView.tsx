@@ -1,10 +1,19 @@
+import { useParams } from "react-router-dom";
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
-import { StoryLetter } from "@/features/letter-view/mock-data";
+import { stories } from "@/features/story-view/mock-data";
 import { TopArea } from "@/shared/components/TopArea";
+import { getStoryInfoItems } from "@/features/story-view/utils/getStoryInfoItems";
 
 function StoryView() {
+  const { id } = useParams<{ id: string }>();
+  const story = stories.find((s) => s.storySeq === Number(id));
+
+  if (!story) {
+    return <p className="mt-10 text-center">스토리를 찾을 수 없습니다.</p>;
+  }
+
   return (
     <div className="mx-auto w-full">
       <TopArea />
@@ -17,10 +26,10 @@ function StoryView() {
           ]}
         />
         <LetterContent
-          title={StoryLetter.title}
-          content={StoryLetter.content}
+          title={story.title}
+          content={story.storyContent}
+          infoItems={getStoryInfoItems(story)}
           onGoList={() => console.log("목록 페이지로 이동")}
-          infoItems={StoryLetter.infoItems}
           onEdit={() => console.log("편지 수정")}
           onDelete={() => console.log("편지 삭제")}
           mobileWidth="7rem"

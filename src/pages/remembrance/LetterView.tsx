@@ -1,10 +1,18 @@
+import { useParams } from "react-router-dom";
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
-import { heavenLetter } from "@/features/letter-view/mock-data";
+import { heavenLetters } from "@/features/letter-view/mock-data";
 import { TopArea } from "@/shared/components/TopArea";
+import { getHeavenInfoItems } from "@/features/letter-view/utils/getHeavenInfoItems";
 
 function LetterView() {
+  const { id } = useParams<{ id: string }>();
+  const letter = heavenLetters.find((l) => l.letterSeq === Number(id));
+  if (!letter) {
+    return <p className="mt-10 text-center">편지를 찾을 수 없습니다.</p>;
+  }
+
   return (
     <div className="mx-auto w-full">
       <TopArea />
@@ -18,10 +26,10 @@ function LetterView() {
           ]}
         />
         <LetterContent
-          title={heavenLetter.title}
-          content={heavenLetter.content}
+          title={letter.letterTitle}
+          content={letter.letterContents}
           onGoList={() => console.log("목록 페이지로 이동")}
-          infoItems={heavenLetter.infoItems}
+          infoItems={getHeavenInfoItems(letter)}
           onEdit={() => console.log("편지 수정")}
           onDelete={() => console.log("편지 삭제")}
           mobileWidth="6rem"
