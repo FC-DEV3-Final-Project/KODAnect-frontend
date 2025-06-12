@@ -12,7 +12,10 @@ export default function Letter() {
           <p className="text-b-sm mobile:text-b-xs">
             그리움과 사랑을 담아 소중한 이들을 기억하는 공간입니다.
           </p>
-          <MoreButton className="absolute bottom-0 right-0 text-b-xs mobile:bottom-auto mobile:top-0" />
+          <MoreButton
+            to="/remembrance/letters"
+            className="absolute bottom-0 right-0 text-b-xs mobile:bottom-auto mobile:top-0"
+          />
         </div>
         <LetterCardList />
       </div>

@@ -48,7 +48,10 @@ export default function Story() {
         <p className="mb-g5 mt-g2 text-b-lg mobile:text-b-xs">
           가슴 따뜻해지는 생명나눔 이야기를 소개합니다.
         </p>
-        <MoreButton className="text-b-sm mobile:absolute mobile:right-0 mobile:top-0 mobile:text-b-xs" />
+        <MoreButton
+          to="/announcement/05"
+          className="text-b-sm mobile:absolute mobile:right-0 mobile:top-0 mobile:text-b-xs"
+        />
         {/* pagination + custom-button */}
         <div className="absolute bottom-[70px] right-0 flex gap-g5 mobile:hidden">
           <button onClick={() => sliderRef.current?.slickPrev()} aria-label="이전">

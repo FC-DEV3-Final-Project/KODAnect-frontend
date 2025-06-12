@@ -34,7 +34,7 @@ export default function DonorMemorial() {
           <h2 id="donor-memorial-heading" className="text-h-md font-bold mobile:text-h-sm">
             기증자 추모
           </h2>
-          <MoreButton className="text-b-sm" />
+          <MoreButton to="/remembrance/members" className="text-b-sm" />
         </div>
         <p className="text-b-sm text-gray-70 mobile:text-b-xs">
           생명 나눔을 실천한 분들의 고귀한 뜻, 잊지 않겠습니다.
@@ -59,7 +59,7 @@ export default function DonorMemorial() {
               key={item.donateSeq}
               className={clsx(
                 "!flex w-full shrink-0 items-center gap-g5 mobile:gap-g4",
-                "shadow-2 relative z-10 rounded-r6 bg-white p-p6",
+                "relative z-10 rounded-r6 bg-white p-p6 shadow-2",
               )}
               aria-label={`기증자 ${item.donorName}`}
             >

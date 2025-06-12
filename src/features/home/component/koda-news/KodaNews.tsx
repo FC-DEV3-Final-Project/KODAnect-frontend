@@ -14,7 +14,7 @@ export default function KodaNews() {
           <Table items={notices} label="공지사항 목록" />
           <Table items={pressReleases} label="보도자료 목록" />
         </TabPanel>
-        <MoreButton className="justify-end text-b-sm" />
+        <MoreButton to="/announcement/notices" className="justify-end text-b-sm" />
       </article>
     </section>
   );

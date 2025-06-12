@@ -16,6 +16,7 @@ export default function Announcement() {
     >
       {/* 홍보영상 */}
       <ArticleCard
+        path="01"
         title="홍보영상"
         moreLabel="홍보영상 더보기"
         children={
@@ -38,6 +39,7 @@ export default function Announcement() {
 
       {/* 기관일정 */}
       <ArticleCard
+        path="07"
         title="기관일정"
         moreLabel="기관일정 더보기"
         children={
