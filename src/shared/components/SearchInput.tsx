@@ -47,7 +47,7 @@ function SearchInput({ onSubmit, placeholder }: SearchInputProps) {
           value={inputValue}
           placeholder={placeholder}
           onChange={(e) => setInputValue(e.target.value)}
-          className={`${getPaddingRight()} w-full rounded-r3 border border-gray-60 py-p4 pl-p6 text-b-md text-gray-90 placeholder:text-gray-40 focus:outline-2 focus:outline-secondary-50`}
+          className={`${getPaddingRight()} w-full rounded-r3 border border-gray-60 py-p4 pl-p6 text-b-md text-gray-90 placeholder:text-gray-40 focus:outline-2 focus:outline-secondary-50 mobile:h-[4rem] mobile:text-b-sm`}
         />
         {/* 삭제 버튼 */}
         {inputValue && (
@@ -56,14 +56,14 @@ function SearchInput({ onSubmit, placeholder }: SearchInputProps) {
             role="button"
             tabIndex={0}
             aria-label="입력값 지우기"
-            className="absolute right-[4rem] top-1/2 h-icon3 w-icon3 -translate-y-1/2 cursor-pointer"
+            className="mobile:h-cion2 absolute right-[4rem] top-1/2 h-icon3 w-icon3 -translate-y-1/2 cursor-pointer mobile:w-icon2"
           />
         )}
         {/* 검색 버튼 */}
         <SearchIcon
           onClick={() => handleSubmit()}
           role="button"
-          className="absolute right-p6 top-1/2 h-icon3 w-icon3 -translate-y-1/2 cursor-pointer hover:text-secondary-50"
+          className="mobile:h-cion2 absolute right-p6 top-1/2 h-icon3 w-icon3 -translate-y-1/2 cursor-pointer hover:text-secondary-50 mobile:w-icon2"
           aria-label="검색"
         />
       </div>

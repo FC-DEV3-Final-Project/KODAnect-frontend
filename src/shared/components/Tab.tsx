@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
-interface TabProps {
-  label: string;
-  content: React.ReactNode;
-}
+export const TABS = [
+  { label: "기증자 추모관", type: "members", path: "/remembrance/members" },
+  { label: "하늘나라 편지", type: "letters", path: "/remembrance/letters" },
+  { label: "수혜자 편지", type: "recipients", path: "/remembrance/recipients" },
+  { label: "기증자 스토리", type: "stories", path: "/remembrance/stories" },
+] as const;
 
-interface TabsProps {
-  tabs: TabProps[];
+export type TabType = (typeof TABS)[number]["type"];
+
+interface TabProps {
+  type: TabType;
 }
 
 interface TabButtonProps {
@@ -16,13 +21,6 @@ interface TabButtonProps {
   onClick: () => void;
   id: string;
   panelId: string;
-}
-
-interface TabPanelProps {
-  children: React.ReactNode;
-  id: string;
-  tabId: string;
-  isSelected: boolean;
 }
 
 function TabButton({ label, isSelected, onClick, id, panelId }: TabButtonProps) {
@@ -44,63 +42,51 @@ function TabButton({ label, isSelected, onClick, id, panelId }: TabButtonProps) 
   );
 }
 
-function TabPanel({ children, id, tabId, isSelected }: TabPanelProps) {
-  return (
-    <div
-      role="tabpanel"
-      id={id}
-      aria-labelledby={tabId}
-      className={`${isSelected ? "" : "hidden"}`}
-    >
-      {children}
-    </div>
-  );
-}
-
-export function Tab({ tabs }: TabsProps) {
+export function Tab({ type }: TabProps) {
   const [selectedTab, setSelectedTab] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const index = TABS.findIndex((tab) => tab.type === type);
+
+    if (index === selectedTab) return;
+    if (index !== -1) setSelectedTab(index);
+  }, [type]);
+
+  const handleTabClick = (index: number) => {
+    setSelectedTab(index);
+    navigate(TABS[index].path);
+  };
 
   return (
-    <>
-      <ul
-        role="tablist"
-        aria-label="Tab Navigation"
-        className="flex w-full flex-wrap overflow-hidden rounded-r3 border border-gray-30"
-      >
-        {tabs.map((tab, index) => {
-          const isFirstLine = index === 0 || index === 1;
-          const isLast = index === tabs.length - 1;
+    <ul
+      role="tablist"
+      aria-label="Tab Navigation"
+      className="flex w-full flex-wrap overflow-hidden rounded-r3 border border-gray-30"
+    >
+      {TABS.map((tab, index) => {
+        const isFirstLine = index < 2;
+        const isLast = index === TABS.length - 1;
 
-          return (
-            <li
-              key={index}
-              className={clsx(
-                "w-1/4 border-gray-30 mobile:w-1/2",
-                isFirstLine ? "mobile:border-0" : "mobile:border-t",
-                isLast ? "border-0" : "border-r mobile:border-0 mobile:odd:border-r",
-              )}
-            >
-              <TabButton
-                label={tab.label}
-                isSelected={index === selectedTab}
-                onClick={() => setSelectedTab(index)}
-                id={`tab-${index}`}
-                panelId={`panel-${index}`}
-              />
-            </li>
-          );
-        })}
-      </ul>
-      {tabs.map((tab, index) => (
-        <TabPanel
-          key={index}
-          id={`panel-${index}`}
-          tabId={`tab-${index}`}
-          isSelected={index === selectedTab}
-        >
-          {tab.content}
-        </TabPanel>
-      ))}
-    </>
+        return (
+          <li
+            key={tab.type}
+            className={clsx(
+              "w-1/4 border-gray-30 mobile:w-1/2",
+              isFirstLine ? "mobile:border-0" : "mobile:border-t",
+              isLast ? "border-0" : "border-r mobile:border-0 mobile:odd:border-r",
+            )}
+          >
+            <TabButton
+              label={tab.label}
+              isSelected={index === selectedTab}
+              onClick={() => handleTabClick(index)}
+              id={`tab-${index}`}
+              panelId={`panel-${index}`}
+            />
+          </li>
+        );
+      })}
+    </ul>
   );
 }
