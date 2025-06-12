@@ -9,12 +9,12 @@ import Analytics from "@/assets/icon/analytics.svg";
 import LocationAway from "@/assets/icon/location-away.svg";
 
 const items = [
-  { name: "기증자 예우", path: "/organ/honor", icon: Calendar },
-  { name: "기증희망 등록", path: "/donation-registration", icon: NewFolder },
+  { name: "기증자 예우", path: "/organ/honor/01", icon: Calendar },
+  { name: "기증희망 등록", path: "/donation-registration/01", icon: NewFolder },
   { name: "KODA LAB", path: "/organ/01", icon: Map },
   { name: "장기·조직기증", path: "/organ/info/organ-donation", icon: Identity },
-  { name: "홍보자료", path: "/announcement", icon: Analytics },
-  { name: "기관안내", path: "/about/koda", icon: LocationAway },
+  { name: "홍보자료", path: "/announcement/01", icon: Analytics },
+  { name: "기관안내", path: "/about/koda/01", icon: LocationAway },
 ];
 
 export default function PopularMenu() {
