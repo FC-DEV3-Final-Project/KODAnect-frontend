@@ -32,25 +32,19 @@ export default function Error() {
       )}
     >
       <div className="flex flex-col items-center gap-g5">
-        <Notification className="h-icon6 w-icon6" />
+        <Notification className="h-icon6 w-icon6" aria-hidden="true" />
         <div className="text-center">
           <h2 className="text-h-lg font-bold text-gray-70">에러 코드</h2>
           <p className="mobile:mt-pag-g3 text-b-md">에러 메시지</p>
         </div>
       </div>
-      <div className={clsx("flex gap-g6", "mobile:gap-g4 ")}>
-        <Button
-          size={isMobile ? "medium" : "large"}
-          variant="tertiary"
-          onClick={handleGoBack}
-          children="이전 페이지로"
-        />
-        <Button
-          size={isMobile ? "medium" : "large"}
-          variant="primary"
-          onClick={handleGoHome}
-          children="홈으로 가기"
-        />
+      <div className={clsx("flex gap-g6", "mobile:gap-g4")}>
+        <Button size={isMobile ? "medium" : "large"} variant="tertiary" onClick={handleGoBack}>
+          이전 페이지로
+        </Button>
+        <Button size={isMobile ? "medium" : "large"} variant="primary" onClick={handleGoHome}>
+          홈으로 가기
+        </Button>
       </div>
     </section>
   );

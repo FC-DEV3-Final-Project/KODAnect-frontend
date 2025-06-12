@@ -37,11 +37,17 @@ export default function Empty() {
         src={construction}
         className={clsx("h-[277px] w-[277px]", "mobile:h-[108px] mobile:w-[108px]")}
       />
-      <h2 className={clsx("mt-[45px] flex items-center gap-g4", "mobile:mt-[42px] mobile:gap-g3")}>
-        <Notification className={clsx("h-icon5 w-icon5 text-gray-80", "w-icon4 mobile:h-icon4")} />
-        <p className={clsx("text-h-lg font-bold text-gray-80", "mobile:text-h-sm")}>
-          페이지 <span className="text-secondary-80">준비중</span> 입니다.
-        </p>
+      <h2
+        className={clsx(
+          "mt-[45px] flex items-center gap-g4 text-h-lg font-bold text-gray-80",
+          "mobile:mt-[42px] mobile:gap-g3 mobile:text-h-sm",
+        )}
+      >
+        <Notification
+          className={clsx("h-icon5 w-icon5 text-gray-80", "w-icon4 mobile:h-icon4")}
+          aria-hidden="true"
+        />
+        페이지 <span className="text-secondary-80">준비중</span> 입니다.
       </h2>
       <p
         className={clsx(
@@ -56,18 +62,12 @@ export default function Empty() {
         감사합니다.
       </p>
       <div className={clsx("flex gap-g6", "mobile:gap-g5")}>
-        <Button
-          size={isMobile ? "small" : "large"}
-          variant="tertiary"
-          onClick={handleGoBack}
-          children="이전 페이지로"
-        />
-        <Button
-          size={isMobile ? "small" : "large"}
-          variant="primary"
-          onClick={handleGoHome}
-          children="홈으로 가기"
-        />
+        <Button size={isMobile ? "small" : "large"} variant="tertiary" onClick={handleGoBack}>
+          이전 페이지로
+        </Button>
+        <Button size={isMobile ? "small" : "large"} variant="primary" onClick={handleGoHome}>
+          홈으로 가기
+        </Button>
       </div>
     </section>
   );
