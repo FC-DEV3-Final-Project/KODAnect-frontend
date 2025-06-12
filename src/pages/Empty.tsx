@@ -35,6 +35,7 @@ export default function Empty() {
     >
       <img
         src={construction}
+        alt="준비중 안내 이미지"
         className={clsx("h-[277px] w-[277px]", "mobile:h-[108px] mobile:w-[108px]")}
       />
       <h2
