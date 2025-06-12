@@ -67,7 +67,12 @@ function LetterContent({
             <ul className="flex flex-col gap-g7">
               {imageUrls.map((url, idx) => (
                 <li key={idx}>
-                  <img src={url} alt={`편지 이미지 ${idx + 1}`} className="h-auto max-w-full" />
+                  <img
+                    src={url}
+                    alt={`편지 이미지 ${idx + 1}`}
+                    className="h-auto max-w-full"
+                    loading="lazy"
+                  />
                 </li>
               ))}
             </ul>
