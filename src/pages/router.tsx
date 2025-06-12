@@ -6,15 +6,16 @@ import SideMenuLayout from "@/widget/layout/SideMenuLayout";
 import Home from "@/pages/Home";
 import Empty from "@/pages/Empty";
 import Members from "@/pages/remembrance/Members";
+import MembersView from "@/pages/remembrance/MembersView";
 import Letters from "@/pages/remembrance/Letters";
 import Recipients from "@/pages/remembrance/Recipients";
 import Stories from "@/pages/remembrance/Stories";
-import Notices from "@/pages/announcement/Notices";
+import OrganDonation from "@/pages/organ/info/OrganDonation";
+import BrainDeath from "@/pages/organ/info/BrainDeath";
 import Donors from "@/pages/participation/Donors";
 import Comparison from "@/pages/participation/Comparison";
 import YearlyTrend from "@/pages/participation/YearlyTrend";
-import OrganDonation from "@/pages/organ/info/OrganDonation";
-import BrainDeath from "@/pages/organ/info/BrainDeath";
+import Notices from "@/pages/announcement/Notices";
 
 import LetterView from "@/pages/remembrance/LetterView";
 import RecipientView from "@/pages/remembrance/RecipientView";
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
         path: "remembrance",
         children: [
           { path: "members", element: <Members /> },
+          { path: "members-view/:id", element: <MembersView /> },
           { path: "letters", element: <Letters /> },
           { path: "letters-view", element: <LetterView /> },
           { path: "recipients", element: <Recipients /> },
