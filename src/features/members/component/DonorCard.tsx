@@ -49,9 +49,9 @@ export default function DonorCard({
   return (
     <article
       className={clsx(
-        "flex w-[284px] flex-col gap-g6 rounded-r6 border-2 border-transparent bg-white p-p8 text-gray-90",
+        "flex max-w-[284px] basis-1/4 flex-col gap-g6 rounded-r6 border-2 border-transparent bg-white p-p8 text-gray-90",
         "shadow-[0_0_2px_0_theme('colors.secondary.10'),0_8px_16px_0_theme('colors.secondary.10')]",
-        "mobile:w-[160px] mobile:py-p6 mobile:pl-p6 mobile:pr-p5",
+        "mobile:max-w-[160px] mobile:basis-1/2 mobile:py-p6 mobile:pl-p6 mobile:pr-p5",
       )}
       aria-label={`기증자 ${donorName} 정보 카드`}
       key={donorId}
@@ -73,8 +73,13 @@ export default function DonorCard({
         />
         {/* 기증자 */}
         <div className="flex flex-col gap-g2">
-          <div className={clsx("flex h-[52px] items-center", "mobile:h-[40px]")}>
-            <h2 className={clsx("mr-g3 text-b-xs text-gray-40", "mobile:min-w-[34px]")}>기증자</h2>
+          <div
+            className={clsx(
+              "flex h-[52px] flex-wrap items-center",
+              "mobile:h-[40px] mobile:flex-nowrap",
+            )}
+          >
+            <h2 className="mr-g3 min-w-[34px] text-b-xs text-gray-40">기증자</h2>
             <p className="text-h-2xs font-bold">
               <span className="mr-g1">{donorName}</span>
               <span>
@@ -83,10 +88,8 @@ export default function DonorCard({
             </p>
           </div>
           {/* 기증일 */}
-          <div>
-            <span className={clsx("mr-g3 text-b-xs text-gray-40", "mobile:min-w-[34px]")}>
-              기증일
-            </span>
+          <div className="flex flex-wrap mobile:flex-nowrap">
+            <span className="mr-g3 min-w-[34px] text-b-xs text-gray-40">기증일</span>
             <time className="text-b-sm mobile:text-b-xs">{donationDate}</time>
           </div>
         </div>
@@ -107,12 +110,12 @@ export default function DonorCard({
         </div>
       </div>
 
-      <div className="flex gap-g4 mobile:flex-col">
+      <div className="flex flex-wrap gap-g4 mobile:flex-col mobile:flex-nowrap">
         {/* 추모관 버튼 */}
         <Button
           variant="secondary"
           size={isMobile ? "x-small" : "small"}
-          className="flex-1 mobile:text-b-xs"
+          className="grow mobile:text-b-xs"
           aria-label={`${donorName} 추모관 바로가기`}
           onClick={handleClick}
         >
@@ -122,7 +125,7 @@ export default function DonorCard({
         <Button
           variant="tertiary"
           size={isMobile ? "x-small" : "small"}
-          className="mobile:text-b-xs"
+          className="grow mobile:text-b-xs"
           aria-label={`${donorName}에게 하늘나라 편지 쓰기`}
         >
           하늘나라 편지쓰기

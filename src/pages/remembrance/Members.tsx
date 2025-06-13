@@ -106,7 +106,12 @@ export default function Members() {
 
         {/* 추모 카드 영역 */}
         <div className={clsx("flex flex-col items-center gap-g8", "mobile:gap-g5")}>
-          <div className={clsx("flex flex-wrap gap-g6", "mobile:gap-x-g3 mobile:gap-y-g5")}>
+          <div
+            className={clsx(
+              "flex flex-wrap justify-center gap-g6",
+              "mobile:gap-x-g3 mobile:gap-y-g5",
+            )}
+          >
             {sortedData.slice(0, cardCount).map((item, index) => (
               <DonorCard
                 key={index}

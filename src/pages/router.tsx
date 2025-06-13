@@ -17,8 +17,6 @@ import Comparison from "@/pages/participation/Comparison";
 import YearlyTrend from "@/pages/participation/YearlyTrend";
 import Notices from "@/pages/announcement/Notices";
 
-// 필요에 따라 페이지 컴포넌트 추가 import
-
 export const router = createBrowserRouter([
   {
     path: "/",
