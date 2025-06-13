@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 import OptionIcon from "@/assets/icon/ellipsis-vertical.svg?react";
+import { Modal } from "@/shared/components/Modal";
 
 type CommentItemProps = {
   id: string;
@@ -12,18 +15,17 @@ type CommentItemProps = {
 function CommentItem({ id, content, date, author, isOpen, onToggle }: CommentItemProps) {
   const dropdownId = `comment-dropdown-${author}-${date}`;
 
-  const handleDelete = async () => {
-    try {
-      // TODO: 삭제 성공 후 목록 갱신 로직 필요 (부모에게 콜백 넘기거나, 상태 재조회 등)
-      console.log(`댓글 ${id} 삭제 완료`);
-    } catch (err) {
-      console.error("댓글 삭제 실패", err);
-    }
+  const [isModalOpen, setIsModalOpen] = useState<"edit" | "delete" | null>(null);
+  const [password, setPassword] = useState("");
+
+  const handleDelete = () => {
+    setIsModalOpen("delete");
+    onToggle();
   };
 
   const handleEdit = () => {
-    console.log(`댓글 ${id} 수정 요청`);
-    // TODO: 수정 모달 열기 or 편집 모드 진입 등
+    setIsModalOpen("edit");
+    onToggle();
   };
 
   return (
@@ -72,6 +74,37 @@ function CommentItem({ id, content, date, author, isOpen, onToggle }: CommentIte
         </time>
         <span className="ml-p5">{author}</span>
       </div>
+
+      {isModalOpen && (
+        <Modal
+          type="input"
+          title="비밀번호 확인"
+          placeholder="비밀번호를 입력하세요"
+          password={password}
+          setPassword={setPassword}
+          onClose={() => {
+            setIsModalOpen(null);
+            setPassword("");
+          }}
+          onSubmit={async () => {
+            try {
+              // 🔐 비밀번호 확인 후 요청
+              if (isModalOpen === "delete") {
+                console.log(`댓글 ${id} 삭제 요청 with password: ${password}`);
+                // TODO: 삭제 API 호출
+              } else {
+                console.log(`댓글 ${id} 수정 요청 with password: ${password}`);
+                // TODO: 수정 모드 전환
+              }
+
+              setIsModalOpen(null);
+              setPassword("");
+            } catch (e) {
+              alert("비밀번호가 일치하지 않습니다.");
+            }
+          }}
+        />
+      )}
     </article>
   );
 }

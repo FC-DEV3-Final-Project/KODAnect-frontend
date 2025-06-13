@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
 import { heavenLetters } from "@/features/letter-view/mock-data";
 import { TopArea } from "@/shared/components/TopArea";
 import { getHeavenInfoItems } from "@/features/letter-view/utils/getHeavenInfoItems";
+import { Modal } from "@/shared/components/Modal";
 
 function LetterView() {
   const { id } = useParams<{ id: string }>();
@@ -13,6 +16,9 @@ function LetterView() {
   if (!letter) {
     return <p className="mt-10 text-center">편지를 찾을 수 없습니다.</p>;
   }
+
+  const [modalType, setModalType] = useState<"edit" | "delete" | null>(null);
+  const [password, setPassword] = useState("");
 
   return (
     <div className="mx-auto w-full">
@@ -31,10 +37,34 @@ function LetterView() {
           content={letter.letterContents}
           onGoList={() => navigate(`/remembrance/letters`)}
           infoItems={getHeavenInfoItems(letter)}
-          onEdit={() => console.log("편지 수정")}
-          onDelete={() => console.log("편지 삭제")}
+          onEdit={() => setModalType("edit")}
+          onDelete={() => setModalType("delete")}
           mobileWidth="6rem"
         />
+        {modalType && (
+          <Modal
+            type="input"
+            title="비밀번호 확인"
+            placeholder="비밀번호를 입력하세요"
+            password={password}
+            setPassword={setPassword}
+            onClose={() => {
+              setModalType(null);
+              setPassword("");
+            }}
+            onSubmit={() => {
+              if (modalType === "edit") {
+                // 편지 수정 페이지로 이동
+              } else {
+                // 삭제 요청 → 성공 시 목록으로 이동
+                navigate(`/remembrance/letters`);
+              }
+              setModalType(null);
+              setPassword("");
+            }}
+          />
+        )}
+
         <CommentArea />
       </div>
     </div>
