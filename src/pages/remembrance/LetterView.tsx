@@ -16,7 +16,7 @@ function LetterView() {
   return (
     <div className="mx-auto w-full">
       <TopArea />
-      <div className="mx-auto mt-[76px] max-w-[1200px] mobile:px-p6">
+      <div className="mx-auto mt-[76px] max-w-[1280px] px-p10 mobile:min-w-[360px] mobile:px-p6">
         <Description
           startBefore="기증자에 대한 그리움과 사랑은 담은 '하늘나라 편지'는 언제 어디서나 시간과 장소에 제약을 받지 않고 추모를 할 수 있는 온라인 공간으로 익명 작성이 가능합니다."
           checkItems={[

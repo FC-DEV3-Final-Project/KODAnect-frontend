@@ -17,7 +17,7 @@ function RecipientView() {
   return (
     <div className="mx-auto w-full">
       <TopArea />
-      <div className="mx-auto mt-[76px] max-w-[1200px] mobile:px-p6">
+      <div className="mx-auto mt-[76px] max-w-[1280px] px-p10 mobile:min-w-[360px] mobile:px-p6">
         <Description
           startBefore="수혜자 편지는 이식으로 새생명을 살고 있는 분들의 이야기입니다. 언제 어디서나 시간과 장소에 구애받지 않고, 익명으로 작성이 가능합니다."
           checkItems={[

@@ -12,7 +12,7 @@ export default function MembersView() {
   return (
     <div className="mx-auto w-full">
       <TopArea />
-      <div className="mx-auto mt-[76px] max-w-[1200px] mobile:px-p6">
+      <div className="mx-auto mt-[76px] max-w-[1280px] px-p10 mobile:min-w-[360px] mobile:px-p6">
         <Description
           startBefore="생명을 나눈 고귀한 사랑을 기억하는 공간, 기증자 추모관은 장기기증자분들께 감사와 추모의 마음을 전달할 수 있는 온라인 추모 공간입니다."
           checkItems={[

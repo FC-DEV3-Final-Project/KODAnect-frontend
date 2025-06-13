@@ -17,7 +17,7 @@ function StoryView() {
   return (
     <div className="mx-auto w-full">
       <TopArea />
-      <div className="mx-auto mt-[76px] max-w-[1200px] mobile:px-p6">
+      <div className="mx-auto mt-[76px] max-w-[1280px] px-p10 mobile:min-w-[360px] mobile:px-p6">
         <Description
           startBefore="한국장기조직기증원 장기구득 코디네이터가 함께 한 영원히 기억되는 기증자의 숭고한 나눔의 순간과 아름다운 이야기를 적는 공간입니다."
           checkItems={[
