@@ -2,7 +2,7 @@ import axios from "axios";
 import type { AxiosInstance } from "axios";
 
 const instance: AxiosInstance = axios.create({
-  baseURL: "http://koda1.elementsoft.biz:8080/",
+  baseURL: "https://koda1.elementsoft.biz/",
   headers: {
     "Content-Type": "application/json",
   },
