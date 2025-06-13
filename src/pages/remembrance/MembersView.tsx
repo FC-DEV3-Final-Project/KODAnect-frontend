@@ -23,7 +23,7 @@ export default function MembersView() {
           ]}
         />
         <TributeArea donor={donor} />
-        <CommentArea />
+        <CommentArea variant="memorial" />
         <HeavenLetterList />
       </div>
     </div>
