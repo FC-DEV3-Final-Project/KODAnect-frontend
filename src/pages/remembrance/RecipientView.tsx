@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
@@ -8,6 +8,7 @@ import { getRecipientInfoItems } from "@/features/recipient-view/utils/getRecipi
 
 function RecipientView() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const letter = recipientLetters.find((l) => l.letterSeq === Number(id));
 
   if (!letter) {
@@ -31,7 +32,7 @@ function RecipientView() {
           title={letter.letterTitle}
           content={letter.letterContents}
           infoItems={getRecipientInfoItems(letter)}
-          onGoList={() => console.log("목록 페이지로 이동")}
+          onGoList={() => navigate(`/remembrance/recipients`)}
           onEdit={() => console.log("편지 수정")}
           onDelete={() => console.log("편지 삭제")}
           mobileWidth="10rem"

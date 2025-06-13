@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
@@ -8,6 +8,7 @@ import { getStoryInfoItems } from "@/features/story-view/utils/getStoryInfoItems
 
 function StoryView() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const story = stories.find((s) => s.storySeq === Number(id));
 
   if (!story) {
@@ -29,7 +30,7 @@ function StoryView() {
           title={story.title}
           content={story.storyContent}
           infoItems={getStoryInfoItems(story)}
-          onGoList={() => console.log("목록 페이지로 이동")}
+          onGoList={() => navigate(`/remembrance/stories`)}
           onEdit={() => console.log("편지 수정")}
           onDelete={() => console.log("편지 삭제")}
           mobileWidth="7rem"

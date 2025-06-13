@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
@@ -8,6 +8,7 @@ import { getHeavenInfoItems } from "@/features/letter-view/utils/getHeavenInfoIt
 
 function LetterView() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const letter = heavenLetters.find((l) => l.letterSeq === Number(id));
   if (!letter) {
     return <p className="mt-10 text-center">편지를 찾을 수 없습니다.</p>;
@@ -28,7 +29,7 @@ function LetterView() {
         <LetterContent
           title={letter.letterTitle}
           content={letter.letterContents}
-          onGoList={() => console.log("목록 페이지로 이동")}
+          onGoList={() => navigate(`/remembrance/letters`)}
           infoItems={getHeavenInfoItems(letter)}
           onEdit={() => console.log("편지 수정")}
           onDelete={() => console.log("편지 삭제")}
