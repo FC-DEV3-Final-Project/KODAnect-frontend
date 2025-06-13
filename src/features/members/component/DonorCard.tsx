@@ -49,9 +49,9 @@ export default function DonorCard({
   return (
     <article
       className={clsx(
-        "flex w-[284px] flex-col gap-g6 rounded-r6 border-2 border-transparent bg-white p-p8 text-gray-90",
+        "flex max-w-[284px] basis-1/4 flex-col gap-g6 rounded-r6 border-2 border-transparent bg-white p-p8 text-gray-90",
         "shadow-[0_0_2px_0_theme('colors.secondary.10'),0_8px_16px_0_theme('colors.secondary.10')]",
-        "mobile:w-[160px] mobile:py-p6 mobile:pl-p6 mobile:pr-p5",
+        "basis-1/2 mobile:max-w-[160px] mobile:py-p6 mobile:pl-p6 mobile:pr-p5",
       )}
       aria-label={`기증자 ${donorName} 정보 카드`}
       key={donorId}
