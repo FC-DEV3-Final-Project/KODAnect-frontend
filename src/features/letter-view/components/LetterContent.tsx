@@ -44,6 +44,7 @@ function LetterContent({
             key={label}
             role="group"
             className="grid grid-cols-[auto_1fr] gap-g7 text-b-lg text-gray-95 mobile:text-b-sm"
+            aria-label={`${label}: ${value}`}
           >
             <dt
               className="w-[18rem] font-bold"
@@ -86,10 +87,20 @@ function LetterContent({
         </Button>
 
         <div className="flex gap-g5 mobile:gap-g3">
-          <Button variant="primary" size={isMobile ? "small" : "large"} onClick={onEdit}>
+          <Button
+            variant="primary"
+            size={isMobile ? "small" : "large"}
+            onClick={onEdit}
+            aria-label="편지 수정"
+          >
             수정
           </Button>
-          <Button variant="tertiary" size={isMobile ? "small" : "large"} onClick={onDelete}>
+          <Button
+            variant="tertiary"
+            size={isMobile ? "small" : "large"}
+            onClick={onDelete}
+            aria-label="편지 삭제"
+          >
             삭제
           </Button>
         </div>

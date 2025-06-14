@@ -32,12 +32,19 @@ function CommentArea({ variant = "default" }: CommentAreaProps) {
         <h2 id="comment-heading" className="text-h-md font-bold text-gray-90">
           {title}
         </h2>
-        <span className="text-b-md text-gray-70 mobile:text-b-sm">
+        <p id="comment-guideline" className="text-b-md text-gray-70 mobile:text-b-sm">
           기증자에 대한 추모 분위기를 해치거나, 비방의 글 등이 게시가 될 경우 관리자에 의해 삭제 될
           수 있습니다.
-        </span>
+        </p>
         {isMemorial && (
-          <div className="mt-g7 flex flex-wrap gap-g4 mobile:gap-g2">
+          <div
+            className="mt-g7 flex flex-wrap gap-g4 mobile:gap-g2"
+            role="group"
+            aria-labelledby="memorial-icon-group"
+          >
+            <h3 id="memorial-icon-group" className="sr-only">
+              추모 표현 아이콘 선택
+            </h3>
             {memorialIcons.map(({ label, icon, count }) => (
               <button
                 key={label}
