@@ -20,6 +20,7 @@ interface LetterCardProps {
   title?: string;
   date?: string;
   views?: number; // 조회수 (lg에서만 표시)
+  onClick?: () => void; // 추가
 }
 
 // 스타일 프리셋
@@ -53,11 +54,13 @@ export default function LetterCard({
   title,
   date,
   views,
+  onClick,
 }: LetterCardProps) {
   const preset = letterCardPresets[size];
 
   return (
     <a
+      onClick={onClick} //추가
       href="#"
       className={clsx(
         "flex flex-col rounded-r6 border-2 border-transparent bg-gray-0 p-p8 text-gray-90",

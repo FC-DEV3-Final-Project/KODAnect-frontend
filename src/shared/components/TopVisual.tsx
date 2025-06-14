@@ -62,7 +62,6 @@ function TopVisual({ type }: TopVisualProps) {
         src={imgUrl}
         alt=""
         className="absolute inset-0 h-full w-full object-cover"
-        loading="lazy"
         aria-hidden="true"
       />
 

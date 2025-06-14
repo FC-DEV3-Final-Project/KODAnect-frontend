@@ -17,6 +17,10 @@ import Comparison from "@/pages/participation/Comparison";
 import YearlyTrend from "@/pages/participation/YearlyTrend";
 import Notices from "@/pages/announcement/Notices";
 
+import LetterView from "@/pages/remembrance/LetterView";
+import RecipientView from "@/pages/remembrance/RecipientView";
+import StoryView from "@/pages/remembrance/StoryView";
+
 // 필요에 따라 페이지 컴포넌트 추가 import
 
 export const router = createBrowserRouter([
@@ -35,8 +39,11 @@ export const router = createBrowserRouter([
           { path: "members", element: <Members /> },
           { path: "members-view/:id", element: <MembersView /> },
           { path: "letters", element: <Letters /> },
+          { path: "letters-view/:id", element: <LetterView /> },
           { path: "recipients", element: <Recipients /> },
+          { path: "recipients-view/:id", element: <RecipientView /> },
           { path: "stories", element: <Stories /> },
+          { path: "stories-view/:id", element: <StoryView /> },
         ],
       },
     ],
