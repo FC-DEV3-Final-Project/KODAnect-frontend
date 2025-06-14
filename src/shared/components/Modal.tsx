@@ -87,7 +87,13 @@ export function Modal({
   }, [onClose]);
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby={type === "text" ? "modal-description" : undefined}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+    >
       <div className="relative w-[510px] rounded-r6 border border-gray-30 bg-white px-p9 pb-p9 pt-p8 mobile:w-[328px] mobile:pb-p8">
         <div className="mb-g5 flex justify-end">
           {/* 닫기 버튼 */}
@@ -100,10 +106,18 @@ export function Modal({
         {type === "text" && (
           <div className="mb-g7 text-center">
             {title && (
-              <h2 className="mb-g5 text-h-md font-bold text-gray-90 mobile:text-h-sm">{title}</h2>
+              <h2
+                id="modal-title"
+                className="mb-g5 text-h-md font-bold text-gray-90 mobile:text-h-sm"
+              >
+                {title}
+              </h2>
             )}
             {description && (
-              <p className="text-h-sm text-gray-80 mobile:whitespace-pre-line mobile:text-b-md">
+              <p
+                id="modal-description"
+                className="text-h-sm text-gray-80 mobile:whitespace-pre-line mobile:text-b-md"
+              >
                 {description}
               </p>
             )}
@@ -115,6 +129,7 @@ export function Modal({
           <div className="mb-g7">
             {title && (
               <label
+                id="modal-title"
                 htmlFor="modal-password"
                 className="mb-g5 block text-h-md font-bold text-gray-90"
               >
