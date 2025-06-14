@@ -10,7 +10,7 @@ export interface HeavenLetter {
 
 export const heavenLetters: HeavenLetter[] = [
   {
-    letterSeq: 1,
+    letterSeq: 12394,
     letterTitle: "비와..",
     letterContents: `아빠 ~ 딸왔어 ㅎㅎ
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
+import { useNavigate } from "react-router-dom"; //추가
 
 import clsx from "clsx";
 
@@ -18,6 +19,7 @@ import { storyData } from "@/features/stories/mock-data";
 export default function Letters() {
   const isMobile = useIsMobile(768);
   const pageCardCount = isMobile ? 16 : 20;
+  const navigate = useNavigate(); //추가
 
   const [selected, setSelected] = useState("");
   const [letterCount, setLetterCount] = useState(pageCardCount);
@@ -86,6 +88,7 @@ export default function Letters() {
                 date={item.date}
                 infoItems={item.infoItems}
                 views={item.views}
+                onClick={() => navigate(`/remembrance/stories-view/${item.letterNumber}`)} // 추가
               />
             ))}
           </div>
