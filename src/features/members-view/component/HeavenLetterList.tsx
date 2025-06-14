@@ -22,7 +22,7 @@ const dummyLetters: Letter[] = [
 ];
 
 export default function HeavenLetterList() {
-  const [letters, setLetters] = useState<Letter[]>(dummyLetters);
+  const [letters] = useState<Letter[]>(dummyLetters);
   const isMobile = useIsMobile();
 
   return (
