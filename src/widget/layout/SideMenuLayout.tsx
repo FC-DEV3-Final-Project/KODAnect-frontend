@@ -1,13 +1,16 @@
-import clsx from "clsx";
 import { Outlet } from "react-router-dom";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
+import { useScrollToTop } from "@/shared/hooks/useScrollToTop";
+
+import clsx from "clsx";
 import Header from "@/widget/header/Header";
+import { Breadcrumb } from "@/shared/components/Breadcrumb";
 import SideMenu from "@/widget/sideMenu/SideMenu";
 import Footer from "@/widget/Footer";
-import { Breadcrumb } from "@/shared/components/Breadcrumb";
 
 export default function SideMenuLayout() {
   const isMobile = useIsMobile(1075);
+  useScrollToTop();
 
   return (
     <>
@@ -21,7 +24,7 @@ export default function SideMenuLayout() {
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-[1280px] gap-g9 px-p10 mobile:px-p6">
+        <div className="mx-auto flex max-w-[1280px] gap-[54px] px-p10 mobile:px-p6">
           <SideMenu />
           <div className="flex-1 py-p10 mobile:py-p9">
             <Outlet />

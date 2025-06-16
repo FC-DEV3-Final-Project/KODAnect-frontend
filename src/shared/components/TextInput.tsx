@@ -6,6 +6,7 @@ import FocusIcon from "@/assets/icon/system-info.svg";
 import Visible from "@/assets/icon/visibility.svg";
 import Unvisible from "@/assets/icon/visibility-off.svg";
 import DeleteIcon from "@/assets/icon/delete.svg";
+import clsx from "clsx";
 
 /**
  * Example usage:
@@ -30,10 +31,20 @@ import DeleteIcon from "@/assets/icon/delete.svg";
  *   />
  * </div>
  *
+ * <div className="w-[30rem]">
+ *   <TextInput
+ *     id="disabled"
+ *     title="비활성화 상태"
+ *     placeholder="입력할 수 없습니다"
+ *     disabled
+ *   />
+ * </div>
+ *
  * - `height`: "large" | "medium" | "small" (기본값: "medium")
  * - `iconToggle`: 비밀번호 보기/숨기기 토글 버튼 여부
  * - `focusMessage`: input 포커스 시 보조 문구
  * - `completed`, `error`: 상태 메시지 표시
+ * - `disabled`: 입력 필드 비활성화 여부
  * - 너비는 부모 요소에서 지정 (`w-full`, `min-w-[...]` 등)
  */
 
@@ -53,7 +64,7 @@ type TextInputProps = {
   onToggleIconClick?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       title,
@@ -137,7 +148,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <div
         role="group"
         aria-labelledby={`${inputId}-label`}
-        className="flex flex-col justify-center gap-g2"
+        className="flex w-full flex-col justify-center gap-g2"
       >
         {title && (
           <Label id={`${inputId}-label`} htmlFor={inputId} size={"m"} color={"default"}>
@@ -149,12 +160,12 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             {description}
           </Label>
         )}
-        <div className="relative">
+        <div className="relative w-full">
           <input
             ref={ref}
             id={inputId}
             type={props.type}
-            className={`w-full ${heightClasses} ${radiusClass} ${fontSizeClass} border py-p6 pl-p6 focus:border-2 focus:border-primary-50 ${getPaddingRightClass()} text-gray-95 focus:outline-none ${error ? "border-2 border-danger-50" : "border border-gray-60"} transition duration-150 ease-in-out`}
+            disabled={props.disabled}
             placeholder={placeholder}
             aria-describedby={describedByIds || undefined}
             aria-invalid={error ? "true" : "false"}
@@ -168,6 +179,21 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             }}
             value={value}
             onChange={onChange}
+            className={clsx(
+              "w-full transition duration-150 ease-in-out",
+              heightClasses,
+              radiusClass,
+              fontSizeClass,
+              getPaddingRightClass(),
+              {
+                "cursor-not-allowed border border-gray-30 bg-gray-20 py-p6 pl-p6 text-gray-50":
+                  props.disabled,
+                "border py-p6 pl-p6 text-gray-95 focus:border-2 focus:border-secondary-50 focus:outline-none":
+                  !props.disabled,
+                "border-2 border-danger-50": error,
+                "border border-gray-60": !error && !props.disabled,
+              },
+            )}
             {...props}
           />
 
@@ -234,3 +260,5 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     );
   },
 );
+
+export default TextInput;

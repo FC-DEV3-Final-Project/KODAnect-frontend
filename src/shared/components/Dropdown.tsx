@@ -56,14 +56,14 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
   return (
     <div
       ref={dropdownRef}
-      className="relative w-full min-w-[8rem] mobile:w-full mobile:min-w-[8rem]"
+      className="relative w-full min-w-[8rem] mobile:h-full mobile:w-full mobile:min-w-[8rem]"
     >
       <button
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls="dropdown-listbox"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p6 py-p4 text-b-md text-gray-90 focus:outline focus:outline-2 focus:outline-primary-50 mobile:h-full mobile:text-b-sm"
+        className="flex w-full items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p6 py-p4 text-b-md text-gray-90 focus:outline focus:outline-2 focus:outline-secondary-50 mobile:h-full mobile:text-b-sm"
       >
         {selectedLabel}
         <img
@@ -78,7 +78,7 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
           role="listbox"
           id="dropdown-listbox"
           aria-labelledby="dropdown-button"
-          className="absolute z-10 mt-2 w-fit min-w-[13rem] rounded-r4 border border-gray-20 bg-white p-p3 shadow-s2 mobile:w-full"
+          className="absolute z-10 mt-2 w-fit min-w-[10.4rem] rounded-r4 border border-gray-20 bg-white p-p3 shadow-s2 mobile:w-full"
         >
           {options.map((option) => {
             const isSelected = option.value === value;

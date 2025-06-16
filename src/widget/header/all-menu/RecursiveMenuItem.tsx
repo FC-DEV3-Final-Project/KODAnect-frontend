@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 import { Link } from "react-router-dom";
-import type { SiteMenu } from '@/shared/types/SiteMenu.types';
+import type { SiteMenu } from "@/shared/types/SiteMenu.types";
 import { baseIconStyle, menuDotStyle } from "@/widget/header/menuStyles";
 
 import NewWindow from "@/assets/icon/open-new-window.svg";
@@ -20,7 +20,7 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
         className="mb-g9 flex items-start text-gray-90"
         aria-label={`${item.label} 관련 메뉴`}
       >
-        <h1 className="min-w-[165px] py-p6 pr-p6 text-h-lg font-bold">{item.label}</h1>
+        <h1 className="min-w-[165px] py-p6 pr-p6 text-h-md font-bold">{item.label}</h1>
         <ul
           className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6"
           role="menu"

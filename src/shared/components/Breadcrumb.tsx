@@ -47,28 +47,14 @@ export const Breadcrumb = () => {
           </button>
         </li>
 
-        {breadcrumbItems.map((item, index) => {
-          const isLast = index === breadcrumbItems.length - 1;
-
-          return (
-            <li key={index} className="flex items-center gap-g2">
-              <ArrowIcon className="h-icon2 w-icon2 -rotate-90 mobile:h-icon1 mobile:w-icon1" />
-              {isLast ? (
-                <span className="flex items-center gap-g2 px-p2 text-b-sm text-gray-90 mobile:gap-g3 mobile:text-b-xs">
-                  {item.label}
-                </span>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => item.path && navigate(item.path)}
-                  className="flex items-center gap-g2 px-p2 text-b-sm text-gray-90 underline mobile:gap-g3 mobile:text-b-xs"
-                >
-                  {item.label}
-                </button>
-              )}
-            </li>
-          );
-        })}
+        {breadcrumbItems.map((item, index) => (
+          <li key={index} className="flex items-center gap-g2">
+            <ArrowIcon className="h-icon2 w-icon2 -rotate-90 mobile:h-icon1 mobile:w-icon1" />
+            <span className="flex items-center gap-g2 px-p2 text-b-sm text-gray-90 mobile:gap-g3 mobile:text-b-xs">
+              {item.label}
+            </span>
+          </li>
+        ))}
       </ol>
     </nav>
   );
