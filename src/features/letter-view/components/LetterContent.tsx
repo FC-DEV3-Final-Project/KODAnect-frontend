@@ -1,6 +1,6 @@
 import { Button } from "@/shared/components/Button";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { sanitizeLetterContent } from "@/shared/utils/sanitizeHtml";
+import parse from "html-react-parser";
 
 type InfoItem = {
   label: string;
@@ -29,9 +29,6 @@ function LetterContent({
   onDelete,
 }: LetterContentProps) {
   const isMobile = useIsMobile();
-
-  // HTML 태그와 엔티티를 처리한 내용
-  const sanitizedContent = sanitizeLetterContent(content);
 
   return (
     <section
@@ -65,7 +62,7 @@ function LetterContent({
         aria-label="추모 편지 본문"
         className="mb-g9 whitespace-pre-line border-b border-gray-20 px-p4 py-p10 text-b-md text-black mobile:mb-g6 mobile:px-p5 mobile:text-b-sm"
       >
-        {sanitizedContent}
+        <div>{parse(content)}</div>
 
         {imageUrls && imageUrls.length > 0 && (
           <div className="mt-g7">
