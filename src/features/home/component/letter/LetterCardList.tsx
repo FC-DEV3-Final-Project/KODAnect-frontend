@@ -39,7 +39,7 @@ export default function LetterCardList() {
   return (
     <>
       {/* PC: 전체 카드 노출 */}
-      <div className="flex w-full flex-wrap items-center gap-g4 mobile:hidden">
+      <div className="grid w-full grid-cols-5 items-center gap-g4 mobile:hidden">
         {lettersData.map((item, index) => (
           <LetterCard
             key={index}
