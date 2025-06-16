@@ -11,14 +11,14 @@ export interface RecipientLetterDetail {
   anonymityFlag: "Y" | "N";
   readCount: number;
   letterContents: string;
-  fileName: string;
+  fileName: string[];
   orgFileName: string;
   writerId: string | null;
   modifierId: string | null;
   delFlag: "Y" | "N";
   commentCount: number;
   hasMoreComments: boolean;
-  imageUrl: string;
+  imageUrl: string[];
   initialCommentData: CommentPagination;
   writeTime: string;
   modifyTime: string;

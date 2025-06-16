@@ -34,6 +34,7 @@ function RecipientView() {
         setIsLoading(true);
         const response = await getLetterDetail(Number(id));
         setLetter(response.data.data); // 응답 구조 안에 data가 한 번 더 들어있음
+        console.log("🖼️ 렌더링용 이미지 URL:", response.data.data.fileName);
       } catch (err) {
         console.error("에러 발생:", err);
         setError("편지 정보를 불러오지 못했습니다.");
@@ -66,6 +67,7 @@ function RecipientView() {
           title={letter.letterTitle}
           content={letter.letterContents}
           infoItems={getRecipientInfoItems(letter)}
+          imageUrl={letter.fileName}
           onGoList={() => navigate(`/remembrance/recipients`)}
           onEdit={() => setModalType("edit")}
           onDelete={() => setModalType("delete")}

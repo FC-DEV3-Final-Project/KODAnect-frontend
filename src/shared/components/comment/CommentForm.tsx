@@ -1,15 +1,10 @@
-import { useState, useReducer, useEffect } from "react";
+import { useState, useReducer } from "react";
 import TextInput from "@/shared/components/TextInput";
 import TextArea from "@/shared/components/Textarea";
-import ResetIcon from "@/assets/icon/reset.svg?react";
+import Captcha from "@/shared/components/Captcha";
 
 import { Button } from "@/shared/components/Button";
-
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplateNoReload,
-  validateCaptcha,
-} from "react-simple-captcha";
+import { validateCaptcha } from "react-simple-captcha";
 
 // 상태 정의
 type FormState = {
@@ -44,10 +39,6 @@ function CommentForm() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inputCaptcha, setInputCaptcha] = useState("");
 
-  useEffect(() => {
-    loadCaptchaEnginge(6, "#6d7882", "black", "numbers");
-  }, []);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -63,16 +54,6 @@ function CommentForm() {
     } catch (err) {
       console.error("댓글 등록 실패", err);
     }
-  };
-
-  const handleCaptchaRefresh = () => {
-    loadCaptchaEnginge(
-      6, // 6자리
-      "#6d7882",
-      "black",
-      "numbers",
-    );
-    setInputCaptcha("");
   };
 
   return (
@@ -133,39 +114,8 @@ function CommentForm() {
         <label id="captcha-heading" className="text-b-md text-gray-70 mobile:text-b-sm">
           자동입력 방지
         </label>
-
         <div className="flex w-full flex-row mobile:flex-col mobile:gap-g3">
-          {/* 좌측 영역 */}
-          <div className="flex w-full flex-1 items-center gap-g3 mobile:flex-col mobile:items-start">
-            <div className="flex items-center gap-g3">
-              {/* react-simple-captcha Canvas 컴포넌트 */}
-              <div className="flex h-[48px] w-[211px] items-center justify-center bg-gray-50 mobile:w-[183px]">
-                <LoadCanvasTemplateNoReload />
-              </div>
-
-              <button
-                type="button"
-                aria-label="자동입력 새로고침"
-                className="flex h-[48px] w-[48px] items-center justify-center rounded-r3 border border-gray-60 bg-white"
-                onClick={handleCaptchaRefresh}
-              >
-                <ResetIcon className="h-icon4 w-icon4 text-gray-40" />
-              </button>
-            </div>
-
-            <div className="min-w-[29.6rem] mobile:w-full">
-              <TextInput
-                id="captcha"
-                placeholder="자동입력 방지 숫자 입력"
-                height="medium"
-                inputMode="numeric"
-                value={inputCaptcha}
-                onChange={(e) => setInputCaptcha(e.target.value)}
-              />
-            </div>
-          </div>
-
-          {/* 우측 버튼 영역 */}
+          <Captcha value={inputCaptcha} onChange={setInputCaptcha} />
           <Button
             type="submit"
             variant="primary"

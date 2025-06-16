@@ -11,7 +11,7 @@ type LetterContentProps = {
   title: string;
   content: string;
   infoItems: InfoItem[];
-  imageUrls?: string[];
+  imageUrl?: string[];
   mobileWidth?: string;
   onGoList?: () => void;
   onEdit?: () => void;
@@ -22,13 +22,14 @@ function LetterContent({
   title,
   content,
   infoItems,
-  imageUrls,
+  imageUrl,
   mobileWidth,
   onGoList,
   onEdit,
   onDelete,
 }: LetterContentProps) {
   const isMobile = useIsMobile();
+  const BASE_IMAGE_URL = "https://koda1.elementsoft.biz/attached"; // 예시
 
   return (
     <section
@@ -64,13 +65,13 @@ function LetterContent({
       >
         <div>{parse(content)}</div>
 
-        {imageUrls && imageUrls.length > 0 && (
+        {imageUrl && (
           <div className="mt-g7">
             <ul className="flex flex-col gap-g7">
-              {imageUrls.map((url, idx) => (
+              {imageUrl.map((url, idx) => (
                 <li key={idx}>
                   <img
-                    src={url}
+                    src={`${BASE_IMAGE_URL}/${url}`}
                     alt={`편지 이미지 ${idx + 1}`}
                     className="h-auto max-w-full"
                     loading="lazy"
