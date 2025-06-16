@@ -1,3 +1,5 @@
+import type { CommentPagination } from "@/shared/api/recipient-view/comment/types";
+
 import CommentForm from "@/shared/components/comment/CommentForm";
 import CommentList from "@/shared/components/comment/CommentList";
 import Flower from "@/assets/images/memorialIcon/flower.svg?react";
@@ -10,6 +12,7 @@ import Hard from "@/assets/images/memorialIcon/hard.svg?react";
 
 interface CommentAreaProps {
   variant?: "default" | "memorial";
+  initialCommentData: CommentPagination;
 }
 
 const memorialIcons = [
@@ -22,7 +25,7 @@ const memorialIcons = [
   { label: "슬퍼요", icon: <Sad className="h-icon3 w-icon3" />, count: 9 },
 ];
 
-function CommentArea({ variant = "default" }: CommentAreaProps) {
+function CommentArea({ variant = "default", initialCommentData }: CommentAreaProps) {
   const isMemorial = variant === "memorial";
   const title = variant === "memorial" ? "추모 메세지" : "댓글";
 
@@ -64,7 +67,7 @@ function CommentArea({ variant = "default" }: CommentAreaProps) {
       <div className="mb-g9">
         <CommentForm />
       </div>
-      <CommentList />
+      <CommentList comments={initialCommentData.content} />
     </section>
   );
 }

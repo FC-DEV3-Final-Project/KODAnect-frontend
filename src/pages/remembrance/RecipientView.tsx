@@ -33,6 +33,7 @@ function RecipientView() {
       try {
         setIsLoading(true);
         const response = await getLetterDetail(Number(id));
+        console.log("📦 댓글 데이터 확인:", response.data.data.initialCommentData.content);
         setLetter(response.data.data); // 응답 구조 안에 data가 한 번 더 들어있음
         console.log("🖼️ 렌더링용 이미지 URL:", response.data.data.fileName);
       } catch (err) {
@@ -111,7 +112,7 @@ function RecipientView() {
           />
         )}
 
-        <CommentArea />
+        <CommentArea variant="default" initialCommentData={letter.initialCommentData} />
       </div>
     </div>
   );

@@ -1,41 +1,16 @@
 import { useState } from "react";
+import type { Comment } from "@/shared/api/recipient-view/comment/types";
+
 import CommentItem from "@/shared/components/comment/CommentItem";
 import { Button } from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
-type Comment = {
-  id: string;
-  content: string;
-  date: string;
-  author: string;
-};
+interface CommentListProps {
+  comments: Comment[];
+}
 
-const dummyComments: Comment[] = [
-  {
-    id: "1",
-    content: "감사합니다.",
-    date: "2025-05-14T09:00:00",
-    author: "수혜자 아빠",
-  },
-  {
-    id: "2",
-    content: "감사합니다.",
-    date: "2025-05-15T08:00:00",
-    author: "수혜자 언니",
-  },
-  {
-    id: "3",
-    content: "감사합니다.",
-    date: "2025-05-15T10:00:00",
-    author: "수혜자 엄마",
-  },
-];
-
-function CommentList() {
+function CommentList({ comments }: CommentListProps) {
   const [openId, setOpenId] = useState<string | null>(null);
-  const comments = [...dummyComments].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
 
   return (
     <section
@@ -55,14 +30,16 @@ function CommentList() {
         <>
           <ul className="flex flex-col gap-g3" aria-label="댓글 목록">
             {comments.map((item) => (
-              <li key={item.id}>
+              <li>
                 <CommentItem
-                  id={item.id}
-                  content={item.content}
-                  date={item.date}
-                  author={item.author}
-                  isOpen={openId === item.id}
-                  onToggle={() => setOpenId(openId === item.id ? null : item.id)}
+                  key={item.commentSeq}
+                  comment={item}
+                  isOpen={openId === item.commentSeq.toString()}
+                  onToggle={() =>
+                    setOpenId(
+                      openId === item.commentSeq.toString() ? null : item.commentSeq.toString(),
+                    )
+                  }
                 />
               </li>
             ))}

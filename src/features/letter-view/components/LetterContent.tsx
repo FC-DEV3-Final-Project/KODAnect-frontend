@@ -66,7 +66,7 @@ function LetterContent({
         <div>{parse(content)}</div>
 
         {imageUrl && (
-          <div className="mt-g7">
+          <div className="mt-g7 w-full overflow-hidden">
             <ul className="flex flex-col gap-g7">
               {imageUrl.map((url, idx) => (
                 <li key={idx}>

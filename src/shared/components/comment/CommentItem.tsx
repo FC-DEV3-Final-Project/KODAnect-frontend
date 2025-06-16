@@ -1,19 +1,18 @@
 import { useState } from "react";
+import type { Comment as CommentType } from "@/shared/api/recipient-view/comment/types";
 
 import OptionIcon from "@/assets/icon/ellipsis-vertical.svg?react";
 import { Modal } from "@/shared/components/Modal";
 
 type CommentItemProps = {
-  id: string;
-  content: string;
-  date: string;
-  author: string;
+  comment: CommentType;
   isOpen: boolean;
   onToggle: () => void;
 };
 
-function CommentItem({ id, content, date, author, isOpen, onToggle }: CommentItemProps) {
-  const dropdownId = `comment-dropdown-${author}-${date}`;
+function CommentItem({ comment, isOpen, onToggle }: CommentItemProps) {
+  const { commentSeq, commentContents, commentWriter, writeTime } = comment;
+  const dropdownId = `comment-dropdown-${commentWriter}-${writeTime}`;
 
   const [isModalOpen, setIsModalOpen] = useState<"edit" | "delete" | null>(null);
   const [password, setPassword] = useState("");
@@ -31,7 +30,9 @@ function CommentItem({ id, content, date, author, isOpen, onToggle }: CommentIte
   return (
     <article className="flex flex-col gap-g7 rounded-r6 border border-gray-30 px-6 py-p7 mobile:gap-g4 mobile:p-p6">
       <div className="flex items-start justify-between">
-        <p className="text-b-md text-gray-90 mobile:text-b-sm">{content}</p>
+        <p className="whitespace-pre-line text-b-md text-gray-90 mobile:text-b-sm">
+          {commentContents}
+        </p>
         <div className="relative">
           <button
             type="button"
@@ -70,9 +71,9 @@ function CommentItem({ id, content, date, author, isOpen, onToggle }: CommentIte
 
       <div className="flex items-center text-b-sm text-gray-60 mobile:text-b-xs">
         <time className="relative pr-p5 after:absolute after:right-0 after:top-1/2 after:h-[16px] after:w-[1px] after:-translate-y-1/2 after:bg-gray-20 after:content-['']">
-          {date?.slice(0, 10)}
+          {writeTime?.slice(0, 10)}
         </time>
-        <span className="ml-p5">{author}</span>
+        <span className="ml-p5">{commentWriter}</span>
       </div>
 
       {isModalOpen && (
@@ -90,10 +91,10 @@ function CommentItem({ id, content, date, author, isOpen, onToggle }: CommentIte
             try {
               // 🔐 비밀번호 확인 후 요청
               if (isModalOpen === "delete") {
-                console.log(`댓글 ${id} 삭제 요청 with password: ${password}`);
+                console.log(`댓글 ${commentSeq} 삭제 요청 with password: ${password}`);
                 // TODO: 삭제 API 호출
               } else {
-                console.log(`댓글 ${id} 수정 요청 with password: ${password}`);
+                console.log(`댓글 ${commentSeq} 수정 요청 with password: ${password}`);
                 // TODO: 수정 모드 전환
               }
 
