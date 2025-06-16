@@ -15,7 +15,8 @@ const dummyLetters: Letter[] = [
   { id: 2, title: "잘 지내지?", date: "YYYY-MM-DD", views: 555 },
   {
     id: 3,
-    title: "길동아 네가 떠난지 벌써 1년이 지났어...",
+    title:
+      "길동아 네가 떠난지 벌써 1년이 지났어... 그곳에서도 잘 지내지지지지 응응 그래 테스트야 옹 아주 긴 제목이야 더 길게 해볼까",
     date: "YYYY-MM-DD",
     views: 222,
   },
@@ -47,13 +48,19 @@ export default function HeavenLetterList() {
         >
           <thead className="border-b border-secondary-10 bg-secondary-5 text-b-lg font-bold text-gray-95 mobile:text-b-sm">
             <tr>
-              <th scope="col" className="w-[73.33%] px-p6 py-p5 mobile:w-[55%]">
+              <th scope="col" className="w-[73.33%] px-p6 py-p5 mobile:w-[55%] mobile:py-p3">
                 제목
               </th>
-              <th scope="col" className="w-[17.5%] px-p6 py-p5 mobile:w-[26%] mobile:text-center">
+              <th
+                scope="col"
+                className="w-[17.5%] px-p6 py-p5 mobile:w-[26%] mobile:py-p3 mobile:text-center"
+              >
                 작성일
               </th>
-              <th scope="col" className="w-[9.17%] px-p6 py-p5 mobile:w-[19%] mobile:text-center">
+              <th
+                scope="col"
+                className="w-[9.17%] px-p6 py-p5 mobile:w-[19%] mobile:py-p3 mobile:text-center"
+              >
                 {isMobile ? "조회" : "조회수"}
               </th>
             </tr>
@@ -63,21 +70,25 @@ export default function HeavenLetterList() {
               letters.map((letter) => (
                 <tr
                   key={letter.id}
-                  className="h-[76px] cursor-pointer border-t border-gray-20 text-b-lg text-gray-70 hover:bg-gray-5 mobile:text-b-sm"
+                  className="cursor-pointer border-t border-gray-20 text-b-lg text-gray-70 hover:bg-gray-5 mobile:text-b-sm"
                   onClick={() => {
                     // navigate(`/letters-form`);
                   }}
                 >
-                  <td className="break-words px-p6 mobile:line-clamp-2 mobile:py-p5">
-                    {letter.title}
+                  <td className="px-p6 py-p8 mobile:flex mobile:min-h-[64px] mobile:items-center mobile:py-0">
+                    <div className="line-clamp-1 mobile:line-clamp-2">{letter.title}</div>
                   </td>
                   <td className="px-p6 mobile:text-center">{letter.date}</td>
                   <td className="px-p6 mobile:text-center">{letter.views}</td>
                 </tr>
               ))
             ) : (
-              <tr className="h-[76px] border-t border-gray-20">
-                <td colSpan={3} className="text-center text-b-lg text-gray-40" role="status">
+              <tr className="border-t border-gray-20">
+                <td
+                  colSpan={3}
+                  className="py-p5 text-center text-b-lg text-gray-40 mobile:text-b-sm"
+                  role="status"
+                >
                   아직 등록된 편지가 없습니다.
                 </td>
               </tr>

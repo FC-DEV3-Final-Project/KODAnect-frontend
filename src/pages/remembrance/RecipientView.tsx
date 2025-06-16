@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
+import {
+  getLetterDetail,
+  verifyLetter,
+  deleteLetter,
+} from "@/shared/api/recipient-view/letter/letterApi";
+import type { RecipientLetterDetail } from "@/shared/api/recipient-view/letter/types";
 
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
-import { recipientLetters } from "@/features/recipient-view/mock-data";
 import { TopArea } from "@/shared/components/TopArea";
 import { getRecipientInfoItems } from "@/features/recipient-view/utils/getRecipientInfoItems";
 import { Modal } from "@/shared/components/Modal";
@@ -12,14 +18,36 @@ import { Modal } from "@/shared/components/Modal";
 function RecipientView() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const letter = recipientLetters.find((l) => l.letterSeq === Number(id));
-
-  if (!letter) {
-    return <p className="mt-10 text-center">편지를 찾을 수 없습니다.</p>;
-  }
 
   const [modalType, setModalType] = useState<"edit" | "delete" | null>(null);
   const [password, setPassword] = useState("");
+
+  const [letter, setLetter] = useState<RecipientLetterDetail | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchLetter = async () => {
+      try {
+        setIsLoading(true);
+        const response = await getLetterDetail(Number(id));
+        setLetter(response.data.data); // 응답 구조 안에 data가 한 번 더 들어있음
+      } catch (err) {
+        console.error("에러 발생:", err);
+        setError("편지 정보를 불러오지 못했습니다.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchLetter();
+  }, [id]);
+
+  if (isLoading) return <p className="mt-10 text-center">불러오는 중...</p>;
+  if (error) return <p className="mt-10 text-center text-red-500">{error}</p>;
+  if (!letter) return <p className="mt-10 text-center">편지를 찾을 수 없습니다.</p>;
 
   return (
     <div className="mx-auto w-full">
@@ -54,15 +82,29 @@ function RecipientView() {
               setModalType(null);
               setPassword("");
             }}
-            onSubmit={() => {
-              if (modalType === "edit") {
-                // 편지 수정 페이지로 이동
-              } else {
-                // 삭제 요청 → 성공 시 목록으로 이동
-                navigate(`/remembrance/recipients`);
+            onSubmit={async () => {
+              if (!id || !letter) return;
+
+              try {
+                if (modalType === "edit") {
+                  // 편지 수정 비밀번호 인증
+                  await verifyLetter(Number(id), { letterPasscode: password });
+
+                  // 인증 성공 시 수정 페이지로 이동 (상태로 데이터 넘기기)
+                  navigate(`/remembrance/recipients/edit/${id}`, {
+                    state: letter,
+                  });
+                } else {
+                  // 편지 삭제 요청
+                  await deleteLetter(Number(id), { letterPasscode: password });
+                  navigate(`/remembrance/recipients`);
+                }
+              } catch (err) {
+                alert("비밀번호가 올바르지 않거나 삭제에 실패했습니다.");
+              } finally {
+                setModalType(null);
+                setPassword("");
               }
-              setModalType(null);
-              setPassword("");
             }}
           />
         )}

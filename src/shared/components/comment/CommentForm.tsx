@@ -2,7 +2,7 @@ import { useState, useReducer, useEffect } from "react";
 import TextInput from "@/shared/components/TextInput";
 import TextArea from "@/shared/components/Textarea";
 import ResetIcon from "@/assets/icon/reset.svg?react";
-import SoundIcon from "@/assets/icon/sound.svg?react";
+
 import { Button } from "@/shared/components/Button";
 
 import {
@@ -75,12 +75,6 @@ function CommentForm() {
     setInputCaptcha("");
   };
 
-  const handleSpeechCaptcha = () => {
-    const utterance = new SpeechSynthesisUtterance("화면에 표시된 숫자를 입력해 주세요");
-    utterance.lang = "ko-KR";
-    speechSynthesis.speak(utterance);
-  };
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -149,14 +143,6 @@ function CommentForm() {
                 <LoadCanvasTemplateNoReload />
               </div>
 
-              <button
-                type="button"
-                aria-label="자동입력 음성 듣기"
-                className="flex h-[48px] w-[48px] items-center justify-center rounded-r3 border border-gray-60 bg-white"
-                onClick={handleSpeechCaptcha}
-              >
-                <SoundIcon className="h-icon4 w-icon4" />
-              </button>
               <button
                 type="button"
                 aria-label="자동입력 새로고침"
