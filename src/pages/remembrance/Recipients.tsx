@@ -79,7 +79,12 @@ export default function Letters() {
         <div
           className={clsx("mt-g7 flex flex-col items-center gap-g7", "mobile:mt-g8 mobile:gap-g7")}
         >
-          <div className={clsx("flex flex-wrap gap-g7", "mobile:gap-x-g3 mobile:gap-y-g4")}>
+          <div
+            className={clsx(
+              "flex flex-wrap justify-center gap-g7",
+              "mobile:gap-x-g3 mobile:gap-y-g4",
+            )}
+          >
             {sortedData.slice(0, letterCount).map((item, index) => (
               <LetterCard
                 key={index}

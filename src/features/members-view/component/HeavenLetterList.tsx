@@ -15,8 +15,7 @@ const dummyLetters: Letter[] = [
   { id: 2, title: "잘 지내지?", date: "YYYY-MM-DD", views: 555 },
   {
     id: 3,
-    title:
-      "길동아 네가 떠난지 벌써 1년이 지났어... 그곳에서도 잘 지내지지지지 응응 그래 테스트야 옹 아주 긴 제목이야 더 길게 해볼까",
+    title: "길동아 네가 떠난지 벌써 1년이 지났어... ",
     date: "YYYY-MM-DD",
     views: 222,
   },

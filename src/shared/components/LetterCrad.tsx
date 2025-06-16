@@ -26,7 +26,8 @@ interface LetterCardProps {
 // 스타일 프리셋
 const letterCardPresets = {
   lg: {
-    layout: "gap-g5 mobile:gap-g4 w-[282px] mobile:w-[160px] mobile:p-p6",
+    layout:
+      "gap-g5 max-w-[282px] basis-1/4 grow-0 shrink-0 mobile:basis-1/2 mobile:max-w-[160px] mobile:p-p6 mobile:gap-g4",
     fontTitle: "text-h-sm mobile:text-h-xs",
     fontDate: "mobile:text-b-xs",
     icon: "h-[30px] w-[30px] mobile:w-icon3 mobile:h-icon3",
@@ -35,7 +36,7 @@ const letterCardPresets = {
     valueFont: "mobile:text-b-xs",
   },
   sm: {
-    layout: "gap-g4 w-[230px] mobile:w-[208px]",
+    layout: "gap-g4 basis-1/5 max-w-[230px] mobile:w-[208px]",
     fontTitle: "text-b-sm",
     fontDate: "text-b-xs",
     icon: "h-icon4 w-icon4",
@@ -73,7 +74,10 @@ export default function LetterCard({
       <div className={clsx("relative flex items-center", preset.gapIcon)}>
         <Mail className={preset.icon} aria-hidden="true" focusable="false" />
         <span
-          className={clsx("text-gray-70 mobile:text-b-xs", size === "sm" && "text-b-xs")}
+          className={clsx(
+            "line-clamp-1 text-gray-70 mobile:text-b-xs",
+            size === "sm" && "text-b-xs",
+          )}
           aria-label={
             labelType === "story" ? `${letterNumber}번째 이야기` : `${letterNumber}번째 편지`
           }

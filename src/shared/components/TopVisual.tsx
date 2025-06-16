@@ -74,7 +74,7 @@ function TopVisual({ type }: TopVisualProps) {
       )}
 
       {/* 텍스트 콘텐츠 */}
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center text-center text-white mobile:items-start mobile:px-p9 mobile:text-left">
+      <div className="relative flex h-full w-full flex-col items-center justify-center text-center text-white mobile:items-start mobile:px-p9 mobile:text-left">
         <h1 className="text-d-md font-bold leading-tight tracking-1 mobile:text-d-md">
           {content.title}
         </h1>
