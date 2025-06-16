@@ -17,7 +17,7 @@ const DateInput = forwardRef<HTMLButtonElement, DateInputProps>(
       <button
         ref={ref}
         onClick={() => {
-          onClick;
+          onClick();
           onOpen?.();
         }}
         onFocus={onOpen}
