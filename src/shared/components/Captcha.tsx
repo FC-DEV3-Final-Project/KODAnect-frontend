@@ -3,6 +3,37 @@ import { LoadCanvasTemplateNoReload, loadCaptchaEnginge } from "react-simple-cap
 import ResetIcon from "@/assets/icon/reset.svg?react";
 import TextInput from "@/shared/components/TextInput";
 
+/**
+ * Example usage:
+ *
+ * import { useState } from "react";
+ * import Captcha from "@/shared/components/Captcha";
+ * import { validateCaptcha } from "react-simple-captcha";
+ *
+ * function CommentForm() {
+ *   const [captchaInput, setCaptchaInput] = useState("");
+ *
+ *   const handleSubmit = (e: React.FormEvent) => {
+ *     e.preventDefault();
+ *
+ *     if (!validateCaptcha(captchaInput)) {
+ *       alert("자동입력 방지 숫자가 일치하지 않습니다.");
+ *       return;
+ *     }
+ *
+ *     // 제출 로직
+ *     console.log("제출 완료");
+ *   };
+ *
+ *   return (
+ *     <form onSubmit={handleSubmit}>
+ *       <Captcha value={captchaInput} onChange={setCaptchaInput} />
+ *       <button type="submit">제출</button>
+ *     </form>
+ *   );
+ * }
+ */
+
 type CaptchaSectionProps = {
   value: string;
   onChange: (value: string) => void;
