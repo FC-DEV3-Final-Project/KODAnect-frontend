@@ -14,15 +14,15 @@ export interface Comment {
 /** 더보기 요청*/
 export interface GetMoreCommentsPayload {
   letterId: number;
-  cursor: number;
+  cusor: number;
   size?: number;
 }
 
 /** 더보기 응답*/
 export interface CommentPagination {
   content: Comment[];
-  replyNextCursor: number;
-  replyHasNext: boolean; // 댓글이 없으면 더보기 버튼 숨김
+  commentNextCursor: number;
+  commentHasNext: boolean; // 댓글이 없으면 더보기 버튼 숨김
 }
 
 /** 댓글 전체 응답*/

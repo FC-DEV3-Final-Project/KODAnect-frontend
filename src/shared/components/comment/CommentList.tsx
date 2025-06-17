@@ -7,9 +7,12 @@ import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
 interface CommentListProps {
   comments: Comment[];
+  hasNext: boolean;
+  nextCursor: number;
+  onLoadMore: () => void;
 }
 
-function CommentList({ comments }: CommentListProps) {
+function CommentList({ comments, hasNext, onLoadMore }: CommentListProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
@@ -24,15 +27,14 @@ function CommentList({ comments }: CommentListProps) {
         )}
       </h3>
 
-      {comments.length === 0 ? (
+      {comments.length === 0 && !hasNext ? (
         <p className="mt-[8px] text-center text-b-lg text-gray-40">아직 등록된 댓글이 없습니다.</p>
       ) : (
         <>
           <ul className="flex flex-col gap-g3" aria-label="댓글 목록">
             {comments.map((item) => (
-              <li>
+              <li key={item.commentSeq}>
                 <CommentItem
-                  key={item.commentSeq}
                   comment={item}
                   isOpen={openId === item.commentSeq.toString()}
                   onToggle={() =>
@@ -45,9 +47,15 @@ function CommentList({ comments }: CommentListProps) {
             ))}
           </ul>
 
-          {comments.length > 2 && (
+          {hasNext && (
             <div className="flex justify-center">
-              <Button variant="secondary" size="medium" className="w-full" aria-label="댓글 더보기">
+              <Button
+                variant="secondary"
+                size="medium"
+                className="w-full"
+                aria-label="댓글 더보기"
+                onClick={onLoadMore}
+              >
                 <span className="text-b-md mobile:text-b-sm">더보기</span>
                 <PlusIcon
                   className="h-icon3 w-icon3 text-secondary-50 mobile:h-icon2 mobile:w-icon2"

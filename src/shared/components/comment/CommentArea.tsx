@@ -1,4 +1,6 @@
+import { useState } from "react";
 import type { CommentPagination } from "@/shared/api/recipient-view/comment/types";
+import { getMoreComments } from "@/shared/api/recipient-view/comment/commentApi";
 
 import CommentForm from "@/shared/components/comment/CommentForm";
 import CommentList from "@/shared/components/comment/CommentList";
@@ -13,6 +15,7 @@ import Hard from "@/assets/images/memorialIcon/hard.svg?react";
 interface CommentAreaProps {
   variant?: "default" | "memorial";
   initialCommentData: CommentPagination;
+  letterId: number;
 }
 
 const memorialIcons = [
@@ -25,9 +28,32 @@ const memorialIcons = [
   { label: "슬퍼요", icon: <Sad className="h-icon3 w-icon3" />, count: 9 },
 ];
 
-function CommentArea({ variant = "default", initialCommentData }: CommentAreaProps) {
+function CommentArea({ variant = "default", initialCommentData, letterId }: CommentAreaProps) {
   const isMemorial = variant === "memorial";
   const title = variant === "memorial" ? "추모 메세지" : "댓글";
+
+  const [comments, setComments] = useState(initialCommentData.content);
+  const [cusor, setCursor] = useState(initialCommentData.commentNextCursor);
+  const [hasNext, setHasNext] = useState(initialCommentData.commentHasNext);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLoadMore = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    try {
+      const res = await getMoreComments({ letterId, cusor, size: 3 });
+      const data = res.data.data;
+      console.log("📦 추가 댓글:", data.content);
+      setComments((prev) => [...prev, ...data.content]);
+      setCursor(data.commentNextCursor);
+      setHasNext(data.commentHasNext);
+    } catch (e) {
+      console.error("더보기 실패", e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section className="mx-auto h-full w-full max-w-[1200px]" aria-labelledby="comment-heading">
@@ -65,9 +91,17 @@ function CommentArea({ variant = "default", initialCommentData }: CommentAreaPro
         )}
       </div>
       <div className="mb-g9">
-        <CommentForm />
+        <CommentForm
+          letterId={letterId}
+          onCommentSubmit={(newComment) => setComments((prev) => [newComment, ...prev])} //등록한 댓글 바로 반영
+        />
       </div>
-      <CommentList comments={initialCommentData.content} />
+      <CommentList
+        comments={comments}
+        hasNext={hasNext}
+        nextCursor={cusor}
+        onLoadMore={handleLoadMore}
+      />
     </section>
   );
 }

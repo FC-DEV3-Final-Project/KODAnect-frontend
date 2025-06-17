@@ -13,10 +13,10 @@ import type {
 } from "@/shared/api/recipient-view/comment/types";
 
 /** 댓글 더보기 (커서 기반 페이징) */
-export const getMoreComments = ({ letterId, cursor, size = 3 }: GetMoreCommentsPayload) =>
+export const getMoreComments = ({ letterId, cusor, size = 3 }: GetMoreCommentsPayload) =>
   api.get<CommentListResponse>(`/recipientLetters/${letterId}/comments`, {
     params: {
-      cursor: cursor,
+      cusor: cusor,
       size,
     },
   });

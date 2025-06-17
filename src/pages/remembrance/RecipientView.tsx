@@ -47,9 +47,11 @@ function RecipientView() {
     fetchLetter();
   }, [id]);
 
-  if (isLoading) return <p className="mt-10 text-center">불러오는 중...</p>;
-  if (error) return <p className="mt-10 text-center text-red-500">{error}</p>;
-  if (!letter) return <p className="mt-10 text-center">편지를 찾을 수 없습니다.</p>;
+  useEffect(() => {
+    if (letter) {
+      console.log("📦 전달받은 initialCommentData:", letter.initialCommentData);
+    }
+  }, [letter]);
 
   return (
     <div className="mx-auto w-full">
@@ -64,55 +66,64 @@ function RecipientView() {
             "이 게시판에 올린 글은 한국장기조직기증원 뉴스레터에 원문의 의미를 훼손하지 않는 범위내에서 교정을 거쳐 임의 수록할 수 있음을 양지하시기 바랍니다.",
           ]}
         />
-        <LetterContent
-          title={letter.letterTitle}
-          content={letter.letterContents}
-          infoItems={getRecipientInfoItems(letter)}
-          imageUrl={letter.fileName}
-          onGoList={() => navigate(`/remembrance/recipients`)}
-          onEdit={() => setModalType("edit")}
-          onDelete={() => setModalType("delete")}
-          mobileWidth="10rem"
-        />
-        {modalType && (
-          <Modal
-            type="input"
-            title="비밀번호 확인"
-            placeholder="비밀번호를 입력하세요"
-            password={password}
-            setPassword={setPassword}
-            onClose={() => {
-              setModalType(null);
-              setPassword("");
-            }}
-            onSubmit={async () => {
-              if (!id || !letter) return;
+        {isLoading ? (
+          <p className="mt-10 text-center">불러오는 중...</p>
+        ) : error ? (
+          <p className="mt-10 text-center text-red-500">{error}</p>
+        ) : letter ? (
+          <>
+            <LetterContent
+              title={letter.letterTitle}
+              content={letter.letterContents}
+              infoItems={getRecipientInfoItems(letter)}
+              imageUrl={letter.fileName}
+              onGoList={() => navigate(`/remembrance/recipients`)}
+              onEdit={() => setModalType("edit")}
+              onDelete={() => setModalType("delete")}
+              mobileWidth="10rem"
+            />
 
-              try {
-                if (modalType === "edit") {
-                  // 편지 수정 비밀번호 인증
-                  await verifyLetter(Number(id), { letterPasscode: password });
+            <CommentArea
+              variant="default"
+              initialCommentData={letter.initialCommentData}
+              letterId={letter.letterSeq}
+            />
 
-                  // 인증 성공 시 수정 페이지로 이동 (상태로 데이터 넘기기)
-                  navigate(`/remembrance/recipients/edit/${id}`, {
-                    state: letter,
-                  });
-                } else {
-                  // 편지 삭제 요청
-                  await deleteLetter(Number(id), { letterPasscode: password });
-                  navigate(`/remembrance/recipients`);
-                }
-              } catch (err) {
-                alert("비밀번호가 올바르지 않거나 삭제에 실패했습니다.");
-              } finally {
-                setModalType(null);
-                setPassword("");
-              }
-            }}
-          />
+            {modalType && (
+              <Modal
+                type="input"
+                title="비밀번호 확인"
+                placeholder="비밀번호를 입력하세요"
+                password={password}
+                setPassword={setPassword}
+                onClose={() => {
+                  setModalType(null);
+                  setPassword("");
+                }}
+                onSubmit={async () => {
+                  if (!id || !letter) return;
+
+                  try {
+                    if (modalType === "edit") {
+                      await verifyLetter(Number(id), { letterPasscode: password });
+                      navigate(`/remembrance/recipients/edit/${id}`, { state: letter });
+                    } else {
+                      await deleteLetter(Number(id), { letterPasscode: password });
+                      navigate(`/remembrance/recipients`);
+                    }
+                  } catch (err) {
+                    alert("비밀번호가 올바르지 않거나 삭제에 실패했습니다.");
+                  } finally {
+                    setModalType(null);
+                    setPassword("");
+                  }
+                }}
+              />
+            )}
+          </>
+        ) : (
+          <p className="mt-10 text-center">편지를 찾을 수 없습니다.</p>
         )}
-
-        <CommentArea variant="default" initialCommentData={letter.initialCommentData} />
       </div>
     </div>
   );

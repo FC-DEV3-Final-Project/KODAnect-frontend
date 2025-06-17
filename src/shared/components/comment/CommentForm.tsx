@@ -1,4 +1,10 @@
 import { useState, useReducer } from "react";
+import { createComment } from "@/shared/api/recipient-view/comment/commentApi";
+import type {
+  Comment as CommentType,
+  CreateCommentPayload,
+} from "@/shared/api/recipient-view/comment/types";
+
 import TextInput from "@/shared/components/TextInput";
 import TextArea from "@/shared/components/Textarea";
 import Captcha from "@/shared/components/Captcha";
@@ -6,20 +12,23 @@ import Captcha from "@/shared/components/Captcha";
 import { Button } from "@/shared/components/Button";
 import { validateCaptcha } from "react-simple-captcha";
 
-// 상태 정의
-type FormState = {
-  writer: string;
-  password: string;
-  content: string;
+type CommentFormProps = {
+  letterId: number;
+  onCommentSubmit?: (newComment: CommentType) => void; // 등록된 댓글 콜백
 };
+
+type FormState = Pick<
+  CreateCommentPayload,
+  "commentWriter" | "commentContents" | "commentPasscode"
+>;
 
 // 액션 정리
 type FormAction = { type: "SET_FIELD"; field: keyof FormState; value: string } | { type: "RESET" };
 
 const initialState: FormState = {
-  writer: "",
-  password: "",
-  content: "",
+  commentWriter: "",
+  commentPasscode: "",
+  commentContents: "",
 };
 
 // reducer 함수
@@ -34,7 +43,7 @@ function reducer(state: FormState, action: FormAction): FormState {
   }
 }
 
-function CommentForm() {
+function CommentForm({ letterId, onCommentSubmit }: CommentFormProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inputCaptcha, setInputCaptcha] = useState("");
@@ -48,6 +57,17 @@ function CommentForm() {
     }
 
     try {
+      const response = await createComment({
+        letterSeq: letterId,
+        commentWriter: state.commentWriter,
+        commentContents: state.commentContents,
+        commentPasscode: state.commentPasscode,
+      });
+
+      alert("댓글이 등록되었습니다.");
+
+      onCommentSubmit?.(response.data.data);
+
       dispatch({ type: "RESET" });
       setInputCaptcha("");
       console.log("댓글 등록 완료");
@@ -75,9 +95,9 @@ function CommentForm() {
             title="추모자"
             height="medium"
             placeholder="한글/ 영문만 입력"
-            value={state.writer}
+            value={state.commentWriter}
             onChange={(e) =>
-              dispatch({ type: "SET_FIELD", field: "writer", value: e.target.value })
+              dispatch({ type: "SET_FIELD", field: "commentWriter", value: e.target.value })
             }
           />
         </div>
@@ -90,9 +110,9 @@ function CommentForm() {
             type={isVisible ? "text" : "password"}
             iconToggle
             isVisible={isVisible}
-            value={state.password}
+            value={state.commentPasscode}
             onChange={(e) =>
-              dispatch({ type: "SET_FIELD", field: "password", value: e.target.value })
+              dispatch({ type: "SET_FIELD", field: "commentPasscode", value: e.target.value })
             }
             onToggleIconClick={() => setIsVisible((prev) => !prev)}
           />
@@ -105,8 +125,10 @@ function CommentForm() {
           title="내용"
           placeholder="기증자에 대한 추모 분위기를 해치거나, 비방의 글 등이 게시가 될 경우 관리자에 의해 삭제 될 수 있습니다."
           maxLength={100}
-          value={state.content}
-          onChange={(e) => dispatch({ type: "SET_FIELD", field: "content", value: e.target.value })}
+          value={state.commentContents}
+          onChange={(e) =>
+            dispatch({ type: "SET_FIELD", field: "commentContents", value: e.target.value })
+          }
         />
       </div>
 
