@@ -49,7 +49,7 @@ interface PaginationProps {
   visiblePages?: number;
 }
 
-export function Pagination({
+export default function Pagination({
   totalPages,
   currentPage,
   onPageChange,
@@ -62,7 +62,7 @@ export function Pagination({
   const pageNumbers = generateRangeGuaranteedSequence(currentPage, visiblePages, 1, totalPages);
 
   const renderPageNumbers = () => (
-    <ul className="flex items-center gap-g3 mobile:order-3 mobile:mt-2 mobile:w-full mobile:justify-center mobile:gap-g2">
+    <ul className="flex items-center gap-g3 mobile:order-3 mobile:mt-p2 mobile:w-full mobile:justify-center mobile:gap-g2">
       {pageNumbers.map((page, index) => (
         <li key={`${page}-${index}`}>
           {page === "ellipsis" ? (
@@ -72,7 +72,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(page as number)}
               className={clsx(
-                "h-[40px] w-[40px] mobile:text-b-sm",
+                "h-icon6 w-icon6 mobile:text-b-sm",
                 currentPage === page
                   ? "rounded-r2 bg-secondary-70 font-bold text-gray-0"
                   : "text-gray-70 hover:rounded-r2 hover:bg-secondary-70 hover:text-gray-0",
@@ -97,7 +97,7 @@ export function Pagination({
         type="button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="flex items-center justify-center text-gray-70 disabled:text-gray-40 mobile:px-3 mobile:text-b-xs"
+        className="flex items-center justify-center text-gray-70 disabled:text-gray-40 mobile:px-p3 mobile:text-b-xs"
         aria-label="이전 페이지"
       >
         <ArrowIcon
@@ -115,7 +115,7 @@ export function Pagination({
         type="button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="flex items-center justify-center text-gray-70 disabled:text-gray-40 mobile:px-3 mobile:text-b-xs"
+        className="flex items-center justify-center text-gray-70 disabled:text-gray-40 mobile:px-p3 mobile:text-b-xs"
         aria-label="다음 페이지"
       >
         다음

@@ -59,6 +59,7 @@ type TextInputProps = {
   iconToggle?: boolean;
   isVisible?: boolean;
   value?: string;
+  className?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClear?: () => void;
   onToggleIconClick?: () => void;
@@ -81,6 +82,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       onFocus,
       onBlur,
       value,
+      className,
       onChange,
       onClear,
       ...props
@@ -148,7 +150,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <div
         role="group"
         aria-labelledby={`${inputId}-label`}
-        className="flex w-full flex-col justify-center gap-g2"
+        className={`flex w-full flex-col justify-center gap-g2 ${className}`}
       >
         {title && (
           <Label id={`${inputId}-label`} htmlFor={inputId} size={"m"} color={"default"}>
