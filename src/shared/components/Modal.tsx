@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import TextInput from "@/shared/components/TextInput";
 import CloseIcon from "@/assets/icon/close.svg?react";
 

@@ -4,7 +4,7 @@ import { useScrollToTop } from "@/shared/hooks/useScrollToTop";
 
 import clsx from "clsx";
 import Header from "@/widget/header/Header";
-import { Breadcrumb } from "@/shared/components/Breadcrumb";
+import Breadcrumb from "@/shared/components/Breadcrumb";
 import SideMenu from "@/widget/sideMenu/SideMenu";
 import Footer from "@/widget/Footer";
 

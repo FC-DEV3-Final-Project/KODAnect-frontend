@@ -3,7 +3,7 @@ import TextInput from "@/shared/components/TextInput";
 import TextArea from "@/shared/components/Textarea";
 import ResetIcon from "@/assets/icon/reset.svg?react";
 import SoundIcon from "@/assets/icon/sound.svg?react";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 
 function CommentForm() {
   const [isVisible, setIsVisible] = useState(false);

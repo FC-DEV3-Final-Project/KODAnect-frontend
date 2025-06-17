@@ -15,7 +15,7 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { formatDateToDotNotation, formatDateToKorean } from "@/shared/utils/formatDate";
 
 import clsx from "clsx";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import tributeFlower from "@/assets/images/tribute-flower.png";
 

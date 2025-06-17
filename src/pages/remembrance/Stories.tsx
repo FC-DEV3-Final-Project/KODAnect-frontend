@@ -3,11 +3,11 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 import clsx from "clsx";
 
-import { TopArea } from "@/shared/components/TopArea";
-import { Description } from "@/shared/components/Description";
+import TopArea from "@/shared/components/TopArea";
+import Description from "@/shared/components/Description";
 import { Dropdown } from "@/shared/components/Dropdown";
 import SearchInput from "@/shared/components/SearchInput";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import LetterCard from "@/shared/components/LetterCrad";
 
 import PlusIcon from "@/assets/icon/btn-more.svg?react";

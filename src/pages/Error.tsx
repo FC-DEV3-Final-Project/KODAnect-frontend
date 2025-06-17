@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import Notification from "@/assets/icon/exclamation.svg?react";
 
 export default function Error() {

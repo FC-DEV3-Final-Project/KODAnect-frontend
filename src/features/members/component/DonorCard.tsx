@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import { NewBadge } from "@/shared/components/NewBadge";
 
 import Message from "@/assets/icon/inquiry.svg?react";

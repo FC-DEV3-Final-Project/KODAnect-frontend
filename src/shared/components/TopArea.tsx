@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import TopVisual from "@/shared/components/TopVisual";
 import { Tab, TABS } from "@/shared/components/Tab";
 
-export function TopArea() {
+export default function TopArea() {
   const { pathname } = useLocation();
   const activeTab = TABS.find((tab) => pathname.startsWith(tab.path)) ?? TABS[0];
 
