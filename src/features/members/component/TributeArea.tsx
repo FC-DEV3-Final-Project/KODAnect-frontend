@@ -14,22 +14,15 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 import { formatDateToDotNotation, formatDateToKorean } from "@/shared/utils/formatDate";
 
+import type { MemberDetail } from "@/shared/api/members-view/member/types";
+
 import clsx from "clsx";
 import { Button } from "@/shared/components/Button";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import tributeFlower from "@/assets/images/tribute-flower.png";
 
-interface Donor {
-  donorName: string;
-  genderFlag: string;
-  donorAge: number;
-  donationDate: string;
-  replyCount: number;
-  letterCount: number;
-}
-
 interface TributeAreaProps {
-  donor: Donor | null;
+  donor: MemberDetail | null;
 }
 
 export default function TributeArea({ donor }: TributeAreaProps) {
@@ -79,15 +72,15 @@ export default function TributeArea({ donor }: TributeAreaProps) {
             </div>
             <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
               <span className="font-bold">기증일</span>
-              <time>{formatDateToDotNotation(donor.donationDate)}</time>
+              <time>{formatDateToDotNotation(donor.donateDate)}</time>
             </div>
           </div>
 
           {/* 추모글 */}
           <div className={clsx("flex flex-col gap-g4", "mobile:text-b-sm")}>
             <p>
-              기증자 {donor.donorName} ({mail ? "남" : "여"},{donor.donorAge}) 님은{" "}
-              {formatDateToKorean(donor.donationDate)} 환자들에게 귀중한 장기를 선물해 주셨습니다.
+              기증자 {donor.donorName} ({mail ? "남" : "여"},{donor.donateAge}) 님은{" "}
+              {formatDateToKorean(donor.donateDate)} 환자들에게 귀중한 장기를 선물해 주셨습니다.
             </p>
             <p>
               한국장기조직기증원은 귀한 생명을 나눠주신 기증자와 유가족께 깊이 감사드리며,

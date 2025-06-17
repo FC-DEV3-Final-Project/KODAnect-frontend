@@ -26,18 +26,30 @@ export const createComment = (payload: CreateCommentPayload) =>
   api.post<CreateCommentResponse>(`/recipientLetters/${payload.letterSeq}/comments`, payload);
 
 /** 댓글 수정/삭제 인증 */
-export const verifyComment = (letterId: number, commentId: number, payload: VerifyCommentPayload) =>
+export const verifyComment = (
+  letterSeq: number,
+  commentId: number,
+  payload: VerifyCommentPayload,
+) =>
   api.post<VerifyCommentResponse>(
-    `/recipientLetters/${letterId}/comments/${commentId}/verifyPwd`,
+    `/recipientLetters/${letterSeq}/comments/${commentId}/verifyPwd`,
     payload,
   );
 
 /** 댓글 수정 */
-export const updateComment = (letterId: number, commentId: number, payload: UpdateCommentPayload) =>
-  api.put<UpdateCommentResponse>(`/recipientLetters/${letterId}/comments/${commentId}`, payload);
+export const updateComment = (
+  letterSeq: number,
+  commentId: number,
+  payload: UpdateCommentPayload,
+) =>
+  api.put<UpdateCommentResponse>(`/recipientLetters/${letterSeq}/comments/${commentId}`, payload);
 
 /** 댓글 삭제 */
-export const deleteComment = (letterId: number, commentId: number, payload: DeleteCommentPayload) =>
-  api.delete<DeleteCommentResponse>(`/recipientLetters/${letterId}/comments/${commentId}`, {
+export const deleteComment = (
+  letterSeq: number,
+  commentId: number,
+  payload: DeleteCommentPayload,
+) =>
+  api.delete<DeleteCommentResponse>(`/recipientLetters/${letterSeq}/comments/${commentId}`, {
     data: payload,
   });

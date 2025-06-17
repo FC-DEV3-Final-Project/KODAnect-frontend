@@ -29,7 +29,6 @@ function LetterContent({
   onDelete,
 }: LetterContentProps) {
   const isMobile = useIsMobile();
-  const BASE_IMAGE_URL = "https://koda1.elementsoft.biz/attached"; // 예시
 
   return (
     <section
@@ -71,7 +70,7 @@ function LetterContent({
               {imageUrl.map((url, idx) => (
                 <li key={idx}>
                   <img
-                    src={`${BASE_IMAGE_URL}/${url}`}
+                    src={url}
                     alt={`편지 이미지 ${idx + 1}`}
                     className="h-auto max-w-full"
                     loading="lazy"

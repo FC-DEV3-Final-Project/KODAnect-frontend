@@ -3,12 +3,13 @@ import type { ApiResponse } from "@/shared/api/common/types";
 /** 댓글 조회 요청 */
 export interface Comment {
   commentSeq: number;
-  letterSeq: number;
+  letterSeq?: number; // 수혜자 편지
+  donateSeq?: number; // 기증자 추모관
   commentWriter: string;
   contents: string;
-  delFlag: "Y" | "N";
+  delFlag?: "Y" | "N";
   writeTime: string;
-  modifyTime: string;
+  modifyTime?: string;
 }
 
 /** 더보기 요청*/

@@ -1,4 +1,7 @@
 import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getMemberDetail } from "@/shared/api/members-view/member/memberApi";
+import type { MemberDetail } from "@/shared/api/members-view/member/types";
 
 import { TopArea } from "@/shared/components/TopArea";
 import { Description } from "@/shared/components/Description";
@@ -8,7 +11,36 @@ import HeavenLetterList from "@/features/members-view/component/HeavenLetterList
 
 export default function MembersView() {
   const location = useLocation();
-  const donor = location.state?.donor;
+  const donorFromState = location.state?.donor;
+
+  const [donor, setDonor] = useState<MemberDetail | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    console.log("📦 donorFromState:", donorFromState);
+
+    if (!donorFromState || !donorFromState.donateSeq) {
+      console.warn("donateSeq 없음 → 요청 안 보냄");
+      return;
+    }
+
+    const fetchDetail = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getMemberDetail(donorFromState.donateSeq);
+        setDonor(data);
+      } catch (err) {
+        console.error("기증자 상세 조회 실패:", err);
+        setError("기증자 정보를 불러오지 못했습니다.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDetail();
+  }, [donorFromState?.donateSeq]);
+
   return (
     <div className="mx-auto w-full">
       <TopArea />
@@ -22,9 +54,23 @@ export default function MembersView() {
             "도서를 직접 받아보고 싶은 분은 대외 협력팀(02-765-8736)으로 연락주시거나 신청서(링크)를 작성하여 주세요.",
           ]}
         />
-        <TributeArea donor={donor} />
-        <CommentArea variant="memorial" />
-        <HeavenLetterList />
+        {isLoading ? (
+          <p className="mt-10 text-center">불러오는 중입니다...</p>
+        ) : error ? (
+          <p className="mt-10 text-center text-red-500">{error}</p>
+        ) : donor ? (
+          <>
+            <TributeArea donor={donor} />
+            <CommentArea
+              variant="memorial"
+              initialCommentData={donor.memorialCommentResponses}
+              letterId={donor.donateSeq}
+            />
+            <HeavenLetterList />
+          </>
+        ) : (
+          <p className="mt-10 text-center">기증자 정보를 찾을 수 없습니다.</p>
+        )}
       </div>
     </div>
   );
