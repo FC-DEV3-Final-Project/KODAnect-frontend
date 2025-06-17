@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { formatDateToYMD } from "@/shared/utils/formatDate";
 
-import api from "@/shared/api/axios/axiosInstance";
+import { fetchDonorData } from "@/shared/api/members/donorApi";
+import type { DonorData } from "@/shared/types/DonorData.types";
 
 import { TopArea } from "@/shared/components/TopArea";
 import { Label } from "@/shared/components/Label";
@@ -14,39 +15,6 @@ import DonorCard from "@/features/members/component/DonorCard";
 import clsx from "clsx";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
-import type { DonorData } from "@/shared/types/DonorData.types";
-
-const fetchDonorData = async (params: {
-  startDate: string;
-  endDate: string;
-  keyWord?: string;
-  cursor?: number;
-  date?: string;
-  size: number;
-}) => {
-  try {
-    const response = await api.get("/remembrance/search", { params });
-    const mappedData = response.data.data.content.map((item: DonorData) => ({
-      donateSeq: item.donateSeq,
-      donorName: item.donorName,
-      genderFlag: item.genderFlag,
-      donateAge: item.donateAge,
-      donateDate: item.donateDate,
-      commentCount: item.commentCount,
-      letterCount: item.letterCount,
-    }));
-    return {
-      mappedData,
-      hasNext: response.data.data.hasNext,
-      nextCursor: response.data.data.nextCursor,
-      totalCount: response.data.data.totalCount,
-    };
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
 export default function Members() {
   const isDesktop = !useIsMobile(768);
   const pageSize = isDesktop ? 20 : 16;
@@ -55,9 +23,9 @@ export default function Members() {
     from: null,
     to: null,
   });
-  const [startDate, setStartDate] = useState<string>("");
-  const [endDate, setEndDate] = useState<string>("");
-  const [keyword, setKeyword] = useState<string>("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const [donorData, setDonorData] = useState<DonorData[]>([]);
   const [hasNext, setHasNext] = useState(false);
@@ -70,7 +38,7 @@ export default function Members() {
   // 데이터 불러오기
   useEffect(() => {
     handleLoadMore();
-  }, [keyword]);
+  }, []);
 
   const handleDateChange = (range: { from: Date | null; to: Date | null }) => {
     setRange(range);
@@ -90,14 +58,11 @@ export default function Members() {
       });
 
       // 더보기라면 기존 데이터에 추가, 아니라면 새로 설정
-      setDonorData((prev) => (isLoadMore ? [...prev, ...result.mappedData] : result.mappedData));
+      setDonorData((prev) => (isLoadMore ? [...prev, ...result.content] : result.content));
       setHasNext(result.hasNext);
       setNextCursor(result.nextCursor);
       nextCursorRef.current = result.nextCursor;
       setTotalCount(result.totalCount);
-
-      if (isLoadMore) console.log(result);
-      if (!isLoadMore) console.log(range);
     } catch (error) {
       console.error(error);
     }
