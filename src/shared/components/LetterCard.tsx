@@ -1,5 +1,7 @@
-import clsx from "clsx";
+import { Link } from "react-router-dom";
 import { NewBadge } from "@/shared/components/NewBadge";
+
+import clsx from "clsx";
 import Mail from "@/assets/icon/mail.svg?react";
 import Visibility from "@/assets/icon/visibility.svg?react";
 
@@ -30,19 +32,21 @@ const letterCardPresets = {
 
 // 컴포넌트 정의
 export default function LetterCard({
+  letterNumber,
+  letterSeq,
   labelType = "letter",
   size = "lg",
   infoItems,
-  letterSeq,
   title,
   date,
   views,
+  toBase,
 }: LetterData) {
   const preset = letterCardPresets[size];
 
   return (
-    <a
-      href="#"
+    <Link
+      to={`${toBase}/${letterSeq}`}
       className={clsx(
         "flex flex-col rounded-r6 border-2 border-transparent bg-gray-0 p-p8 text-gray-90",
         "shadow-[0_0_2px_0_theme('colors.secondary.10'),0_8px_16px_0_theme('colors.secondary.10')]",
@@ -58,9 +62,11 @@ export default function LetterCard({
             "line-clamp-1 text-gray-70 mobile:text-b-xs",
             size === "sm" && "text-b-xs",
           )}
-          aria-label={labelType === "story" ? `${letterSeq}번째 이야기` : `${letterSeq}번째 편지`}
+          aria-label={
+            labelType === "story" ? `${letterNumber}번째 이야기` : `${letterNumber}번째 편지`
+          }
         >
-          {letterSeq}
+          {letterNumber}
           {labelType === "story" ? "번째 이야기" : "번째 편지"}
         </span>
         <NewBadge size="sm" date={date} />
@@ -101,6 +107,6 @@ export default function LetterCard({
           </div>
         )}
       </div>
-    </a>
+    </Link>
   );
 }
