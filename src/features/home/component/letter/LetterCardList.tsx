@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import Slider from "react-slick";
 
 import { lettersData } from "@/features/home/component/letter/mock-data";
-import LetterCard from "@/shared/components/LetterCrad";
+import LetterCard from "@/shared/components/LetterCard";
 import clsx from "clsx";
 
 interface Letter {
@@ -42,6 +42,7 @@ export default function LetterCardList() {
       <div className="grid w-full grid-cols-5 items-center gap-g4 mobile:hidden">
         {lettersData.map((item, index) => (
           <LetterCard
+            letterSeq={item.letterNumber} // 임시로 추가함
             key={index}
             size="sm"
             letterNumber={item.letterNumber}
@@ -71,6 +72,7 @@ export default function LetterCardList() {
             <div key={index} className="!grid grid-rows-2 gap-g3">
               {group.map((item) => (
                 <LetterCard
+                  letterSeq={item.letterNumber} // 임시로 추가함
                   key={item.letterNumber}
                   size="sm"
                   letterNumber={item.letterNumber}
