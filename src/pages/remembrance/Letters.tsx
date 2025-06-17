@@ -1,34 +1,43 @@
-import { useState } from "react";
-import { useIsMobile } from "@/shared/hooks/useIsMobile";
+import { useNavigate } from "react-router-dom";
 
-import clsx from "clsx";
+import { useFetchData } from "@/shared/hooks/useFetchData";
+import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 import { TopArea } from "@/shared/components/TopArea";
 import { Description } from "@/shared/components/Description";
 import { Dropdown } from "@/shared/components/Dropdown";
 import SearchInput from "@/shared/components/SearchInput";
 import { Button } from "@/shared/components/Button";
-import LetterCard from "@/shared/components/LetterCrad";
+import LetterCard from "@/shared/components/LetterCard";
+import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/letters";
+import { DROPDOWN_OPTIONS } from "@/shared/constant/dropdownOptions";
 
+import clsx from "clsx";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
-import { START_BEFORE, CHECK_ITEMS, DROPDOWN_OPTIONS } from "@/shared/constant/letters";
-import { letterData } from "@/features/letters/mock-data";
+const dataMapping = (item: any) => {
+  return {
+    labelType: "letter",
+    size: "lg",
+    infoItems: [
+      { label: "기증자", value: item.donorName },
+      { label: "추모자", value: item.letterWriter },
+    ],
+    letterSeq: item.letterSeq,
+    title: item.letterTitle,
+    date: item.writeTime,
+    views: item.readCount,
+  };
+};
 
 export default function Letters() {
-  const isMobile = useIsMobile(768);
-  const pageCardCount = isMobile ? 16 : 20;
+  const isDesktop = !useIsMobile(768);
+  const navigate = useNavigate();
+  const { data, hasNext, totalCount, selectedType, setSelectedType, setKeyword, handleLoadMore } =
+    useFetchData("/heavenLetters", dataMapping);
 
-  const [selected, setSelected] = useState("");
-  const [letterCount, setLetterCount] = useState(pageCardCount);
-
-  const sortedData = [...letterData].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
-
-  // 더보기 버튼 클릭 핸들러
-  const handleLoadMore = () => {
-    setLetterCount((prev) => prev + pageCardCount);
+  const handleClick = () => {
+    navigate(`/remembrance/letters-form/`);
   };
 
   return (
@@ -50,64 +59,61 @@ export default function Letters() {
           <div className="w-[124px] mobile:h-[40px] mobile:w-[104px]">
             <Dropdown
               options={DROPDOWN_OPTIONS}
-              value={selected}
-              onChange={setSelected}
+              value={selectedType}
+              onChange={setSelectedType}
               placeholder="전체"
             />
           </div>
           <div className="w-[313px] mobile:w-[208px]">
-            <SearchInput
-              onSubmit={(keyword: string) => {
-                console.log(keyword);
-              }}
-              placeholder="검색어를 입력해 주세요."
-            />
+            <SearchInput onSubmit={setKeyword} placeholder="검색어를 입력해 주세요." />
           </div>
         </div>
 
         {/* 검색 결과 및 편지쓰기 버튼 */}
         <div className={clsx("flex items-end justify-between", "mobile:items-center")}>
           <p className="text-b-lg font-bold text-gray-90">
-            검색 결과 <span className="text-primary-60">12510</span>개
+            검색 결과 <span className="text-primary-60">{totalCount}</span>개
           </p>
-          <Button size={isMobile ? "small" : "large"} children="하늘나라 편지쓰기" />
+          <Button size={isDesktop ? "large" : "small"} onClick={handleClick}>
+            하늘나라 편지쓰기
+          </Button>
         </div>
 
         {/* 편지 카드 영역 */}
-        <div
-          className={clsx("mt-g7 flex flex-col items-center gap-g7", "mobile:mt-g8 mobile:gap-g7")}
-        >
-          <div
-            className={clsx(
-              "flex w-full flex-wrap justify-center gap-g7",
-              "mobile:gap-x-g3 mobile:gap-y-g4",
-            )}
-          >
-            {sortedData.slice(0, letterCount).map((item, index) => (
+        <div className={clsx("mt-g7 flex flex-col gap-g7", "mobile:mt-g8 mobile:gap-g7")}>
+          <div className={clsx("flex w-full flex-wrap gap-g7", "mobile:gap-x-g3 mobile:gap-y-g4")}>
+            {data.map((item, index) => (
               <LetterCard
                 key={index}
-                letterNumber={item.letterNumber}
+                letterSeq={item.letterSeq}
+                letterNumber={totalCount - index}
                 title={item.title}
                 date={item.date}
                 infoItems={item.infoItems}
                 views={item.views}
+                toBase="/remembrance/Letter-view"
               />
             ))}
           </div>
-          <Button
-            size={isMobile ? "medium" : "large"}
-            variant="secondary"
-            aria-label="카드 더보기"
-            className={clsx("flex w-full gap-g2 text-b-lg text-secondary-60", "mobile:text-b-md")}
-            onClick={handleLoadMore}
-          >
-            더보기
-            <PlusIcon
-              className={clsx("h-icon4 w-icon4 text-secondary-50", "mobile:h-icon3 mobile:w-icon3")}
-              aria-hidden="true"
-              focusable="false"
-            />
-          </Button>
+          {hasNext && (
+            <Button
+              size={isDesktop ? "large" : "medium"}
+              variant="secondary"
+              aria-label="카드 더보기"
+              className={clsx("flex w-full gap-g2 text-b-lg text-secondary-60", "mobile:text-b-md")}
+              onClick={handleLoadMore}
+            >
+              더보기
+              <PlusIcon
+                className={clsx(
+                  "h-icon4 w-icon4 text-secondary-50",
+                  "mobile:h-icon3 mobile:w-icon3",
+                )}
+                aria-hidden="true"
+                focusable="false"
+              />
+            </Button>
+          )}
         </div>
       </section>
     </>
