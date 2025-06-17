@@ -17,10 +17,7 @@ type CommentFormProps = {
   onCommentSubmit?: (newComment: CommentType) => void; // 등록된 댓글 콜백
 };
 
-type FormState = Pick<
-  CreateCommentPayload,
-  "commentWriter" | "commentContents" | "commentPasscode"
->;
+type FormState = Pick<CreateCommentPayload, "commentWriter" | "contents" | "commentPasscode">;
 
 // 액션 정리
 type FormAction = { type: "SET_FIELD"; field: keyof FormState; value: string } | { type: "RESET" };
@@ -28,7 +25,7 @@ type FormAction = { type: "SET_FIELD"; field: keyof FormState; value: string } |
 const initialState: FormState = {
   commentWriter: "",
   commentPasscode: "",
-  commentContents: "",
+  contents: "",
 };
 
 // reducer 함수
@@ -60,7 +57,7 @@ function CommentForm({ letterId, onCommentSubmit }: CommentFormProps) {
       const response = await createComment({
         letterSeq: letterId,
         commentWriter: state.commentWriter,
-        commentContents: state.commentContents,
+        contents: state.contents,
         commentPasscode: state.commentPasscode,
       });
 
@@ -125,9 +122,9 @@ function CommentForm({ letterId, onCommentSubmit }: CommentFormProps) {
           title="내용"
           placeholder="기증자에 대한 추모 분위기를 해치거나, 비방의 글 등이 게시가 될 경우 관리자에 의해 삭제 될 수 있습니다."
           maxLength={100}
-          value={state.commentContents}
+          value={state.contents}
           onChange={(e) =>
-            dispatch({ type: "SET_FIELD", field: "commentContents", value: e.target.value })
+            dispatch({ type: "SET_FIELD", field: "contents", value: e.target.value })
           }
         />
       </div>

@@ -33,7 +33,7 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
   const title = variant === "memorial" ? "추모 메세지" : "댓글";
 
   const [comments, setComments] = useState(initialCommentData.content);
-  const [cusor, setCursor] = useState(initialCommentData.commentNextCursor);
+  const [cursor, setCursor] = useState(initialCommentData.commentNextCursor);
   const [hasNext, setHasNext] = useState(initialCommentData.commentHasNext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +42,7 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
     if (isLoading) return;
     setIsLoading(true);
     try {
-      const res = await getMoreComments({ letterId, cusor, size: 3 });
+      const res = await getMoreComments({ letterId, cursor, size: 3 });
       const data = res.data.data;
       console.log("📦 추가 댓글:", data.content);
       setComments((prev) => [...prev, ...data.content]);
@@ -99,7 +99,7 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
       <CommentList
         comments={comments}
         hasNext={hasNext}
-        nextCursor={cusor}
+        nextCursor={cursor}
         onLoadMore={handleLoadMore}
       />
     </section>

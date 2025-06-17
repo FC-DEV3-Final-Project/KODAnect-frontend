@@ -5,7 +5,7 @@ export interface Comment {
   commentSeq: number;
   letterSeq: number;
   commentWriter: string;
-  commentContents: string;
+  contents: string;
   delFlag: "Y" | "N";
   writeTime: string;
   modifyTime: string;
@@ -14,7 +14,7 @@ export interface Comment {
 /** 더보기 요청*/
 export interface GetMoreCommentsPayload {
   letterId: number;
-  cusor: number;
+  cursor: number;
   size?: number;
 }
 
@@ -32,7 +32,7 @@ export type CommentListResponse = ApiResponse<CommentPagination>;
 export interface CreateCommentPayload {
   letterSeq: number;
   commentWriter: string;
-  commentContents: string;
+  contents: string;
   commentPasscode: string;
 }
 
@@ -50,7 +50,7 @@ export type VerifyCommentResponse = ApiResponse<null>;
 /** 댓글 수정 요청*/
 export interface UpdateCommentPayload {
   commentWriter: string;
-  commentContents: string;
+  contents: string;
 }
 
 /**  댓글 수정 응답*/

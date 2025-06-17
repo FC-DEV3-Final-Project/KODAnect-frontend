@@ -108,6 +108,8 @@ function RecipientView() {
                       await verifyLetter(Number(id), { letterPasscode: password });
                       navigate(`/remembrance/recipients/edit/${id}`, { state: letter });
                     } else {
+                      console.log("전달되는 비밀번호:", password);
+
                       await deleteLetter(Number(id), { letterPasscode: password });
                       navigate(`/remembrance/recipients`);
                     }

@@ -11,7 +11,7 @@ type CommentItemProps = {
 };
 
 function CommentItem({ comment, isOpen, onToggle }: CommentItemProps) {
-  const { commentSeq, commentContents, commentWriter, writeTime } = comment;
+  const { commentSeq, contents, commentWriter, writeTime } = comment;
   const dropdownId = `comment-dropdown-${commentWriter}-${writeTime}`;
 
   const [isModalOpen, setIsModalOpen] = useState<"edit" | "delete" | null>(null);
@@ -30,9 +30,7 @@ function CommentItem({ comment, isOpen, onToggle }: CommentItemProps) {
   return (
     <article className="flex flex-col gap-g7 rounded-r6 border border-gray-30 px-6 py-p7 mobile:gap-g4 mobile:p-p6">
       <div className="flex items-start justify-between">
-        <p className="whitespace-pre-line text-b-md text-gray-90 mobile:text-b-sm">
-          {commentContents}
-        </p>
+        <p className="whitespace-pre-line text-b-md text-gray-90 mobile:text-b-sm">{contents}</p>
         <div className="relative">
           <button
             type="button"
