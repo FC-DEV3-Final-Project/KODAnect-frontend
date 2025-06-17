@@ -59,6 +59,7 @@ interface ModalProps {
   description?: string;
   setPassword?: (value: string) => void;
   placeholder?: string;
+  confirmText?: string; // 확인 버튼 텍스트
 }
 
 export function Modal({
@@ -70,6 +71,7 @@ export function Modal({
   description,
   setPassword,
   placeholder = "비밀번호를 입력하세요",
+  confirmText,
 }: ModalProps) {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -153,7 +155,7 @@ export function Modal({
         {/* 버튼 영역 */}
         <div className="flex justify-end gap-[12px]">
           <Button variant="primary" size="medium" onClick={onSubmit}>
-            삭제
+            {confirmText || "삭제"}
           </Button>
           <Button variant="tertiary" size="medium" onClick={onClose}>
             취소

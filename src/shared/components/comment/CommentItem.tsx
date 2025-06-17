@@ -11,9 +11,17 @@ type CommentItemProps = {
   onToggle: () => void;
   onDelete?: (id: number) => void;
   letterId: number;
+  onStartEdit?: (comment: CommentType) => void; // 수정 요청 콜백
 };
 
-function CommentItem({ comment, isOpen, onToggle, onDelete, letterId }: CommentItemProps) {
+function CommentItem({
+  comment,
+  isOpen,
+  onToggle,
+  onDelete,
+  letterId,
+  onStartEdit,
+}: CommentItemProps) {
   const { commentSeq, contents, commentWriter, writeTime } = comment;
   const dropdownId = `comment-dropdown-${commentWriter}-${writeTime}`;
 
@@ -88,6 +96,7 @@ function CommentItem({ comment, isOpen, onToggle, onDelete, letterId }: CommentI
             setIsModalOpen(null);
             setPassword("");
           }}
+          confirmText={isModalOpen === "delete" ? "삭제" : "수정"}
           onSubmit={async () => {
             try {
               if (isModalOpen === "delete") {
@@ -102,8 +111,7 @@ function CommentItem({ comment, isOpen, onToggle, onDelete, letterId }: CommentI
                 console.log("삭제 응답:", response);
                 onDelete?.(commentSeq);
               } else {
-                console.log(`댓글 ${commentSeq} 수정 요청 with password: ${password}`);
-                // TODO: 수정 모드 전환
+                onStartEdit?.(comment);
               }
 
               setIsModalOpen(null);

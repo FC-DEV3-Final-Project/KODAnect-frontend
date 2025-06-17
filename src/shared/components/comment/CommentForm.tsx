@@ -1,5 +1,5 @@
-import { useState, useReducer } from "react";
-import { createComment } from "@/shared/api/recipient-view/comment/commentApi";
+import { useState, useReducer, useEffect } from "react";
+import { createComment, updateComment } from "@/shared/api/recipient-view/comment/commentApi";
 import type {
   Comment as CommentType,
   CreateCommentPayload,
@@ -15,6 +15,7 @@ import { validateCaptcha } from "react-simple-captcha";
 type CommentFormProps = {
   letterId: number;
   onCommentSubmit?: (newComment: CommentType) => void; // 등록된 댓글 콜백
+  editingComment?: CommentType | null;
 };
 
 type FormState = Pick<CreateCommentPayload, "commentWriter" | "contents" | "commentPasscode">;
@@ -40,7 +41,7 @@ function reducer(state: FormState, action: FormAction): FormState {
   }
 }
 
-function CommentForm({ letterId, onCommentSubmit }: CommentFormProps) {
+function CommentForm({ letterId, onCommentSubmit, editingComment }: CommentFormProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inputCaptcha, setInputCaptcha] = useState("");
@@ -54,24 +55,47 @@ function CommentForm({ letterId, onCommentSubmit }: CommentFormProps) {
     }
 
     try {
-      const response = await createComment({
-        letterSeq: letterId,
-        commentWriter: state.commentWriter,
-        contents: state.contents,
-        commentPasscode: state.commentPasscode,
-      });
+      if (editingComment) {
+        // ✨ 수정 로직
+        await updateComment(letterId, editingComment.commentSeq, {
+          commentWriter: state.commentWriter,
+          contents: state.contents,
+        });
 
-      alert("댓글이 등록되었습니다.");
+        alert("댓글이 수정되었습니다.");
 
-      onCommentSubmit?.(response.data.data);
+        onCommentSubmit?.({
+          ...editingComment,
+          commentWriter: state.commentWriter,
+          contents: state.contents,
+          modifyTime: new Date().toISOString(),
+        });
+      } else {
+        // 기존 등록 로직
+        const response = await createComment({
+          letterSeq: letterId,
+          commentWriter: state.commentWriter,
+          contents: state.contents,
+          commentPasscode: state.commentPasscode,
+        });
+
+        alert("댓글이 등록되었습니다.");
+        onCommentSubmit?.(response.data.data);
+      }
 
       dispatch({ type: "RESET" });
       setInputCaptcha("");
-      console.log("댓글 등록 완료");
     } catch (err) {
       console.error("댓글 등록 실패", err);
     }
   };
+
+  useEffect(() => {
+    if (editingComment) {
+      dispatch({ type: "SET_FIELD", field: "commentWriter", value: editingComment.commentWriter });
+      dispatch({ type: "SET_FIELD", field: "contents", value: editingComment.contents });
+    }
+  }, [editingComment]);
 
   return (
     <form
@@ -105,13 +129,14 @@ function CommentForm({ letterId, onCommentSubmit }: CommentFormProps) {
             height="medium"
             placeholder="영문, 숫자 8자 이상"
             type={isVisible ? "text" : "password"}
-            iconToggle
+            iconToggle={!editingComment}
             isVisible={isVisible}
             value={state.commentPasscode}
             onChange={(e) =>
               dispatch({ type: "SET_FIELD", field: "commentPasscode", value: e.target.value })
             }
             onToggleIconClick={() => setIsVisible((prev) => !prev)}
+            disabled={!!editingComment}
           />
         </div>
       </fieldset>
@@ -141,7 +166,7 @@ function CommentForm({ letterId, onCommentSubmit }: CommentFormProps) {
             size="medium"
             className="mobile:max-w-[9.1rem] mobile:self-end"
           >
-            추모하기
+            {editingComment ? "수정하기" : "추모하기"}
           </Button>
         </div>
       </fieldset>

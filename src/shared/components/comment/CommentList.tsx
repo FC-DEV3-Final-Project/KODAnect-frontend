@@ -10,8 +10,9 @@ interface CommentListProps {
   hasNext: boolean;
   nextCursor: number;
   onLoadMore: () => void;
-  letterId: number; // letterId 추가
-  onDeleteComment: (commentId: number) => void; // 삭제 콜백 추가
+  letterId: number;
+  onDeleteComment: (commentId: number) => void; // 삭제 콜백
+  onStartEdit?: (comment: Comment) => void; // 수정 콜백
 }
 
 function CommentList({
@@ -20,6 +21,7 @@ function CommentList({
   onLoadMore,
   letterId,
   onDeleteComment,
+  onStartEdit,
 }: CommentListProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
@@ -50,8 +52,9 @@ function CommentList({
                       openId === item.commentSeq.toString() ? null : item.commentSeq.toString(),
                     )
                   }
-                  letterId={letterId} // 이미 전달되고 있음
+                  letterId={letterId}
                   onDelete={onDeleteComment}
+                  onStartEdit={onStartEdit}
                 />
               </li>
             ))}

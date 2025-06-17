@@ -1,5 +1,8 @@
 import { useState } from "react";
-import type { CommentPagination } from "@/shared/api/recipient-view/comment/types";
+import type {
+  Comment as CommentType,
+  CommentPagination,
+} from "@/shared/api/recipient-view/comment/types";
 import { getMoreComments } from "@/shared/api/recipient-view/comment/commentApi";
 
 import CommentForm from "@/shared/components/comment/CommentForm";
@@ -37,6 +40,7 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
   const [hasNext, setHasNext] = useState(initialCommentData.commentHasNext);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [editingComment, setEditingComment] = useState<CommentType | null>(null);
 
   const handleLoadMore = async () => {
     if (isLoading) return;
@@ -95,7 +99,19 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
       <div className="mb-g9">
         <CommentForm
           letterId={letterId}
-          onCommentSubmit={(newComment) => setComments((prev) => [newComment, ...prev])} //등록한 댓글 바로 반영
+          editingComment={editingComment}
+          onCommentSubmit={(newComment) => {
+            if (editingComment) {
+              // 수정인 경우: 기존 댓글 업데이트
+              setComments((prev) =>
+                prev.map((c) => (c.commentSeq === newComment.commentSeq ? newComment : c)),
+              );
+              setEditingComment(null); // 수정모드 종료
+            } else {
+              // 새 댓글인 경우: 앞에 추가
+              //setComments((prev) => [newComment, ...prev]);
+            }
+          }}
         />
       </div>
       <CommentList
@@ -105,6 +121,7 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
         onLoadMore={handleLoadMore}
         letterId={letterId}
         onDeleteComment={handleDeleteComment}
+        onStartEdit={(comment: CommentType) => setEditingComment(comment)}
       />
     </section>
   );
