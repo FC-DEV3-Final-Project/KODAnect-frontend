@@ -18,7 +18,7 @@ export interface RecipientLetterDetail {
   delFlag: "Y" | "N";
   commentCount: number;
   hasMoreComments: boolean;
-  imageUrl: string[];
+  imageUrl?: string;
   initialCommentData: CommentPagination;
   writeTime: string;
   modifyTime: string;

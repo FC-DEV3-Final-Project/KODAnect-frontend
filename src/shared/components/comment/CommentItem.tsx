@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Comment as CommentType } from "@/shared/api/recipient-view/comment/types";
+import { deleteComment } from "@/shared/api/recipient-view/comment/commentApi";
 
 import OptionIcon from "@/assets/icon/ellipsis-vertical.svg?react";
 import { Modal } from "@/shared/components/Modal";
@@ -8,9 +9,11 @@ type CommentItemProps = {
   comment: CommentType;
   isOpen: boolean;
   onToggle: () => void;
+  onDelete?: (id: number) => void;
+  letterId: number;
 };
 
-function CommentItem({ comment, isOpen, onToggle }: CommentItemProps) {
+function CommentItem({ comment, isOpen, onToggle, onDelete, letterId }: CommentItemProps) {
   const { commentSeq, contents, commentWriter, writeTime } = comment;
   const dropdownId = `comment-dropdown-${commentWriter}-${writeTime}`;
 
@@ -87,10 +90,17 @@ function CommentItem({ comment, isOpen, onToggle }: CommentItemProps) {
           }}
           onSubmit={async () => {
             try {
-              // 🔐 비밀번호 확인 후 요청
               if (isModalOpen === "delete") {
-                console.log(`댓글 ${commentSeq} 삭제 요청 with password: ${password}`);
-                // TODO: 삭제 API 호출
+                console.log("🧾 실제 삭제 요청", {
+                  letterId, // letterId 확인
+                  commentSeq, // commentSeq 확인
+                  password, // password 확인
+                });
+                const response = await deleteComment(letterId, commentSeq, {
+                  commentPasscode: password,
+                });
+                console.log("삭제 응답:", response);
+                onDelete?.(commentSeq);
               } else {
                 console.log(`댓글 ${commentSeq} 수정 요청 with password: ${password}`);
                 // TODO: 수정 모드 전환

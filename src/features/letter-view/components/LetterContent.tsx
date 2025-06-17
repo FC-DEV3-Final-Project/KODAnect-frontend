@@ -11,7 +11,7 @@ type LetterContentProps = {
   title: string;
   content: string;
   infoItems: InfoItem[];
-  imageUrl?: string[];
+  imageUrl?: string;
   mobileWidth?: string;
   onGoList?: () => void;
   onEdit?: () => void;
@@ -29,6 +29,8 @@ function LetterContent({
   onDelete,
 }: LetterContentProps) {
   const isMobile = useIsMobile();
+
+  console.log("📷 imageUrl 확인:", imageUrl);
 
   return (
     <section
@@ -66,18 +68,7 @@ function LetterContent({
 
         {imageUrl && (
           <div className="mt-g7 w-full overflow-hidden">
-            <ul className="flex flex-col gap-g7">
-              {imageUrl.map((url, idx) => (
-                <li key={idx}>
-                  <img
-                    src={url}
-                    alt={`편지 이미지 ${idx + 1}`}
-                    className="h-auto max-w-full"
-                    loading="lazy"
-                  />
-                </li>
-              ))}
-            </ul>
+            <img src={imageUrl} alt="편지 이미지" className="h-auto max-w-full" loading="lazy" />
           </div>
         )}
       </article>

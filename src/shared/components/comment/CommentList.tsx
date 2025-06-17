@@ -10,9 +10,17 @@ interface CommentListProps {
   hasNext: boolean;
   nextCursor: number;
   onLoadMore: () => void;
+  letterId: number; // letterId 추가
+  onDeleteComment: (commentId: number) => void; // 삭제 콜백 추가
 }
 
-function CommentList({ comments, hasNext, onLoadMore }: CommentListProps) {
+function CommentList({
+  comments,
+  hasNext,
+  onLoadMore,
+  letterId,
+  onDeleteComment,
+}: CommentListProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
@@ -27,7 +35,7 @@ function CommentList({ comments, hasNext, onLoadMore }: CommentListProps) {
         )}
       </h3>
 
-      {comments.length === 0 && !hasNext ? (
+      {comments.length === 0 ? (
         <p className="mt-[8px] text-center text-b-lg text-gray-40">아직 등록된 댓글이 없습니다.</p>
       ) : (
         <>
@@ -42,6 +50,8 @@ function CommentList({ comments, hasNext, onLoadMore }: CommentListProps) {
                       openId === item.commentSeq.toString() ? null : item.commentSeq.toString(),
                     )
                   }
+                  letterId={letterId} // 이미 전달되고 있음
+                  onDelete={onDeleteComment}
                 />
               </li>
             ))}

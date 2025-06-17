@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
         path: "remembrance",
         children: [
           { path: "members", element: <Members /> },
-          { path: "members-view/:id", element: <MembersView /> },
+          { path: "members-view/:donateSeq", element: <MembersView /> },
           { path: "letters", element: <Letters /> },
           { path: "letters-view/:id", element: <LetterView /> },
           { path: "recipients", element: <Recipients /> },

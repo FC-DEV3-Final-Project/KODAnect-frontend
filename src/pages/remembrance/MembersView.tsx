@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMemberDetail } from "@/shared/api/members-view/member/memberApi";
 import type { MemberDetail } from "@/shared/api/members-view/member/types";
@@ -10,25 +10,24 @@ import CommentArea from "@/shared/components/comment/CommentArea";
 import HeavenLetterList from "@/features/members-view/component/HeavenLetterList";
 
 export default function MembersView() {
-  const location = useLocation();
-  const donorFromState = location.state?.donor;
+  const { donateSeq } = useParams();
 
   const [donor, setDonor] = useState<MemberDetail | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log("📦 donorFromState:", donorFromState);
+    console.log("📦 donorFromState:", donateSeq);
 
-    if (!donorFromState || !donorFromState.donateSeq) {
-      console.warn("donateSeq 없음 → 요청 안 보냄");
+    if (!donateSeq) {
+      setIsLoading(false);
       return;
     }
 
     const fetchDetail = async () => {
       try {
         setIsLoading(true);
-        const data = await getMemberDetail(donorFromState.donateSeq);
+        const data = await getMemberDetail(Number(donateSeq));
         setDonor(data);
       } catch (err) {
         console.error("기증자 상세 조회 실패:", err);
@@ -39,7 +38,7 @@ export default function MembersView() {
     };
 
     fetchDetail();
-  }, [donorFromState?.donateSeq]);
+  }, [donateSeq]);
 
   return (
     <div className="mx-auto w-full">

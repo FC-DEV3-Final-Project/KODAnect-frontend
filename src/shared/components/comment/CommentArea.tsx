@@ -44,15 +44,17 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
     try {
       const res = await getMoreComments({ letterId, cursor, size: 3 });
       const data = res.data.data;
-      console.log("📦 추가 댓글:", data.content);
       setComments((prev) => [...prev, ...data.content]);
       setCursor(data.commentNextCursor);
       setHasNext(data.commentHasNext);
     } catch (e) {
-      console.error("더보기 실패", e);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleDeleteComment = (commentId: number) => {
+    setComments((prev) => prev.filter((comment) => comment.commentSeq !== commentId));
   };
 
   return (
@@ -101,6 +103,8 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
         hasNext={hasNext}
         nextCursor={cursor}
         onLoadMore={handleLoadMore}
+        letterId={letterId}
+        onDeleteComment={handleDeleteComment}
       />
     </section>
   );

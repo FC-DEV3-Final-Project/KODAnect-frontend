@@ -12,14 +12,13 @@
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
-import { formatDateToDotNotation, formatDateToKorean } from "@/shared/utils/formatDate";
-
 import type { MemberDetail } from "@/shared/api/members-view/member/types";
 
 import clsx from "clsx";
 import { Button } from "@/shared/components/Button";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import tributeFlower from "@/assets/images/tribute-flower.png";
+import parse from "html-react-parser";
 
 interface TributeAreaProps {
   donor: MemberDetail | null;
@@ -31,7 +30,6 @@ export default function TributeArea({ donor }: TributeAreaProps) {
   }
   const isMobile = useIsMobile(768);
   const navigate = useNavigate();
-  const mail = donor.genderFlag === "M";
 
   const handleClick = () => {
     navigate("/remembrance/members");
@@ -59,35 +57,9 @@ export default function TributeArea({ donor }: TributeAreaProps) {
             추모합니다.
           </h2>
 
-          {/* 추모자 정보 */}
-          <div
-            className={clsx(
-              "mb-g8 mt-g4 flex gap-g10",
-              "mobile:mb-g7 mobile:mt-g5 mobile:flex-col mobile:gap-g4",
-            )}
-          >
-            <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
-              <span className="font-bold">기증자</span>
-              <span>{donor.donorName}</span>
-            </div>
-            <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
-              <span className="font-bold">기증일</span>
-              <time>{formatDateToDotNotation(donor.donateDate)}</time>
-            </div>
-          </div>
-
           {/* 추모글 */}
           <div className={clsx("flex flex-col gap-g4", "mobile:text-b-sm")}>
-            <p>
-              기증자 {donor.donorName} ({mail ? "남" : "여"},{donor.donateAge}) 님은{" "}
-              {formatDateToKorean(donor.donateDate)} 환자들에게 귀중한 장기를 선물해 주셨습니다.
-            </p>
-            <p>
-              한국장기조직기증원은 귀한 생명을 나눠주신 기증자와 유가족께 깊이 감사드리며,
-              <br />
-              앞으로도 기증자 유가족들이 건강한 삶을 유지할 수 있도록 최선을 다해 지원할 것입니다.
-            </p>
-            <p>고인의 명복을 빕니다.</p>
+            {parse(donor.contents)}
           </div>
 
           {/* 헌화 이미지 */}
