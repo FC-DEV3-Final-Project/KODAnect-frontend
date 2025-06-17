@@ -104,7 +104,14 @@ function DatePicker({ range, onRangeChange, fromRef }: DatePickerProps) {
             onSelect={handleSelect}
             currentMonth={currentMonth}
             onMonthChange={setCurrentMonth}
-            onCancel={() => setOpen(null)}
+            onCancel={() => {
+              if (open === "from") {
+                onRangeChange({ ...range, from: null }); // null -> 입력값 초기화
+              } else if (open === "to") {
+                onRangeChange({ ...range, to: null });
+              }
+              setOpen(null);
+            }}
             onTodayClick={handleTodayClick}
           />
         </div>
