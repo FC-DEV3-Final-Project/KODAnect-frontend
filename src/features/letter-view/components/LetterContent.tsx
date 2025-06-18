@@ -30,8 +30,6 @@ function LetterContent({
 }: LetterContentProps) {
   const isMobile = useIsMobile();
 
-  console.log("📷 imageUrl 확인:", imageUrl);
-
   return (
     <section
       aria-labelledby="letter-heading"

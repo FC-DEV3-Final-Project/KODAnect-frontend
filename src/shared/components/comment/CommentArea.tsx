@@ -2,6 +2,14 @@ import { useState } from "react";
 import type {
   Comment as CommentType,
   CommentPagination,
+  CreateCommentPayload,
+  CreateCommentResponse,
+  UpdateCommentPayload,
+  UpdateCommentResponse,
+  VerifyCommentPayload,
+  VerifyCommentResponse,
+  DeleteCommentPayload,
+  DeleteCommentResponse,
 } from "@/shared/api/recipient-view/comment/types";
 import { getMoreComments } from "@/shared/api/recipient-view/comment/commentApi";
 
@@ -19,6 +27,22 @@ interface CommentAreaProps {
   variant?: "default" | "memorial";
   initialCommentData: CommentPagination;
   letterId: number;
+  createComment: (payload: CreateCommentPayload) => Promise<CreateCommentResponse>;
+  updateComment: (
+    letterId: number,
+    commentId: number,
+    payload: UpdateCommentPayload,
+  ) => Promise<UpdateCommentResponse>;
+  verifyComment: (
+    letterId: number,
+    commentId: number,
+    payload: VerifyCommentPayload,
+  ) => Promise<VerifyCommentResponse>;
+  deleteComment: (
+    letterId: number,
+    commentId: number,
+    payload: DeleteCommentPayload,
+  ) => Promise<DeleteCommentResponse>;
 }
 
 const memorialIcons = [
@@ -31,7 +55,15 @@ const memorialIcons = [
   { label: "슬퍼요", icon: <Sad className="h-icon3 w-icon3" />, count: 9 },
 ];
 
-function CommentArea({ variant = "default", initialCommentData, letterId }: CommentAreaProps) {
+function CommentArea({
+  variant = "default",
+  initialCommentData,
+  letterId,
+  createComment,
+  updateComment,
+  verifyComment,
+  deleteComment,
+}: CommentAreaProps) {
   const isMemorial = variant === "memorial";
   const title = variant === "memorial" ? "추모 메세지" : "댓글";
 
@@ -100,16 +132,16 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
         <CommentForm
           letterId={letterId}
           editingComment={editingComment}
+          createComment={createComment}
+          updateComment={updateComment}
           onCommentSubmit={(newComment) => {
             if (editingComment) {
-              // 수정인 경우: 기존 댓글 업데이트
               setComments((prev) =>
                 prev.map((c) => (c.commentSeq === newComment.commentSeq ? newComment : c)),
               );
-              setEditingComment(null); // 수정모드 종료
+              setEditingComment(null);
             } else {
-              // 새 댓글인 경우: 앞에 추가
-              //setComments((prev) => [newComment, ...prev]);
+              setComments((prev) => [newComment, ...prev]);
             }
           }}
         />
@@ -122,6 +154,8 @@ function CommentArea({ variant = "default", initialCommentData, letterId }: Comm
         letterId={letterId}
         onDeleteComment={handleDeleteComment}
         onStartEdit={(comment: CommentType) => setEditingComment(comment)}
+        verifyComment={verifyComment}
+        deleteComment={deleteComment}
       />
     </section>
   );

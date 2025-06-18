@@ -6,6 +6,13 @@ import {
   verifyLetter,
   deleteLetter,
 } from "@/shared/api/recipient-view/letter/letterApi";
+import {
+  createComment,
+  updateComment,
+  verifyComment,
+  deleteComment,
+} from "@/shared/api/recipient-view/comment/commentApi";
+
 import type { RecipientLetterDetail } from "@/shared/api/recipient-view/letter/types";
 
 import { Description } from "@/shared/components/Description";
@@ -33,9 +40,11 @@ function RecipientView() {
       try {
         setIsLoading(true);
         const response = await getLetterDetail(Number(id));
-        console.log("📦 댓글 데이터 확인:", response.data.data.initialCommentData.content);
-        setLetter(response.data.data); // 응답 구조 안에 data가 한 번 더 들어있음
-        console.log("🖼️ 렌더링용 이미지 URL:", response.data.data.fileName);
+
+        const letterData = response.data.data;
+        console.log("전체 편지 응답:", letterData);
+        console.log("imageUrl 확인:", letterData.imageUrl);
+        setLetter(response.data.data);
       } catch (err) {
         console.error("에러 발생:", err);
         setError("편지 정보를 불러오지 못했습니다.");
@@ -46,12 +55,6 @@ function RecipientView() {
 
     fetchLetter();
   }, [id]);
-
-  useEffect(() => {
-    if (letter) {
-      console.log("📦 전달받은 initialCommentData:", letter.initialCommentData);
-    }
-  }, [letter]);
 
   return (
     <div className="mx-auto w-full">
@@ -76,7 +79,7 @@ function RecipientView() {
               title={letter.letterTitle}
               content={letter.letterContents}
               infoItems={getRecipientInfoItems(letter)}
-              imageUrl={letter.fileName}
+              imageUrl={letter.imageUrl}
               onGoList={() => navigate(`/remembrance/recipients`)}
               onEdit={() => setModalType("edit")}
               onDelete={() => setModalType("delete")}
@@ -87,6 +90,17 @@ function RecipientView() {
               variant="default"
               initialCommentData={letter.initialCommentData}
               letterId={letter.letterSeq}
+              // axios 응답 전체를 반환하는게 아니라 data만 꺼내서 반환해야하기 때문
+              createComment={(payload) => createComment(payload).then((res) => res.data)}
+              updateComment={(letterId, commentId, payload) =>
+                updateComment(letterId, commentId, payload).then((res) => res.data)
+              }
+              verifyComment={(letterId, commentId, payload) =>
+                verifyComment(letterId, commentId, payload).then((res) => res.data)
+              }
+              deleteComment={(letterId, commentId, payload) =>
+                deleteComment(letterId, commentId, payload).then((res) => res.data)
+              }
             />
 
             {modalType && (

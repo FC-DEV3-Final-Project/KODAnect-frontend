@@ -1,8 +1,11 @@
 import { useState, useReducer, useEffect } from "react";
-import { createComment, updateComment } from "@/shared/api/recipient-view/comment/commentApi";
+
 import type {
   Comment as CommentType,
   CreateCommentPayload,
+  CreateCommentResponse,
+  UpdateCommentPayload,
+  UpdateCommentResponse,
 } from "@/shared/api/recipient-view/comment/types";
 
 import TextInput from "@/shared/components/TextInput";
@@ -16,6 +19,12 @@ type CommentFormProps = {
   letterId: number;
   onCommentSubmit?: (newComment: CommentType) => void; // 등록된 댓글 콜백
   editingComment?: CommentType | null;
+  createComment: (payload: CreateCommentPayload) => Promise<CreateCommentResponse>;
+  updateComment: (
+    letterId: number,
+    commentId: number,
+    payload: UpdateCommentPayload,
+  ) => Promise<UpdateCommentResponse>;
 };
 
 type FormState = Pick<CreateCommentPayload, "commentWriter" | "contents" | "commentPasscode">;
@@ -41,7 +50,13 @@ function reducer(state: FormState, action: FormAction): FormState {
   }
 }
 
-function CommentForm({ letterId, onCommentSubmit, editingComment }: CommentFormProps) {
+function CommentForm({
+  letterId,
+  onCommentSubmit,
+  editingComment,
+  createComment,
+  updateComment,
+}: CommentFormProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inputCaptcha, setInputCaptcha] = useState("");
@@ -56,7 +71,7 @@ function CommentForm({ letterId, onCommentSubmit, editingComment }: CommentFormP
 
     try {
       if (editingComment) {
-        // ✨ 수정 로직
+        //  수정 로직
         await updateComment(letterId, editingComment.commentSeq, {
           commentWriter: state.commentWriter,
           contents: state.contents,
@@ -80,7 +95,7 @@ function CommentForm({ letterId, onCommentSubmit, editingComment }: CommentFormP
         });
 
         alert("댓글이 등록되었습니다.");
-        onCommentSubmit?.(response.data.data);
+        onCommentSubmit?.(response.data);
       }
 
       dispatch({ type: "RESET" });
