@@ -34,5 +34,5 @@ export const updateLetter = (letterId: number, payload: UpdateLetterPayload) => 
 /** 편지 삭제 */
 export const deleteLetter = (letterId: number, payload: DeleteLetterPayload) =>
   api.delete<DeleteLetterResponse>(`/recipientLetters/${letterId}`, {
-    data: payload, // axios에서 DELETE의 body는 `data`로 전달
+    data: payload,
   });

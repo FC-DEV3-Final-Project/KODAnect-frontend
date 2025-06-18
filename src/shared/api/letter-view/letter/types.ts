@@ -1,36 +1,24 @@
 import type { ApiResponse } from "@/shared/api/common/types";
 import type { CommentPagination } from "@/shared/api/recipient-view/comment/types";
 
-export interface RecipientLetterDetail {
+/** 하늘나라 편지 상세 타입 */
+export interface HeavenLetterDetail {
   letterSeq: number;
-  organCode: string;
-  organEtc: string | null;
+  donateSeq: number;
   letterTitle: string;
-  recipientYear: string;
+  donorName: string;
   letterWriter: string;
   anonymityFlag: "Y" | "N";
   readCount: number;
   letterContents: string;
-  fileName: string[];
+  fileName: string;
   orgFileName: string;
-  writerId: string | null;
-  modifierId: string | null;
-  delFlag: "Y" | "N";
-  commentCount: number;
-  hasMoreComments: boolean;
-  imageUrl?: string[];
-  initialCommentData: CommentPagination;
   writeTime: string;
-  modifyTime: string;
+  cursorCommentPaginationResponse: CommentPagination;
 }
 
 /** 편지 전체 응답 구조*/
-export interface RecipientLetterDetailResponse {
-  success: boolean;
-  code: number;
-  message: string;
-  data: RecipientLetterDetail;
-}
+export interface HeavenLetterDetailResponse extends ApiResponse<HeavenLetterDetail> {}
 
 /** 편지 수정 인증 요청 */
 export interface VerifyLetterPayload {
@@ -50,7 +38,7 @@ export interface UpdateLetterPayload {
 }
 
 /**편지 수정 응답 */
-export type UpdateLetterResponse = ApiResponse<RecipientLetterDetail>;
+export type UpdateLetterResponse = ApiResponse<HeavenLetterDetail>;
 
 /** 편지 삭제 요청 */
 export interface DeleteLetterPayload {
