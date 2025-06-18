@@ -17,9 +17,9 @@ export const Default: Story = {
   args: {
     donorName: "홍길동",
     genderFlag: "F",
-    donorAge: 30,
-    donationDate: "2025-06-09",
-    replyCount: 5,
+    donateAge: 30,
+    donateDate: "2025-06-09",
+    commentCount: 5,
     letterCount: 10,
   },
 };
