@@ -5,7 +5,17 @@ import clsx from "clsx";
 import Mail from "@/assets/icon/mail.svg?react";
 import Visibility from "@/assets/icon/visibility.svg?react";
 
-import type { LetterData } from "../types/LetterData.types";
+interface LetterCardProps {
+  letterNumber: number;
+  letterSeq: number;
+  labelType?: "letter" | "story";
+  size?: "lg" | "sm";
+  infoItems: { label: string; value: string }[];
+  title: string;
+  date: string;
+  views: number;
+  toBase: string;
+}
 
 // 스타일 프리셋
 const letterCardPresets = {
@@ -41,7 +51,7 @@ export default function LetterCard({
   date,
   views,
   toBase,
-}: LetterData) {
+}: LetterCardProps) {
   const preset = letterCardPresets[size];
 
   return (

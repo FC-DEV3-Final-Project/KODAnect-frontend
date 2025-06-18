@@ -1,7 +1,9 @@
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useFetchData } from "@/shared/hooks/useFetchData";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
+import { fetchLetterData } from "@/shared/api/remembrance/letterApi";
+import type { LetterData, LetterListResponse } from "@/shared/types/remembrance/LetterData.types";
 
 import { TopArea } from "@/shared/components/TopArea";
 import { Description } from "@/shared/components/Description";
@@ -9,33 +11,88 @@ import { Dropdown } from "@/shared/components/Dropdown";
 import SearchInput from "@/shared/components/SearchInput";
 import { Button } from "@/shared/components/Button";
 import LetterCard from "@/shared/components/LetterCard";
+
 import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/letters";
 import { DROPDOWN_OPTIONS } from "@/shared/constant/dropdownOptions";
 
 import clsx from "clsx";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
-const dataMapping = (item: any) => {
+// 데이터 매핑
+const dataMapping = (item: LetterData) => {
   return {
-    labelType: "letter",
-    size: "lg",
+    letterSeq: item.letterSeq,
+    title: item.letterTitle,
     infoItems: [
       { label: "기증자", value: item.donorName },
       { label: "추모자", value: item.letterWriter },
     ],
-    letterSeq: item.letterSeq,
-    title: item.letterTitle,
     date: item.writeTime,
     views: item.readCount,
   };
 };
 
 export default function Letters() {
-  const isDesktop = !useIsMobile(768);
   const navigate = useNavigate();
-  const { data, hasNext, totalCount, selectedType, setSelectedType, setKeyword, handleLoadMore } =
-    useFetchData("/heavenLetters", dataMapping);
+  const isDesktop = !useIsMobile(768);
+  const pageSize = isDesktop ? 20 : 16;
 
+  const [selectedType, setSelectedType] = useState("ALL");
+  const [keyword, setKeyword] = useState("");
+
+  const [data, setData] = useState<ReturnType<typeof dataMapping>[]>([]);
+  const [hasNext, setHasNext] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+  const nextCursorRef = useRef<number | null>(null);
+
+  // 엔드포인트 결정 함수
+  const getEndpoint = () => {
+    // 검색 조건: 키워드가 있거나, 타입이 기본값이 아니면 검색 엔드포인트 사용
+    return keyword !== "" || selectedType !== "ALL" ? "/heavenLetters/search" : "/heavenLetters";
+  };
+
+  // 데이터 패칭 및 상태 업데이트
+  const fetchAndSetData = async (isLoadMore = false) => {
+    try {
+      const result = await fetchLetterData<LetterListResponse<LetterData>>(getEndpoint(), {
+        cursor: isLoadMore ? nextCursorRef.current : null,
+        size: pageSize,
+        type: selectedType,
+        keyWord: keyword,
+      });
+      const mappedData = result.content.map(dataMapping);
+      setData((prev) => (isLoadMore ? [...prev, ...mappedData] : mappedData));
+      setHasNext(result.hasNext);
+      nextCursorRef.current = result.nextCursor;
+      setTotalCount(result.totalCount);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 검색 핸들러
+  const handleSearch = () => {
+    console.log("🔎 검색 실행"), fetchAndSetData(false);
+  };
+
+  // 더보기 핸들러
+  const handleLoadMore = () => {
+    console.log("📦 데이터 불러오기"), fetchAndSetData(true);
+  };
+
+  // 초기 데이터 조회
+  useEffect(() => {
+    handleLoadMore();
+  }, []);
+
+  // 검색어 또는 드롭다운 변경 시 검색 실행
+  useEffect(() => {
+    if (keyword !== "" || selectedType !== "ALL") {
+      handleSearch();
+    }
+  }, [keyword, selectedType]);
+
+  // 하늘나라 편지로 이동
   const handleClick = () => {
     navigate(`/remembrance/letters-form/`);
   };
