@@ -13,8 +13,8 @@ interface LetterCardProps {
   infoItems: { label: string; value: string }[];
   title: string;
   date: string;
-  views: number;
-  toBase: string;
+  views?: number;
+  toBase?: string;
 }
 
 // 스타일 프리셋
