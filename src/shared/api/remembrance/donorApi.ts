@@ -1,5 +1,5 @@
 import api from "@/shared/api/axios/axiosInstance";
-import type { DonorListResponse } from "@/shared/types/DonorData.types";
+import type { DonorListResponse } from "@/shared/types/remembrance/DonorData.types";
 
 /** 기증자 목록 조회 API */
 

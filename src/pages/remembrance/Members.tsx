@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { formatDateToYMD } from "@/shared/utils/formatDate";
 
-import { fetchDonorData } from "@/shared/api/members/donorApi";
-import type { DonorData } from "@/shared/types/DonorData.types";
+import { fetchDonorData } from "@/shared/api/remembrance/donorApi";
+import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 
 import { TopArea } from "@/shared/components/TopArea";
 import { Label } from "@/shared/components/Label";

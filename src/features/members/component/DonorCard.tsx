@@ -9,7 +9,7 @@ import Letter from "@/assets/icon/mail.svg?react";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import { useNavigate } from "react-router-dom";
 
-import type { DonorData } from "@/shared/types/DonorData.types";
+import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 
 export default function DonorCard({
   donateSeq,
