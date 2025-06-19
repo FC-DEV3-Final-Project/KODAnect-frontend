@@ -13,8 +13,8 @@ import type {
 } from "@/shared/api/recipient-view/comment/types";
 
 /** 댓글 더보기 (커서 기반 페이징) */
-export const getMoreComments = ({ letterId, cursor }: GetMoreCommentsPayload) =>
-  api.get<CommentListResponse>(`/heavenLetters/${letterId}/comments`, {
+export const getMoreComments = ({ letterSeq, cursor }: GetMoreCommentsPayload) =>
+  api.get<CommentListResponse>(`/heavenLetters/${letterSeq}/comments`, {
     params: {
       ...(cursor !== undefined && { cursor }),
     },

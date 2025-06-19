@@ -14,7 +14,7 @@ import type {
 
 /** 댓글 더보기 (커서 기반 페이징) */
 export const getMoreComments = ({ donateSeq, cursor, size }: GetMoreCommentsPayload) =>
-  api.get<CommentListResponse>(`/remembrance/${donateSeq}/comments`, {
+  api.get<CommentListResponse>(`/remembrance/${donateSeq}/comment`, {
     params: {
       cursor: cursor,
       size,
@@ -23,25 +23,25 @@ export const getMoreComments = ({ donateSeq, cursor, size }: GetMoreCommentsPayl
 
 /** 댓글 등록 */
 export const createComment = (payload: CreateCommentPayload) =>
-  api.post<CreateCommentResponse>(`/remembrance/${payload.donateSeq}/comments`, payload);
+  api.post<CreateCommentResponse>(`/remembrance/${payload.donateSeq}/comment`, payload);
 
 /** 댓글 수정/삭제 인증 */
 export const verifyComment = (
   donateSeq: number,
-  commentId: number,
+  commentSeq: number,
   payload: VerifyCommentPayload,
 ) =>
   api.post<VerifyCommentResponse>(
-    `/remembrance/${donateSeq}/comments/${commentId}/verifyPwd`,
+    `/remembrance/${donateSeq}/comment/${commentSeq}/verifyPwd`,
     payload,
   );
 
 /** 댓글 수정 */
 export const updateComment = (
   donateSeq: number,
-  commentId: number,
+  commentSeq: number,
   payload: UpdateCommentPayload,
-) => api.put<UpdateCommentResponse>(`/remembrance/${donateSeq}/comment/${commentId}`, payload);
+) => api.put<UpdateCommentResponse>(`/remembrance/${donateSeq}/comment/${commentSeq}`, payload);
 
 /** 댓글 삭제 */
 export const deleteComment = (

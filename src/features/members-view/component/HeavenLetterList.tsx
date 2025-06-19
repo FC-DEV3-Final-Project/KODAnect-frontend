@@ -1,29 +1,43 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import type { HeavenLetter, HeavenLetterPagination } from "@/shared/api/members-view/letter/types";
+import { getMoreHeavenLetters } from "@/shared/api/members-view/letter/letterApi";
+
 import { Button } from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
-interface Letter {
-  id: number;
-  title: string;
-  date: string;
-  views: number;
+interface HeavenLetterListProps {
+  donateSeq: number;
+  initialData: HeavenLetterPagination;
 }
 
-const dummyLetters: Letter[] = [
-  { id: 1, title: "보고싶다…", date: "YYYY-MM-DD", views: 100 },
-  { id: 2, title: "잘 지내지?", date: "YYYY-MM-DD", views: 555 },
-  {
-    id: 3,
-    title: "길동아 네가 떠난지 벌써 1년이 지났어... ",
-    date: "YYYY-MM-DD",
-    views: 222,
-  },
-];
+export default function HeavenLetterList({ donateSeq, initialData }: HeavenLetterListProps) {
+  const [letters, setLetters] = useState<HeavenLetter[]>(initialData.content);
+  const [cursor, setCursor] = useState(initialData.nextCursor);
+  const [hasNext, setHasNext] = useState(initialData.hasNext);
+  const [isLoading, setIsLoading] = useState(false);
 
-export default function HeavenLetterList() {
-  const [letters] = useState<Letter[]>(dummyLetters);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+
+  // 편지 더보기 핸들러
+  const handleLoadMore = async () => {
+    if (!hasNext || isLoading) return;
+    setIsLoading(true);
+    try {
+      const res = await getMoreHeavenLetters({ donateSeq, cursor, size: 5 });
+      const data = res.data.data;
+      setLetters((prev) => [...prev, ...data.content]);
+      setCursor(data.nextCursor);
+      setHasNext(data.hasNext);
+    } catch (e) {
+      console.error("하늘나라 편지 더보기 실패:", e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section className="mx-auto mb-g11 w-full max-w-[1200px]" aria-labelledby="letter-heading">
@@ -68,17 +82,15 @@ export default function HeavenLetterList() {
             {letters.length > 0 ? (
               letters.map((letter) => (
                 <tr
-                  key={letter.id}
+                  key={letter.letterSeq}
                   className="cursor-pointer border-t border-gray-20 text-b-lg text-gray-70 hover:bg-gray-5 mobile:text-b-sm"
-                  onClick={() => {
-                    // navigate(`/letters-form`);
-                  }}
+                  onClick={() => navigate(`/remembrance/letters-view/${letter.letterSeq}`)}
                 >
                   <td className="px-p6 py-p8 mobile:flex mobile:min-h-[64px] mobile:items-center mobile:py-0">
-                    <div className="line-clamp-1 mobile:line-clamp-2">{letter.title}</div>
+                    <div className="line-clamp-1 mobile:line-clamp-2">{letter.letterTitle}</div>
                   </td>
-                  <td className="px-p6 mobile:text-center">{letter.date}</td>
-                  <td className="px-p6 mobile:text-center">{letter.views}</td>
+                  <td className="px-p6 mobile:text-center">{letter.writeTime}</td>
+                  <td className="px-p6 mobile:text-center">{letter.readCount}</td>
                 </tr>
               ))
             ) : (
@@ -96,9 +108,16 @@ export default function HeavenLetterList() {
         </table>
       </div>
 
-      {letters.length > 2 && (
+      {hasNext && (
         <div className="flex justify-center">
-          <Button variant="secondary" size="medium" className="w-full" aria-label="편지 더보기">
+          <Button
+            variant="secondary"
+            size="medium"
+            className="w-full"
+            aria-label="편지 더보기"
+            onClick={handleLoadMore}
+            disabled={isLoading}
+          >
             <span className="text-b-md mobile:text-b-sm">더보기</span>
             <PlusIcon
               className="h-icon3 w-icon3 text-secondary-50 mobile:h-icon2 mobile:w-icon2"

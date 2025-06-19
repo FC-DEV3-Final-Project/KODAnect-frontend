@@ -112,7 +112,10 @@ export default function MembersView() {
                 sad: donor.sadCount,
               }}
             />
-            <HeavenLetterList />
+            <HeavenLetterList
+              donateSeq={donor.donateSeq}
+              initialData={donor.heavenLetterResponses}
+            />
           </>
         ) : (
           <p className="mt-10 text-center">기증자 정보를 찾을 수 없습니다.</p>
