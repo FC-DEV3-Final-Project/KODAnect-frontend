@@ -28,3 +28,9 @@ export interface MemberDetail {
 
 /** 전체 응답 구조 */
 export type MemberDetailResponse = ApiResponse<MemberDetail>;
+
+/** 이모지 타입 (emotion 키워드)*/
+export type EmotionType = "flower" | "love" | "see" | "miss" | "proud" | "hard" | "sad";
+
+/** 이모지 카운팅 응답*/
+export type PatchEmotionResponse = ApiResponse<null>;

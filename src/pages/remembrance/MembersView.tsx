@@ -1,7 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getMemberDetail } from "@/shared/api/members-view/member/memberApi";
-import type { MemberDetail } from "@/shared/api/members-view/member/types";
+
+import { getMemberDetail, patchEmotionCount } from "@/shared/api/members-view/member/memberApi";
+import type { MemberDetail, EmotionType } from "@/shared/api/members-view/member/types";
+
+import {
+  createComment,
+  updateComment,
+  verifyComment,
+  deleteComment,
+} from "@/shared/api/members-view/comment/commentApi";
 
 import { TopArea } from "@/shared/components/TopArea";
 import { Description } from "@/shared/components/Description";
@@ -40,6 +48,25 @@ export default function MembersView() {
     fetchDetail();
   }, [donateSeq]);
 
+  // 이모지 클릭 이벤트 핸들러
+  const handleEmotionClick = async (emotion: EmotionType) => {
+    if (!donor) return;
+    try {
+      await patchEmotionCount(donor.donateSeq, emotion);
+
+      setDonor((prev) =>
+        prev
+          ? {
+              ...prev,
+              [`${emotion}Count`]: (prev as any)[`${emotion}Count`] + 1,
+            }
+          : prev,
+      );
+    } catch (e) {
+      console.error("이모지 업데이트 실패", e);
+    }
+  };
+
   return (
     <div className="mx-auto w-full">
       <TopArea />
@@ -64,6 +91,26 @@ export default function MembersView() {
               variant="memorial"
               initialCommentData={donor.memorialCommentResponses}
               letterId={donor.donateSeq}
+              createComment={(payload) => createComment(payload).then((res) => res.data)}
+              updateComment={(donateSeq, commentId, payload) =>
+                updateComment(donateSeq, commentId, payload).then((res) => res.data)
+              }
+              verifyComment={(donateSeq, commentId, payload) =>
+                verifyComment(donateSeq, commentId, payload).then((res) => res.data)
+              }
+              deleteComment={(donateSeq, commentId, payload) =>
+                deleteComment(donateSeq, commentId, payload).then((res) => res.data)
+              }
+              onClickEmotion={handleEmotionClick}
+              emotionCounts={{
+                flower: donor.flowerCount,
+                love: donor.loveCount,
+                see: donor.seeCount,
+                miss: donor.missCount,
+                proud: donor.proudCount,
+                hard: donor.hardCount,
+                sad: donor.sadCount,
+              }}
             />
             <HeavenLetterList />
           </>

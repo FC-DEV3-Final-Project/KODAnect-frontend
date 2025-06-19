@@ -12,9 +12,9 @@ import type {
   DeleteCommentResponse,
 } from "@/shared/api/recipient-view/comment/types";
 import { getMoreComments } from "@/shared/api/recipient-view/comment/commentApi";
+import type { EmotionType } from "@/shared/api/members-view/member/types";
 
 import MemorialIconGroup from "@/features/members-view/component/MemorialIconGroup";
-
 import CommentForm from "@/shared/components/comment/CommentForm";
 import CommentList from "@/shared/components/comment/CommentList";
 
@@ -38,6 +38,8 @@ interface CommentAreaProps {
     commentId: number,
     payload: DeleteCommentPayload,
   ) => Promise<DeleteCommentResponse>;
+  onClickEmotion?: (emotion: EmotionType) => void;
+  emotionCounts?: Record<EmotionType, number>;
 }
 
 function CommentArea({
@@ -48,6 +50,8 @@ function CommentArea({
   updateComment,
   verifyComment,
   deleteComment,
+  onClickEmotion,
+  emotionCounts,
 }: CommentAreaProps) {
   const isMemorial = variant === "memorial";
   const title = variant === "memorial" ? "추모 메세지" : "댓글";
@@ -95,7 +99,9 @@ function CommentArea({
           기증자에 대한 추모 분위기를 해치거나, 비방의 글 등이 게시가 될 경우 관리자에 의해 삭제 될
           수 있습니다.
         </p>
-        {isMemorial && <MemorialIconGroup />}
+        {isMemorial && onClickEmotion && emotionCounts && (
+          <MemorialIconGroup onClickEmotion={onClickEmotion} counts={emotionCounts} />
+        )}
       </div>
       <div className="mb-g9">
         <CommentForm
