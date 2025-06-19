@@ -39,6 +39,8 @@ function CommentList({
   letterId,
   onDeleteComment,
   onStartEdit,
+  verifyComment,
+  deleteComment,
 }: CommentListProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
@@ -72,6 +74,8 @@ function CommentList({
                   letterId={letterId}
                   onDelete={onDeleteComment}
                   onStartEdit={onStartEdit}
+                  verifyComment={verifyComment}
+                  deleteComment={deleteComment}
                 />
               </li>
             ))}

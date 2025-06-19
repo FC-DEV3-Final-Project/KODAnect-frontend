@@ -1,6 +1,11 @@
 import { useState } from "react";
-import type { Comment as CommentType } from "@/shared/api/recipient-view/comment/types";
-import { deleteComment } from "@/shared/api/recipient-view/comment/commentApi";
+import type {
+  Comment as CommentType,
+  VerifyCommentPayload,
+  VerifyCommentResponse,
+  DeleteCommentPayload,
+  DeleteCommentResponse,
+} from "@/shared/api/recipient-view/comment/types";
 
 import OptionIcon from "@/assets/icon/ellipsis-vertical.svg?react";
 import { Modal } from "@/shared/components/Modal";
@@ -12,6 +17,17 @@ type CommentItemProps = {
   onDelete?: (id: number) => void;
   letterId: number;
   onStartEdit?: (comment: CommentType) => void; // 수정 요청 콜백
+  verifyComment: (
+    letterId: number,
+    commentId: number,
+    payload: VerifyCommentPayload,
+  ) => Promise<VerifyCommentResponse>;
+
+  deleteComment: (
+    letterId: number,
+    commentId: number,
+    payload: DeleteCommentPayload,
+  ) => Promise<DeleteCommentResponse>;
 };
 
 function CommentItem({
@@ -21,6 +37,8 @@ function CommentItem({
   onDelete,
   letterId,
   onStartEdit,
+  verifyComment,
+  deleteComment,
 }: CommentItemProps) {
   const { commentSeq, contents, commentWriter, writeTime } = comment;
   const dropdownId = `comment-dropdown-${commentWriter}-${writeTime}`;
@@ -100,17 +118,14 @@ function CommentItem({
           onSubmit={async () => {
             try {
               if (isModalOpen === "delete") {
-                console.log("🧾 실제 삭제 요청", {
-                  letterId, // letterId 확인
-                  commentSeq, // commentSeq 확인
-                  password, // password 확인
-                });
-                const response = await deleteComment(letterId, commentSeq, {
+                await deleteComment(letterId, commentSeq, {
                   commentPasscode: password,
                 });
-                console.log("삭제 응답:", response);
                 onDelete?.(commentSeq);
               } else {
+                await verifyComment(letterId, commentSeq, {
+                  commentPasscode: password,
+                });
                 onStartEdit?.(comment);
               }
 

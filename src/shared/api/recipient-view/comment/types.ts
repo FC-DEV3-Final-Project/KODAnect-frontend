@@ -5,16 +5,20 @@ export interface Comment {
   commentSeq: number;
   letterSeq?: number; // 수혜자 편지
   donateSeq?: number; // 기증자 추모관
+  storySeq?: number; //기증자 스토리
   commentWriter: string;
   contents: string;
+  comments?: string;
   delFlag?: "Y" | "N";
-  writeTime: string;
+  writeTime?: string;
+  commentWriteTime?: string;
   modifyTime?: string;
 }
 
 /** 더보기 요청*/
 export interface GetMoreCommentsPayload {
-  letterId: number;
+  letterId?: number;
+  storySeq?: number;
   cursor: number;
   size?: number;
 }
@@ -31,7 +35,8 @@ export type CommentListResponse = ApiResponse<CommentPagination>;
 
 /** 댓글 등록 요청*/
 export interface CreateCommentPayload {
-  letterSeq: number;
+  letterSeq?: number;
+  storySeq?: number;
   commentWriter: string;
   contents: string;
   commentPasscode: string;
@@ -51,7 +56,8 @@ export type VerifyCommentResponse = ApiResponse<null>;
 /** 댓글 수정 요청*/
 export interface UpdateCommentPayload {
   commentWriter: string;
-  contents: string;
+  contents?: string;
+  commentContents?: string;
 }
 
 /**  댓글 수정 응답*/

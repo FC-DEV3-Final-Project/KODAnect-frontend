@@ -7,6 +7,12 @@ import {
   deleteHeavenLetter,
 } from "@/shared/api/letter-view/letter/letterApi";
 import type { HeavenLetterDetail } from "@/shared/api/letter-view/letter/types";
+import {
+  createComment,
+  updateComment,
+  verifyComment,
+  deleteComment,
+} from "@/shared/api/letter-view/comment/commentApi";
 
 import { Description } from "@/shared/components/Description";
 import LetterContent from "@/features/letter-view/components/LetterContent";
@@ -84,6 +90,16 @@ function LetterView() {
               variant="default"
               initialCommentData={letter.cursorCommentPaginationResponse}
               letterId={letter.letterSeq}
+              createComment={(payload) => createComment(payload).then((res) => res.data)}
+              updateComment={(letterId, commentId, payload) =>
+                updateComment(letterId, commentId, payload).then((res) => res.data)
+              }
+              verifyComment={(letterId, commentId, payload) =>
+                verifyComment(letterId, commentId, payload).then((res) => res.data)
+              }
+              deleteComment={(letterId, commentId, payload) =>
+                deleteComment(letterId, commentId, payload).then((res) => res.data)
+              }
             />
 
             {modalType && (

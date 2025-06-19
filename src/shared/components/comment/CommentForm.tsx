@@ -71,7 +71,7 @@ function CommentForm({
 
     try {
       if (editingComment) {
-        //  수정 로직
+        //  댓글 수정
         await updateComment(letterId, editingComment.commentSeq, {
           commentWriter: state.commentWriter,
           contents: state.contents,
@@ -86,16 +86,18 @@ function CommentForm({
           modifyTime: new Date().toISOString(),
         });
       } else {
-        // 기존 등록 로직
+        // 댓글 등록
         const response = await createComment({
           letterSeq: letterId,
           commentWriter: state.commentWriter,
           contents: state.contents,
           commentPasscode: state.commentPasscode,
         });
+        console.log("응답 확인:", response);
+        console.log("응답 데이터:", response.data);
 
         alert("댓글이 등록되었습니다.");
-        onCommentSubmit?.(response.data);
+        // onCommentSubmit?.(response.data.data);
       }
 
       dispatch({ type: "RESET" });

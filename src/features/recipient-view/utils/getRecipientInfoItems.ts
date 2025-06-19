@@ -1,5 +1,5 @@
 import type { RecipientLetterDetail } from "@/shared/api/recipient-view/letter/types";
-import { getOrganName } from "./getOranName";
+import { getOrganName } from "./getOrganName";
 
 export function getRecipientInfoItems(data: RecipientLetterDetail) {
   return [
