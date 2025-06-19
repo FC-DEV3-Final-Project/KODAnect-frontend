@@ -1,16 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
+import api from "@/shared/api/axios/axiosInstance";
+import { heavenLetterMain } from "@/features/remembrance/dataMapping";
+import type { LetterCardData } from "@/shared/types/LetterCard.types";
 
-import { lettersData } from "@/features/home/component/letter/mock-data";
 import LetterCard from "@/shared/components/LetterCard";
 import clsx from "clsx";
-
-interface Letter {
-  letterNumber: number;
-  title: string;
-  date: string;
-  infoItems: { label: string; value: string }[];
-}
 
 // 카드 2개씩 묶기
 function groupByCount<T>(arr: T[], count: number): T[][] {
@@ -22,9 +17,26 @@ function groupByCount<T>(arr: T[], count: number): T[][] {
 }
 
 export default function LetterCardList() {
+  const [letters, setLetters] = useState<LetterCardData[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
   const sliderRef = useRef<Slider | null>(null);
-  const lettersGroup = groupByCount<Letter>(lettersData, 2);
+  const lettersGroup = groupByCount<LetterCardData>(letters, 2);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await api.get("/heavenLetters", {
+        params: {
+          size: 10,
+        },
+      });
+      // 매핑 적용
+      const mappedData = response.data.data.content.map(heavenLetterMain);
+      setLetters(mappedData);
+      setTotalCount(response.data.data.totalCount);
+    };
+    loadData();
+  }, []);
 
   const settings = {
     dots: false,
@@ -40,15 +52,16 @@ export default function LetterCardList() {
     <>
       {/* PC: 전체 카드 노출 */}
       <div className="grid w-full grid-cols-5 items-center gap-g4 mobile:hidden">
-        {lettersData.map((item, index) => (
+        {letters.map((item, index) => (
           <LetterCard
-            letterSeq={item.letterNumber} // 임시로 추가함
-            key={index}
+            key={item.letterSeq}
             size="sm"
-            letterNumber={item.letterNumber}
+            letterSeq={item.letterSeq} // 임시로 추가함
+            letterNumber={totalCount - index}
             title={item.title}
             infoItems={item.infoItems}
             date={item.date}
+            toBase="/remembrance/Letter-view"
           />
         ))}
       </div>
@@ -70,15 +83,16 @@ export default function LetterCardList() {
         >
           {lettersGroup.map((group, index) => (
             <div key={index} className="!grid grid-rows-2 gap-g3">
-              {group.map((item) => (
+              {group.map((item, index) => (
                 <LetterCard
-                  letterSeq={item.letterNumber} // 임시로 추가함
-                  key={item.letterNumber}
+                  key={item.letterSeq}
                   size="sm"
-                  letterNumber={item.letterNumber}
+                  letterSeq={item.letterSeq}
+                  letterNumber={totalCount - index}
                   title={item.title}
                   infoItems={item.infoItems}
                   date={item.date}
+                  toBase="/remembrance/Letter-view"
                 />
               ))}
             </div>
