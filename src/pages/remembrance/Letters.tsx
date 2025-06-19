@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { fetchLetterData } from "@/shared/api/remembrance/letterApi";
+import { heavenLetter } from "@/features/remembrance/dataMapping";
 import type { LetterData, LetterListResponse } from "@/shared/types/remembrance/LetterData.types";
 
 import { TopArea } from "@/shared/components/TopArea";
@@ -18,20 +19,6 @@ import { DROPDOWN_OPTIONS } from "@/shared/constant/dropdownOptions";
 import clsx from "clsx";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
-// 데이터 매핑
-const dataMapping = (item: LetterData) => {
-  return {
-    letterSeq: item.letterSeq,
-    title: item.letterTitle,
-    infoItems: [
-      { label: "기증자", value: item.donorName },
-      { label: "추모자", value: item.letterWriter },
-    ],
-    date: item.writeTime,
-    views: item.readCount,
-  };
-};
-
 export default function Letters() {
   const navigate = useNavigate();
   const isDesktop = !useIsMobile(768);
@@ -40,7 +27,7 @@ export default function Letters() {
   const [selectedType, setSelectedType] = useState("ALL");
   const [keyword, setKeyword] = useState("");
 
-  const [data, setData] = useState<ReturnType<typeof dataMapping>[]>([]);
+  const [data, setData] = useState<ReturnType<typeof heavenLetter>[]>([]);
   const [hasNext, setHasNext] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
   const nextCursorRef = useRef<number | null>(null);
@@ -60,7 +47,7 @@ export default function Letters() {
         type: selectedType,
         keyWord: keyword,
       });
-      const mappedData = result.content.map(dataMapping);
+      const mappedData = result.content.map(heavenLetter);
       setData((prev) => (isLoadMore ? [...prev, ...mappedData] : mappedData));
       setHasNext(result.hasNext);
       nextCursorRef.current = result.nextCursor;
@@ -94,7 +81,7 @@ export default function Letters() {
 
   // 하늘나라 편지로 이동
   const handleClick = () => {
-    navigate(`/remembrance/letters-form/`);
+    navigate(`/remembrance/letters-form`);
   };
 
   return (

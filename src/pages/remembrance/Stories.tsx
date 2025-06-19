@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { fetchLetterData } from "@/shared/api/remembrance/letterApi";
+import { donorStory } from "@/features/remembrance/dataMapping";
 import type { StoryData, LetterListResponse } from "@/shared/types/remembrance/LetterData.types";
 
 import { TopArea } from "@/shared/components/TopArea";
@@ -18,15 +19,6 @@ import { DROPDOWN_OPTIONS } from "@/shared/constant/dropdownOptions";
 import clsx from "clsx";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
-// 데이터 매핑
-const dataMapping = (item: StoryData) => ({
-  letterSeq: item.storySeq,
-  title: item.storyTitle,
-  infoItems: [{ label: "코디네이터", value: item.storyWriter }],
-  date: item.writeTime,
-  views: item.readCount,
-});
-
 export default function Stories() {
   const navigate = useNavigate();
   const isDesktop = !useIsMobile(768);
@@ -35,7 +27,7 @@ export default function Stories() {
   const [selectedType, setSelectedType] = useState("ALL");
   const [keyword, setKeyword] = useState("");
 
-  const [data, setData] = useState<ReturnType<typeof dataMapping>[]>([]);
+  const [data, setData] = useState<ReturnType<typeof donorStory>[]>([]);
   const [hasNext, setHasNext] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
   const nextCursorRef = useRef<number | null>(null);
@@ -56,7 +48,7 @@ export default function Stories() {
         type: selectedType,
         keyWord: keyword,
       });
-      const mappedData = result.content.map(dataMapping);
+      const mappedData = result.content.map(donorStory);
       setData((prev) => (isLoadMore ? [...prev, ...mappedData] : mappedData));
       setHasNext(result.hasNext);
       nextCursorRef.current = result.nextCursor;
@@ -90,7 +82,7 @@ export default function Stories() {
 
   // 하늘나라 편지로 이동
   const handleClick = () => {
-    navigate(`/remembrance/letters-form/`);
+    navigate(`/remembrance/letters-form`);
   };
 
   return (

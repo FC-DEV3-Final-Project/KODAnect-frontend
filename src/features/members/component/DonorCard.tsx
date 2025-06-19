@@ -28,7 +28,7 @@ export default function DonorCard({
   };
 
   const handleWriteLetter = () => {
-    navigate(`/remembrance/letters-form/`, {
+    navigate(`/remembrance/letters-form`, {
       state: {
         donateSeq: donateSeq,
         donorName: donorName,
