@@ -25,12 +25,7 @@ export interface RecipientLetterDetail {
 }
 
 /** 편지 전체 응답 구조*/
-export interface RecipientLetterDetailResponse {
-  success: boolean;
-  code: number;
-  message: string;
-  data: RecipientLetterDetail;
-}
+export type RecipientLetterDetailResponse = ApiResponse<RecipientLetterDetail>;
 
 /** 편지 수정 인증 요청 */
 export interface VerifyLetterPayload {

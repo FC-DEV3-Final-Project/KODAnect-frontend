@@ -1,4 +1,5 @@
 import type { CommentPagination } from "@/shared/api/recipient-view/comment/types";
+import type { HeavenLetterPagination } from "@/shared/api/members-view/letter/types";
 import type { ApiResponse } from "@/shared/api/common/types";
 
 export interface MemberDetail {
@@ -21,6 +22,7 @@ export interface MemberDetail {
   sadCount: number;
   writeTime: string;
   memorialCommentResponses: CommentPagination;
+  heavenLetterResponses: HeavenLetterPagination;
   // 편의상 이름 맞춤: memorialCommentResponses → initialCommentData
 }
 

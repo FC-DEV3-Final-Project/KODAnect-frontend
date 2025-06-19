@@ -80,7 +80,7 @@ function StoryView() {
             />
 
             <CommentArea
-              variant="default"
+              variant="story"
               initialCommentData={story.comments}
               letterId={story.storySeq}
               createComment={(payload) => createComment(payload).then((res) => res.data)}

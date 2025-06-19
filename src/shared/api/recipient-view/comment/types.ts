@@ -8,7 +8,7 @@ export interface Comment {
   storySeq?: number; //기증자 스토리
   commentWriter: string;
   contents: string;
-  comments?: string;
+  comments?: string; // 기증자 스토리 댓글 내용
   delFlag?: "Y" | "N";
   writeTime?: string;
   commentWriteTime?: string;
@@ -17,8 +17,9 @@ export interface Comment {
 
 /** 더보기 요청*/
 export interface GetMoreCommentsPayload {
-  letterId?: number;
+  letterSeq?: number;
   storySeq?: number;
+  donateSeq?: number;
   cursor: number;
   size?: number;
 }
@@ -26,6 +27,7 @@ export interface GetMoreCommentsPayload {
 /** 더보기 응답*/
 export interface CommentPagination {
   content: Comment[];
+  comments?: Comment[];
   commentNextCursor: number;
   commentHasNext: boolean; // 댓글이 없으면 더보기 버튼 숨김
 }
@@ -37,6 +39,7 @@ export type CommentListResponse = ApiResponse<CommentPagination>;
 export interface CreateCommentPayload {
   letterSeq?: number;
   storySeq?: number;
+  donateSeq?: number;
   commentWriter: string;
   contents: string;
   commentPasscode: string;

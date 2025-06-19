@@ -16,6 +16,7 @@ import { Button } from "@/shared/components/Button";
 import { validateCaptcha } from "react-simple-captcha";
 
 type CommentFormProps = {
+  variant: "default" | "memorial" | "story";
   letterId: number;
   onCommentSubmit?: (newComment: CommentType) => void; // 등록된 댓글 콜백
   editingComment?: CommentType | null;
@@ -51,6 +52,7 @@ function reducer(state: FormState, action: FormAction): FormState {
 }
 
 function CommentForm({
+  variant,
   letterId,
   onCommentSubmit,
   editingComment,
@@ -88,7 +90,11 @@ function CommentForm({
       } else {
         // 댓글 등록
         const response = await createComment({
-          letterSeq: letterId,
+          ...(variant === "default"
+            ? { letterSeq: letterId }
+            : variant === "memorial"
+              ? { donateSeq: letterId }
+              : { storySeq: letterId }),
           commentWriter: state.commentWriter,
           contents: state.contents,
           commentPasscode: state.commentPasscode,
