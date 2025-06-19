@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import clsx from "clsx";
 import Button from "@/shared/components/Button";
 import TextInput from "@/shared/components/TextInput";
 import CloseIcon from "@/assets/icon/close.svg?react";
@@ -51,7 +52,7 @@ import CloseIcon from "@/assets/icon/close.svg?react";
  */
 
 interface ModalProps {
-  type?: "text" | "input";
+  type?: "text" | "input" | "basic";
   onClose: () => void;
   onSubmit: () => void;
   title?: string;
@@ -59,6 +60,7 @@ interface ModalProps {
   description?: string;
   setPassword?: (value: string) => void;
   placeholder?: string;
+  children?: React.ReactNode;
 }
 
 export function Modal({
@@ -70,6 +72,7 @@ export function Modal({
   description,
   setPassword,
   placeholder = "비밀번호를 입력하세요",
+  children,
 }: ModalProps) {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -88,7 +91,12 @@ export function Modal({
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="relative w-[510px] rounded-r6 border border-gray-30 bg-white px-p9 pb-p9 pt-p8 mobile:w-[328px] mobile:pb-p8">
+      <div
+        className={clsx(
+          "relative rounded-r6 border border-gray-30 bg-white px-p9 pb-p9 pt-p8 mobile:pb-p8",
+          type === "basic" ? "w-auto mobile:w-full" : "w-[510px] mobile:w-[328px]",
+        )}
+      >
         <div className="mb-g5 flex justify-end">
           {/* 닫기 버튼 */}
           <button onClick={onClose} aria-label="모달 닫기">
@@ -136,14 +144,25 @@ export function Modal({
         )}
 
         {/* 버튼 영역 */}
-        <div className="flex justify-end gap-[12px]">
-          <Button variant="primary" size="medium" onClick={onSubmit}>
-            삭제
-          </Button>
-          <Button variant="tertiary" size="medium" onClick={onClose}>
-            취소
-          </Button>
-        </div>
+        {type !== "basic" && (
+          <div className="flex justify-end gap-[12px]">
+            <Button variant="primary" size="medium" onClick={onSubmit}>
+              삭제
+            </Button>
+            <Button variant="tertiary" size="medium" onClick={onClose}>
+              취소
+            </Button>
+          </div>
+        )}
+
+        {type == "basic" && (
+          <div>
+            {title && (
+              <h2 className="mb-g5 text-h-md font-bold text-gray-90 mobile:text-h-sm">{title}</h2>
+            )}
+            {children}
+          </div>
+        )}
       </div>
     </div>,
     document.body,

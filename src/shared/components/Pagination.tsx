@@ -47,6 +47,7 @@ interface PaginationProps {
   currentPage: number;
   onPageChange: (page: number) => void;
   visiblePages?: number;
+  className?: string;
 }
 
 export default function Pagination({
@@ -54,6 +55,7 @@ export default function Pagination({
   currentPage,
   onPageChange,
   visiblePages: propVisiblePages = 5,
+  className,
 }: PaginationProps) {
   const visiblePages = Math.max(
     propVisiblePages % 2 === 0 ? propVisiblePages + 1 : propVisiblePages,
@@ -91,7 +93,7 @@ export default function Pagination({
   return (
     <nav
       aria-label="페이지 네비게이션"
-      className="flex gap-g3 mobile:flex-wrap mobile:justify-center mobile:gap-g5"
+      className={`flex justify-center gap-g3 mobile:flex-wrap mobile:gap-g5 ${className}`}
     >
       <button
         type="button"
