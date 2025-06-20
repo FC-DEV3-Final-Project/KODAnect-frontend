@@ -102,10 +102,11 @@ export default function Members() {
             <Label
               size="m"
               weight="bold"
-              children="기증일"
               className="min-w-[45px]"
               onClick={() => fromRef.current?.focus()}
-            ></Label>
+            >
+              기증일
+            </Label>
             <DatePicker range={range} onRangeChange={handleDateChange} fromRef={fromRef} />
           </div>
           <div
@@ -114,13 +115,9 @@ export default function Members() {
               "mobile:flex-col mobile:items-start mobile:gap-g3",
             )}
           >
-            <Label
-              size="m"
-              weight="bold"
-              children="기증자명"
-              htmlFor="donorName"
-              className="min-w-[60px]"
-            ></Label>
+            <Label size="m" weight="bold" htmlFor="donorName" className="min-w-[60px]">
+              기증자명
+            </Label>
             <TextInput
               id="donorName"
               placeholder="성함을 입력해주세요"
