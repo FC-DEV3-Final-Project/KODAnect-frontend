@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { throttle } from "lodash";
 

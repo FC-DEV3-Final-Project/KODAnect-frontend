@@ -35,15 +35,6 @@ export interface VerifyLetterPayload {
 /** 편지 수정 인증 응답 */
 export type VerifyLetterResponse = ApiResponse<null>;
 
-/** 편지 수정 요청 */
-export interface UpdateLetterPayload {
-  letterTitle: string;
-  letterWriter: string;
-  letterContents: string;
-  letterPasscode: string;
-  imageFile?: File | null;
-}
-
 /**편지 수정 응답 */
 export type UpdateLetterResponse = ApiResponse<RecipientLetterDetail>;
 

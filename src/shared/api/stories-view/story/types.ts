@@ -26,15 +26,6 @@ export interface VerifyStoryPayload {
 /** 수정 인증 응답 */
 export type VerifyStoryResponse = ApiResponse<StoryLetterDetail>; // data 안에 상세 데이터가 옴
 
-/** 수정 요청 */
-export interface UpdateStoryPayload {
-  storyTitle: string;
-  storyWriter: string;
-  storyContents: string;
-  storyPasscode: string;
-  imageFile?: File | null;
-}
-
 /** 수정 응답 */
 export type UpdateStoryResponse = ApiResponse<null>;
 
