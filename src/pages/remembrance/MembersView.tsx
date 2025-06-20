@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { throttle } from "lodash";
+import { useState, useEffect, useCallback } from "react";
 
 import { getMemberDetail, patchEmotionCount } from "@/shared/api/members-view/member/memberApi";
 import type { MemberDetail, EmotionType } from "@/shared/api/members-view/member/types";
@@ -27,6 +26,16 @@ export default function MembersView() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const emotionCountKeys: Record<EmotionType, keyof MemberDetail> = {
+    flower: "flowerCount",
+    love: "loveCount",
+    see: "seeCount",
+    miss: "missCount",
+    proud: "proudCount",
+    hard: "hardCount",
+    sad: "sadCount",
+  };
+
   useEffect(() => {
     if (!donateSeq) {
       setIsLoading(false);
@@ -51,27 +60,24 @@ export default function MembersView() {
   // 이모지 클릭 이벤트 핸들러 & throttle 위해 useCallback 적용
   const handleEmotionClick = useCallback(
     async (emotion: EmotionType) => {
-      if (!donor) return;
+      if (!donateSeq) return;
       try {
-        await patchEmotionCount(donor.donateSeq, emotion);
+        await patchEmotionCount(Number(donateSeq), emotion);
 
         setDonor((prev) => {
           if (!prev) return prev;
+          const countKey = emotionCountKeys[emotion];
           return {
             ...prev,
-            [`${emotion}Count`]: (prev as any)[`${emotion}Count`] + 1,
+            [countKey]: (prev[countKey] as number) + 1,
           };
         });
       } catch (e) {
         console.error("이모지 업데이트 실패", e);
       }
     },
-    [donor],
+    [donateSeq],
   );
-
-  const throttledEmotionClick = useMemo(() => {
-    return throttle(handleEmotionClick, 2000); // 2초 제한
-  }, [handleEmotionClick]);
 
   return (
     <div className="mx-auto w-full">
@@ -102,7 +108,7 @@ export default function MembersView() {
               getMoreComments={(cursor, size = 3) =>
                 getMoreComments({ donateSeq: donor.donateSeq, cursor, size })
               }
-              onClickEmotion={throttledEmotionClick}
+              onClickEmotion={handleEmotionClick}
               emotionCounts={{
                 flower: donor.flowerCount,
                 love: donor.loveCount,

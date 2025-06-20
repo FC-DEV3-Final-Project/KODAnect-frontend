@@ -1,4 +1,6 @@
+import { useMemo } from "react";
 import type { ReactElement } from "react";
+import { throttle } from "lodash";
 
 import Flower from "@/assets/images/memorialIcon/flower.svg?react";
 import Sad from "@/assets/images/memorialIcon/sad.svg?react";
@@ -30,6 +32,10 @@ const memorialIcons: { emotion: EmotionType; label: string; icon: ReactElement }
 ];
 
 export default function MemorialIconGroup({ onClickEmotion, counts }: MemorialIconGroupProps) {
+  const throttledClick = useMemo(() => {
+    return throttle(onClickEmotion, 2000);
+  }, [onClickEmotion]);
+
   return (
     <div
       className="mt-g7 flex flex-wrap gap-g4 mobile:gap-g2"
@@ -43,7 +49,7 @@ export default function MemorialIconGroup({ onClickEmotion, counts }: MemorialIc
         <button
           key={emotion}
           type="button"
-          onClick={() => onClickEmotion(emotion)}
+          onClick={() => throttledClick(emotion)}
           className="mb-[8px] flex items-center gap-g4 rounded-full border border-gray-20 px-p7 py-p3 text-b-md text-gray-90 hover:bg-secondary-10 mobile:px-p4 mobile:py-p3 mobile:text-b-sm"
         >
           {icon}
