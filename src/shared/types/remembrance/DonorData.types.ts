@@ -2,11 +2,11 @@
 export interface DonorData {
   donateSeq: number;
   donorName: string;
-  genderFlag: "M" | "F";
-  donateAge: number;
+  genderFlag?: "M" | "F";
+  donateAge?: number;
   donateDate: string;
-  commentCount: number;
-  letterCount: number;
+  commentCount?: number;
+  letterCount?: number;
 }
 
 /** 검색 결과 응답 타입 */
