@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { NewBadge } from "@/shared/components/NewBadge";
+import NewBadge from "@/shared/components/NewBadge";
 import type { LetterCardData } from "@/shared/types/LetterCard.types";
 
 import clsx from "clsx";

@@ -1,6 +1,6 @@
-import TabPanel from '../common/TabPanel';
-import AgencySlideList from "./AgencySlideList";
-import { activationAgencies, brainDeathAgencies } from "./mock-data";
+import TabPanel from "@/features/home/component/common/TabPanel";
+import AgencySlideList from "@/features/home/component/convention-partners/AgencySlideList";
+import { activationAgencies, brainDeathAgencies } from "@/features/home/mock-data";
 
 export default function ConventionPartner() {
   return (

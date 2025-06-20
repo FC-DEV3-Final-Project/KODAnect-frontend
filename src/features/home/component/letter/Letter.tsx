@@ -1,5 +1,5 @@
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { MoreButton } from "@/features/home/component/common/MoreButton";
+import MoreButton from "@/features/home/component/common/MoreButton";
 import LetterCardList from "@/features/home/component/letter/LetterCardList";
 
 export default function Letter() {

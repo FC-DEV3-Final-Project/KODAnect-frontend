@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import api from "@/shared/api/axios/axiosInstance";
+import clsx from "clsx";
+import LetterCard from "@/shared/components/LetterCard";
 import { heavenLetterMain } from "@/features/remembrance/dataMapping";
 import type { LetterCardData } from "@/shared/types/LetterCard.types";
-
-import LetterCard from "@/shared/components/LetterCard";
-import clsx from "clsx";
 
 // 카드 2개씩 묶기
 function groupByCount<T>(arr: T[], count: number): T[][] {
@@ -56,7 +55,7 @@ export default function LetterCardList() {
           <LetterCard
             key={item.letterSeq}
             size="sm"
-            letterSeq={item.letterSeq} // 임시로 추가함
+            letterSeq={item.letterSeq}
             letterNumber={totalCount - index}
             title={item.title}
             infoItems={item.infoItems}

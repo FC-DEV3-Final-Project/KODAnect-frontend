@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Slider from "react-slick";
-import SliderNextArrow from "../common/SliderNextArrow";
+import SliderNextArrow from "@/features/home/component/common/SliderNextArrow";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 interface Agency {

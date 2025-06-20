@@ -1,8 +1,8 @@
+import clsx from "clsx";
 import MedicalStaff from "@/assets/images/medical-staff.svg";
 import Person from "@/assets/images/none-medical-person.svg";
 import Organ from "@/assets/images/organ.svg";
 import Tissue from "@/assets/images/tissue.svg";
-import clsx from "clsx";
 
 export default function QuickInfoCard({ isMobile }: { isMobile: boolean }) {
   return (
@@ -82,7 +82,10 @@ export default function QuickInfoCard({ isMobile }: { isMobile: boolean }) {
           2025 누적 기증자
         </h2>
         <div className="flex h-[170px] items-center justify-center gap-g11 mobile:h-[164px]">
-          <div className="flex flex-col items-center justify-between" aria-label="장기 기증자 누적 인원">
+          <div
+            className="flex flex-col items-center justify-between"
+            aria-label="장기 기증자 누적 인원"
+          >
             <img src={Organ} alt="" className="h-[65px] w-[65px]" />
             <div className="text-center">
               <p className="text-h-xs font-bold mobile:text-h-xs">장기 기증자</p>
@@ -92,7 +95,10 @@ export default function QuickInfoCard({ isMobile }: { isMobile: boolean }) {
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-between" aria-label="조직 기증자 누적 인원">
+          <div
+            className="flex flex-col items-center justify-between"
+            aria-label="조직 기증자 누적 인원"
+          >
             <img src={Tissue} alt="" className="h-[65px] w-[65px]" />
             <div className="text-center">
               <p className="text-h-xs font-bold mobile:text-h-xs">조직 기증자</p>
