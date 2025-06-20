@@ -136,6 +136,7 @@ function LetterView() {
                     setPassword("");
                   }
                 }}
+                confirmText={modalType === "edit" ? "수정" : "삭제"}
               />
             )}
           </>

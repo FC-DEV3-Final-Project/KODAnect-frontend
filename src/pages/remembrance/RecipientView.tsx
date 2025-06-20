@@ -141,6 +141,7 @@ function RecipientView() {
                     setPassword("");
                   }
                 }}
+                confirmText={modalType === "edit" ? "수정" : "삭제"}
               />
             )}
           </>
