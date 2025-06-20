@@ -18,6 +18,7 @@ import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/members-view";
 import TributeArea from "@/features/members/component/TributeArea";
 import CommentArea from "@/shared/components/comment/CommentArea";
 import HeavenLetterList from "@/features/members-view/component/HeavenLetterList";
+import { withData } from "@/shared/utils/withData";
 
 export default function MembersView() {
   const { donateSeq } = useParams();
@@ -95,15 +96,15 @@ export default function MembersView() {
               variant="memorial"
               initialCommentData={donor.memorialCommentResponses}
               letterId={donor.donateSeq}
-              createComment={(payload) => createComment(payload).then((res) => res.data)}
+              createComment={(payload) => withData(createComment(payload))}
               updateComment={(donateSeq, commentId, payload) =>
-                updateComment(donateSeq, commentId, payload).then((res) => res.data)
+                withData(updateComment(donateSeq, commentId, payload))
               }
               verifyComment={(donateSeq, commentId, payload) =>
-                verifyComment(donateSeq, commentId, payload).then((res) => res.data)
+                withData(verifyComment(donateSeq, commentId, payload))
               }
               deleteComment={(donateSeq, commentId, payload) =>
-                deleteComment(donateSeq, commentId, payload).then((res) => res.data)
+                withData(deleteComment(donateSeq, commentId, payload))
               }
               getMoreComments={(cursor, size = 3) =>
                 getMoreComments({ donateSeq: donor.donateSeq, cursor, size })

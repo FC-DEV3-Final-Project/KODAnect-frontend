@@ -22,6 +22,7 @@ import CommentArea from "@/shared/components/comment/CommentArea";
 import { TopArea } from "@/shared/components/TopArea";
 import { getHeavenInfoItems } from "@/features/letter-view/utils/getHeavenInfoItems";
 import { Modal } from "@/shared/components/Modal";
+import { withData } from "@/shared/utils/withData";
 
 function LetterView() {
   const { id } = useParams<{ id: string }>();
@@ -78,15 +79,15 @@ function LetterView() {
               variant="default"
               initialCommentData={letter.cursorCommentPaginationResponse}
               letterId={letter.letterSeq}
-              createComment={(payload) => createComment(payload).then((res) => res.data)}
+              createComment={(payload) => withData(createComment(payload))}
               updateComment={(letterId, commentId, payload) =>
-                updateComment(letterId, commentId, payload).then((res) => res.data)
+                withData(updateComment(letterId, commentId, payload))
               }
               verifyComment={(letterId, commentId, payload) =>
-                verifyComment(letterId, commentId, payload).then((res) => res.data)
+                withData(verifyComment(letterId, commentId, payload))
               }
               deleteComment={(letterId, commentId, payload) =>
-                deleteComment(letterId, commentId, payload).then((res) => res.data)
+                withData(deleteComment(letterId, commentId, payload))
               }
               getMoreComments={(cursor, size = 3) =>
                 getMoreComments({ letterSeq: letter.letterSeq, cursor, size })

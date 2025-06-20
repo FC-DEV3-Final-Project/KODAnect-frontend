@@ -23,6 +23,7 @@ import CommentArea from "@/shared/components/comment/CommentArea";
 import { TopArea } from "@/shared/components/TopArea";
 import { getStoryInfoItems } from "@/features/story-view/utils/getStoryInfoItems";
 import { Modal } from "@/shared/components/Modal";
+import { withData } from "@/shared/utils/withData";
 
 function StoryView() {
   const { id } = useParams<{ id: string }>();
@@ -79,15 +80,15 @@ function StoryView() {
               variant="story"
               initialCommentData={story.comments}
               letterId={story.storySeq}
-              createComment={(payload) => createComment(payload).then((res) => res.data)}
+              createComment={(payload) => withData(createComment(payload))}
               updateComment={(letterId, commentId, payload) =>
-                updateComment(letterId, commentId, payload).then((res) => res.data)
+                withData(updateComment(letterId, commentId, payload))
               }
               verifyComment={(letterId, commentId, payload) =>
-                verifyComment(letterId, commentId, payload).then((res) => res.data)
+                withData(verifyComment(letterId, commentId, payload))
               }
               deleteComment={(letterId, commentId, payload) =>
-                deleteComment(letterId, commentId, payload).then((res) => res.data)
+                withData(deleteComment(letterId, commentId, payload))
               }
               getMoreComments={(cursor, size = 3) =>
                 getMoreComments({ storySeq: story.storySeq, cursor, size })

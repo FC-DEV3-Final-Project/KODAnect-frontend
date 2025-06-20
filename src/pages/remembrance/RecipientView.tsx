@@ -23,6 +23,7 @@ import CommentArea from "@/shared/components/comment/CommentArea";
 import { TopArea } from "@/shared/components/TopArea";
 import { getRecipientInfoItems } from "@/features/recipient-view/utils/getRecipientInfoItems";
 import { Modal } from "@/shared/components/Modal";
+import { withData } from "@/shared/utils/withData";
 
 function RecipientView() {
   const { id } = useParams<{ id: string }>();
@@ -84,16 +85,15 @@ function RecipientView() {
               variant="default"
               initialCommentData={letter.initialCommentData}
               letterId={letter.letterSeq}
-              // axios 응답 전체를 반환하는게 아니라 data만 꺼내서 반환해야하기 때문
-              createComment={(payload) => createComment(payload).then((res) => res.data)}
+              createComment={(payload) => withData(createComment(payload))}
               updateComment={(letterId, commentId, payload) =>
-                updateComment(letterId, commentId, payload).then((res) => res.data)
+                withData(updateComment(letterId, commentId, payload))
               }
               verifyComment={(letterId, commentId, payload) =>
-                verifyComment(letterId, commentId, payload).then((res) => res.data)
+                withData(verifyComment(letterId, commentId, payload))
               }
               deleteComment={(letterId, commentId, payload) =>
-                deleteComment(letterId, commentId, payload).then((res) => res.data)
+                withData(deleteComment(letterId, commentId, payload))
               }
               getMoreComments={(cursor, size = 3) =>
                 getMoreComments({ letterSeq: letter.letterSeq, cursor, size })
