@@ -1,10 +1,10 @@
 import clsx from "clsx";
 
-import { executiveSchedules } from "@/features/home/component/announcement/mock-data";
-
-import announceImage from "@/assets/images/announcement-image.png";
 import ArticleCard from "@/features/home/component/announcement/ArticleCard";
 import SocialNetwork from "@/features/home/component/sns/SocialNetwork";
+import announceImage from "@/assets/images/announcement-image.png";
+
+import { executiveSchedules } from "@/features/home/mock-data";
 
 export default function Announcement() {
   return (

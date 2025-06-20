@@ -1,7 +1,7 @@
-import { MoreButton } from "@/features/home/component/common/MoreButton";
+import MoreButton from "@/features/home/component/common/MoreButton";
 import TabPanel from "@/features/home/component/common/TabPanel";
 import Table from "@/features/home/component/koda-news/Table";
-import { notices, pressReleases } from "@/features/home/component/koda-news/mock-data";
+import { notices, pressReleases } from "@/features/home/mock-data";
 
 export default function KodaNews() {
   return (

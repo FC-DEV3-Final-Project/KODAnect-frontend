@@ -2,46 +2,36 @@ import clsx from "clsx";
 
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { Button } from "@/shared/components/Button";
-import { NewBadge } from "@/shared/components/NewBadge";
+import NewBadge from "@/shared/components/NewBadge";
 
 import Message from "@/assets/icon/inquiry.svg?react";
 import Letter from "@/assets/icon/mail.svg?react";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import { useNavigate } from "react-router-dom";
 
-interface DonorCardProps {
-  donorId: number;
-  donorName: string;
-  genderFlag: string;
-  donorAge: number;
-  donationDate: string;
-  replyCount: number;
-  letterCount: number;
-}
+import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 
 export default function DonorCard({
-  donorId,
+  donateSeq,
   donorName,
   genderFlag,
-  donorAge,
-  donationDate,
-  replyCount,
+  donateAge,
+  donateDate,
+  commentCount,
   letterCount,
-}: DonorCardProps) {
+}: DonorData) {
   const isMobile = useIsMobile(768);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/remembrance/members-view/${donorId}`, {
+    navigate(`/remembrance/members-view/${donateSeq}`);
+  };
+
+  const handleWriteLetter = () => {
+    navigate(`/remembrance/letters-form`, {
       state: {
-        donor: {
-          donorName,
-          genderFlag,
-          donorAge,
-          donationDate,
-          replyCount,
-          letterCount,
-        },
+        donateSeq: donateSeq,
+        donorName: donorName,
       },
     });
   };
@@ -54,14 +44,14 @@ export default function DonorCard({
         "mobile:max-w-[160px] mobile:basis-1/2 mobile:py-p6 mobile:pl-p6 mobile:pr-p5",
       )}
       aria-label={`기증자 ${donorName} 정보 카드`}
-      key={donorId}
+      key={donateSeq}
     >
       <div
         className={clsx("relative flex items-center gap-g4", "mobile:flex-col mobile:items-start")}
       >
         <NewBadge
           size="sm"
-          date={donationDate}
+          date={donateDate}
           className={clsx("-right-p2 -top-p2", "mobile:right-p2 mobile:top-0")}
         />
 
@@ -83,14 +73,14 @@ export default function DonorCard({
             <p className="text-h-2xs font-bold">
               <span className="mr-g1">{donorName}</span>
               <span>
-                ({genderFlag},{donorAge})
+                ({genderFlag},{donateAge})
               </span>
             </p>
           </div>
           {/* 기증일 */}
           <div className="flex flex-wrap mobile:flex-nowrap">
             <span className="mr-g3 min-w-[34px] text-b-xs text-gray-40">기증일</span>
-            <time className="text-b-sm mobile:text-b-xs">{donationDate}</time>
+            <time className="text-b-sm mobile:text-b-xs">{donateDate}</time>
           </div>
         </div>
       </div>
@@ -100,7 +90,7 @@ export default function DonorCard({
         <div className="flex gap-g3">
           <Message className="h-icon3 w-icon3 text-gray-40" aria-hidden="true" />
           <span className="text-b-xs text-gray-70">추모 메시지</span>
-          <span className="text-b-xs text-gray-40">{replyCount}</span>
+          <span className="text-b-xs text-gray-40">{commentCount}</span>
         </div>
         {/* 하늘나라 편지 */}
         <div className="flex gap-g3">
@@ -127,6 +117,7 @@ export default function DonorCard({
           size={isMobile ? "x-small" : "small"}
           className="grow mobile:text-b-xs"
           aria-label={`${donorName}에게 하늘나라 편지 쓰기`}
+          onClick={handleWriteLetter}
         >
           하늘나라 편지쓰기
         </Button>

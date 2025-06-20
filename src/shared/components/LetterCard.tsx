@@ -1,27 +1,10 @@
+import { Link } from "react-router-dom";
+import NewBadge from "@/shared/components/NewBadge";
+import type { LetterCardData } from "@/shared/types/LetterCard.types";
+
 import clsx from "clsx";
-import { NewBadge } from "@/shared/components/NewBadge";
 import Mail from "@/assets/icon/mail.svg?react";
 import Visibility from "@/assets/icon/visibility.svg?react";
-
-// 정보 아이템 타입
-type InfoItem = {
-  label: string;
-  value: string;
-};
-
-type LetterCardSize = "lg" | "sm";
-
-// 컴포넌트에 전달할 props 타입 정의
-interface LetterCardProps {
-  labelType?: "letter" | "story"; // 기본값은 "letter"
-  size?: LetterCardSize;
-  infoItems?: InfoItem[]; // lg에서만 사용
-  letterNumber?: number;
-  title?: string;
-  date?: string;
-  views?: number; // 조회수 (lg에서만 표시)
-  onClick?: () => void; // 추가
-}
 
 // 스타일 프리셋
 const letterCardPresets = {
@@ -48,21 +31,21 @@ const letterCardPresets = {
 
 // 컴포넌트 정의
 export default function LetterCard({
+  letterNumber,
+  letterSeq,
   labelType = "letter",
   size = "lg",
   infoItems,
-  letterNumber,
   title,
   date,
   views,
-  onClick,
-}: LetterCardProps) {
+  toBase,
+}: LetterCardData) {
   const preset = letterCardPresets[size];
 
   return (
-    <a
-      onClick={onClick} //추가
-      href="#"
+    <Link
+      to={`${toBase}/${letterSeq}`}
       className={clsx(
         "flex flex-col rounded-r6 border-2 border-transparent bg-gray-0 p-p8 text-gray-90",
         "shadow-[0_0_2px_0_theme('colors.secondary.10'),0_8px_16px_0_theme('colors.secondary.10')]",
@@ -123,6 +106,6 @@ export default function LetterCard({
           </div>
         )}
       </div>
-    </a>
+    </Link>
   );
 }

@@ -2,10 +2,9 @@ import { useRef } from "react";
 import Slider from "react-slick";
 
 import clsx from "clsx";
-import { snsData } from "@/features/home/component/sns/mock-data";
-import { SnsCard } from "@/features/home/component/sns/SnsCard";
-
+import SnsCard from "@/features/home/component/sns/SnsCard";
 import Arrow from "@/assets/icon/round-arrow.svg?react";
+import { snsData } from "@/features/home/mock-data";
 
 export default function SocialNetwork() {
   const sliderRef = useRef<Slider | null>(null);

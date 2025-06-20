@@ -7,7 +7,7 @@ interface StoryCardProps {
   view: number;
 }
 
-export function StoryCard({ imageUrl, title, date, view }: StoryCardProps) {
+export default function StoryCard({ imageUrl, title, date, view }: StoryCardProps) {
   return (
     <div className="overflow-hidden rounded-r6 shadow-s2">
       <img src={imageUrl} aria-label="대표 이미지" className="h-[274px] w-full" />
