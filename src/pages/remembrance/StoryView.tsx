@@ -116,7 +116,8 @@ function StoryView() {
                   try {
                     if (modalType === "edit") {
                       await verifyStoryLetter(Number(id), { storyPasscode: password });
-                      navigate(`/remembrance/stories/edit/${id}`, { state: story });
+                      console.log("수정 페이지로 전달할 데이터:", story);
+                      navigate(`/remembrance/stories-form/${story.storySeq}`, { state: story });
                     } else {
                       await deleteStoryLetter(Number(id), { storyPasscode: password });
                       navigate(`/remembrance/stories`);

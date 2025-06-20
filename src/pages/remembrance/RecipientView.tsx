@@ -124,7 +124,10 @@ function RecipientView() {
                   try {
                     if (modalType === "edit") {
                       await verifyLetter(Number(id), { letterPasscode: password });
-                      navigate(`/remembrance/recipients/edit/${id}`, { state: letter });
+                      console.log("수정 페이지로 전달할 데이터:", letter);
+                      navigate(`/remembrance/recipients-form/${letter.letterSeq}`, {
+                        state: letter,
+                      });
                     } else {
                       console.log("전달되는 비밀번호:", password);
 

@@ -6,12 +6,12 @@ export interface StoryLetterDetail {
   storySeq: number;
   title: string;
   storyWriter: string;
-  uploadDate: string;
   areaCode: string;
   readCount: number;
   storyContent: string;
   fileName: string;
   orgFileName: string;
+  writeTime: string;
   comments: CommentPagination; // 구조 동일
 }
 

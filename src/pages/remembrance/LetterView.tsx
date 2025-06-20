@@ -123,7 +123,8 @@ function LetterView() {
                   try {
                     if (modalType === "edit") {
                       await verifyHeavenLetter(Number(id), { letterPasscode: password });
-                      navigate(`/remembrance/letters/edit/${id}`, { state: letter });
+                      console.log("수정 페이지로 전달할 데이터:", letter);
+                      navigate(`/remembrance/letters-form/${letter.letterSeq}`, { state: letter });
                     } else {
                       await deleteHeavenLetter(Number(id), { letterPasscode: password });
                       navigate(`/remembrance/letters`);
