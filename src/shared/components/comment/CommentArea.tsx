@@ -1,3 +1,4 @@
+import type { AxiosResponse } from "axios";
 import { useState } from "react";
 import type {
   Comment as CommentType,
@@ -10,6 +11,7 @@ import type {
   VerifyCommentResponse,
   DeleteCommentPayload,
   DeleteCommentResponse,
+  CommentListResponse,
 } from "@/shared/api/recipient-view/comment/types";
 import type { EmotionType } from "@/shared/api/members-view/member/types";
 
@@ -37,7 +39,8 @@ interface CommentAreaProps {
     commentId: number,
     payload: DeleteCommentPayload,
   ) => Promise<DeleteCommentResponse>;
-  getMoreComments: (cursor: number, size?: number) => Promise<any>;
+  getMoreComments: (cursor: number, size?: number) => Promise<AxiosResponse<CommentListResponse>>;
+
   onClickEmotion?: (emotion: EmotionType) => void;
   emotionCounts?: Record<EmotionType, number>;
 }

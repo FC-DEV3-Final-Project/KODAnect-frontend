@@ -89,7 +89,7 @@ function CommentForm({
         });
       } else {
         // 댓글 등록
-        const response = await createComment({
+        await createComment({
           ...(variant === "default"
             ? { letterSeq: letterId }
             : variant === "memorial"
@@ -99,11 +99,10 @@ function CommentForm({
           contents: state.contents,
           commentPasscode: state.commentPasscode,
         });
-        console.log("응답 확인:", response);
-        console.log("응답 데이터:", response.data);
 
         alert("댓글이 등록되었습니다.");
-        // onCommentSubmit?.(response.data.data);
+        window.location.reload();
+        //onCommentSubmit?.(response.data.data);
       }
 
       dispatch({ type: "RESET" });

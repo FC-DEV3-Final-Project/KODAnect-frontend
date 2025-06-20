@@ -30,11 +30,7 @@ export const verifyComment = (
   donateSeq: number,
   commentSeq: number,
   payload: VerifyCommentPayload,
-) =>
-  api.post<VerifyCommentResponse>(
-    `/remembrance/${donateSeq}/comment/${commentSeq}/verifyPwd`,
-    payload,
-  );
+) => api.post<VerifyCommentResponse>(`/remembrance/${donateSeq}/comment/${commentSeq}`, payload);
 
 /** 댓글 수정 */
 export const updateComment = (

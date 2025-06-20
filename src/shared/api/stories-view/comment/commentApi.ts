@@ -13,15 +13,7 @@ import type {
 } from "@/shared/api/recipient-view/comment/types";
 
 /** 댓글 더보기 (커서 기반 페이징) */
-export const getMoreComments = ({
-  storySeq,
-  cursor,
-  size = 3,
-}: {
-  storySeq: number;
-  cursor: number;
-  size?: number;
-}) =>
+export const getMoreComments = ({ storySeq, cursor, size = 3 }: GetMoreCommentsPayload) =>
   api.get<CommentListResponse>(`/donationLetters/${storySeq}/comments`, {
     params: {
       cursor: cursor,
@@ -41,8 +33,11 @@ export const verifyComment = (storySeq: number, commentId: number, payload: Veri
   );
 
 /** 댓글 수정 */
-export const updateComment = (storySeq: number, commentId: number, payload: UpdateCommentPayload) =>
-  api.patch<UpdateCommentResponse>(`/donationLetters/${storySeq}/comments/${commentId}`, payload);
+export const updateComment = (
+  storySeq: number,
+  commentSeq: number,
+  payload: UpdateCommentPayload,
+) => api.put<UpdateCommentResponse>(`/donationLetters/${storySeq}/comments/${commentSeq}`, payload);
 
 /** 댓글 삭제 */
 export const deleteComment = (storySeq: number, commentId: number, payload: DeleteCommentPayload) =>

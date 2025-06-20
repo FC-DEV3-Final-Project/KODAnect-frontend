@@ -37,9 +37,7 @@ export default function MembersView() {
         setIsLoading(true);
         const data = await getMemberDetail(Number(donateSeq));
         setDonor(data);
-        console.log("더보기 여부:", data.memorialCommentResponses?.commentHasNext);
       } catch (err) {
-        console.error("기증자 상세 조회 실패:", err);
         setError("기증자 정보를 불러오지 못했습니다.");
       } finally {
         setIsLoading(false);
@@ -70,7 +68,7 @@ export default function MembersView() {
     [donor],
   );
 
-  const throttledEmotionClick = useCallback(() => {
+  const throttledEmotionClick = useMemo(() => {
     return throttle(handleEmotionClick, 2000); // 2초 제한
   }, [handleEmotionClick]);
 
