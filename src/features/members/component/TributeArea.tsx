@@ -35,6 +35,15 @@ export default function TributeArea({ donor }: TributeAreaProps) {
     navigate("/remembrance/members");
   };
 
+  const handleWriteLetter = () => {
+    navigate("/remembrance/letters-form", {
+      state: {
+        donateSeq: donor.donateSeq,
+        donorName: donor.donorName,
+      },
+    });
+  };
+
   return (
     <article className={clsx("flex w-full flex-col pb-[60px] pt-[54px]", "mobile:pt-p10")}>
       <div
@@ -80,6 +89,7 @@ export default function TributeArea({ donor }: TributeAreaProps) {
           size={isMobile ? "small" : "large"}
           className="mobile:text-b-xs"
           aria-label={`${donor.donorName}에게 하늘나라 편지 쓰기`}
+          onClick={handleWriteLetter}
         >
           하늘나라 편지쓰기
         </Button>
@@ -87,7 +97,6 @@ export default function TributeArea({ donor }: TributeAreaProps) {
           variant="tertiary"
           size={isMobile ? "small" : "large"}
           className="mobile:text-b-xs"
-          aria-label={`${donor.donorName}에게 하늘나라 편지 쓰기`}
           onClick={handleClick}
         >
           목록

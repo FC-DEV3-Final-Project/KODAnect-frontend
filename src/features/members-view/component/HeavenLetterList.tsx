@@ -11,9 +11,14 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 interface HeavenLetterListProps {
   donateSeq: number;
   initialData: HeavenLetterPagination;
+  donorName: string;
 }
 
-export default function HeavenLetterList({ donateSeq, initialData }: HeavenLetterListProps) {
+export default function HeavenLetterList({
+  donateSeq,
+  initialData,
+  donorName,
+}: HeavenLetterListProps) {
   const [letters, setLetters] = useState<HeavenLetter[]>(initialData.content);
   const [cursor, setCursor] = useState(initialData.nextCursor);
   const [hasNext, setHasNext] = useState(initialData.hasNext);
@@ -39,6 +44,15 @@ export default function HeavenLetterList({ donateSeq, initialData }: HeavenLette
     }
   };
 
+  const handleWriteLetter = () => {
+    navigate("/remembrance/letters-form", {
+      state: {
+        donateSeq,
+        donorName,
+      },
+    });
+  };
+
   return (
     <section className="mx-auto mb-g11 w-full max-w-[1200px]" aria-labelledby="letter-heading">
       <div className="mb-g5 flex items-center justify-between">
@@ -48,7 +62,8 @@ export default function HeavenLetterList({ donateSeq, initialData }: HeavenLette
         <Button
           variant="tertiary"
           size={isMobile ? "small" : "medium"}
-          aria-label="하늘나라 편지쓰기"
+          onClick={handleWriteLetter}
+          aria-label={`${donorName}에게 하늘나라 편지 쓰기`}
         >
           하늘나라 편지쓰기
         </Button>

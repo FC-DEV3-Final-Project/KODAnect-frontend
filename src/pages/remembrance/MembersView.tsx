@@ -123,6 +123,7 @@ export default function MembersView() {
             <HeavenLetterList
               donateSeq={donor.donateSeq}
               initialData={donor.heavenLetterResponses}
+              donorName={donor.donorName}
             />
           </>
         ) : (
