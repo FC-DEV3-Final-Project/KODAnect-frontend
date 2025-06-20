@@ -1,12 +1,6 @@
 import { useState } from "react";
-import type {
-  Comment,
-  VerifyCommentPayload,
-  VerifyCommentResponse,
-  DeleteCommentPayload,
-  DeleteCommentResponse,
-} from "@/shared/api/recipient-view/comment/types";
 
+import type { Comment } from "@/shared/api/recipient-view/comment/types";
 import CommentItem from "@/shared/components/comment/CommentItem";
 import { Button } from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
@@ -16,32 +10,10 @@ interface CommentListProps {
   hasNext: boolean;
   nextCursor: number;
   onLoadMore: () => void;
-  letterId: number;
   onDeleteComment: (commentId: number) => void; // 삭제 콜백
-  onStartEdit?: (comment: Comment) => void; // 수정 콜백
-  verifyComment: (
-    letterId: number,
-    commentId: number,
-    payload: VerifyCommentPayload,
-  ) => Promise<VerifyCommentResponse>;
-
-  deleteComment: (
-    letterId: number,
-    commentId: number,
-    payload: DeleteCommentPayload,
-  ) => Promise<DeleteCommentResponse>;
 }
 
-function CommentList({
-  comments,
-  hasNext,
-  onLoadMore,
-  letterId,
-  onDeleteComment,
-  onStartEdit,
-  verifyComment,
-  deleteComment,
-}: CommentListProps) {
+function CommentList({ comments, hasNext, onLoadMore, onDeleteComment }: CommentListProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
@@ -71,11 +43,7 @@ function CommentList({
                       openId === item.commentSeq.toString() ? null : item.commentSeq.toString(),
                     )
                   }
-                  letterId={letterId}
                   onDelete={onDeleteComment}
-                  onStartEdit={onStartEdit}
-                  verifyComment={verifyComment}
-                  deleteComment={deleteComment}
                 />
               </li>
             ))}

@@ -1,11 +1,9 @@
 import { useState, useReducer, useEffect } from "react";
+import { useCommentContext } from "@/shared/context/CommentContext";
 
 import type {
   Comment as CommentType,
   CreateCommentPayload,
-  CreateCommentResponse,
-  UpdateCommentPayload,
-  UpdateCommentResponse,
 } from "@/shared/api/recipient-view/comment/types";
 
 import TextInput from "@/shared/components/TextInput";
@@ -16,16 +14,7 @@ import { Button } from "@/shared/components/Button";
 import { validateCaptcha } from "react-simple-captcha";
 
 type CommentFormProps = {
-  variant: "default" | "memorial" | "story";
-  letterId: number;
   onCommentSubmit?: (newComment: CommentType) => void; // 등록된 댓글 콜백
-  editingComment?: CommentType | null;
-  createComment: (payload: CreateCommentPayload) => Promise<CreateCommentResponse>;
-  updateComment: (
-    letterId: number,
-    commentId: number,
-    payload: UpdateCommentPayload,
-  ) => Promise<UpdateCommentResponse>;
 };
 
 type FormState = Pick<CreateCommentPayload, "commentWriter" | "contents" | "commentPasscode">;
@@ -51,14 +40,8 @@ function reducer(state: FormState, action: FormAction): FormState {
   }
 }
 
-function CommentForm({
-  variant,
-  letterId,
-  onCommentSubmit,
-  editingComment,
-  createComment,
-  updateComment,
-}: CommentFormProps) {
+function CommentForm({ onCommentSubmit }: CommentFormProps) {
+  const { letterId, variant, editingComment, createComment, updateComment } = useCommentContext();
   const [isVisible, setIsVisible] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inputCaptcha, setInputCaptcha] = useState("");

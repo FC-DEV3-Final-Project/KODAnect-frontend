@@ -1,5 +1,7 @@
 import type { AxiosResponse } from "axios";
 import { useState } from "react";
+import { CommentContext } from "@/shared/context/CommentContext";
+
 import type {
   Comment as CommentType,
   CommentPagination,
@@ -87,50 +89,54 @@ function CommentArea({
   };
 
   return (
-    <section className="mx-auto h-full w-full max-w-[1200px]" aria-labelledby="comment-heading">
-      <div className="mb-[24px] gap-g3">
-        <h2 id="comment-heading" className="text-h-md font-bold text-gray-90">
-          {title}
-        </h2>
-        <p id="comment-guideline" className="text-b-md text-gray-70 mobile:text-b-sm">
-          기증자에 대한 추모 분위기를 해치거나, 비방의 글 등이 게시가 될 경우 관리자에 의해 삭제 될
-          수 있습니다.
-        </p>
-        {isMemorial && onClickEmotion && emotionCounts && (
-          <MemorialIconGroup onClickEmotion={onClickEmotion} counts={emotionCounts} />
-        )}
-      </div>
-      <div className="mb-g9">
-        <CommentForm
-          variant={variant}
-          letterId={letterId}
-          editingComment={editingComment}
-          createComment={createComment}
-          updateComment={updateComment}
-          onCommentSubmit={(newComment) => {
-            if (editingComment) {
-              setComments((prev) =>
-                prev.map((c) => (c.commentSeq === newComment.commentSeq ? newComment : c)),
-              );
-              setEditingComment(null);
-            } else {
-              setComments((prev) => [newComment, ...prev]);
-            }
-          }}
+    <CommentContext.Provider
+      value={{
+        letterId,
+        variant,
+        editingComment,
+        setEditingComment,
+        createComment,
+        updateComment,
+        verifyComment,
+        deleteComment,
+      }}
+    >
+      <section className="mx-auto h-full w-full max-w-[1200px]" aria-labelledby="comment-heading">
+        <div className="mb-[24px] gap-g3">
+          <h2 id="comment-heading" className="text-h-md font-bold text-gray-90">
+            {title}
+          </h2>
+          <p id="comment-guideline" className="text-b-md text-gray-70 mobile:text-b-sm">
+            기증자에 대한 추모 분위기를 해치거나, 비방의 글 등이 게시가 될 경우 관리자에 의해 삭제
+            될 수 있습니다.
+          </p>
+          {isMemorial && onClickEmotion && emotionCounts && (
+            <MemorialIconGroup onClickEmotion={onClickEmotion} counts={emotionCounts} />
+          )}
+        </div>
+        <div className="mb-g9">
+          <CommentForm
+            onCommentSubmit={(newComment) => {
+              if (editingComment) {
+                setComments((prev) =>
+                  prev.map((c) => (c.commentSeq === newComment.commentSeq ? newComment : c)),
+                );
+                setEditingComment(null);
+              } else {
+                setComments((prev) => [newComment, ...prev]);
+              }
+            }}
+          />
+        </div>
+        <CommentList
+          comments={comments}
+          hasNext={hasNext}
+          nextCursor={cursor}
+          onLoadMore={handleLoadMore}
+          onDeleteComment={handleDeleteComment}
         />
-      </div>
-      <CommentList
-        comments={comments}
-        hasNext={hasNext}
-        nextCursor={cursor}
-        onLoadMore={handleLoadMore}
-        letterId={letterId}
-        onDeleteComment={handleDeleteComment}
-        onStartEdit={(comment: CommentType) => setEditingComment(comment)}
-        verifyComment={verifyComment}
-        deleteComment={deleteComment}
-      />
-    </section>
+      </section>
+    </CommentContext.Provider>
   );
 }
 

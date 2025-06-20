@@ -1,11 +1,7 @@
 import { useState } from "react";
-import type {
-  Comment as CommentType,
-  VerifyCommentPayload,
-  VerifyCommentResponse,
-  DeleteCommentPayload,
-  DeleteCommentResponse,
-} from "@/shared/api/recipient-view/comment/types";
+import { useCommentContext } from "@/shared/context/CommentContext";
+
+import type { Comment as CommentType } from "@/shared/api/recipient-view/comment/types";
 
 import OptionIcon from "@/assets/icon/ellipsis-vertical.svg?react";
 import { Modal } from "@/shared/components/Modal";
@@ -15,31 +11,11 @@ type CommentItemProps = {
   isOpen: boolean;
   onToggle: () => void;
   onDelete?: (id: number) => void;
-  letterId: number;
-  onStartEdit?: (comment: CommentType) => void; // 수정 요청 콜백
-  verifyComment: (
-    letterId: number,
-    commentId: number,
-    payload: VerifyCommentPayload,
-  ) => Promise<VerifyCommentResponse>;
-
-  deleteComment: (
-    letterId: number,
-    commentId: number,
-    payload: DeleteCommentPayload,
-  ) => Promise<DeleteCommentResponse>;
 };
 
-function CommentItem({
-  comment,
-  isOpen,
-  onToggle,
-  onDelete,
-  letterId,
-  onStartEdit,
-  verifyComment,
-  deleteComment,
-}: CommentItemProps) {
+function CommentItem({ comment, isOpen, onToggle, onDelete }: CommentItemProps) {
+  const { letterId, deleteComment, verifyComment, setEditingComment } = useCommentContext();
+
   const { commentSeq, contents, commentWriter, writeTime } = comment;
   const dropdownId = `comment-dropdown-${commentWriter}-${writeTime}`;
 
@@ -126,7 +102,7 @@ function CommentItem({
                 await verifyComment(letterId, commentSeq, {
                   commentPasscode: password,
                 });
-                onStartEdit?.(comment);
+                setEditingComment(comment);
               }
 
               setIsModalOpen(null);
