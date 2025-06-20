@@ -4,7 +4,7 @@ import Arrow from "@/assets/icon/arrow-down.svg";
 import OpenNewWindow from "@/assets/icon/open-new-window.svg";
 import { RELATED_SITES, SOCIAL_LINKS, POLICY_LINKS } from "@/shared/constant/footerlink";
 
-function Footer() {
+export default function Footer() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -135,5 +135,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import DonorMemorial from "./DonorMemorial";
-import QuickLinkCard from "./QuickLinkCard";
+import DonorMemorial from "@/features/home/component/donation-service/DonorMemorial";
+import QuickLinkCard from "@/features/home/component/donation-service/QuickLinkCard";
 
 import donate from "@/assets/images/donate-icon.png";
 import mailBox from "@/assets/images/mainBox-icon.png";

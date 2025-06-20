@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { MoreButton } from "@/features/home/component/common/MoreButton";
+import MoreButton from "@/features/home/component/common/MoreButton";
 interface ArticleCardProps {
   path: "01" | "07";
   title: string;
