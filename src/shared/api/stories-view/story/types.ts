@@ -13,6 +13,7 @@ export interface StoryLetterDetail {
   orgFileName: string;
   writeTime: string;
   comments: CommentPagination; // 구조 동일
+  imageUrl?: string[];
 }
 
 /** 상세 조회 응답 */
