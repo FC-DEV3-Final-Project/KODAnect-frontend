@@ -8,7 +8,7 @@ import { useCurrentTopMenuLabel } from "@/shared/hooks/useCurrentTopMenuLabel";
 
 import OpenNewWindow from "@/assets/icon/open-new-window.svg";
 
-function SideMenu() {
+export default function SideMenu() {
   const location = useLocation();
   const topMenuLabel = useCurrentTopMenuLabel();
 
@@ -70,5 +70,3 @@ function SideMenu() {
     </aside>
   );
 }
-
-export default SideMenu;

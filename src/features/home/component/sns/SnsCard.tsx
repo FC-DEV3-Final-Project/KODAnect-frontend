@@ -5,7 +5,7 @@ interface SnsCardProps {
   title: string;
 }
 
-export function SnsCard({ imageUrl, title }: SnsCardProps) {
+export default function SnsCard({ imageUrl, title }: SnsCardProps) {
   return (
     <div className="w-[240px] overflow-hidden rounded-r6 shadow-s2">
       <img src={imageUrl} className="h-[240px] w-full" />
