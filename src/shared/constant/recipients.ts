@@ -7,8 +7,3 @@ export const CHECK_ITEMS = [
   "개인정보 노출을 자제해주세요.",
   "이 게시판에 올린 글은 한국장기조직기증원 뉴스레터에 원문의 의미를 훼손하지 않는 범위내에서 교정을 거쳐 임의 수록할 수 있음을 양지하시기 바랍니다.",
 ];
-
-export const DROPDOWN_OPTIONS = [
-  { label: "제목", value: "title" },
-  { label: "내용", value: "content" },
-];

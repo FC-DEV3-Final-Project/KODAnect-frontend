@@ -1,9 +1,9 @@
+import { useState, useRef } from "react";
+import { useIsMobile } from "@/shared/hooks/useIsMobile";
+
 import clsx from "clsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import { useState, useRef } from "react";
-import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 import Play from "@/assets/icon/play.svg";
 import Stop from "@/assets/icon/stop.svg";

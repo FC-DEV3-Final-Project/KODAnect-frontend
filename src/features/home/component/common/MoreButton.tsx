@@ -6,7 +6,7 @@ type MoreButtonProps = {
   className?: string;
 };
 
-export function MoreButton({ to = "#", className = "", ...props }: MoreButtonProps) {
+export default function MoreButton({ to = "#", className = "", ...props }: MoreButtonProps) {
   return (
     <Link to={to} className={`flex items-center gap-g1 ${className}`} {...props}>
       <span className="text-gray-50">더보기</span>

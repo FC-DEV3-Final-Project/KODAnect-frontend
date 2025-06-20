@@ -5,8 +5,3 @@ export const CHECK_ITEMS = [
   "KODA 장기구득 코디네이터들의 공간입니다.",
   "개인정보 노출의 우려가 있으니 게시글 작성 시 개인정보 등록은 자제하여 주시기 바랍니다.",
 ];
-
-export const DROPDOWN_OPTIONS = [
-  { label: "제목", value: "title" },
-  { label: "내용", value: "content" },
-];

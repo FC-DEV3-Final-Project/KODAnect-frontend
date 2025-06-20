@@ -15,7 +15,7 @@ const badgePresets = {
   },
 } as const;
 
-export const NewBadge = ({ size = "lg", date, className = "" }: NewBadgeProps) => {
+export default function NewBadge({ size = "lg", date, className = "" }: NewBadgeProps) {
   const preset = badgePresets[size];
 
   if (!date) return null;
@@ -37,4 +37,4 @@ export const NewBadge = ({ size = "lg", date, className = "" }: NewBadgeProps) =
       N
     </span>
   );
-};
+}

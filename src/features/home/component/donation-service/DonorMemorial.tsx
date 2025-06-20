@@ -1,18 +1,31 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import api from "@/shared/api/axios/axiosInstance";
+import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 
+import NewBadge from "@/shared/components/NewBadge";
+import BlackRibbon from "@/assets/images/black-ribbon.png";
+import MoreButton from "@/features/home/component/common/MoreButton";
+import SliderNextArrow from "@/features/home/component/common/SliderNextArrow";
 import clsx from "clsx";
 
-import { NewBadge } from "@/shared/components/NewBadge";
-import BlackRibbon from "@/assets/images/black-ribbon.png";
-import { MoreButton } from "@/features/home/component/common/MoreButton";
-import SliderNextArrow from "@/features/home/component/common/SliderNextArrow";
-import { donorData } from "@/features/home/component/donation-service/mock-data";
-
 export default function DonorMemorial() {
+  const [donor, setDonor] = useState<DonorData[]>([]);
   const sliderRef = useRef<Slider | null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await api.get("remembrance", {
+        params: {
+          size: 10,
+        },
+      });
+      setDonor(response.data.data.content);
+    };
+    loadData();
+  }, []);
 
   const settings = {
     dots: false,
@@ -54,12 +67,12 @@ export default function DonorMemorial() {
             "mobile:[&_.slick-slide]:px-p2",
           )}
         >
-          {donorData.map((item) => (
+          {donor.map((item) => (
             <div
               key={item.donateSeq}
               className={clsx(
                 "!flex w-full shrink-0 items-center gap-g5 mobile:gap-g4",
-                "shadow-2 relative z-10 rounded-r6 bg-white p-p6",
+                "relative z-10 rounded-r6 bg-white p-p6 shadow-2",
               )}
               aria-label={`기증자 ${item.donorName}`}
             >

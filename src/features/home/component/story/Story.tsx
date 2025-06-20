@@ -2,12 +2,10 @@ import { useRef, useState } from "react";
 import Slider from "react-slick";
 
 import clsx from "clsx";
-
-import { storiesData } from "@/features/home/component/story/mock-data";
-import { MoreButton } from "@/features/home/component/common/MoreButton";
-import { StoryCard } from "@/features/home/component/story/StoryCard";
-
+import MoreButton from "@/features/home/component/common/MoreButton";
+import StoryCard from "@/features/home/component/story/StoryCard";
 import Arrow from "@/assets/icon/round-arrow.svg?react";
+import { storiesData } from "@/features/home/mock-data";
 
 export default function Story() {
   const [currentSlide, setCurrentSlide] = useState(0);
