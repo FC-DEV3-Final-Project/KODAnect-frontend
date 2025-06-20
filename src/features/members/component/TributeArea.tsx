@@ -19,6 +19,7 @@ import { Button } from "@/shared/components/Button";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import tributeFlower from "@/assets/images/tribute-flower.png";
 import parse from "html-react-parser";
+import { formatDateToDotNotation } from "@/shared/utils/formatDate";
 
 interface TributeAreaProps {
   donor: MemberDetail | null;
@@ -65,6 +66,23 @@ export default function TributeArea({ donor }: TributeAreaProps) {
           <h2 className={clsx("text-h-lg font-bold", "mobile:text-center mobile:text-h-md")}>
             추모합니다.
           </h2>
+
+          {/* 추모자 정보 */}
+          <div
+            className={clsx(
+              "mb-g8 mt-g4 flex gap-g10",
+              "mobile:mb-g7 mobile:mt-g5 mobile:flex-col mobile:gap-g4",
+            )}
+          >
+            <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
+              <span className="font-bold">기증자</span>
+              <span>{donor.donorName}</span>
+            </div>
+            <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
+              <span className="font-bold">기증일</span>
+              <time>{formatDateToDotNotation(donor.donateDate)}</time>
+            </div>
+          </div>
 
           {/* 추모글 */}
           <div className={clsx("flex flex-col gap-g4", "mobile:text-b-sm")}>
