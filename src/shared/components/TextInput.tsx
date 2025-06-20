@@ -63,6 +63,7 @@ type TextInputProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClear?: () => void;
   onToggleIconClick?: () => void;
+  readOnly?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
@@ -85,6 +86,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       className,
       onChange,
       onClear,
+      readOnly,
       ...props
     },
     ref,
@@ -196,11 +198,12 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
                 "border border-gray-60": !error && !props.disabled,
               },
             )}
+            readOnly={readOnly}
             {...props}
           />
 
           <div className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-g3">
-            {value && (
+            {!readOnly && value && (
               <button type="button" onClick={handleClear}>
                 <img src={DeleteIcon} alt="삭제" className="h-icon3 w-icon3" />
               </button>

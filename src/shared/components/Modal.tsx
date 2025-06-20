@@ -54,7 +54,7 @@ import CloseIcon from "@/assets/icon/close.svg?react";
 interface ModalProps {
   type?: "text" | "input" | "basic";
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit?: () => void;
   title?: string;
   password?: string;
   description?: string;
@@ -94,7 +94,9 @@ export function Modal({
       <div
         className={clsx(
           "relative rounded-r6 border border-gray-30 bg-white px-p9 pb-p9 pt-p8 mobile:pb-p8",
-          type === "basic" ? "w-auto mobile:w-full" : "w-[510px] mobile:w-[328px]",
+          type === "basic"
+            ? "max-h-[667px] w-auto overflow-y-auto mobile:w-full"
+            : "w-[510px] mobile:w-[328px]",
         )}
       >
         <div className="mb-g5 flex justify-end">
