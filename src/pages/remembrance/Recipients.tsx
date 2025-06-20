@@ -136,7 +136,7 @@ export default function recipients() {
                 date={item.date}
                 infoItems={item.infoItems}
                 views={item.views}
-                toBase="/remembrance/Recipient-view"
+                toBase="/remembrance/recipients-view"
               />
             ))}
           </div>

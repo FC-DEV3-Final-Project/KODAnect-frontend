@@ -137,7 +137,7 @@ export default function Stories() {
                 date={item.date}
                 infoItems={item.infoItems}
                 views={item.views}
-                toBase="/remembrance/story-view"
+                toBase="/remembrance/stories-view"
               />
             ))}
           </div>

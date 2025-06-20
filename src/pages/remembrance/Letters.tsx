@@ -135,7 +135,7 @@ export default function Letters() {
                 date={item.date}
                 infoItems={item.infoItems}
                 views={item.views}
-                toBase="/remembrance/Letter-view"
+                toBase="/remembrance/letters-view"
               />
             ))}
           </div>
