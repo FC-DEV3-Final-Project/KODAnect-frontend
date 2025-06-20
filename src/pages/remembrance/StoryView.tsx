@@ -11,6 +11,7 @@ import {
   updateComment,
   verifyComment,
   deleteComment,
+  getMoreComments,
 } from "@/shared/api/stories-view/comment/commentApi";
 
 import type { StoryLetterDetail } from "@/shared/api/stories-view/story/types";
@@ -92,6 +93,9 @@ function StoryView() {
               }
               deleteComment={(letterId, commentId, payload) =>
                 deleteComment(letterId, commentId, payload).then((res) => res.data)
+              }
+              getMoreComments={(cursor, size = 3) =>
+                getMoreComments({ storySeq: story.storySeq, cursor, size })
               }
             />
 

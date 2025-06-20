@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { throttle } from "lodash";
 
 import { getMemberDetail, patchEmotionCount } from "@/shared/api/members-view/member/memberApi";
 import type { MemberDetail, EmotionType } from "@/shared/api/members-view/member/types";
@@ -9,6 +10,7 @@ import {
   updateComment,
   verifyComment,
   deleteComment,
+  getMoreComments,
 } from "@/shared/api/members-view/comment/commentApi";
 
 import { TopArea } from "@/shared/components/TopArea";
@@ -25,8 +27,6 @@ export default function MembersView() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log("📦 donorFromState:", donateSeq);
-
     if (!donateSeq) {
       setIsLoading(false);
       return;
@@ -37,6 +37,7 @@ export default function MembersView() {
         setIsLoading(true);
         const data = await getMemberDetail(Number(donateSeq));
         setDonor(data);
+        console.log("더보기 여부:", data.memorialCommentResponses?.commentHasNext);
       } catch (err) {
         console.error("기증자 상세 조회 실패:", err);
         setError("기증자 정보를 불러오지 못했습니다.");
@@ -48,24 +49,30 @@ export default function MembersView() {
     fetchDetail();
   }, [donateSeq]);
 
-  // 이모지 클릭 이벤트 핸들러
-  const handleEmotionClick = async (emotion: EmotionType) => {
-    if (!donor) return;
-    try {
-      await patchEmotionCount(donor.donateSeq, emotion);
+  // 이모지 클릭 이벤트 핸들러 & throttle 위해 useCallback 적용
+  const handleEmotionClick = useCallback(
+    async (emotion: EmotionType) => {
+      if (!donor) return;
+      try {
+        await patchEmotionCount(donor.donateSeq, emotion);
 
-      setDonor((prev) =>
-        prev
-          ? {
-              ...prev,
-              [`${emotion}Count`]: (prev as any)[`${emotion}Count`] + 1,
-            }
-          : prev,
-      );
-    } catch (e) {
-      console.error("이모지 업데이트 실패", e);
-    }
-  };
+        setDonor((prev) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            [`${emotion}Count`]: (prev as any)[`${emotion}Count`] + 1,
+          };
+        });
+      } catch (e) {
+        console.error("이모지 업데이트 실패", e);
+      }
+    },
+    [donor],
+  );
+
+  const throttledEmotionClick = useCallback(() => {
+    return throttle(handleEmotionClick, 2000); // 2초 제한
+  }, [handleEmotionClick]);
 
   return (
     <div className="mx-auto w-full">
@@ -101,7 +108,10 @@ export default function MembersView() {
               deleteComment={(donateSeq, commentId, payload) =>
                 deleteComment(donateSeq, commentId, payload).then((res) => res.data)
               }
-              onClickEmotion={handleEmotionClick}
+              getMoreComments={(cursor, size = 3) =>
+                getMoreComments({ donateSeq: donor.donateSeq, cursor, size })
+              }
+              onClickEmotion={throttledEmotionClick}
               emotionCounts={{
                 flower: donor.flowerCount,
                 love: donor.loveCount,

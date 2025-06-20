@@ -11,6 +11,7 @@ import {
   updateComment,
   verifyComment,
   deleteComment,
+  getMoreComments,
 } from "@/shared/api/recipient-view/comment/commentApi";
 
 import type { RecipientLetterDetail } from "@/shared/api/recipient-view/letter/types";
@@ -100,6 +101,9 @@ function RecipientView() {
               }
               deleteComment={(letterId, commentId, payload) =>
                 deleteComment(letterId, commentId, payload).then((res) => res.data)
+              }
+              getMoreComments={(cursor, size = 3) =>
+                getMoreComments({ letterSeq: letter.letterSeq, cursor, size })
               }
             />
 

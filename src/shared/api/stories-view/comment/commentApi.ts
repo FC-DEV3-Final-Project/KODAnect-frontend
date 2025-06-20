@@ -13,7 +13,15 @@ import type {
 } from "@/shared/api/recipient-view/comment/types";
 
 /** 댓글 더보기 (커서 기반 페이징) */
-export const getMoreComments = ({ storySeq, cursor, size = 3 }: GetMoreCommentsPayload) =>
+export const getMoreComments = ({
+  storySeq,
+  cursor,
+  size = 3,
+}: {
+  storySeq: number;
+  cursor: number;
+  size?: number;
+}) =>
   api.get<CommentListResponse>(`/donationLetters/${storySeq}/comments`, {
     params: {
       cursor: cursor,

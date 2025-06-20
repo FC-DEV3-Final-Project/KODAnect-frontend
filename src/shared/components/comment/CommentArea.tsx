@@ -11,7 +11,6 @@ import type {
   DeleteCommentPayload,
   DeleteCommentResponse,
 } from "@/shared/api/recipient-view/comment/types";
-import { getMoreComments } from "@/shared/api/recipient-view/comment/commentApi";
 import type { EmotionType } from "@/shared/api/members-view/member/types";
 
 import MemorialIconGroup from "@/features/members-view/component/MemorialIconGroup";
@@ -38,6 +37,7 @@ interface CommentAreaProps {
     commentId: number,
     payload: DeleteCommentPayload,
   ) => Promise<DeleteCommentResponse>;
+  getMoreComments: (cursor: number, size?: number) => Promise<any>;
   onClickEmotion?: (emotion: EmotionType) => void;
   emotionCounts?: Record<EmotionType, number>;
 }
@@ -50,6 +50,7 @@ function CommentArea({
   updateComment,
   verifyComment,
   deleteComment,
+  getMoreComments,
   onClickEmotion,
   emotionCounts,
 }: CommentAreaProps) {
@@ -63,18 +64,11 @@ function CommentArea({
   const [isLoading, setIsLoading] = useState(false);
   const [editingComment, setEditingComment] = useState<CommentType | null>(null);
 
-  const idParam =
-    variant === "default"
-      ? { letterSeq: letterId }
-      : variant === "memorial"
-        ? { donateSeq: letterId }
-        : { storySeq: letterId };
-
   const handleLoadMore = async () => {
     if (isLoading) return;
     setIsLoading(true);
     try {
-      const res = await getMoreComments({ ...idParam, cursor, size: 3 });
+      const res = await getMoreComments(cursor, 3);
       const data = res.data.data;
       setComments((prev) => [...prev, ...data.content]);
       setCursor(data.commentNextCursor);

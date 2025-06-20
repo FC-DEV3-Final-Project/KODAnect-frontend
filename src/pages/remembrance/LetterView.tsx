@@ -12,6 +12,7 @@ import {
   updateComment,
   verifyComment,
   deleteComment,
+  getMoreComments,
 } from "@/shared/api/letter-view/comment/commentApi";
 
 import { Description } from "@/shared/components/Description";
@@ -99,6 +100,9 @@ function LetterView() {
               }
               deleteComment={(letterId, commentId, payload) =>
                 deleteComment(letterId, commentId, payload).then((res) => res.data)
+              }
+              getMoreComments={(cursor, size = 3) =>
+                getMoreComments({ letterSeq: letter.letterSeq, cursor, size })
               }
             />
 
