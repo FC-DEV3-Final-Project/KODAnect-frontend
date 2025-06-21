@@ -18,7 +18,7 @@ type LetterContentProps = {
   onDelete?: () => void;
 };
 
-function LetterContent({
+export default function LetterContent({
   title,
   content,
   infoItems,
@@ -98,5 +98,3 @@ function LetterContent({
     </section>
   );
 }
-
-export default LetterContent;
