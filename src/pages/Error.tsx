@@ -4,10 +4,21 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { Button } from "@/shared/components/Button";
 import Notification from "@/assets/icon/exclamation.svg?react";
 
+interface ErrorInfo {
+  status?: number;
+  message?: string;
+}
+
 export default function Error() {
   const isMobile = useIsMobile(768);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // 에러 정보 추출
+  const errorInfo: ErrorInfo = location.state?.error || {};
+
+  const errorCode = errorInfo.status ?? "알 수 없음";
+  const errorMessage = errorInfo.message ?? "페이지를 불러오는 중 문제가 발생했습니다.";
 
   // 이전 페이지로 이동
   const handleGoBack = () => {
@@ -34,8 +45,8 @@ export default function Error() {
       <div className="flex flex-col items-center gap-g5">
         <Notification className="h-icon6 w-icon6" aria-hidden="true" />
         <div className="text-center">
-          <h2 className="text-h-lg font-bold text-gray-70">에러 코드</h2>
-          <p className="mobile:mt-pag-g3 text-b-md">에러 메시지</p>
+          <h2 className="text-h-lg font-bold text-gray-70">{errorCode}</h2>
+          <p className="mobile:mt-pag-g3 text-b-md">{errorMessage}</p>
         </div>
       </div>
       <div className={clsx("flex gap-g6", "mobile:gap-g4")}>
