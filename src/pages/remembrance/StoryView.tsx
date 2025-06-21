@@ -67,8 +67,8 @@ function StoryView() {
         ) : story ? (
           <>
             <LetterContent
-              title={story.title}
-              content={story.storyContent}
+              title={story.storyTitle}
+              content={story.storyContents}
               infoItems={getStoryInfoItems(story)}
               onGoList={() => navigate(`/remembrance/stories`)}
               onEdit={() => setModalType("edit")}

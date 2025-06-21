@@ -4,11 +4,11 @@ import type { CommentPagination } from "@/shared/api/recipient-view/comment/type
 /** 기증자 스토리 상세 타입 */
 export interface StoryLetterDetail {
   storySeq: number;
-  title: string;
+  storyTitle: string;
   storyWriter: string;
   areaCode: string;
   readCount: number;
-  storyContent: string;
+  storyContents: string;
   fileName: string;
   orgFileName: string;
   writeTime: string;

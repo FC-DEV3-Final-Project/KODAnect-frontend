@@ -9,7 +9,6 @@ import type {
 import TextInput from "@/shared/components/TextInput";
 import TextArea from "@/shared/components/Textarea";
 import Captcha from "@/shared/components/Captcha";
-
 import { Button } from "@/shared/components/Button";
 import { validateCaptcha } from "react-simple-captcha";
 
@@ -85,7 +84,6 @@ function CommentForm({ onCommentSubmit }: CommentFormProps) {
 
         alert("댓글이 등록되었습니다.");
         window.location.reload();
-        //onCommentSubmit?.(response.data.data);
       }
 
       dispatch({ type: "RESET" });

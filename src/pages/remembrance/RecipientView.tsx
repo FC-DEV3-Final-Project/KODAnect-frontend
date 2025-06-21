@@ -43,10 +43,10 @@ function RecipientView() {
       try {
         setIsLoading(true);
         const response = await getLetterDetail(Number(id));
-
         const letterData = response.data.data;
         console.log("전체 편지 응답:", letterData);
         console.log("imageUrl 확인:", letterData.imageUrl);
+
         setLetter(response.data.data);
       } catch (err) {
         console.error("에러 발생:", err);
