@@ -1,13 +1,11 @@
 {
   "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     "baseUrl": ".", // 경로 기준점
     "paths": {
-      "@/*": ["src/*"] // @로 시작하는 경로를 src로 매핑
+      "@/*": ["src/*"], // @로 시작하는 경로를 src로 매핑
+      "@ckeditor/*": ["node_modules/@ckeditor/*"]
     }
   }
 }
