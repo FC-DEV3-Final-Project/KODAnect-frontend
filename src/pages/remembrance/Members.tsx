@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
+import { useErrorHandler } from "@/shared/hooks/useErrorHandler";
 import { formatDateToYMD } from "@/shared/utils/formatDate";
 
 import { fetchDonorData } from "@/shared/api/remembrance/donorApi";
@@ -17,6 +18,7 @@ import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
 export default function Members() {
   const isDesktop = !useIsMobile(768);
+  const handleError = useErrorHandler();
   const pageSize = isDesktop ? 20 : 16;
 
   const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
@@ -64,7 +66,7 @@ export default function Members() {
       nextCursorRef.current = result.nextCursor;
       setTotalCount(result.totalCount);
     } catch (error) {
-      console.error(error);
+      handleError(error);
     }
   };
 
