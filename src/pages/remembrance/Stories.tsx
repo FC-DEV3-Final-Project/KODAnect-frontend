@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { useErrorHandler } from "@/shared/hooks/useErrorHandler";
 import { fetchLetterData } from "@/shared/api/remembrance/letterApi";
 import { donorStory } from "@/features/remembrance/dataMapping";
 import type { StoryData, LetterListResponse } from "@/shared/types/remembrance/LetterData.types";
@@ -22,7 +21,6 @@ import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
 export default function Stories() {
   const navigate = useNavigate();
-  const handleError = useErrorHandler();
   const isDesktop = !useIsMobile(768);
   const pageSize = isDesktop ? 20 : 16;
 
@@ -56,7 +54,7 @@ export default function Stories() {
       nextCursorRef.current = result.nextCursor;
       setTotalCount(result.totalCount);
     } catch (error) {
-      handleError(error);
+      navigate("/error");
     }
   };
 

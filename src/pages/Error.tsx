@@ -4,21 +4,10 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { Button } from "@/shared/components/Button";
 import Notification from "@/assets/icon/exclamation.svg?react";
 
-interface ErrorInfo {
-  status?: number;
-  message?: string;
-}
-
 export default function Error() {
   const isMobile = useIsMobile(768);
   const navigate = useNavigate();
   const location = useLocation();
-
-  // 에러 정보 추출
-  const errorInfo: ErrorInfo = location.state?.error || {};
-
-  const errorCode = errorInfo.status ?? "알 수 없음";
-  const errorMessage = errorInfo.message ?? "페이지를 불러오는 중 문제가 발생했습니다.";
 
   // 이전 페이지로 이동
   const handleGoBack = () => {
@@ -34,6 +23,10 @@ export default function Error() {
   const handleGoHome = () => {
     navigate("/home");
   };
+
+  // 고정값으로 에러 코드와 메시지 설정
+  const errorCode = 500;
+  const errorMessage = "데이터를 불러오는 중 문제가 발생했습니다.";
 
   return (
     <section
