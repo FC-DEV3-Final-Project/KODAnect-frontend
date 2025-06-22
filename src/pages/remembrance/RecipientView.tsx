@@ -22,7 +22,7 @@ import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
 import { TopArea } from "@/shared/components/TopArea";
 import { getRecipientInfoItems } from "@/features/recipient-view/utils/getRecipientInfoItems";
-import Modal from "@/shared/components/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
 
 export default function RecipientView() {
@@ -43,13 +43,9 @@ export default function RecipientView() {
       try {
         setIsLoading(true);
         const response = await getLetterDetail(Number(id));
-        const letterData = response.data.data;
-        console.log("전체 편지 응답:", letterData);
-        console.log("imageUrl 확인:", letterData.imageUrl);
 
         setLetter(response.data.data);
       } catch (err) {
-        console.error("에러 발생:", err);
         setError("편지 정보를 불러오지 못했습니다.");
       } finally {
         setIsLoading(false);
