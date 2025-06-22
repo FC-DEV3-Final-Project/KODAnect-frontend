@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import {
   getStoryLetterDetail,
@@ -14,8 +15,6 @@ import {
   getMoreComments,
 } from "@/shared/api/stories-view/comment/commentApi";
 
-import type { StoryLetterDetail } from "@/shared/api/stories-view/story/types";
-
 import { Description } from "@/shared/components/Description";
 import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/stories";
 import LetterContent from "@/features/letter-view/components/LetterContent";
@@ -29,30 +28,19 @@ export default function StoryView() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const [story, setStory] = useState<StoryLetterDetail | null>(null);
   const [modalType, setModalType] = useState<"edit" | "delete" | null>(null);
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!id) return;
-
-    const fetchStory = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getStoryLetterDetail(Number(id));
-        setStory(response.data.data);
-      } catch (err) {
-        console.error("스토리 조회 실패:", err);
-        setError("스토리 정보를 불러오지 못했습니다.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchStory();
-  }, [id]);
+  const {
+    data: story,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["storyLetterDetail", id],
+    queryFn: () => getStoryLetterDetail(Number(id)),
+    enabled: !!id,
+    select: (res) => res.data.data,
+  });
 
   return (
     <div className="mx-auto w-full">
@@ -63,7 +51,7 @@ export default function StoryView() {
         {isLoading ? (
           <p className="mt-10 text-center">불러오는 중...</p>
         ) : error ? (
-          <p className="mt-10 text-center text-red-500">{error}</p>
+          <p className="mt-10 text-center text-red-500">스토리 정보를 불러오지 못했습니다.</p>
         ) : story ? (
           <>
             <LetterContent

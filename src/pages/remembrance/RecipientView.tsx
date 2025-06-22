@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import {
   getLetterDetail,
@@ -13,8 +14,6 @@ import {
   deleteComment,
   getMoreComments,
 } from "@/shared/api/recipient-view/comment/commentApi";
-
-import type { RecipientLetterDetail } from "@/shared/api/recipient-view/letter/types";
 
 import { Description } from "@/shared/components/Description";
 import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/recipients-view";
@@ -32,28 +31,16 @@ export default function RecipientView() {
   const [modalType, setModalType] = useState<"edit" | "delete" | null>(null);
   const [password, setPassword] = useState("");
 
-  const [letter, setLetter] = useState<RecipientLetterDetail | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!id) return;
-
-    const fetchLetter = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getLetterDetail(Number(id));
-
-        setLetter(response.data.data);
-      } catch (err) {
-        setError("편지 정보를 불러오지 못했습니다.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchLetter();
-  }, [id]);
+  const {
+    data: letter,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["recipientLetterDetail", id],
+    queryFn: () => getLetterDetail(Number(id)),
+    enabled: !!id,
+    select: (res) => res.data.data,
+  });
 
   return (
     <div className="mx-auto w-full">
@@ -63,7 +50,7 @@ export default function RecipientView() {
         {isLoading ? (
           <p className="mt-10 text-center">불러오는 중...</p>
         ) : error ? (
-          <p className="mt-10 text-center text-red-500">{error}</p>
+          <p className="mt-10 text-center text-red-500">편지 정보를 불러오지 못했습니다.</p>
         ) : letter ? (
           <>
             <LetterContent

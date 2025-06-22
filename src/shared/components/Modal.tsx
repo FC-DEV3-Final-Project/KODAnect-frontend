@@ -128,7 +128,17 @@ export function Modal({
 
         {/* 타이틀 + 입력창 */}
         {type === "input" && (
-          <div className="mb-g7">
+          <form className="mb-g7">
+            {/* 경고 제거용 hidden username 필드 */}
+            <input
+              type="text"
+              autoComplete="username"
+              value="anonymous"
+              readOnly
+              hidden
+              tabIndex={-1}
+            />
+
             {title && (
               <label
                 id="modal-title"
@@ -148,8 +158,9 @@ export function Modal({
               iconToggle
               isVisible={isVisible}
               onToggleIconClick={() => setIsVisible((prev) => !prev)}
+              autoComplete="new-password"
             />
-          </div>
+          </form>
         )}
 
         {/* 버튼 영역 */}

@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import {
   getHeavenLetterDetail,
   verifyHeavenLetter,
   deleteHeavenLetter,
 } from "@/shared/api/letter-view/letter/letterApi";
-import type { HeavenLetterDetail } from "@/shared/api/letter-view/letter/types";
 import {
   createComment,
   updateComment,
@@ -30,28 +30,17 @@ export default function LetterView() {
 
   const [modalType, setModalType] = useState<"edit" | "delete" | null>(null);
   const [password, setPassword] = useState("");
-  const [letter, setLetter] = useState<HeavenLetterDetail | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!id) return;
-
-    const fetchLetter = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getHeavenLetterDetail(Number(id));
-        setLetter(response.data.data);
-      } catch (err) {
-        console.error(err);
-        setError("편지 정보를 불러오지 못했습니다.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchLetter();
-  }, [id]);
+  const {
+    data: letter,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["heavenLetterDetail", id],
+    queryFn: () => getHeavenLetterDetail(Number(id)),
+    enabled: !!id,
+    select: (res) => res.data.data,
+  });
 
   return (
     <div className="mx-auto w-full">
@@ -61,7 +50,7 @@ export default function LetterView() {
         {isLoading ? (
           <p className="mt-10 text-center">불러오는 중...</p>
         ) : error ? (
-          <p className="mt-10 text-center text-red-500">{error}</p>
+          <p className="mt-10 text-center text-red-500">편지 정보를 불러오지 못했습니다.</p>
         ) : letter ? (
           <>
             <LetterContent

@@ -1,6 +1,7 @@
 import { Button } from "@/shared/components/Button";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import parse from "html-react-parser";
+import ReactHtmlParser from "html-react-parser";
+import { sanitizeCkContent } from "@/shared/utils/sanitizeCkContent";
 
 type InfoItem = {
   label: string;
@@ -62,7 +63,7 @@ export default function LetterContent({
         aria-label="추모 편지 본문"
         className="mb-g9 whitespace-pre-line border-b border-gray-20 px-p4 py-p10 text-b-md text-black mobile:mb-g6 mobile:px-p5 mobile:text-b-sm"
       >
-        <div>{parse(content)}</div>
+        <div>{ReactHtmlParser(sanitizeCkContent(content))}</div>
 
         {imageUrl && (
           <div className="mt-g7 w-full overflow-hidden">

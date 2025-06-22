@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import { getMemberDetail, patchEmotionCount } from "@/shared/api/members-view/member/memberApi";
 import type { MemberDetail, EmotionType } from "@/shared/api/members-view/member/types";
@@ -23,9 +24,49 @@ import { withData } from "@/shared/utils/withData";
 export default function MembersView() {
   const { donateSeq } = useParams();
 
-  const [donor, setDonor] = useState<MemberDetail | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    data: donor,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["memberDetail", donateSeq],
+    queryFn: () => getMemberDetail(Number(donateSeq)),
+    enabled: !!donateSeq,
+  });
+
+  const [optimisticDonor, setOptimisticDonor] = useState(donor ?? null);
+
+  useEffect(() => {
+    if (donor) {
+      setOptimisticDonor(donor);
+    }
+  }, [donor]);
+  // 이모지 클릭 이벤트 핸들러
+  const handleEmotionClick = useCallback(
+    async (emotion: EmotionType) => {
+      if (!donateSeq || !donor) return;
+      try {
+        await patchEmotionCount(Number(donateSeq), emotion);
+
+        // 낙관적 업데이트 (UI 즉시 반영)
+        setOptimisticDonor((prev) => {
+          if (!prev) return prev;
+          const key = emotionCountKeys[emotion];
+          return {
+            ...prev,
+            [key]: (prev[key] as number) + 1,
+          };
+        });
+
+        // refetch로 동기화
+        refetch();
+      } catch (e) {
+        console.error("이모지 업데이트 실패", e);
+      }
+    },
+    [donateSeq, refetch],
+  );
 
   const emotionCountKeys: Record<EmotionType, keyof MemberDetail> = {
     flower: "flowerCount",
@@ -37,49 +78,6 @@ export default function MembersView() {
     sad: "sadCount",
   };
 
-  useEffect(() => {
-    if (!donateSeq) {
-      setIsLoading(false);
-      return;
-    }
-
-    const fetchDetail = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getMemberDetail(Number(donateSeq));
-        setDonor(data);
-      } catch (err) {
-        setError("기증자 정보를 불러오지 못했습니다.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchDetail();
-  }, [donateSeq]);
-
-  // 이모지 클릭 이벤트 핸들러 & throttle 위해 useCallback 적용
-  const handleEmotionClick = useCallback(
-    async (emotion: EmotionType) => {
-      if (!donateSeq) return;
-      try {
-        await patchEmotionCount(Number(donateSeq), emotion);
-
-        setDonor((prev) => {
-          if (!prev) return prev;
-          const countKey = emotionCountKeys[emotion];
-          return {
-            ...prev,
-            [countKey]: (prev[countKey] as number) + 1,
-          };
-        });
-      } catch (e) {
-        console.error("이모지 업데이트 실패", e);
-      }
-    },
-    [donateSeq],
-  );
-
   return (
     <div className="mx-auto w-full">
       <TopArea />
@@ -88,14 +86,14 @@ export default function MembersView() {
         {isLoading ? (
           <p className="mt-10 text-center">불러오는 중입니다...</p>
         ) : error ? (
-          <p className="mt-10 text-center text-red-500">{error}</p>
+          <p className="mt-10 text-center text-red-500">기증자 정보를 불러오지 못했습니다.</p>
         ) : donor ? (
           <>
-            <TributeArea donor={donor} />
+            <TributeArea donor={optimisticDonor ?? donor} />
             <CommentArea
               variant="memorial"
               initialCommentData={donor.memorialCommentResponses}
-              letterId={donor.donateSeq}
+              letterId={Number(donor.donateSeq)}
               createComment={(payload) => withData(createComment(payload))}
               updateComment={(donateSeq, commentId, payload) =>
                 withData(updateComment(donateSeq, commentId, payload))
