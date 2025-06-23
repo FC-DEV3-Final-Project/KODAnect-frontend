@@ -54,8 +54,8 @@ export default function Members() {
         startDate,
         endDate,
         keyWord: keyword,
-        cursor: nextCursorRef.current?.cursor,
-        date: nextCursorRef.current?.date,
+        cursor: isLoadMore ? nextCursorRef.current?.cursor : undefined,
+        date: isLoadMore ? nextCursorRef.current?.date : undefined,
         size: pageSize,
       });
 
