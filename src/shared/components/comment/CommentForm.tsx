@@ -81,7 +81,7 @@ function CommentForm({ onCommentSubmit }: CommentFormProps) {
           commentPasscode: state.commentPasscode,
         });
         alert("댓글이 등록되었습니다.");
-        //window.location.reload();
+        window.location.reload();
       }
 
       dispatch({ type: "RESET" });
@@ -117,11 +117,11 @@ function CommentForm({ onCommentSubmit }: CommentFormProps) {
             title="추모자"
             height="medium"
             placeholder="한글/ 영문만 입력"
-            autoComplete="username"
             value={state.commentWriter}
             onChange={(e) =>
               dispatch({ type: "SET_FIELD", field: "commentWriter", value: e.target.value })
             }
+            autoComplete="username"
           />
         </div>
         <div className="w-full">
@@ -139,7 +139,6 @@ function CommentForm({ onCommentSubmit }: CommentFormProps) {
             }
             onToggleIconClick={() => setIsVisible((prev) => !prev)}
             disabled={!!editingComment}
-            autoComplete="new-password"
           />
         </div>
       </fieldset>
@@ -154,6 +153,7 @@ function CommentForm({ onCommentSubmit }: CommentFormProps) {
           onChange={(e) =>
             dispatch({ type: "SET_FIELD", field: "contents", value: e.target.value })
           }
+          autoComplete="new-password"
         />
       </div>
 
