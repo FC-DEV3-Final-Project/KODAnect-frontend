@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -42,6 +42,12 @@ export default function StoryView() {
     select: (res) => res.data.data,
   });
 
+  useEffect(() => {
+    if (error) {
+      navigate("/error");
+    }
+  }, [error, navigate]);
+
   return (
     <div className="mx-auto w-full">
       <TopArea />
@@ -50,8 +56,6 @@ export default function StoryView() {
 
         {isLoading ? (
           <p className="mt-10 text-center">불러오는 중...</p>
-        ) : error ? (
-          <p className="mt-10 text-center text-red-500">스토리 정보를 불러오지 못했습니다.</p>
         ) : story ? (
           <>
             <LetterContent

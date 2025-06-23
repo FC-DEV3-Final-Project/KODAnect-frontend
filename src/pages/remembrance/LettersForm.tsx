@@ -3,7 +3,7 @@ import { validateCaptcha } from "react-simple-captcha";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import instance from "@/shared/api/axios/axiosInstance";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 import TopArea from "@/shared/components/TopArea";
 import Description from "@/shared/components/Description";
@@ -50,9 +50,9 @@ export default function LettersForm() {
   const letterPasscodeRef = useRef<HTMLInputElement>(null);
   const letterTitleRef = useRef<HTMLInputElement>(null);
   const fromRef = useRef<HTMLButtonElement>(null);
-  const letterContentsRef = useRef("");
 
   const navigate = useNavigate();
+  const location = useLocation();
   const { letterSeq } = useParams<{ letterSeq: string }>();
   const isEdit = !!letterSeq;
 
@@ -133,7 +133,7 @@ export default function LettersForm() {
     }
 
     // 내용
-    const rawContents = letterContentsRef.current;
+    const rawContents = letterContents;
     const textOnly = rawContents.replace(/<[^>]*>/g, "").trim();
     const hasImage = rawContents.includes("<img");
     if (!textOnly && !hasImage) {
@@ -170,7 +170,7 @@ export default function LettersForm() {
         },
       });
       console.log(`${isEdit ? "수정" : "등록"} 성공:`, response.data);
-      navigate("/remembrance/letters");
+      navigate(`${isEdit ? `/remembrance/letters-view/${letterSeq}` : "/remembrance/letters"}`);
     } catch (error) {
       console.error(error);
     }
@@ -203,6 +203,18 @@ export default function LettersForm() {
 
     fetchLetterDetail();
   }, [letterSeq]);
+
+  useEffect(() => {
+    if (!isEdit && location.state?.donateSeq && location.state?.donorName) {
+      setSelectedDonor({
+        donateSeq: location.state.donateSeq,
+        donorName: location.state.donorName,
+        donateDate: "",
+        genderFlag: "",
+        donateAge: 0,
+      });
+    }
+  }, [isEdit, location.state]);
 
   return (
     <>
@@ -394,7 +406,6 @@ export default function LettersForm() {
                 data={letterContents}
                 onChange={(_event, editor) => {
                   const data = editor.getData();
-                  letterContentsRef.current = data;
                   setLetterContents(data);
                 }}
               />
@@ -408,7 +419,12 @@ export default function LettersForm() {
             </div>
             <div className="flex gap-g7 mobile:w-full mobile:justify-end mobile:gap-g3">
               <Button type="submit" children={isEdit ? "편지 수정" : "편지 등록"} />
-              <Button type="reset" variant="tertiary" children="취소" />
+              <Button
+                type="button"
+                variant="tertiary"
+                children="취소"
+                onClick={() => window.history.back()}
+              />
             </div>
           </div>
         </form>
