@@ -3,7 +3,7 @@ import { validateCaptcha } from "react-simple-captcha";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import instance from "@/shared/api/axios/axiosInstance";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 import TopArea from "@/shared/components/TopArea";
 import Description from "@/shared/components/Description";
@@ -53,6 +53,7 @@ export default function LettersForm() {
   const letterContentsRef = useRef("");
 
   const navigate = useNavigate();
+  const location = useLocation();
   const { letterSeq } = useParams<{ letterSeq: string }>();
   const isEdit = !!letterSeq;
 
@@ -203,6 +204,18 @@ export default function LettersForm() {
 
     fetchLetterDetail();
   }, [letterSeq]);
+
+  useEffect(() => {
+    if (!isEdit && location.state?.donateSeq && location.state?.donorName) {
+      setSelectedDonor({
+        donateSeq: location.state.donateSeq,
+        donorName: location.state.donorName,
+        donateDate: "",
+        genderFlag: "",
+        donateAge: 0,
+      });
+    }
+  }, [isEdit, location.state]);
 
   return (
     <>
