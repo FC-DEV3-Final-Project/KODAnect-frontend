@@ -99,7 +99,7 @@ export default function StoriesForm() {
         },
       });
       console.log(`${isEdit ? "수정" : "등록"} 성공:`, response.data);
-      navigate("/remembrance/stories");
+      navigate(`${isEdit ? `/remembrance/stories-view/${storySeq}` : "/remembrance/stories"}`);
     } catch (error) {
       console.error(error);
     }

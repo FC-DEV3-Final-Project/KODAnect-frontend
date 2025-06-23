@@ -158,7 +158,9 @@ export default function RecipientsForm() {
         },
       });
       console.log(`${isEdit ? "수정" : "등록"} 성공:`, response.data);
-      navigate("/remembrance/recipients");
+      navigate(
+        `${isEdit ? `/remembrance/recipients-view/${letterSeq}` : "/remembrance/recipients"}`,
+      );
     } catch (error) {
       console.error(error);
     }
