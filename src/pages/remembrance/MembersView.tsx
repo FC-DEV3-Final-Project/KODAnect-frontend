@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -23,6 +23,7 @@ import { withData } from "@/shared/utils/withData";
 
 export default function MembersView() {
   const { donateSeq } = useParams();
+  const navigate = useNavigate();
 
   const {
     data: donor,
@@ -42,6 +43,13 @@ export default function MembersView() {
       setOptimisticDonor(donor);
     }
   }, [donor]);
+
+  useEffect(() => {
+    if (error) {
+      navigate("/error");
+    }
+  }, [error, navigate]);
+
   // 이모지 클릭 이벤트 핸들러
   const handleEmotionClick = useCallback(
     async (emotion: EmotionType) => {
@@ -85,8 +93,6 @@ export default function MembersView() {
         <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS} />
         {isLoading ? (
           <p className="mt-10 text-center">불러오는 중입니다...</p>
-        ) : error ? (
-          <p className="mt-10 text-center text-red-500">기증자 정보를 불러오지 못했습니다.</p>
         ) : donor ? (
           <>
             <TributeArea donor={optimisticDonor ?? donor} />
