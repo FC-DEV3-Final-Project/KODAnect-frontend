@@ -25,7 +25,7 @@ import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
 
 export default function RecipientView() {
-  const { id } = useParams<{ id: string }>();
+  const { letterSeq } = useParams<{ letterSeq: string }>();
   const navigate = useNavigate();
 
   const [modalType, setModalType] = useState<"edit" | "delete" | null>(null);
@@ -36,9 +36,9 @@ export default function RecipientView() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["recipientLetterDetail", id],
-    queryFn: () => getLetterDetail(Number(id)),
-    enabled: !!id,
+    queryKey: ["recipientLetterDetail", letterSeq],
+    queryFn: () => getLetterDetail(Number(letterSeq)),
+    enabled: !!letterSeq,
     select: (res) => res.data.data,
   });
 
@@ -95,11 +95,11 @@ export default function RecipientView() {
                   setPassword("");
                 }}
                 onSubmit={async () => {
-                  if (!id || !letter) return;
+                  if (!letterSeq || !letter) return;
 
                   try {
                     if (modalType === "edit") {
-                      await verifyLetter(Number(id), { letterPasscode: password });
+                      await verifyLetter(Number(letterSeq), { letterPasscode: password });
                       console.log("수정 페이지로 전달할 데이터:", letter);
                       navigate(`/remembrance/recipients-form/${letter.letterSeq}`, {
                         state: letter,
@@ -107,7 +107,7 @@ export default function RecipientView() {
                     } else {
                       console.log("전달되는 비밀번호:", password);
 
-                      await deleteLetter(Number(id), { letterPasscode: password });
+                      await deleteLetter(Number(letterSeq), { letterPasscode: password });
                       navigate(`/remembrance/recipients`);
                     }
                   } catch (err) {
