@@ -34,6 +34,8 @@ export default function MembersView() {
     queryKey: ["memberDetail", donateSeq],
     queryFn: () => getMemberDetail(Number(donateSeq)),
     enabled: !!donateSeq,
+    refetchOnWindowFocus: false, // 포커스 변경 시 자동 refetch 방지
+    staleTime: 60000, // 60초간 데이터를 "신선한" 상태로 유지
   });
 
   const [optimisticDonor, setOptimisticDonor] = useState(donor ?? null);
@@ -53,11 +55,11 @@ export default function MembersView() {
   // 이모지 클릭 이벤트 핸들러
   const handleEmotionClick = useCallback(
     async (emotion: EmotionType) => {
-      if (!donateSeq || !donor) return;
+      if (!donateSeq) return;
+
       try {
         await patchEmotionCount(Number(donateSeq), emotion);
 
-        // 낙관적 업데이트 (UI 즉시 반영)
         setOptimisticDonor((prev) => {
           if (!prev) return prev;
           const key = emotionCountKeys[emotion];
@@ -67,7 +69,6 @@ export default function MembersView() {
           };
         });
 
-        // refetch로 동기화
         refetch();
       } catch (e) {
         console.error("이모지 업데이트 실패", e);
