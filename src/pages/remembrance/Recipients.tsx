@@ -60,12 +60,12 @@ export default function recipients() {
 
   // 검색 핸들러
   const handleSearch = () => {
-    console.log("🔎 검색 실행"), fetchAndSetData(false);
+    (console.log("🔎 검색 실행"), fetchAndSetData(false));
   };
 
   // 더보기 핸들러
   const handleLoadMore = () => {
-    console.log("📦 데이터 불러오기"), fetchAndSetData(true);
+    (console.log("📦 데이터 불러오기"), fetchAndSetData(true));
   };
 
   // 초기 데이터 조회
@@ -80,9 +80,8 @@ export default function recipients() {
     }
   }, [keyword, selectedType]);
 
-  // 하늘나라 편지로 이동
   const handleClick = () => {
-    navigate(`/remembrance/letters-form`);
+    navigate(`/remembrance/recipients-form`);
   };
 
   return (
