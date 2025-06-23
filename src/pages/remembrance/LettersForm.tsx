@@ -32,7 +32,6 @@ export default function LettersForm() {
   const [anonymityFlag, setAnonymityFlag] = useState(false);
   const [letterContents, setLetterContents] = useState("");
   const [captchaInput, setCaptchaInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   // 기증자 검색
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,7 +59,6 @@ export default function LettersForm() {
   const handleDonorSearch = async (page: number = 1) => {
     if (!searchKeyword.trim()) return;
 
-    setIsLoading(true);
     try {
       const response = await instance.get("/remembrance/heaven", {
         params: {
@@ -78,8 +76,6 @@ export default function LettersForm() {
       setCurrentPage(page);
     } catch (error) {
       console.error("기증자 검색 실패", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
