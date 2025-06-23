@@ -347,7 +347,12 @@ export default function RecipientsForm() {
             </div>
             <div className="flex gap-g7 mobile:w-full mobile:justify-end mobile:gap-g3">
               <Button type="submit" children={isEdit ? "편지 수정" : "편지 등록"} />
-              <Button type="reset" variant="tertiary" children="취소" />
+              <Button
+                type="button"
+                variant="tertiary"
+                children="취소"
+                onClick={() => window.history.back()}
+              />
             </div>
           </div>
         </form>

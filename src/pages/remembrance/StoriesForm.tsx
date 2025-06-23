@@ -248,7 +248,12 @@ export default function StoriesForm() {
             </div>
             <div className="flex gap-g7 mobile:w-full mobile:justify-end mobile:gap-g3">
               <Button type="submit" children={isEdit ? "수정하기" : "등록하기"} />
-              <Button type="reset" variant="tertiary" children="취소" />
+              <Button
+                type="button"
+                variant="tertiary"
+                children="취소"
+                onClick={() => window.history.back()}
+              />
             </div>
           </div>
         </form>
