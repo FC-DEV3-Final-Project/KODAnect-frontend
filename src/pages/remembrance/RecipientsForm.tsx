@@ -28,7 +28,6 @@ export default function RecipientsForm() {
   const letterWriterRef = useRef<HTMLInputElement>(null);
   const letterPasscodeRef = useRef<HTMLInputElement>(null);
   const letterTitleRef = useRef<HTMLInputElement>(null);
-  const letterContentsRef = useRef("");
 
   const navigate = useNavigate();
   const { letterSeq } = useParams<{ letterSeq: string }>();
@@ -121,7 +120,7 @@ export default function RecipientsForm() {
     }
 
     // 내용
-    const rawContents = letterContentsRef.current;
+    const rawContents = letterContents;
     const textOnly = rawContents.replace(/<[^>]*>/g, "").trim();
     const hasImage = rawContents.includes("<img");
     if (!textOnly && !hasImage) {
@@ -333,7 +332,6 @@ export default function RecipientsForm() {
                 data={letterContents}
                 onChange={(_event, editor) => {
                   const data = editor.getData();
-                  letterContentsRef.current = data;
                   setLetterContents(data);
                 }}
               />

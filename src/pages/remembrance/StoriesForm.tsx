@@ -24,7 +24,6 @@ export default function StoriesForm() {
   const storyWriterRef = useRef<HTMLInputElement>(null);
   const storyPasscodeRef = useRef<HTMLInputElement>(null);
   const storyTitleRef = useRef<HTMLInputElement>(null);
-  const storyContentsRef = useRef("");
 
   const navigate = useNavigate();
   const { storySeq } = useParams<{ storySeq: string }>();
@@ -65,7 +64,7 @@ export default function StoriesForm() {
     }
 
     // 내용
-    const rawContents = storyContentsRef.current;
+    const rawContents = storyContents;
     const textOnly = rawContents.replace(/<[^>]*>/g, "").trim();
     const hasImage = rawContents.includes("<img");
     if (!textOnly && !hasImage) {
@@ -234,7 +233,6 @@ export default function StoriesForm() {
                 data={storyContents}
                 onChange={(_event, editor) => {
                   const data = editor.getData();
-                  storyContentsRef.current = data;
                   setStoryContents(data);
                 }}
               />

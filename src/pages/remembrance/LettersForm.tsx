@@ -50,7 +50,6 @@ export default function LettersForm() {
   const letterPasscodeRef = useRef<HTMLInputElement>(null);
   const letterTitleRef = useRef<HTMLInputElement>(null);
   const fromRef = useRef<HTMLButtonElement>(null);
-  const letterContentsRef = useRef("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -134,7 +133,7 @@ export default function LettersForm() {
     }
 
     // 내용
-    const rawContents = letterContentsRef.current;
+    const rawContents = letterContents;
     const textOnly = rawContents.replace(/<[^>]*>/g, "").trim();
     const hasImage = rawContents.includes("<img");
     if (!textOnly && !hasImage) {
@@ -407,7 +406,6 @@ export default function LettersForm() {
                 data={letterContents}
                 onChange={(_event, editor) => {
                   const data = editor.getData();
-                  letterContentsRef.current = data;
                   setLetterContents(data);
                 }}
               />
