@@ -60,7 +60,7 @@ export default function LetterContent({
 
       <article
         aria-label="추모 편지 본문"
-        className="mb-g9 whitespace-pre-line border-b border-gray-20 px-p4 py-p10 text-b-md text-black mobile:mb-g6 mobile:px-p5 mobile:text-b-sm"
+        className="letter-content mb-g9 whitespace-pre-line border-b border-gray-20 px-p4 py-p10 text-b-md text-black mobile:mb-g6 mobile:px-p5 mobile:text-b-sm"
       >
         <div>{ReactHtmlParser(content)}</div>
 
