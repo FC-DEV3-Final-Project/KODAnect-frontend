@@ -13,8 +13,8 @@ import {
   getMoreComments,
 } from "@/shared/api/members-view/comment/commentApi";
 
-import { TopArea } from "@/shared/components/TopArea";
-import { Description } from "@/shared/components/Description";
+import TopArea from "@/shared/components/TopArea";
+import Description from "@/shared/components/Description";
 import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/members-view";
 import TributeArea from "@/features/members/component/TributeArea";
 import CommentArea from "@/shared/components/comment/CommentArea";

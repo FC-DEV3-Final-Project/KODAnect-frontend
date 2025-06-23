@@ -1,4 +1,4 @@
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import ReactHtmlParser from "html-react-parser";
 

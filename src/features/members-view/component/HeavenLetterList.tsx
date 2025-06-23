@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import type { HeavenLetter, HeavenLetterPagination } from "@/shared/api/members-view/letter/types";
 import { getMoreHeavenLetters } from "@/shared/api/members-view/letter/letterApi";
 
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 

@@ -15,11 +15,11 @@ import {
   getMoreComments,
 } from "@/shared/api/letter-view/comment/commentApi";
 
-import { Description } from "@/shared/components/Description";
+import Description from "@/shared/components/Description";
 import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/letters-view";
 import LetterContent from "@/features/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
-import { TopArea } from "@/shared/components/TopArea";
+import TopArea from "@/shared/components/TopArea";
 import { getHeavenInfoItems } from "@/features/letter-view/utils/getHeavenInfoItems";
 import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
