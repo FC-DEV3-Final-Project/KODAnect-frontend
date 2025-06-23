@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import type { Comment } from "@/shared/api/recipient-view/comment/types";
 import CommentItem from "@/shared/components/comment/CommentItem";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
 interface CommentListProps {

@@ -29,7 +29,7 @@ function findBreadcrumbPath(pathname: string): BreadcrumbItem[] {
   return result;
 }
 
-export const Breadcrumb = () => {
+export default function Breadcrumb() {
   const location = useLocation();
   const navigate = useNavigate();
   const breadcrumbItems = findBreadcrumbPath(location.pathname);
@@ -58,4 +58,4 @@ export const Breadcrumb = () => {
       </ol>
     </nav>
   );
-};
+}

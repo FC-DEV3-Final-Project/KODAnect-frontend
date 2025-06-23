@@ -15,7 +15,7 @@ import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import type { MemberDetail } from "@/shared/api/members-view/member/types";
 
 import clsx from "clsx";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import tributeFlower from "@/assets/images/tribute-flower.png";
 import parse from "html-react-parser";

@@ -1,21 +1,23 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { formatDateToYMD } from "@/shared/utils/formatDate";
-
 import { fetchDonorData } from "@/shared/api/remembrance/donorApi";
 import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 
-import { TopArea } from "@/shared/components/TopArea";
+import TopArea from "@/shared/components/TopArea";
 import { Label } from "@/shared/components/Label";
 import DatePicker from "@/shared/components/calendar/DatePicker";
 import TextInput from "@/shared/components/TextInput";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import DonorCard from "@/features/members/component/DonorCard";
 
 import clsx from "clsx";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
 export default function Members() {
+  const navigate = useNavigate();
   const isDesktop = !useIsMobile(768);
   const pageSize = isDesktop ? 20 : 16;
 
@@ -64,7 +66,7 @@ export default function Members() {
       nextCursorRef.current = result.nextCursor;
       setTotalCount(result.totalCount);
     } catch (error) {
-      console.error(error);
+      navigate("/error");
     }
   };
 

@@ -6,11 +6,11 @@ import { fetchLetterData } from "@/shared/api/remembrance/letterApi";
 import { heavenLetter } from "@/features/remembrance/dataMapping";
 import type { LetterData, LetterListResponse } from "@/shared/types/remembrance/LetterData.types";
 
-import { TopArea } from "@/shared/components/TopArea";
-import { Description } from "@/shared/components/Description";
+import TopArea from "@/shared/components/TopArea";
+import Description from "@/shared/components/Description";
 import { Dropdown } from "@/shared/components/Dropdown";
 import SearchInput from "@/shared/components/SearchInput";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import LetterCard from "@/shared/components/LetterCard";
 
 import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/letters";
@@ -53,7 +53,7 @@ export default function Letters() {
       nextCursorRef.current = result.nextCursor;
       setTotalCount(result.totalCount);
     } catch (error) {
-      console.error(error);
+      navigate("/error");
     }
   };
 
