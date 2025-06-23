@@ -25,7 +25,7 @@ import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
 
 export default function StoryView() {
-  const { id } = useParams<{ id: string }>();
+  const { storySeq } = useParams<{ storySeq: string }>();
   const navigate = useNavigate();
 
   const [modalType, setModalType] = useState<"edit" | "delete" | null>(null);
@@ -36,9 +36,9 @@ export default function StoryView() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["storyLetterDetail", id],
-    queryFn: () => getStoryLetterDetail(Number(id)),
-    enabled: !!id,
+    queryKey: ["storyLetterDetail", storySeq],
+    queryFn: () => getStoryLetterDetail(Number(storySeq)),
+    enabled: !!storySeq,
     select: (res) => res.data.data,
   });
 
@@ -95,15 +95,15 @@ export default function StoryView() {
                   setPassword("");
                 }}
                 onSubmit={async () => {
-                  if (!id || !story) return;
+                  if (!storySeq || !story) return;
 
                   try {
                     if (modalType === "edit") {
-                      await verifyStoryLetter(Number(id), { storyPasscode: password });
+                      await verifyStoryLetter(Number(storySeq), { storyPasscode: password });
                       console.log("수정 페이지로 전달할 데이터:", story);
                       navigate(`/remembrance/stories-form/${story.storySeq}`, { state: story });
                     } else {
-                      await deleteStoryLetter(Number(id), { storyPasscode: password });
+                      await deleteStoryLetter(Number(storySeq), { storyPasscode: password });
                       navigate(`/remembrance/stories`);
                     }
                   } catch (err) {
