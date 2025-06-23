@@ -8,9 +8,11 @@ import Empty from "@/pages/Empty";
 import Members from "@/pages/remembrance/Members";
 import MembersView from "@/pages/remembrance/MembersView";
 import Letters from "@/pages/remembrance/Letters";
+import LettersForm from "@/pages/remembrance/LettersForm";
 import Recipients from "@/pages/remembrance/Recipients";
+import RecipientsForm from "./remembrance/RecipientsForm";
 import Stories from "@/pages/remembrance/Stories";
-
+import StoriesForm from "./remembrance/StoriesForm";
 import Error from "@/pages/Error";
 
 export const router = createBrowserRouter([
@@ -30,8 +32,14 @@ export const router = createBrowserRouter([
           { path: "members", element: <Members /> },
           { path: "members-view/:id", element: <MembersView /> },
           { path: "letters", element: <Letters /> },
+          { path: "letters-form", element: <LettersForm /> },
+          { path: "letters-form/:letterSeq", element: <LettersForm /> },
           { path: "recipients", element: <Recipients /> },
+          { path: "recipients-form", element: <RecipientsForm /> },
+          { path: "recipients-form/:letterSeq", element: <RecipientsForm /> },
           { path: "stories", element: <Stories /> },
+          { path: "stories-form", element: <StoriesForm /> },
+          { path: "stories-form/:storySeq", element: <StoriesForm /> },
         ],
       },
     ],

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 
 import construction from "@/assets/images/under-construction.png";
 import Notification from "@/assets/icon/exclamation.svg?react";

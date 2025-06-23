@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CommentItem from "@/shared/components/comment/CommentItem";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
 
 const dummyComments = [

@@ -6,15 +6,23 @@ type CheckboxProps = {
   checked: boolean;
   onChange: () => void;
   disabled?: boolean;
+  className?: string;
 };
 
-export function Checkbox({ id, label, checked, onChange, disabled = false }: CheckboxProps) {
+export function Checkbox({
+  id,
+  label,
+  checked,
+  onChange,
+  disabled = false,
+  className,
+}: CheckboxProps) {
   return (
     <label
       htmlFor={id}
       className={`inline-flex cursor-pointer select-none items-center gap-g3 ${
         disabled ? "cursor-not-allowed opacity-50" : ""
-      }`}
+      } ${className}`}
     >
       <input
         id={id}
