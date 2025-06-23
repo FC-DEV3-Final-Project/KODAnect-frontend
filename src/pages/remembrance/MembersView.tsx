@@ -34,8 +34,6 @@ export default function MembersView() {
     queryKey: ["memberDetail", donateSeq],
     queryFn: () => getMemberDetail(Number(donateSeq)),
     enabled: !!donateSeq,
-    refetchOnWindowFocus: false, // 포커스 변경 시 자동 refetch 방지
-    staleTime: 60000, // 60초간 데이터를 "신선한" 상태로 유지
   });
 
   const [optimisticDonor, setOptimisticDonor] = useState(donor ?? null);
