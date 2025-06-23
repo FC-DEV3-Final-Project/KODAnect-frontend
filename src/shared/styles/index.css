@@ -26,3 +26,80 @@
     font-family: "PretendardGOVVariable", sans-serif;
   }
 }
+
+/* CKEditor */
+.ck-editor__editable_inline {
+  height: 450px;
+}
+
+@media (max-width: 767px) {
+  .ck-editor__editable_inline {
+    height: 644px;
+  }
+}
+
+.ck-toolbar {
+  flex: 0 0 auto;
+}
+
+.ck-content {
+  flex: 1 1 auto;
+  overflow: auto;
+  background-color: #ffffff;
+}
+
+.ck-read-only {
+  padding: 0 !important;
+}
+
+.ck-content h2 {
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.ck-content h3 {
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.ck-content h4 {
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.ck-content ul {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.ck-content ol {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.ck-content a:-webkit-any-link {
+  color: #38a5ee;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.ck-content blockquote > p {
+  margin: 16px 0px;
+}

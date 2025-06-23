@@ -32,7 +32,7 @@ function TabButton({ label, isSelected, onClick, id, panelId }: TabButtonProps) 
       id={id}
       onClick={onClick}
       className={clsx(
-        "h-full w-full flex-auto cursor-pointer p-[14px] text-h-sm font-bold mobile:p-[12px] mobile:text-h-2xs",
+        "h-full w-full flex-auto cursor-pointer p-[14px] text-h-sm font-bold mobile:p-p5 mobile:text-h-2xs",
         isSelected ? "bg-secondary-80 text-gray-0" : "bg-gray-0 text-gray-70",
       )}
     >

@@ -6,11 +6,11 @@ import { formatDateToYMD } from "@/shared/utils/formatDate";
 import { fetchDonorData } from "@/shared/api/remembrance/donorApi";
 import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 
-import { TopArea } from "@/shared/components/TopArea";
+import TopArea from "@/shared/components/TopArea";
 import { Label } from "@/shared/components/Label";
 import DatePicker from "@/shared/components/calendar/DatePicker";
 import TextInput from "@/shared/components/TextInput";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import DonorCard from "@/features/members/component/DonorCard";
 
 import clsx from "clsx";

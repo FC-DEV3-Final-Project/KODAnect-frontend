@@ -11,7 +11,7 @@ import {
 } from "date-fns";
 import clsx from "clsx";
 import Arrow from "@/assets/icon/round-arrow.svg?react";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import { DropdownSelect } from "@/shared/components/calendar/DropdownSelect";
 
 type CalendarProps = {

@@ -35,9 +35,10 @@ type DropdownProps = {
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
+  className?: string;
 };
 
-export function Dropdown({ options, value, onChange, placeholder }: DropdownProps) {
+export function Dropdown({ options, value, onChange, placeholder, className }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -54,16 +55,14 @@ export function Dropdown({ options, value, onChange, placeholder }: DropdownProp
   const selectedLabel = options.find((opt) => opt.value === value)?.label || placeholder;
 
   return (
-    <div
-      ref={dropdownRef}
-      className="relative w-full min-w-[8rem] mobile:h-full mobile:w-full mobile:min-w-[8rem]"
-    >
+    <div ref={dropdownRef} className={`relative w-full min-w-[8rem] ${className}`}>
       <button
+        type="button"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls="dropdown-listbox"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p6 py-p4 text-b-md text-gray-90 focus:outline focus:outline-2 focus:outline-secondary-50 mobile:h-full mobile:text-b-sm"
+        className="flex h-full w-full items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p6 py-p4 text-b-md text-gray-90 focus:outline focus:outline-2 focus:outline-secondary-50 mobile:text-b-sm"
       >
         {selectedLabel}
         <img
