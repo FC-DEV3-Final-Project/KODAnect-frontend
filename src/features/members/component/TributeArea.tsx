@@ -12,24 +12,17 @@
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
-import { formatDateToDotNotation, formatDateToKorean } from "@/shared/utils/formatDate";
+import type { MemberDetail } from "@/shared/api/members-view/member/types";
 
 import clsx from "clsx";
 import Button from "@/shared/components/Button";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import tributeFlower from "@/assets/images/tribute-flower.png";
-
-interface Donor {
-  donorName: string;
-  genderFlag: string;
-  donorAge: number;
-  donationDate: string;
-  replyCount: number;
-  letterCount: number;
-}
+import parse from "html-react-parser";
+import { formatDateToDotNotation } from "@/shared/utils/formatDate";
 
 interface TributeAreaProps {
-  donor: Donor | null;
+  donor: MemberDetail | null;
 }
 
 export default function TributeArea({ donor }: TributeAreaProps) {
@@ -38,10 +31,18 @@ export default function TributeArea({ donor }: TributeAreaProps) {
   }
   const isMobile = useIsMobile(768);
   const navigate = useNavigate();
-  const mail = donor.genderFlag === "M";
 
   const handleClick = () => {
     navigate("/remembrance/members");
+  };
+
+  const handleWriteLetter = () => {
+    navigate("/remembrance/letters-form", {
+      state: {
+        donateSeq: donor.donateSeq,
+        donorName: donor.donorName,
+      },
+    });
   };
 
   return (
@@ -79,22 +80,13 @@ export default function TributeArea({ donor }: TributeAreaProps) {
             </div>
             <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
               <span className="font-bold">기증일</span>
-              <time>{formatDateToDotNotation(donor.donationDate)}</time>
+              <time>{formatDateToDotNotation(donor.donateDate)}</time>
             </div>
           </div>
 
           {/* 추모글 */}
           <div className={clsx("flex flex-col gap-g4", "mobile:text-b-sm")}>
-            <p>
-              기증자 {donor.donorName} ({mail ? "남" : "여"},{donor.donorAge}) 님은{" "}
-              {formatDateToKorean(donor.donationDate)} 환자들에게 귀중한 장기를 선물해 주셨습니다.
-            </p>
-            <p>
-              한국장기조직기증원은 귀한 생명을 나눠주신 기증자와 유가족께 깊이 감사드리며,
-              <br />
-              앞으로도 기증자 유가족들이 건강한 삶을 유지할 수 있도록 최선을 다해 지원할 것입니다.
-            </p>
-            <p>고인의 명복을 빕니다.</p>
+            {parse(donor.contents)}
           </div>
 
           {/* 헌화 이미지 */}
@@ -115,6 +107,7 @@ export default function TributeArea({ donor }: TributeAreaProps) {
           size={isMobile ? "small" : "large"}
           className="mobile:text-b-xs"
           aria-label={`${donor.donorName}에게 하늘나라 편지 쓰기`}
+          onClick={handleWriteLetter}
         >
           하늘나라 편지쓰기
         </Button>
@@ -122,7 +115,6 @@ export default function TributeArea({ donor }: TributeAreaProps) {
           variant="tertiary"
           size={isMobile ? "small" : "large"}
           className="mobile:text-b-xs"
-          aria-label={`${donor.donorName}에게 하늘나라 편지 쓰기`}
           onClick={handleClick}
         >
           목록

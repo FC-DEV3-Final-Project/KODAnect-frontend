@@ -15,6 +15,10 @@ import Stories from "@/pages/remembrance/Stories";
 import StoriesForm from "./remembrance/StoriesForm";
 import Error from "@/pages/Error";
 
+import LetterView from "@/pages/remembrance/LetterView";
+import RecipientView from "@/pages/remembrance/RecipientView";
+import StoryView from "@/pages/remembrance/StoryView";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,16 +34,19 @@ export const router = createBrowserRouter([
         path: "remembrance",
         children: [
           { path: "members", element: <Members /> },
-          { path: "members-view/:id", element: <MembersView /> },
+          { path: "members-view/:donateSeq", element: <MembersView /> },
           { path: "letters", element: <Letters /> },
           { path: "letters-form", element: <LettersForm /> },
           { path: "letters-form/:letterSeq", element: <LettersForm /> },
+          { path: "letters-view/:id", element: <LetterView /> },
           { path: "recipients", element: <Recipients /> },
           { path: "recipients-form", element: <RecipientsForm /> },
           { path: "recipients-form/:letterSeq", element: <RecipientsForm /> },
+          { path: "recipients-view/:id", element: <RecipientView /> },
           { path: "stories", element: <Stories /> },
           { path: "stories-form", element: <StoriesForm /> },
           { path: "stories-form/:storySeq", element: <StoriesForm /> },
+          { path: "stories-view/:id", element: <StoryView /> },
         ],
       },
     ],

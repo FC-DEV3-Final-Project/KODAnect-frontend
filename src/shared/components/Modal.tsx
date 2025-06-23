@@ -61,6 +61,7 @@ interface ModalProps {
   setPassword?: (value: string) => void;
   placeholder?: string;
   children?: React.ReactNode;
+  confirmText?: string; // 확인 버튼 텍스트
 }
 
 export function Modal({
@@ -73,6 +74,7 @@ export function Modal({
   setPassword,
   placeholder = "비밀번호를 입력하세요",
   children,
+  confirmText,
 }: ModalProps) {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -90,7 +92,13 @@ export function Modal({
   }, [onClose]);
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby={type === "text" ? "modal-description" : undefined}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+    >
       <div
         className={clsx(
           "relative rounded-r6 border border-gray-30 bg-white px-p9 pb-p9 pt-p8 mobile:pb-p8",
@@ -110,10 +118,18 @@ export function Modal({
         {type === "text" && (
           <div className="mb-g7 text-center">
             {title && (
-              <h2 className="mb-g5 text-h-md font-bold text-gray-90 mobile:text-h-sm">{title}</h2>
+              <h2
+                id="modal-title"
+                className="mb-g5 text-h-md font-bold text-gray-90 mobile:text-h-sm"
+              >
+                {title}
+              </h2>
             )}
             {description && (
-              <p className="text-h-sm text-gray-80 mobile:whitespace-pre-line mobile:text-b-md">
+              <p
+                id="modal-description"
+                className="text-h-sm text-gray-80 mobile:whitespace-pre-line mobile:text-b-md"
+              >
                 {description}
               </p>
             )}
@@ -122,9 +138,20 @@ export function Modal({
 
         {/* 타이틀 + 입력창 */}
         {type === "input" && (
-          <div className="mb-g7">
+          <form className="mb-g7">
+            {/* 경고 제거용 hidden username 필드 */}
+            <input
+              type="text"
+              autoComplete="username"
+              value="anonymous"
+              readOnly
+              hidden
+              tabIndex={-1}
+            />
+
             {title && (
               <label
+                id="modal-title"
                 htmlFor="modal-password"
                 className="mb-g5 block text-h-md font-bold text-gray-90"
               >
@@ -141,15 +168,16 @@ export function Modal({
               iconToggle
               isVisible={isVisible}
               onToggleIconClick={() => setIsVisible((prev) => !prev)}
+              autoComplete="new-password"
             />
-          </div>
+          </form>
         )}
 
         {/* 버튼 영역 */}
         {type !== "basic" && (
           <div className="flex justify-end gap-[12px]">
             <Button variant="primary" size="medium" onClick={onSubmit}>
-              삭제
+              {confirmText || "삭제"}
             </Button>
             <Button variant="tertiary" size="medium" onClick={onClose}>
               취소
