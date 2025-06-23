@@ -54,7 +54,7 @@ export default function Stories() {
       nextCursorRef.current = result.nextCursor;
       setTotalCount(result.totalCount);
     } catch (error) {
-      console.error(error);
+      navigate("/error");
     }
   };
 
@@ -137,7 +137,7 @@ export default function Stories() {
                 date={item.date}
                 infoItems={item.infoItems}
                 views={item.views}
-                toBase="/remembrance/story-view"
+                toBase="/remembrance/stories-view"
               />
             ))}
           </div>

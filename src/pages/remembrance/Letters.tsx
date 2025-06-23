@@ -53,7 +53,7 @@ export default function Letters() {
       nextCursorRef.current = result.nextCursor;
       setTotalCount(result.totalCount);
     } catch (error) {
-      console.error(error);
+      navigate("/error");
     }
   };
 
@@ -135,7 +135,7 @@ export default function Letters() {
                 date={item.date}
                 infoItems={item.infoItems}
                 views={item.views}
-                toBase="/remembrance/Letter-view"
+                toBase="/remembrance/letters-view"
               />
             ))}
           </div>

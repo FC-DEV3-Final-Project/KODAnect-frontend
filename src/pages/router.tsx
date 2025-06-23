@@ -13,12 +13,7 @@ import Recipients from "@/pages/remembrance/Recipients";
 import RecipientsForm from "./remembrance/RecipientsForm";
 import Stories from "@/pages/remembrance/Stories";
 import StoriesForm from "./remembrance/StoriesForm";
-import OrganDonation from "@/pages/organ/info/OrganDonation";
-import BrainDeath from "@/pages/organ/info/BrainDeath";
-import Donors from "@/pages/participation/Donors";
-import Comparison from "@/pages/participation/Comparison";
-import YearlyTrend from "@/pages/participation/YearlyTrend";
-import Notices from "@/pages/announcement/Notices";
+import Error from "@/pages/Error";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +25,7 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "home", element: <Home /> },
+      { path: "error", element: <Error /> },
       {
         path: "remembrance",
         children: [
@@ -58,8 +54,8 @@ export const router = createBrowserRouter([
           {
             path: "info",
             children: [
-              { path: "organ-donation", element: <OrganDonation /> },
-              { path: "brain-death", element: <BrainDeath /> },
+              { path: "organ-donation", element: <Empty /> },
+              { path: "brain-death", element: <Empty /> },
               { path: ":id", element: <Empty /> },
             ],
           },
@@ -85,7 +81,7 @@ export const router = createBrowserRouter([
       {
         path: "announcement",
         children: [
-          { path: "notices", element: <Notices /> },
+          { path: "notices", element: <Empty /> },
           { path: ":id", element: <Empty /> },
         ],
       },
@@ -95,9 +91,9 @@ export const router = createBrowserRouter([
           {
             path: "donation-stats",
             children: [
-              { path: "donors", element: <Donors /> },
-              { path: "comparison-5years", element: <Comparison /> },
-              { path: "yearly-trend", element: <YearlyTrend /> },
+              { path: "donors", element: <Empty /> },
+              { path: "comparison-5years", element: <Empty /> },
+              { path: "yearly-trend", element: <Empty /> },
             ],
           },
           {

@@ -54,7 +54,7 @@ export default function recipients() {
       nextCursorRef.current = result.nextCursor;
       setTotalCount(result.totalCount);
     } catch (error) {
-      console.error(error);
+      navigate("/error");
     }
   };
 
@@ -136,7 +136,7 @@ export default function recipients() {
                 date={item.date}
                 infoItems={item.infoItems}
                 views={item.views}
-                toBase="/remembrance/Recipient-view"
+                toBase="/remembrance/recipients-view"
               />
             ))}
           </div>
