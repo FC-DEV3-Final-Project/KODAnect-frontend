@@ -60,7 +60,7 @@ export default function LetterCardList() {
             title={item.title}
             infoItems={item.infoItems}
             date={item.date}
-            toBase="/remembrance/Letter-view"
+            toBase="/remembrance/letters-view"
           />
         ))}
       </div>
