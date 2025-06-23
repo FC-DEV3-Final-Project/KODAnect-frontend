@@ -25,7 +25,7 @@ import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
 
 export default function LetterView() {
-  const { id } = useParams<{ id: string }>();
+  const { letterSeq } = useParams<{ letterSeq: string }>();
   const navigate = useNavigate();
 
   const [modalType, setModalType] = useState<"edit" | "delete" | null>(null);
@@ -36,9 +36,9 @@ export default function LetterView() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["heavenLetterDetail", id],
-    queryFn: () => getHeavenLetterDetail(Number(id)),
-    enabled: !!id,
+    queryKey: ["heavenLetterDetail", letterSeq],
+    queryFn: () => getHeavenLetterDetail(Number(letterSeq)),
+    enabled: !!letterSeq,
     select: (res) => res.data.data,
   });
 
@@ -95,15 +95,15 @@ export default function LetterView() {
                   setPassword("");
                 }}
                 onSubmit={async () => {
-                  if (!id || !letter) return;
+                  if (!letterSeq || !letter) return;
 
                   try {
                     if (modalType === "edit") {
-                      await verifyHeavenLetter(Number(id), { letterPasscode: password });
+                      await verifyHeavenLetter(Number(letterSeq), { letterPasscode: password });
                       console.log("수정 페이지로 전달할 데이터:", letter);
                       navigate(`/remembrance/letters-form/${letter.letterSeq}`, { state: letter });
                     } else {
-                      await deleteHeavenLetter(Number(id), { letterPasscode: password });
+                      await deleteHeavenLetter(Number(letterSeq), { letterPasscode: password });
                       navigate(`/remembrance/letters`);
                     }
                   } catch (err) {
