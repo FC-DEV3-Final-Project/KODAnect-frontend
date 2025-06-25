@@ -17,7 +17,7 @@ import type {
 } from "@/shared/api/recipient-view/comment/types";
 import type { EmotionType } from "@/shared/api/members-view/member/types";
 
-import MemorialIconGroup from "@/features/members-view/component/MemorialIconGroup";
+import MemorialIconGroup from "@/features/remembrance/members-view/component/MemorialIconGroup";
 import CommentForm from "@/shared/components/comment/CommentForm";
 import CommentList from "@/shared/components/comment/CommentList";
 

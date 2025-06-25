@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { fetchLetterData } from "@/shared/api/remembrance/letterApi";
+import { fetchLetterData } from "@/shared/api/letters/letterApi";
 import { donorStory } from "@/features/remembrance/dataMapping";
 import type { StoryData, LetterListResponse } from "@/shared/types/remembrance/LetterData.types";
 

@@ -7,8 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import TopArea from "@/shared/components/TopArea";
 import Description from "@/shared/components/Description";
-import PageTitle from "@/features/lettersForm/PageTitle";
-import FormInfo from "@/features/lettersForm/FormInfo";
+import PageTitle from "@/features/remembrance/lettersForm/PageTitle";
+import FormInfo from "@/features/remembrance/lettersForm/FormInfo";
 import { Label } from "@/shared/components/Label";
 import TextInput from "@/shared/components/TextInput";
 import RadioButton from "@/shared/components/RadioButton";
