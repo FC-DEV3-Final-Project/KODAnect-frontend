@@ -170,7 +170,7 @@ export default function LettersForm() {
         },
       });
       console.log(`${isEdit ? "수정" : "등록"} 성공:`, response.data);
-      navigate(`${isEdit ? `/remembrance/letters-view/${letterSeq}` : "/remembrance/letters"}`);
+      navigate(`${isEdit ? `/heavenLetters/letters-view/${letterSeq}` : "/heavenLetters/letters"}`);
     } catch (error) {
       console.error(error);
     }
