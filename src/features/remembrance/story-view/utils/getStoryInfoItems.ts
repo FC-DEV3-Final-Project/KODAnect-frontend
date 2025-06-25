@@ -1,5 +1,5 @@
 import type { StoryLetterDetail } from "@/shared/api/stories-view/story/types";
-import { getAreaName } from "@/features/story-view/utils/getAreaName";
+import { getAreaName } from "@/features/remembrance/story-view/utils/getAreaName";
 
 export function getStoryInfoItems(data: StoryLetterDetail) {
   return [
