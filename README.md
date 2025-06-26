@@ -49,25 +49,25 @@
 | :-------------------------------------------------: |
 | ![메인페이지모바일버전](/public/images/home_mo.gif) |
 
-|                  **기증자 추모관 목록**                  |
-| :------------------------------------------------------: |
+|                                                     **기증자 추모관 목록**                                                      |
+| :-----------------------------------------------------------------------------------------------------------------------------: |
 | 날짜와 이름으로 기증자를 검색할 수 있습니다. <br /> 기증자의 추모관으로 이동하거나 하늘나라 편지쓰기로 바로 이동할 수 있습니다. |
-| ![기증자추모관목록](/public/images/remembrance-list.gif) |
+|                                    ![기증자추모관목록](/public/images/remembrance-list.gif)                                     |
 
 |                  **하늘나라 편지쓰기**                   |
 | :------------------------------------------------------: |
-| 기증자를 선택하여 추모 편지를 작성할 수 있습니다. |
+|    기증자를 선택하여 추모 편지를 작성할 수 있습니다.     |
 | ![하늘나라편지쓰기](/public/images/heavenLetters_01.gif) |
 
-|                    **편지 수정 & 삭제**                    |
-| :--------------------------------------------------------: |
-| 등록 시 설정한 비밀번호로 인증 후 편지를 수정하거나 삭제 할 수 있습니다. |
-| ![편지수정및삭제하기](/public/images/heavenLetters_02.gif) |
+|                           **편지 수정 & 삭제**                           |
+| :----------------------------------------------------------------------: |
+| 등록 시 설정한 비밀번호로 인증 후 편지를 수정하거나 삭제할 수 있습니다. |
+|        ![편지수정및삭제하기](/public/images/heavenLetters_02.gif)        |
 
-|            **댓글 등록 & 수정 & 삭제**            |
-| :-----------------------------------------------: |
-| 편지에 댓글을 등록하거나, 수정 또는 삭제 할 수 있습니다. |
-| ![댓글등록&수정&삭제](/public/images/comment.gif) |
+|               **댓글 등록 & 수정 & 삭제**                |
+| :------------------------------------------------------: |
+| 편지에 댓글을 등록하거나, 수정 또는 삭제할 수 있습니다. |
+|    ![댓글등록&수정&삭제](/public/images/comment.gif)     |
 
 </div>
 &nbsp;
@@ -76,17 +76,18 @@
 
 <div>
 
-|      **TYPE**       |                                                                                                          **TOOL**                                                                                                          |
-| :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|     **Library**     | ![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![TanstackQuery](https://img.shields.io/badge/tanstackquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=black) |
-|    **Language**     |                                                   ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)                                                    |
-|     **Styling**     |                                                    ![TailwindCSS](https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindCSS&logoColor=white)                                                    |
-|   **Formatting**    |     ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)     |
-| **Package Manager** |                                                                ![Npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)                                                                |
-|   **Build Tools**   |                                                              ![VITE](https://img.shields.io/badge/VITE-646CFF?style=for-the-badge&logo=Vite&logoColor=white)                                                               |
-|   **Deployment**    |                                                          ![netlify](https://img.shields.io/badge/netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)                                                          |
-| **Version Control** |      ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)      |
-|  **Collaboration**  |          ![Slack](https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=slack&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)          |
+|       **TYPE**        |                                                                                                          **TOOL**                                                                                                          |
+| :-------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|     **Language**      |                                                   ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)                                                    |
+|      **Library**      | ![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![TanstackQuery](https://img.shields.io/badge/tanstackquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=black) |
+|      **Styling**      |                                                    ![TailwindCSS](https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindCSS&logoColor=white)                                                    |
+| **Development Tools** |                                                       ![storybook](https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)                                                       |
+|    **Formatting**     |     ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)     |
+|    **Build Tools**    |                                                              ![VITE](https://img.shields.io/badge/VITE-646CFF?style=for-the-badge&logo=Vite&logoColor=white)                                                               |
+|  **Package Manager**  |                                                                ![Npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)                                                                |
+|    **Deployment**     |                                                          ![netlify](https://img.shields.io/badge/netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)                                                          |
+|  **Version Control**  |      ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)      |
+|   **Collaboration**   |          ![Slack](https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=slack&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)          |
 
 </div>
 &nbsp;
