@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Captcha from "@/shared/components/Captcha";
 import { validateCaptcha } from "react-simple-captcha";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 
 const meta: Meta<typeof Captcha> = {
   title: "Components/Captcha",

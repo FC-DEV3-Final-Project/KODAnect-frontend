@@ -9,7 +9,11 @@ interface AccordionMenuProps {
   defaultOpen?: boolean;
   currentPath: string;
 }
-function AccordionMenu({ menu, defaultOpen = true, currentPath }: AccordionMenuProps) {
+export default function AccordionMenu({
+  menu,
+  defaultOpen = true,
+  currentPath,
+}: AccordionMenuProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const hasChildren = menu.children && menu.children.length > 0;
@@ -59,5 +63,3 @@ function AccordionMenu({ menu, defaultOpen = true, currentPath }: AccordionMenuP
     </div>
   );
 }
-
-export default AccordionMenu;

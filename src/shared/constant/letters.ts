@@ -8,8 +8,3 @@ export const CHECK_ITEMS = [
   "<기증자 가족 안내> 한국장기조직기증원에서는 기증자 가족, 수혜자, 한국장기조직기증원 코디네이터 및 임직원의 이야기를 모은 여섯 번째 생명나눔 사례집 <별이 빛나는 밤에>를 출간하였습니다.",
   "도서를 직접 받아보고 싶은 분은 대외 협력팀(02-765-8736)으로 연락주시거나 <a href='/' class='underline'>신청서(링크)</a>를 작성하여 주세요.",
 ];
-
-export const DROPDOWN_OPTIONS = [
-  { label: "제목", value: "title" },
-  { label: "내용", value: "content" },
-];

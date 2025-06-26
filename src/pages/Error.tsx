@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { Button } from "@/shared/components/Button";
+import Button from "@/shared/components/Button";
 import Notification from "@/assets/icon/exclamation.svg?react";
 
 export default function Error() {
@@ -24,6 +24,10 @@ export default function Error() {
     navigate("/home");
   };
 
+  // 고정값으로 에러 코드와 메시지 설정
+  const errorCode = 500;
+  const errorMessage = "데이터를 불러오는 중 문제가 발생했습니다.";
+
   return (
     <section
       className={clsx(
@@ -34,8 +38,8 @@ export default function Error() {
       <div className="flex flex-col items-center gap-g5">
         <Notification className="h-icon6 w-icon6" aria-hidden="true" />
         <div className="text-center">
-          <h2 className="text-h-lg font-bold text-gray-70">에러 코드</h2>
-          <p className="mobile:mt-pag-g3 text-b-md">에러 메시지</p>
+          <h2 className="text-h-lg font-bold text-gray-70">{errorCode}</h2>
+          <p className="mobile:mt-pag-g3 text-b-md">{errorMessage}</p>
         </div>
       </div>
       <div className={clsx("flex gap-g6", "mobile:gap-g4")}>

@@ -8,14 +8,16 @@ import Empty from "@/pages/Empty";
 import Members from "@/pages/remembrance/Members";
 import MembersView from "@/pages/remembrance/MembersView";
 import Letters from "@/pages/remembrance/Letters";
+import LettersForm from "@/pages/remembrance/LettersForm";
 import Recipients from "@/pages/remembrance/Recipients";
+import RecipientsForm from "./remembrance/RecipientsForm";
 import Stories from "@/pages/remembrance/Stories";
-import OrganDonation from "@/pages/organ/info/OrganDonation";
-import BrainDeath from "@/pages/organ/info/BrainDeath";
-import Donors from "@/pages/participation/Donors";
-import Comparison from "@/pages/participation/Comparison";
-import YearlyTrend from "@/pages/participation/YearlyTrend";
-import Notices from "@/pages/announcement/Notices";
+import StoriesForm from "./remembrance/StoriesForm";
+import Error from "@/pages/Error";
+
+import LetterView from "@/pages/remembrance/LetterView";
+import RecipientView from "@/pages/remembrance/RecipientView";
+import StoryView from "@/pages/remembrance/StoryView";
 
 export const router = createBrowserRouter([
   {
@@ -27,14 +29,25 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "home", element: <Home /> },
+      { path: "error", element: <Error /> },
       {
         path: "remembrance",
         children: [
           { path: "members", element: <Members /> },
-          { path: "members-view/:id", element: <MembersView /> },
+          { path: "members-view/:donateSeq", element: <MembersView /> },
+          { path: "members-view/:donateSeq", element: <MembersView /> },
           { path: "letters", element: <Letters /> },
+          { path: "letters-form", element: <LettersForm /> },
+          { path: "letters-form/:letterSeq", element: <LettersForm /> },
+          { path: "letters-view/:letterSeq", element: <LetterView /> },
           { path: "recipients", element: <Recipients /> },
+          { path: "recipients-form", element: <RecipientsForm /> },
+          { path: "recipients-form/:letterSeq", element: <RecipientsForm /> },
+          { path: "recipients-view/:letterSeq", element: <RecipientView /> },
           { path: "stories", element: <Stories /> },
+          { path: "stories-form", element: <StoriesForm /> },
+          { path: "stories-form/:storySeq", element: <StoriesForm /> },
+          { path: "stories-view/:storySeq", element: <StoryView /> },
         ],
       },
     ],
@@ -49,8 +62,8 @@ export const router = createBrowserRouter([
           {
             path: "info",
             children: [
-              { path: "organ-donation", element: <OrganDonation /> },
-              { path: "brain-death", element: <BrainDeath /> },
+              { path: "organ-donation", element: <Empty /> },
+              { path: "brain-death", element: <Empty /> },
               { path: ":id", element: <Empty /> },
             ],
           },
@@ -76,7 +89,7 @@ export const router = createBrowserRouter([
       {
         path: "announcement",
         children: [
-          { path: "notices", element: <Notices /> },
+          { path: "notices", element: <Empty /> },
           { path: ":id", element: <Empty /> },
         ],
       },
@@ -86,9 +99,9 @@ export const router = createBrowserRouter([
           {
             path: "donation-stats",
             children: [
-              { path: "donors", element: <Donors /> },
-              { path: "comparison-5years", element: <Comparison /> },
-              { path: "yearly-trend", element: <YearlyTrend /> },
+              { path: "donors", element: <Empty /> },
+              { path: "comparison-5years", element: <Empty /> },
+              { path: "yearly-trend", element: <Empty /> },
             ],
           },
           {
