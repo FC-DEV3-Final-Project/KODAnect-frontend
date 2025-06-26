@@ -20,8 +20,9 @@ export default function Story() {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: false,
-    draggable: false,
     variableWidth: true,
+    draggable: true,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -33,7 +34,6 @@ export default function Story() {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
-          draggable: true,
         },
       },
     ],

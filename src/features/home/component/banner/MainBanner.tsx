@@ -48,6 +48,8 @@ export default function MainBanner() {
     slidesToShow: 1,
     slidesToScroll: 1,
     pauseOnHover: false,
+    draggable: true,
+    swipeToSlide: true,
     beforeChange: (_oldIndex: number, newIndex: number) => setActiveIndex(newIndex),
     nextArrow: <></>,
     prevArrow: <></>,
@@ -114,15 +116,15 @@ export default function MainBanner() {
         <div
           className={clsx(
             "h-[500px] max-w-[1280px] text-gray-90 mobile:h-[450px]",
-            "absolute inset-0 m-auto grid grid-rows-1 px-p10 py-p5",
+            "pointer-events-none absolute inset-0 m-auto grid grid-rows-1 px-p10 py-p5",
             isMobile ? "grid-cols-1" : "grid-cols-[1fr_400px]",
           )}
         >
-          <div className="mb-g8 flex w-full items-end justify-center gap-g3 mobile:mb-g4">
+          <div className="pointer-events-none mb-g8 flex w-full items-end justify-center gap-g3 mobile:mb-g4">
             {/* 슬라이드 인디케이터 */}
             <nav
               aria-label="배너 슬라이드 페이지 선택"
-              className="flex gap-2 rounded-full bg-white p-p6"
+              className="pointer-events-auto flex gap-2 rounded-full bg-white p-p6"
             >
               {bannerItems.map((_, index) => (
                 <button
@@ -141,7 +143,7 @@ export default function MainBanner() {
             </nav>
 
             {/* 자동재생 버튼 */}
-            <div className="flex justify-center gap-4">
+            <div className="pointer-events-auto flex justify-center gap-4">
               {isPlaying ? (
                 <button
                   onClick={handlePause}
