@@ -157,7 +157,7 @@ export default function LettersForm() {
     formData.append("letterTitle", letterTitle);
     formData.append("letterContents", letterContents);
 
-    const url = isEdit ? `/heavenLetters/${letterSeq}` : "/heavenLetters";
+    const url = isEdit ? `/remembrance/${letterSeq}` : "/remembrance";
     const method = isEdit ? "patch" : "post";
 
     try {
