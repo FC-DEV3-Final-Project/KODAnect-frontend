@@ -103,3 +103,87 @@
 .ck-content blockquote > p {
   margin: 16px 0px;
 }
+
+/* LetterContent */
+.letter-content h2 {
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.letter-content h3 {
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.letter-content h4 {
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.letter-content ul,
+.letter-content ol {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.letter-content ul {
+  list-style: initial;
+}
+
+.letter-content ol {
+  list-style: decimal;
+}
+
+.letter-content li {
+  margin-bottom: 0.4em;
+}
+
+.letter-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.letter-content th,
+.letter-content td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.letter-content i {
+  font-style: italic;
+}
+
+.letter-content b,
+.letter-content strong {
+  font-weight: bold;
+}
+
+.letter-content a:-webkit-any-link {
+  color: #38a5ee;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.letter-content blockquote > p {
+  margin: 16px 0px;
+  padding-left: 1rem;
+  border-left: 4px solid #ccc;
+  color: #555;
+  font-style: italic;
+}

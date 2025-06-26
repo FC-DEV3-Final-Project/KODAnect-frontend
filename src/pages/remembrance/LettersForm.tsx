@@ -7,8 +7,8 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 import TopArea from "@/shared/components/TopArea";
 import Description from "@/shared/components/Description";
-import PageTitle from "@/features/lettersForm/PageTitle";
-import FormInfo from "@/features/lettersForm/FormInfo";
+import PageTitle from "@/features/remembrance/lettersForm/PageTitle";
+import FormInfo from "@/features/remembrance/lettersForm/FormInfo";
 import { Label } from "@/shared/components/Label";
 import TextInput from "@/shared/components/TextInput";
 import { Checkbox } from "@/shared/components/Checkbox";
@@ -157,7 +157,7 @@ export default function LettersForm() {
     formData.append("letterTitle", letterTitle);
     formData.append("letterContents", letterContents);
 
-    const url = isEdit ? `/heavenLetters/${letterSeq}` : "/heavenLetters";
+    const url = isEdit ? `/remembrance/${letterSeq}` : "/remembrance";
     const method = isEdit ? "patch" : "post";
 
     try {

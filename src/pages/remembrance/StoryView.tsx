@@ -17,10 +17,10 @@ import {
 
 import Description from "@/shared/components/Description";
 import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/stories";
-import LetterContent from "@/features/letter-view/components/LetterContent";
+import LetterContent from "@/features/remembrance/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
 import TopArea from "@/shared/components/TopArea";
-import { getStoryInfoItems } from "@/features/story-view/utils/getStoryInfoItems";
+import { getStoryInfoItems } from "@/features/remembrance/story-view/utils/getStoryInfoItems";
 import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
 
