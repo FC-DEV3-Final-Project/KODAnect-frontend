@@ -11,6 +11,9 @@ import BannerLogo from "@/assets/images/banner-logo.svg";
 import Banner01 from "@/assets/images/mainBanner/main-banner-01.png";
 import Banner02 from "@/assets/images/mainBanner/main-banner-02.png";
 import Banner03 from "@/assets/images/mainBanner/main-banner-03.png";
+import MobileBanner01 from "@/assets/images/mainBanner/main-banner-01_mo.png";
+import MobileBanner02 from "@/assets/images/mainBanner/main-banner-02_mo.png";
+import MobileBanner03 from "@/assets/images/mainBanner/main-banner-03_mo.png";
 
 import Slider from "react-slick";
 import QuickInfoCard from "./QuickInfoCard";
@@ -20,16 +23,19 @@ const bannerItems = [
     title: "내일을 이어주는 기적, \n당신의 마음에서 시작됩니다",
     subtitle: "기적은 멀리 있지 않습니다. \n당신의 선택에서 시작됩니다.",
     imageSrc: Banner01,
+    mobileImageSrc: MobileBanner01,
   },
   {
     title: "더 많은 삶이, \n당신의 따뜻한 결심으로 시작됩니다.",
     subtitle: "생명을 기다리는 이들에게 \n희망이 되어 주세요.",
     imageSrc: Banner02,
+    mobileImageSrc: MobileBanner02,
   },
   {
     title: "기증으로 이어지는 하나의 삶, \n또 다른 삶의 시작입니다",
     subtitle: "생명을 잇는 가장 아름다운 선택, \n지금 함께해 주세요",
     imageSrc: Banner03,
+    mobileImageSrc: MobileBanner03,
   },
 ];
 
@@ -84,7 +90,7 @@ export default function MainBanner() {
               aria-hidden={activeIndex !== index}
             >
               <img
-                src={item.imageSrc}
+                src={isMobile ? item.mobileImageSrc : item.imageSrc}
                 alt={item.title.replace(/\n/g, " ")}
                 className="absolute inset-0 h-full w-dvw object-cover"
                 draggable={false}
