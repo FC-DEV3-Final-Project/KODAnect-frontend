@@ -9,7 +9,7 @@ export default function QuickInfoCard({ isMobile }: { isMobile: boolean }) {
     <section
       className={clsx(
         isMobile && "mb-g11 px-p6",
-        "ml-auto flex min-w-[386px] flex-col gap-4 text-b-md text-gray-90 mobile:mb-g8 mobile:min-w-full mobile:gap-g8",
+        "pointer-events-auto ml-auto flex min-w-[386px] flex-col gap-4 text-b-md text-gray-90 mobile:mb-g8 mobile:min-w-full mobile:gap-g4",
       )}
       aria-label="빠른 정보 카드 영역"
     >
@@ -83,28 +83,28 @@ export default function QuickInfoCard({ isMobile }: { isMobile: boolean }) {
         </h2>
         <div className="flex h-[170px] items-center justify-center gap-g11 mobile:h-[164px]">
           <div
-            className="flex flex-col items-center justify-between"
+            className="flex flex-col items-center justify-between gap-g2 mobile:gap-g2"
             aria-label="장기 기증자 누적 인원"
           >
             <img src={Organ} alt="" className="h-[65px] w-[65px]" />
             <div className="text-center">
               <p className="text-h-xs font-bold mobile:text-h-xs">장기 기증자</p>
               <p className="text-b-xs text-gray-40">2025-01-16 (주간)</p>
-              <p className="text-b-xs">
-                <b className="mr-g2 text-d-md mobile:text-h-lg">25</b>명
+              <p className="mt-g2 text-b-xs">
+                <b className="mr-g2 text-d-sm mobile:text-d-md">25</b>명
               </p>
             </div>
           </div>
           <div
-            className="flex flex-col items-center justify-between"
+            className="flex flex-col items-center justify-between gap-g2 mobile:gap-g2"
             aria-label="조직 기증자 누적 인원"
           >
             <img src={Tissue} alt="" className="h-[65px] w-[65px]" />
             <div className="text-center">
               <p className="text-h-xs font-bold mobile:text-h-xs">조직 기증자</p>
               <p className="text-b-xs text-gray-40">2025-01-16 (주간)</p>
-              <p className="text-b-xs">
-                <b className="mr-g2 text-d-md mobile:text-h-lg">78</b>명
+              <p className="mt-g2 text-b-xs">
+                <b className="mr-g2 text-d-sm mobile:text-d-md">78</b>명
               </p>
             </div>
           </div>
