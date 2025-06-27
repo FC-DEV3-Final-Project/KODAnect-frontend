@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import DonorCard from "@/features/members/component/DonorCard";
+import DonorCard from "@/features/remembrance/members/component/DonorCard";
 
 const meta: Meta<typeof DonorCard> = {
   title: "Components/DonorCard",

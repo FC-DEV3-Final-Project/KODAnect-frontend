@@ -7,8 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import TopArea from "@/shared/components/TopArea";
 import Description from "@/shared/components/Description";
-import PageTitle from "@/features/lettersForm/PageTitle";
-import FormInfo from "@/features/lettersForm/FormInfo";
+import PageTitle from "@/features/remembrance/lettersForm/PageTitle";
+import FormInfo from "@/features/remembrance/lettersForm/FormInfo";
 import { Label } from "@/shared/components/Label";
 import TextInput from "@/shared/components/TextInput";
 import RadioButton from "@/shared/components/RadioButton";
@@ -24,7 +24,6 @@ export default function StoriesForm() {
   const storyWriterRef = useRef<HTMLInputElement>(null);
   const storyPasscodeRef = useRef<HTMLInputElement>(null);
   const storyTitleRef = useRef<HTMLInputElement>(null);
-  const storyContentsRef = useRef("");
 
   const navigate = useNavigate();
   const { storySeq } = useParams<{ storySeq: string }>();
@@ -65,7 +64,7 @@ export default function StoriesForm() {
     }
 
     // 내용
-    const rawContents = storyContentsRef.current;
+    const rawContents = storyContents;
     const textOnly = rawContents.replace(/<[^>]*>/g, "").trim();
     const hasImage = rawContents.includes("<img");
     if (!textOnly && !hasImage) {
@@ -100,7 +99,7 @@ export default function StoriesForm() {
         },
       });
       console.log(`${isEdit ? "수정" : "등록"} 성공:`, response.data);
-      navigate("/remembrance/stories");
+      navigate(`${isEdit ? `/remembrance/stories-view/${storySeq}` : "/remembrance/stories"}`);
     } catch (error) {
       console.error(error);
     }
@@ -234,7 +233,6 @@ export default function StoriesForm() {
                 data={storyContents}
                 onChange={(_event, editor) => {
                   const data = editor.getData();
-                  storyContentsRef.current = data;
                   setStoryContents(data);
                 }}
               />
@@ -248,7 +246,12 @@ export default function StoriesForm() {
             </div>
             <div className="flex gap-g7 mobile:w-full mobile:justify-end mobile:gap-g3">
               <Button type="submit" children={isEdit ? "수정하기" : "등록하기"} />
-              <Button type="reset" variant="tertiary" children="취소" />
+              <Button
+                type="button"
+                variant="tertiary"
+                children="취소"
+                onClick={() => window.history.back()}
+              />
             </div>
           </div>
         </form>

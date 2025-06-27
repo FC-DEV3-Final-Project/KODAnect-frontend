@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import { formatDateToYMD } from "@/shared/utils/formatDate";
-import { fetchDonorData } from "@/shared/api/remembrance/donorApi";
+import { fetchDonorData } from "@/shared/api/members/donorApi";
 import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 
 import TopArea from "@/shared/components/TopArea";
@@ -11,7 +11,7 @@ import { Label } from "@/shared/components/Label";
 import DatePicker from "@/shared/components/calendar/DatePicker";
 import TextInput from "@/shared/components/TextInput";
 import Button from "@/shared/components/Button";
-import DonorCard from "@/features/members/component/DonorCard";
+import DonorCard from "@/features/remembrance/members/component/DonorCard";
 
 import clsx from "clsx";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
@@ -54,8 +54,8 @@ export default function Members() {
         startDate,
         endDate,
         keyWord: keyword,
-        cursor: nextCursorRef.current?.cursor,
-        date: nextCursorRef.current?.date,
+        cursor: isLoadMore ? nextCursorRef.current?.cursor : undefined,
+        date: isLoadMore ? nextCursorRef.current?.date : undefined,
         size: pageSize,
       });
 
