@@ -19,7 +19,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
 
   const subMenuRef = useRef<HTMLDivElement>(null);
 
-  const { selectedDepth1, setSelectedDepth1 } = useMenuStore();
+  const { selectedDepth1, setSelectedDepth1, resetMenu } = useMenuStore();
 
   // 메뉴 열릴 때 첫 번째 메뉴 자동 선택
   useEffect(() => {
@@ -41,7 +41,9 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
             <button
               type="button"
               className="m-g3 flex gap-p3 text-b-sm font-bold"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                (setIsOpen(false), resetMenu());
+              }}
               aria-label="전체메뉴 닫기"
               aria-expanded={isOpen}
             >
