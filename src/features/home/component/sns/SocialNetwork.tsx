@@ -15,7 +15,8 @@ export default function SocialNetwork() {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    draggable: false,
+    draggable: true,
+    swipeToSlide: true,
     variableWidth: true,
   };
 

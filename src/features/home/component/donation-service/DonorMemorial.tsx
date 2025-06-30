@@ -8,7 +8,7 @@ import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 import NewBadge from "@/shared/components/NewBadge";
 import BlackRibbon from "@/assets/images/black-ribbon.png";
 import MoreButton from "@/features/home/component/common/MoreButton";
-import SliderNextArrow from "@/features/home/component/common/SliderNextArrow";
+import { SliderNextArrow } from "@/features/home/component/common/SliderArrow";
 import clsx from "clsx";
 
 export default function DonorMemorial() {

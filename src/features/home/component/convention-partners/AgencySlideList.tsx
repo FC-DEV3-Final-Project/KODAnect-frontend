@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Slider from "react-slick";
-import SliderNextArrow from "@/features/home/component/common/SliderNextArrow";
+import { SliderNextArrow, SliderPrevArrow } from "@/features/home/component/common/SliderArrow";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
 interface Agency {
@@ -32,7 +32,7 @@ export default function AgencySlideList({ items }: AgencySlideListProps) {
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <SliderNextArrow />,
-    prevArrow: <></>,
+    prevArrow: <SliderPrevArrow />,
   };
 
   return (

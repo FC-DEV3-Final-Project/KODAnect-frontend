@@ -11,6 +11,9 @@ import BannerLogo from "@/assets/images/banner-logo.svg";
 import Banner01 from "@/assets/images/mainBanner/main-banner-01.png";
 import Banner02 from "@/assets/images/mainBanner/main-banner-02.png";
 import Banner03 from "@/assets/images/mainBanner/main-banner-03.png";
+import MobileBanner01 from "@/assets/images/mainBanner/main-banner-01_mo.png";
+import MobileBanner02 from "@/assets/images/mainBanner/main-banner-02_mo.png";
+import MobileBanner03 from "@/assets/images/mainBanner/main-banner-03_mo.png";
 
 import Slider from "react-slick";
 import QuickInfoCard from "./QuickInfoCard";
@@ -20,16 +23,19 @@ const bannerItems = [
     title: "내일을 이어주는 기적, \n당신의 마음에서 시작됩니다",
     subtitle: "기적은 멀리 있지 않습니다. \n당신의 선택에서 시작됩니다.",
     imageSrc: Banner01,
+    mobileImageSrc: MobileBanner01,
   },
   {
     title: "더 많은 삶이, \n당신의 따뜻한 결심으로 시작됩니다.",
     subtitle: "생명을 기다리는 이들에게 \n희망이 되어 주세요.",
     imageSrc: Banner02,
+    mobileImageSrc: MobileBanner02,
   },
   {
     title: "기증으로 이어지는 하나의 삶, \n또 다른 삶의 시작입니다",
     subtitle: "생명을 잇는 가장 아름다운 선택, \n지금 함께해 주세요",
     imageSrc: Banner03,
+    mobileImageSrc: MobileBanner03,
   },
 ];
 
@@ -48,6 +54,8 @@ export default function MainBanner() {
     slidesToShow: 1,
     slidesToScroll: 1,
     pauseOnHover: false,
+    draggable: true,
+    swipeToSlide: true,
     beforeChange: (_oldIndex: number, newIndex: number) => setActiveIndex(newIndex),
     nextArrow: <></>,
     prevArrow: <></>,
@@ -82,7 +90,7 @@ export default function MainBanner() {
               aria-hidden={activeIndex !== index}
             >
               <img
-                src={item.imageSrc}
+                src={isMobile ? item.mobileImageSrc : item.imageSrc}
                 alt={item.title.replace(/\n/g, " ")}
                 className="absolute inset-0 h-full w-dvw object-cover"
                 draggable={false}
@@ -114,15 +122,15 @@ export default function MainBanner() {
         <div
           className={clsx(
             "h-[500px] max-w-[1280px] text-gray-90 mobile:h-[450px]",
-            "absolute inset-0 m-auto grid grid-rows-1 px-p10 py-p5",
+            "pointer-events-none absolute inset-0 m-auto grid grid-rows-1 px-p10 py-p5",
             isMobile ? "grid-cols-1" : "grid-cols-[1fr_400px]",
           )}
         >
-          <div className="mb-g8 flex w-full items-end justify-center gap-g3 mobile:mb-g4">
+          <div className="pointer-events-none mb-g8 flex w-full items-end justify-center gap-g3 mobile:mb-g4">
             {/* 슬라이드 인디케이터 */}
             <nav
               aria-label="배너 슬라이드 페이지 선택"
-              className="flex gap-2 rounded-full bg-white p-p6"
+              className="pointer-events-auto flex gap-2 rounded-full bg-white p-p6"
             >
               {bannerItems.map((_, index) => (
                 <button
@@ -141,7 +149,7 @@ export default function MainBanner() {
             </nav>
 
             {/* 자동재생 버튼 */}
-            <div className="flex justify-center gap-4">
+            <div className="pointer-events-auto flex justify-center gap-4">
               {isPlaying ? (
                 <button
                   onClick={handlePause}

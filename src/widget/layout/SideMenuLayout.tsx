@@ -8,14 +8,30 @@ import Breadcrumb from "@/shared/components/Breadcrumb";
 import SideMenu from "@/widget/sideMenu/SideMenu";
 import Footer from "@/widget/Footer";
 
+import { useMenuStore } from "@/shared/stores/useMenuStore";
+
 export default function SideMenuLayout() {
   const isMobile = useIsMobile(1075);
   useScrollToTop();
 
+  // 딤 처리를 위한 상태
+  const { selectedDepth1, resetMenu } = useMenuStore();
+
   return (
     <>
       <Header />
-
+      {/* dim */}
+      {selectedDepth1 !== null && (
+        <div
+          className="fixed left-0 right-0 z-40 bg-black bg-opacity-50"
+          style={{
+            top: 0,
+            bottom: 0,
+          }}
+          onClick={resetMenu}
+          aria-label="배경 닫기"
+        />
+      )}
       <main className={clsx(isMobile ? "pt-[92px]" : "pt-[146px]", "mobile:pt-[72px]")}>
         {/* BreadCrumb */}
         <div className="bg-gray-5 py-p8 mobile:py-p5">

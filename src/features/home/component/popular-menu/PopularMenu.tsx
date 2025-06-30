@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 
-import Calendar from "@/assets/icon/calendar.svg";
-import NewFolder from "@/assets/icon/new-folder.svg";
-import Map from "@/assets/icon/map.svg";
-import Identity from "@/assets/icon/identity.svg";
-import Analytics from "@/assets/icon/analytics.svg";
-import LocationAway from "@/assets/icon/location-away.svg";
+import Calendar from "@/assets/icon/calendar.svg?react";
+import NewFolder from "@/assets/icon/new-folder.svg?react";
+import Map from "@/assets/icon/map.svg?react";
+import Identity from "@/assets/icon/identity.svg?react";
+import Analytics from "@/assets/icon/analytics.svg?react";
+import LocationAway from "@/assets/icon/location-away.svg?react";
 
 const items = [
   { name: "기증자 예우", path: "/organ/honor/01", icon: Calendar },
@@ -34,20 +34,31 @@ export default function PopularMenu() {
         )}
         aria-label="자주찾는 메뉴 목록"
       >
-        {items.map((item, index) => (
-          <Link
-            to={item.path}
-            key={index}
-            className={clsx(
-              "flex flex-col items-center gap-g2",
-              "rounded-r6 border border-gray-30 px-p5 py-p8",
-              "mobile:text-center",
-            )}
-          >
-            <img src={item.icon} alt="" className="w-icon6 mobile:w-icon5" />
-            <span className="break-keep text-center font-bold mobile:text-b-xs">{item.name}</span>
-          </Link>
-        ))}
+        {items.map((item, index) => {
+          const Icon = item.icon;
+          return (
+            <Link
+              to={item.path}
+              key={index}
+              className={clsx(
+                "group",
+                "flex flex-col items-center gap-g2",
+                "rounded-r6 border border-gray-30 px-p5 py-p8",
+                "mobile:text-center",
+                "hover:bg-secondary-5 hover:text-secondary-50",
+                "active:bg-secondary-10 active:text-secondary-70",
+              )}
+            >
+              <Icon
+                className={clsx(
+                  "w-icon6 transition-colors mobile:w-icon5",
+                  "group-hover:fill-secondary-50 group-active:fill-secondary-70",
+                )}
+              />
+              <span className="break-keep text-center font-bold mobile:text-b-xs">{item.name}</span>
+            </Link>
+          );
+        })}
       </nav>
     </section>
   );
