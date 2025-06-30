@@ -20,7 +20,9 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
         className="mb-g9 flex items-start text-gray-90"
         aria-label={`${item.label} 관련 메뉴`}
       >
-        <h1 className="min-w-[165px] py-p6 pr-p6 text-h-md font-bold">{item.label}</h1>
+        <h1 className="min-w-[165px] py-p6 pr-p6 text-h-md font-bold text-secondary-80">
+          {item.label}
+        </h1>
         <ul
           className="flex w-full flex-wrap gap-g3 border-l border-gray-20 p-p6"
           role="menu"
@@ -35,7 +37,7 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
               href={item.path}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-w-[180px] max-w-[205px] flex-1 items-center justify-center rounded-r3 border border-gray-20 bg-white px-p6 py-p3 text-b-lg font-bold"
+              className="flex max-w-[180px] flex-1 items-center justify-center rounded-r3 border border-gray-20 bg-white px-p6 py-p3 text-b-lg font-bold"
               aria-label={`${item.label} 바로가기`}
             >
               {item.label}
@@ -54,17 +56,13 @@ export default function RecursiveMenuItem({ item, depth = 1 }: RecursiveMenuItem
 
   if (depth === 2) {
     return (
-      <li className="min-w-[180px] max-w-[205px] flex-1" role="menuitem">
+      <li className="w-full max-w-[180px] shrink-0 grow-0" role="menuitem">
         {hasChildren ? (
           <>
             <h2 className="block w-full rounded-r3 border border-gray-20 bg-white p-p3 text-center text-b-lg font-bold">
               {item.label}
             </h2>
-            <ul
-              className="mt-g5 min-w-[180px] max-w-[205px] flex-1 break-keep"
-              role="menu"
-              aria-label="3차 메뉴"
-            >
+            <ul className="mt-g5 max-w-[180px] break-keep" role="menu" aria-label="3차 메뉴">
               {item.children!.map((child) => (
                 <RecursiveMenuItem key={child.label} item={child} depth={depth + 1} />
               ))}
