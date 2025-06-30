@@ -190,12 +190,12 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
               fontSizeClass,
               getPaddingRightClass(),
               {
-                "cursor-not-allowed border border-gray-30 bg-gray-20 py-p6 pl-p6 text-gray-50":
+                "cursor-not-allowed bg-gray-20 py-p6 pl-p6 text-gray-50 outline outline-1 outline-gray-30":
                   props.disabled,
-                "border py-p6 pl-p6 text-gray-95 focus:border-2 focus:border-secondary-50 focus:outline-none":
+                "py-p6 pl-p6 text-gray-95 focus:outline-2 focus:outline-secondary-50":
                   !props.disabled,
-                "border-2 border-danger-50": error,
-                "border border-gray-60": !error && !props.disabled,
+                "outline-2 outline-danger-50": error,
+                "outline outline-1 outline-gray-60": !error && !props.disabled,
               },
             )}
             readOnly={readOnly}

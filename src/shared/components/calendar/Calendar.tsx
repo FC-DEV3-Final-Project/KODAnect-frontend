@@ -57,7 +57,7 @@ function Calendar({
 
   return (
     <div className="flex h-[48.2rem] w-[38.4rem] flex-col rounded-r6 border border-gray-30 bg-white mobile:w-[32.8rem]">
-      <div className="h-[41rem] rounded-t-r6 bg-secondary-5 pt-p6">
+      <div className="h-[41rem] rounded-t-r6 bg-white pt-p6">
         {/* 헤더 */}
         <div className="relative flex items-center justify-between px-p8 py-p3">
           <button
@@ -149,8 +149,8 @@ function Calendar({
                             "relative flex h-[4.4rem] w-[4.4rem] items-center justify-center rounded-full text-b-md transition-all duration-150 mobile:w-[4rem]",
                             {
                               "bg-secondary-80 text-white": isSelectedDate,
-                              "bg-white text-blue-700": isTodayDate && !isSelectedDate,
-                              "text-gray-90 hover:bg-white":
+                              "bg-secondary-5 text-gray-90": isTodayDate && !isSelectedDate,
+                              "text-gray-90 hover:bg-secondary-5":
                                 !isTodayDate && isCurrentMonth && !isSelectedDate,
                               "active:bg-secondary-10": !isSelectedDate,
                               "text-gray-30": !isTodayDate && !isCurrentMonth && !isSelectedDate,
@@ -159,7 +159,7 @@ function Calendar({
                         >
                           {date.getDate()}
                           {isTodayDate && !isSelectedDate && (
-                            <span className="absolute bottom-[0.6rem] h-[0.4rem] w-[0.4rem] rounded-full bg-secondary-50" />
+                            <span className="absolute bottom-[0.6rem] h-[0.4rem] w-[0.4rem] rounded-full bg-primary-50" />
                           )}
                         </button>
                       </td>
