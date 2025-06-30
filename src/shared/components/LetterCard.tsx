@@ -84,7 +84,7 @@ export default function LetterCard({
       </div>
 
       {/* 하단 정보 영역 */}
-      <div className={clsx("flex flex-col gap-g2", size === "lg" && "relative mobile:mb-[20px]")}>
+      <div className={clsx("flex flex-col gap-g2", size === "lg" && "relative mobile:mb-[24px]")}>
         {infoItems?.map((item, index) => (
           <div key={index} className="flex items-center">
             <span className={clsx("mr-g3 text-gray-40", preset.label)}>{item.label}</span>
@@ -94,7 +94,7 @@ export default function LetterCard({
         {/* 조회수: size가 'lg'일 때만 우측 하단에 표시 */}
         {size === "lg" && (
           <div
-            className="absolute bottom-0 right-0 flex gap-g2 text-gray-50 mobile:bottom-[-20px] mobile:text-b-xs"
+            className="absolute bottom-0 right-0 flex gap-g2 text-gray-50 mobile:bottom-[-24px] mobile:text-b-xs"
             aria-label="조회수"
           >
             <Visibility

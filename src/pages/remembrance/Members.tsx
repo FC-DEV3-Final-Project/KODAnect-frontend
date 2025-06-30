@@ -97,22 +97,6 @@ export default function Members() {
         >
           <div
             className={clsx(
-              "flex basis-1/2 items-center gap-g4",
-              "mobile:flex-col mobile:items-start mobile:gap-g3",
-            )}
-          >
-            <Label
-              size="m"
-              weight="bold"
-              className="min-w-[45px]"
-              onClick={() => fromRef.current?.focus()}
-            >
-              기증일
-            </Label>
-            <DatePicker range={range} onRangeChange={handleDateChange} fromRef={fromRef} />
-          </div>
-          <div
-            className={clsx(
               "flex items-center gap-g4",
               "mobile:flex-col mobile:items-start mobile:gap-g3",
             )}
@@ -134,12 +118,28 @@ export default function Members() {
               }}
             />
           </div>
+          <div
+            className={clsx(
+              "flex basis-1/2 items-center gap-g4",
+              "mobile:flex-col mobile:items-start mobile:gap-g3",
+            )}
+          >
+            <Label
+              size="m"
+              weight="bold"
+              className="min-w-[45px]"
+              onClick={() => fromRef.current?.focus()}
+            >
+              기증일
+            </Label>
+            <DatePicker range={range} onRangeChange={handleDateChange} fromRef={fromRef} />
+          </div>
           <div className="mobile:flex mobile:justify-end">
             <Button
               type="submit"
               size={isDesktop ? "medium" : "small"}
               aria-label="기증자 검색"
-              className="w-[70px] mobile:-mt-g1"
+              className="w-[70px] mobile:-mt-g1 mobile:w-full"
             >
               검색
             </Button>
@@ -155,7 +155,12 @@ export default function Members() {
 
         {/* 추모 카드 영역 */}
         <div className={clsx("flex flex-col gap-g8", "mobile:gap-g5")}>
-          <div className={clsx("flex flex-wrap gap-g6", "mobile:gap-x-g3 mobile:gap-y-g5")}>
+          <div
+            className={clsx(
+              "flex flex-wrap justify-center gap-g6",
+              "mobile:gap-x-g3 mobile:gap-y-g5",
+            )}
+          >
             {donorData.map((item, index) => (
               <DonorCard
                 key={index}

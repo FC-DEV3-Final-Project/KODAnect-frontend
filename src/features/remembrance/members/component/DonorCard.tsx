@@ -39,7 +39,7 @@ export default function DonorCard({
   return (
     <article
       className={clsx(
-        "flex max-w-[284px] basis-1/4 flex-col gap-g6 rounded-r6 border-2 border-transparent bg-white p-p8 text-gray-90",
+        "flex max-w-[284px] basis-1/4 flex-col gap-g6 overflow-hidden rounded-r6 border-2 border-transparent bg-white p-p8 text-gray-90",
         "shadow-[0_0_2px_0_theme('colors.secondary.10'),0_8px_16px_0_theme('colors.secondary.10')]",
         "mobile:max-w-[160px] mobile:basis-1/2 mobile:py-p6 mobile:pl-p6 mobile:pr-p5",
       )}
@@ -62,15 +62,10 @@ export default function DonorCard({
           className={clsx("h-[66px] w-[66px] rounded-r4", "mobile:h-[59px] mobile:w-[59px]")}
         />
         {/* 기증자 */}
-        <div className="flex flex-col gap-g2">
-          <div
-            className={clsx(
-              "flex h-[52px] flex-wrap items-center",
-              "mobile:h-[40px] mobile:flex-nowrap",
-            )}
-          >
+        <div className={clsx("flex h-[80px] flex-col justify-center gap-g2", "mobile:h-[64px]")}>
+          <div className={clsx("flex flex-wrap items-center", "mobile:flex-nowrap")}>
             <h2 className="mr-g3 min-w-[34px] text-b-xs text-gray-40">기증자</h2>
-            <p className="text-h-2xs font-bold">
+            <p className={clsx("text-h-xs font-bold", "mobile:text-h-2xs")}>
               <span className="mr-g1">{donorName}</span>
               <span>
                 ({genderFlag},{donateAge})

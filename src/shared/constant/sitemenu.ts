@@ -48,9 +48,9 @@ export const SITE_MENU: SiteMenu[] = [
   {
     label: "기증희망등록",
     children: [
-      { label: "기증희망등록 방법 안내", path: "/donation-registration/01" },
+      { label: "등록 방법 안내", path: "/donation-registration/01" },
       { label: "온라인 신규 등록", path: "/donation-registration/02" },
-      { label: "기증희망등록 여부 확인", path: "/donation-registration/03" },
+      { label: "등록 여부 확인", path: "/donation-registration/03" },
     ],
   },
   {
