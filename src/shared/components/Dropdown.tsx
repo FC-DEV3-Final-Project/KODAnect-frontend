@@ -41,7 +41,9 @@ type DropdownProps = {
 export function Dropdown({ options, value, onChange, placeholder, className }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [focusIndex, setFocusIndex] = useState<number>(-1);
 
+  // 외부 클릭 시 드롭다운 닫기
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -51,6 +53,43 @@ export function Dropdown({ options, value, onChange, placeholder, className }: D
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // 키보드로 드롭다운 선택
+  useEffect(() => {
+    if (isOpen) {
+      setFocusIndex(options.findIndex((opt) => opt.value === value));
+    }
+  }, [isOpen, options, value]);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!isOpen) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        setIsOpen(true);
+      }
+      return;
+    }
+
+    //화살표로 이동
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setFocusIndex((prev) => (prev + 1) % options.length); // 순환(맨 아래에서 누르면 맨 위로 이동)
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setFocusIndex((prev) => (prev - 1 + options.length) % options.length); //인덱스가 음수가 되지 않도록 조정
+    } else if (e.key === "Enter") {
+      //enter로 선택
+      e.preventDefault();
+      const selectedOption = options[focusIndex];
+      if (selectedOption) {
+        onChange(selectedOption.value);
+        setIsOpen(false);
+      }
+    } else if (e.key === "Escape") {
+      // esc로 닫기
+      setIsOpen(false);
+    }
+  };
 
   const selectedLabel = options.find((opt) => opt.value === value)?.label || placeholder;
 
@@ -62,6 +101,7 @@ export function Dropdown({ options, value, onChange, placeholder, className }: D
         aria-expanded={isOpen}
         aria-controls="dropdown-listbox"
         onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={handleKeyDown}
         className="flex h-full w-full items-center justify-between gap-g3 rounded-r3 border border-gray-60 bg-white px-p6 py-p4 text-b-md text-gray-90 focus:outline focus:outline-2 focus:outline-secondary-50 mobile:text-b-sm"
       >
         {selectedLabel}
@@ -79,8 +119,9 @@ export function Dropdown({ options, value, onChange, placeholder, className }: D
           aria-labelledby="dropdown-button"
           className="absolute z-10 mt-2 w-fit min-w-[10.4rem] rounded-r4 border border-gray-20 bg-white p-p3 shadow-s2 mobile:w-full"
         >
-          {options.map((option) => {
+          {options.map((option, index) => {
             const isSelected = option.value === value;
+            const isFocused = index === focusIndex;
             return (
               <li
                 role="option"
@@ -90,11 +131,7 @@ export function Dropdown({ options, value, onChange, placeholder, className }: D
                   onChange(option.value);
                   setIsOpen(false);
                 }}
-                className={`flex w-full cursor-pointer items-center gap-g3 rounded-r3 px-p6 py-p4 text-b-md mobile:text-b-sm ${
-                  isSelected
-                    ? "bg-secondary-5 text-secondary-80"
-                    : "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10"
-                }`}
+                className={`flex w-full cursor-pointer items-center gap-g3 rounded-r3 px-p6 py-p4 text-b-md mobile:text-b-sm ${isFocused ? "bg-secondary-10" : ""} ${isSelected ? "bg-secondary-5 text-secondary-80" : "text-gray-90 hover:bg-secondary-5 active:bg-secondary-10"} `}
               >
                 {isSelected && (
                   <img src={CheckIcon} className="mr-1 h-icon2 w-icon2" alt="선택됨" />
