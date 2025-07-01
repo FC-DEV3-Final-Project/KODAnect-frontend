@@ -51,6 +51,10 @@ function DatePicker({ range, onRangeChange, fromRef, yearRange }: DatePickerProp
     } else if (open === "to") {
       onRangeChange({ ...range, to: date });
       setOpen(null);
+    } else {
+      // 방어로직
+      console.warn(`handleSelect: 예상하지 못한 open 값 "${open}"입니다.`);
+      setOpen(null); // UI 복구
     }
   };
 
