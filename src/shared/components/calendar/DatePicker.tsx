@@ -26,9 +26,10 @@ type DatePickerProps = {
   range: DateRange;
   onRangeChange: (range: DateRange) => void;
   fromRef?: React.Ref<HTMLButtonElement>;
+  yearRange?: { start: number; end: number };
 };
 
-function DatePicker({ range, onRangeChange, fromRef }: DatePickerProps) {
+function DatePicker({ range, onRangeChange, fromRef, yearRange }: DatePickerProps) {
   const [open, setOpen] = useState<"from" | "to" | null>(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const ref = useRef<HTMLDivElement>(null);
@@ -113,6 +114,7 @@ function DatePicker({ range, onRangeChange, fromRef }: DatePickerProps) {
               setOpen(null);
             }}
             onTodayClick={handleTodayClick}
+            yearRange={yearRange}
           />
         </div>
       )}

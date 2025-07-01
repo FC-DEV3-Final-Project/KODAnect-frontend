@@ -21,6 +21,7 @@ type CalendarProps = {
   onMonthChange: (date: Date) => void;
   onCancel: () => void;
   onTodayClick: () => void;
+  yearRange?: { start: number; end: number };
 };
 
 const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
@@ -38,10 +39,13 @@ function Calendar({
   onMonthChange,
   onCancel,
   onTodayClick,
+  yearRange,
 }: CalendarProps) {
   const [openDropdown, setOpenDropdown] = useState<"year" | "month" | null>(null);
   const calendarDays = getCalendarDays(currentMonth);
-  const years = Array.from({ length: 6 }, (_, i) => 2020 + i).reverse(); // 2020~2025
+  const startYear = yearRange?.start ?? 2020;
+  const endYear = yearRange?.end ?? 2025;
+  const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i).reverse();
   const months = Array.from({ length: 12 }, (_, i) => i + 1); //1 ~ 12
 
   const navigateMonth = (direction: "prev" | "next") => {
