@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 type ButtonProps<E extends React.ElementType> = {
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary" | "tertiary";
@@ -56,13 +58,13 @@ export default function Button<E extends React.ElementType = "button">({
     },
   }[size];
 
-  const buttonStyles = `
-    ${baseStyles} 
-    ${disabled ? variantStyles.disabledStyle : variantStyles.style} 
-    ${sizeStyles.style} 
-    ${disabled ? "cursor-not-allowed" : ""}
-    ${className}
-  `;
+  const buttonStyles = clsx(
+    baseStyles,
+    disabled ? variantStyles.disabledStyle : variantStyles.style,
+    sizeStyles.style,
+    disabled && "cursor-not-allowed",
+    className,
+  );
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === "Enter" || event.key === " ") {
