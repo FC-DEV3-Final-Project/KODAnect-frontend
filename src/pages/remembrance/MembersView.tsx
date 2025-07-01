@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { getMemberDetail, patchEmotionCount } from "@/shared/api/members-view/member/memberApi";
-import type { MemberDetail, EmotionType } from "@/shared/api/members-view/member/types";
+import type { EmotionType } from "@/shared/api/members-view/member/types";
 
 import {
   createComment,
@@ -20,6 +20,7 @@ import TributeArea from "@/features/remembrance/members-view/component/TributeAr
 import CommentArea from "@/shared/components/comment/CommentArea";
 import HeavenLetterList from "@/features/remembrance/members-view/component/HeavenLetterList";
 import { withData } from "@/shared/utils/withData";
+import { EMOTION_COUNT_KEYS } from "@/shared/constant/emotion";
 
 export default function MembersView() {
   const { donateSeq } = useParams();
@@ -60,7 +61,7 @@ export default function MembersView() {
 
         setOptimisticDonor((prev) => {
           if (!prev) return prev;
-          const key = emotionCountKeys[emotion];
+          const key = EMOTION_COUNT_KEYS[emotion];
           return {
             ...prev,
             [key]: (prev[key] as number) + 1,
@@ -74,16 +75,6 @@ export default function MembersView() {
     },
     [donateSeq, refetch],
   );
-
-  const emotionCountKeys: Record<EmotionType, keyof MemberDetail> = {
-    flower: "flowerCount",
-    love: "loveCount",
-    see: "seeCount",
-    miss: "missCount",
-    proud: "proudCount",
-    hard: "hardCount",
-    sad: "sadCount",
-  };
 
   return (
     <div className="mx-auto w-full">
