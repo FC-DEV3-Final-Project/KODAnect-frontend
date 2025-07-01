@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { formatDateToYMD } from "@/shared/utils/formatDate";
+import { format } from "date-fns";
 import { fetchDonorData } from "@/shared/api/members/donorApi";
 import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
 
@@ -44,8 +44,8 @@ export default function Members() {
 
   const handleDateChange = (range: { from: Date | null; to: Date | null }) => {
     setRange(range);
-    setStartDate(range.from ? formatDateToYMD(range.from) : "");
-    setEndDate(range.to ? formatDateToYMD(range.to) : "");
+    setStartDate(range.from ? format(range.from, "yyyy-MM-dd") : "");
+    setEndDate(range.to ? format(range.to, "yyyy-MM-dd") : "");
   };
 
   const fetchAndSetData = async (isLoadMore = false) => {
@@ -157,8 +157,8 @@ export default function Members() {
         <div className={clsx("flex flex-col gap-g8", "mobile:gap-g5")}>
           <div
             className={clsx(
-              "flex flex-wrap justify-center gap-g6",
-              "mobile:gap-x-g3 mobile:gap-y-g5",
+              "flex flex-wrap gap-g6",
+              "mobile:justify-center mobile:gap-x-g3 mobile:gap-y-g5",
             )}
           >
             {donorData.map((item, index) => (

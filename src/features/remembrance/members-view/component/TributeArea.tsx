@@ -19,7 +19,7 @@ import Button from "@/shared/components/Button";
 import blackRibbon from "@/assets/images/black-ribbon.png";
 import tributeFlower from "@/assets/images/tribute-flower.png";
 import parse from "html-react-parser";
-import { formatDateToDotNotation } from "@/shared/utils/formatDate";
+import { format, parseISO } from "date-fns";
 
 interface TributeAreaProps {
   donor: MemberDetail | null;
@@ -80,7 +80,7 @@ export default function TributeArea({ donor }: TributeAreaProps) {
             </div>
             <div className={clsx("flex gap-g3 text-b-lg", "mobile:text-b-md")}>
               <span className="font-bold">기증일</span>
-              <time>{formatDateToDotNotation(donor.donateDate)}</time>
+              <time>{format(parseISO(donor.donateDate), "yyyy.MM.dd")}</time>
             </div>
           </div>
 
