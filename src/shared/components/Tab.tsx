@@ -43,7 +43,7 @@ function TabButton({ label, isSelected, onClick, id, panelId }: TabButtonProps) 
 }
 
 export function Tab({ type }: TabProps) {
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(() => TABS.findIndex((tab) => tab.type === type));
   const navigate = useNavigate();
 
   useEffect(() => {
