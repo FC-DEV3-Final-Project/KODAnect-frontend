@@ -29,8 +29,9 @@ export default function LetterCardList() {
           size: 10,
         },
       });
-      // 매핑 적용
-      const mappedData = response.data.data.content.map(heavenLetterMain);
+      // data, data.content가 undefined일 수 있으므로 안전하게 처리
+      const content = response.data?.data?.content ?? [];
+      const mappedData = content.map(heavenLetterMain);
       setLetters(mappedData);
       setTotalCount(response.data.data.totalCount);
     };
