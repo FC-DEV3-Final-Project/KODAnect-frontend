@@ -20,7 +20,10 @@ import Calendar from "@/shared/components/calendar/Calendar";
  * - `fromRef`: label 클릭 시 포커스 이동을 위한 버튼 참조
  */
 
-type DateRange = { from: Date | null; to: Date | null };
+interface DateRange {
+  from: Date | null;
+  to: Date | null;
+}
 
 type DatePickerProps = {
   range: DateRange;

@@ -2,12 +2,12 @@ import { forwardRef } from "react";
 import CalendarIcon from "@/assets/icon/calendar.svg?react";
 import { format } from "date-fns";
 
-type DateInputProps = {
+interface DateInputProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "value"> {
   value?: Date;
   placeholder: string;
   onClick: () => void;
   onOpen?: () => void;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "value">;
+}
 
 const DateInput = forwardRef<HTMLButtonElement, DateInputProps>(
   ({ value, placeholder, onClick, onOpen, ...props }, ref) => {

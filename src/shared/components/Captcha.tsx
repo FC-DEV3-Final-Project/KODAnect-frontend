@@ -34,10 +34,10 @@ import TextInput from "@/shared/components/TextInput";
  * }
  */
 
-type CaptchaSectionProps = {
+interface CaptchaSectionProps {
   value: string;
   onChange: (value: string) => void;
-};
+}
 
 function Captcha({ value, onChange }: CaptchaSectionProps) {
   useEffect(() => {

@@ -25,18 +25,18 @@ import CheckIcon from "@/assets/icon/check.svg";
  * - `placeholder`: 선택되지 않았을 때 표시할 텍스트
  */
 
-type DropdownOption = {
+interface DropdownOption {
   label: string;
   value: string;
-};
+}
 
-type DropdownProps = {
+interface DropdownProps {
   options: DropdownOption[];
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
   className?: string;
-};
+}
 
 export function Dropdown({ options, value, onChange, placeholder, className }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);

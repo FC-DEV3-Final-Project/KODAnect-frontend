@@ -2,12 +2,12 @@ import Button from "@/shared/components/Button";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 import ReactHtmlParser from "html-react-parser";
 
-type InfoItem = {
+interface InfoItem {
   label: string;
   value: string | number;
-};
+}
 
-type LetterContentProps = {
+interface LetterContentProps {
   title: string;
   content: string;
   infoItems: InfoItem[];
@@ -16,7 +16,7 @@ type LetterContentProps = {
   onGoList?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
-};
+}
 
 export default function LetterContent({
   title,

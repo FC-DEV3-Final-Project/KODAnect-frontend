@@ -14,7 +14,7 @@ import Arrow from "@/assets/icon/round-arrow.svg?react";
 import Button from "@/shared/components/Button";
 import { DropdownSelect } from "@/shared/components/calendar/DropdownSelect";
 
-type CalendarProps = {
+interface CalendarProps {
   selected: Date | undefined;
   onSelect: (date: Date) => void;
   currentMonth: Date;
@@ -22,7 +22,7 @@ type CalendarProps = {
   onCancel: () => void;
   onTodayClick: () => void;
   yearRange?: { start: number; end: number };
-};
+}
 
 const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
 
