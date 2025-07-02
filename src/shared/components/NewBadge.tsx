@@ -2,7 +2,7 @@ import { parseISO, differenceInDays } from "date-fns";
 
 type BadgeSize = "lg" | "sm";
 
-type NewBadgeProps = {
+interface NewBadgeProps {
   size?: BadgeSize;
   date?: string | Date;
   className?: string;

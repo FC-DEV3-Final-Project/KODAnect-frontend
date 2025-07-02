@@ -1,14 +1,3 @@
-/*
- * 사용 방법
- *
- * 아래와 같이 donor 데이터를 추출해 전달합니다.
- *
- * const location = useLocation();
- * const donor = location.state?.donor;
- *
- * <TributeArea donor={donor} />
- */
-
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
