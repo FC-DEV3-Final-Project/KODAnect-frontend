@@ -132,7 +132,12 @@ export default function Members() {
             >
               기증일
             </Label>
-            <DatePicker range={range} onRangeChange={handleDateChange} fromRef={fromRef} />
+            <DatePicker
+              range={range}
+              onRangeChange={handleDateChange}
+              fromRef={fromRef}
+              yearRange={{ start: 2020, end: 2025 }}
+            />
           </div>
           <div className="mobile:flex mobile:justify-end">
             <Button

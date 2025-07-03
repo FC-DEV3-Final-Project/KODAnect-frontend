@@ -8,16 +8,16 @@ import receiverMobile from "@/assets/images/receiver_m.webp";
 import donorMobile from "@/assets/images/donor_m.webp";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
 
-type ContentType = {
+interface ContentType {
   imgUrl: string;
   title: string;
   description: string | string[];
   mobileImgUrl?: string;
-};
+}
 
-type TopVisualProps = {
+interface TopVisualProps {
   type: "members" | "letters" | "recipients" | "stories";
-};
+}
 
 const CONTENT: Record<TopVisualProps["type"], ContentType> = {
   members: {

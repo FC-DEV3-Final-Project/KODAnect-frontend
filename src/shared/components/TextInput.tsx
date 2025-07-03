@@ -48,7 +48,7 @@ import clsx from "clsx";
  * - 너비는 부모 요소에서 지정 (`w-full`, `min-w-[...]` 등)
  */
 
-type TextInputProps = {
+interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   title?: string;
   description?: string;
@@ -64,7 +64,7 @@ type TextInputProps = {
   onClear?: () => void;
   onToggleIconClick?: () => void;
   readOnly?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+}
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
