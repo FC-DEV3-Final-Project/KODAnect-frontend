@@ -26,6 +26,7 @@
     "react-router-dom": "^7.6.1",
     "react-simple-captcha": "^9.3.1",
     "react-slick": "^0.30.3",
+    "react-toastify": "^11.0.5",
     "slick-carousel": "^1.8.1",
     "storybook-addon-remix-react-router": "^3.1.0",
     "tailwind-scrollbar-hide": "^4.0.0",
