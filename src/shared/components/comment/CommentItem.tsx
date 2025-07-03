@@ -6,12 +6,12 @@ import type { Comment as CommentType } from "@/shared/api/recipient-view/comment
 import OptionIcon from "@/assets/icon/ellipsis-vertical.svg?react";
 import { Modal } from "@/shared/components/Modal";
 
-type CommentItemProps = {
+interface CommentItemProps {
   comment: CommentType;
   isOpen: boolean;
   onToggle: () => void;
   onDelete?: (id: number) => void;
-};
+}
 
 function CommentItem({ comment, isOpen, onToggle, onDelete }: CommentItemProps) {
   const { letterId, deleteComment, verifyComment, setEditingComment } = useCommentContext();

@@ -17,7 +17,7 @@ import FocusIcon from "@/assets/icon/system-info.svg";
  * />
  */
 
-type TextAreaProps = {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
   title?: string;
   description?: string;
@@ -25,7 +25,7 @@ type TextAreaProps = {
   error?: string;
   completed?: string;
   focusMessage?: string;
-} & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+}
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (

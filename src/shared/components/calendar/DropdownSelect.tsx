@@ -2,7 +2,7 @@ import clsx from "clsx";
 import ArrowDropdown from "@/assets/icon/arrow-drop-down.svg?react";
 import CheckIcon from "@/assets/icon/check.svg?react";
 
-type DropdownSelectProps = {
+interface DropdownSelectProps {
   items: number[];
   selectedItem: number;
   formatItem: (item: number) => string;
@@ -10,7 +10,7 @@ type DropdownSelectProps = {
   buttonLabel: string;
   open: boolean;
   onToggle: () => void;
-};
+}
 
 export function DropdownSelect({
   items,

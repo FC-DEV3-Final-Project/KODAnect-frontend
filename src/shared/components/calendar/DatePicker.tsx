@@ -20,15 +20,19 @@ import Calendar from "@/shared/components/calendar/Calendar";
  * - `fromRef`: label 클릭 시 포커스 이동을 위한 버튼 참조
  */
 
-type DateRange = { from: Date | null; to: Date | null };
+interface DateRange {
+  from: Date | null;
+  to: Date | null;
+}
 
 type DatePickerProps = {
   range: DateRange;
   onRangeChange: (range: DateRange) => void;
   fromRef?: React.Ref<HTMLButtonElement>;
+  yearRange?: { start: number; end: number };
 };
 
-function DatePicker({ range, onRangeChange, fromRef }: DatePickerProps) {
+function DatePicker({ range, onRangeChange, fromRef, yearRange }: DatePickerProps) {
   const [open, setOpen] = useState<"from" | "to" | null>(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const ref = useRef<HTMLDivElement>(null);
@@ -45,10 +49,23 @@ function DatePicker({ range, onRangeChange, fromRef }: DatePickerProps) {
 
   const handleSelect = (date: Date) => {
     if (open === "from") {
-      onRangeChange({ ...range, from: date });
+      // from이 to보다 나중이라면 to 초기화
+      if (range.to && date > range.to) {
+        onRangeChange({ from: date, to: null });
+      } else {
+        onRangeChange({ ...range, from: date });
+      }
       setOpen(null);
     } else if (open === "to") {
+      // to가 from보다 빠르면 무시
+      if (range.from && date < range.from) {
+        alert("종료일은 시작일 이후여야 합니다.");
+        return;
+      }
       onRangeChange({ ...range, to: date });
+      setOpen(null);
+    } else {
+      console.warn(`handleSelect: 예상하지 못한 open 값 "${open}"입니다.`);
       setOpen(null);
     }
   };
@@ -113,6 +130,7 @@ function DatePicker({ range, onRangeChange, fromRef }: DatePickerProps) {
               setOpen(null);
             }}
             onTodayClick={handleTodayClick}
+            yearRange={yearRange}
           />
         </div>
       )}
