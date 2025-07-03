@@ -34,7 +34,7 @@ const memorialIcons: { emotion: EmotionType; label: string; icon: ReactElement }
 export default function MemorialIconGroup({ onClickEmotion, counts }: MemorialIconGroupProps) {
   const throttledClick = useMemo(() => {
     return throttle(onClickEmotion, 1500);
-  }, [onClickEmotion]);
+  }, []);
 
   return (
     <div
