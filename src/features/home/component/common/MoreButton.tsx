@@ -1,10 +1,10 @@
 import Arrow from "@/assets/icon/arrow-down.svg?react";
 import { Link } from "react-router-dom";
 
-type MoreButtonProps = {
+interface MoreButtonProps {
   to?: string;
   className?: string;
-};
+}
 
 export default function MoreButton({ to = "#", className = "", ...props }: MoreButtonProps) {
   return (
