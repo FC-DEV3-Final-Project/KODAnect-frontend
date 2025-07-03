@@ -22,6 +22,10 @@ import HeavenLetterList from "@/features/remembrance/members-view/component/Heav
 import { withData } from "@/shared/utils/withData";
 import { EMOTION_COUNT_KEYS } from "@/shared/constant/emotion";
 
+import SkeletonTributeArea from "@/shared/components/skeleton/membersView/SkeletonTributeArea";
+import SkeletonHeavenLetterList from "@/shared/components/skeleton/membersView/SkeletonHeavenLetterList";
+import SkeletonCommentArea from "@/shared/components/skeleton/membersView/SkeletonCommentArea";
+
 export default function MembersView() {
   const { donateSeq } = useParams();
   const navigate = useNavigate();
@@ -92,7 +96,11 @@ export default function MembersView() {
       <div className="mx-auto mt-[76px] max-w-[1280px] px-p10 mobile:min-w-[360px] mobile:px-p6">
         <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS} />
         {isLoading ? (
-          <p className="mt-10 text-center">불러오는 중입니다...</p>
+          <>
+            <SkeletonTributeArea />
+            <SkeletonCommentArea />
+            <SkeletonHeavenLetterList />
+          </>
         ) : donor ? (
           <>
             <TributeArea donor={donor} />
