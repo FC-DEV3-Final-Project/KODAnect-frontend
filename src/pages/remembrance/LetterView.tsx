@@ -16,7 +16,7 @@ import {
 } from "@/shared/api/letter-view/comment/commentApi";
 
 import Description from "@/shared/components/Description";
-import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/letters-view";
+import { START_BEFORE, CHECK_ITEMS_CASE2 } from "@/shared/constant/letters";
 import LetterContent from "@/features/remembrance/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
 import TopArea from "@/shared/components/TopArea";
@@ -52,7 +52,7 @@ export default function LetterView() {
     <div className="mx-auto w-full">
       <TopArea />
       <div className="mx-auto mt-[76px] max-w-[1200px] px-p10 mobile:min-w-[360px] mobile:px-p6">
-        <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS} />
+        <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS_CASE2} />
         {isLoading ? (
           <p className="mt-10 text-center">불러오는 중...</p>
         ) : letter ? (
