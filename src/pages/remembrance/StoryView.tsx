@@ -24,6 +24,9 @@ import { getStoryInfoItems } from "@/features/remembrance/story-view/utils/getSt
 import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
 
+import SkeletonLetterContent from "@/shared/components/skeleton/SkeletonLetterContent";
+import SkeletonCommentArea from "@/shared/components/skeleton/membersView/SkeletonCommentArea";
+
 export default function StoryView() {
   const { storySeq } = useParams<{ storySeq: string }>();
   const navigate = useNavigate();
@@ -55,7 +58,10 @@ export default function StoryView() {
         <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS} />
 
         {isLoading ? (
-          <p className="mt-10 text-center">불러오는 중...</p>
+          <>
+            <SkeletonLetterContent />
+            <SkeletonCommentArea />
+          </>
         ) : story ? (
           <>
             <LetterContent

@@ -24,6 +24,9 @@ import { getHeavenInfoItems } from "@/features/remembrance/letter-view/utils/get
 import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
 
+import SkeletonLetterContent from "@/shared/components/skeleton/SkeletonLetterContent";
+import SkeletonCommentArea from "@/shared/components/skeleton/membersView/SkeletonCommentArea";
+
 export default function LetterView() {
   const { letterSeq } = useParams<{ letterSeq: string }>();
   const navigate = useNavigate();
@@ -54,7 +57,10 @@ export default function LetterView() {
       <div className="mx-auto mt-[76px] max-w-[1200px] px-p10 mobile:min-w-[360px] mobile:px-p6">
         <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS_CASE2} />
         {isLoading ? (
-          <p className="mt-10 text-center">불러오는 중...</p>
+          <>
+            <SkeletonLetterContent />
+            <SkeletonCommentArea />
+          </>
         ) : letter ? (
           <>
             <LetterContent

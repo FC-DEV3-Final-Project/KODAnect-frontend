@@ -24,6 +24,9 @@ import { getRecipientInfoItems } from "@/features/remembrance/recipient-view/uti
 import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
 
+import SkeletonLetterContent from "@/shared/components/skeleton/SkeletonLetterContent";
+import SkeletonCommentArea from "@/shared/components/skeleton/membersView/SkeletonCommentArea";
+
 export default function RecipientView() {
   const { letterSeq } = useParams<{ letterSeq: string }>();
   const navigate = useNavigate();
@@ -54,7 +57,10 @@ export default function RecipientView() {
       <div className="mx-auto mt-[76px] max-w-[1280px] px-p10 mobile:min-w-[360px] mobile:px-p6">
         <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS} />
         {isLoading ? (
-          <p className="mt-10 text-center">불러오는 중...</p>
+          <>
+            <SkeletonLetterContent />
+            <SkeletonCommentArea />
+          </>
         ) : letter ? (
           <>
             <LetterContent
