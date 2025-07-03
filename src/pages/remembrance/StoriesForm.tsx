@@ -16,6 +16,7 @@ import Captcha from "@/shared/components/Captcha";
 import Button from "@/shared/components/Button";
 import CustomUploadAdapterPlugin from "@/shared/utils/ckeditor/CustomUploadAdapterPlugin";
 import { AREA_OPTIONS } from "@/shared/constant/stories-form";
+import { toast } from "react-toastify";
 
 export default function StoriesForm() {
   const [areaCode, setAreaCode] = useState("AREA100");
@@ -93,6 +94,7 @@ export default function StoriesForm() {
         },
       });
       console.log(`${isEdit ? "수정" : "등록"} 성공:`, response.data);
+      toast.success(`${isEdit ? "편지가 수정" : "편지가 등록"} 되었습니다.`);
       navigate(`${isEdit ? `/remembrance/stories-view/${storySeq}` : "/remembrance/stories"}`);
     } catch (error) {
       console.error(error);
