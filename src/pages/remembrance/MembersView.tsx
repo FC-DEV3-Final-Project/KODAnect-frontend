@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 import { getMemberDetail, patchEmotionCount } from "@/shared/api/members-view/member/memberApi";
 import type { EmotionType, MemberDetail } from "@/shared/api/members-view/member/types";
