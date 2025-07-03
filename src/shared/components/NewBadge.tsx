@@ -1,6 +1,8 @@
+import { parseISO, differenceInDays } from "date-fns";
+
 type BadgeSize = "lg" | "sm";
 
-type NewBadgeProps = {
+interface NewBadgeProps {
   size?: BadgeSize;
   date?: string | Date;
   className?: string;
@@ -21,8 +23,8 @@ export default function NewBadge({ size = "lg", date, className = "" }: NewBadge
   if (!date) return null;
 
   const now = new Date();
-  const donated = typeof date === "string" ? new Date(date) : date;
-  const diffDays = (now.getTime() - donated.getTime()) / (1000 * 60 * 60 * 24);
+  const donated = typeof date === "string" ? parseISO(date) : date;
+  const diffDays = differenceInDays(now, donated);
 
   if (diffDays > 7) return null;
 

@@ -15,7 +15,7 @@ import {
 
 import TopArea from "@/shared/components/TopArea";
 import Description from "@/shared/components/Description";
-import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/members-view";
+import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/members";
 import TributeArea from "@/features/remembrance/members-view/component/TributeArea";
 import CommentArea from "@/shared/components/comment/CommentArea";
 import HeavenLetterList from "@/features/remembrance/members-view/component/HeavenLetterList";
