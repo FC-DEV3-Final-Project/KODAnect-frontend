@@ -17,6 +17,7 @@ import Captcha from "@/shared/components/Captcha";
 import Button from "@/shared/components/Button";
 import CustomUploadAdapterPlugin from "@/shared/utils/ckeditor/CustomUploadAdapterPlugin";
 import { ORGAN_OPTIONS } from "@/shared/constant/recipients-form";
+import { toast } from "react-toastify";
 
 export default function RecipientsForm() {
   const [anonymityFlag, setAnonymityFlag] = useState(false);
@@ -140,6 +141,7 @@ export default function RecipientsForm() {
         },
       });
       console.log(`${isEdit ? "수정" : "등록"} 성공:`, response.data);
+      toast.success(`${isEdit ? "편지가 수정" : "편지가 등록"} 되었습니다.`);
       navigate(
         `${isEdit ? `/remembrance/recipients-view/${letterSeq}` : "/remembrance/recipients"}`,
       );

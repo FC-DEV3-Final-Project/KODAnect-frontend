@@ -23,6 +23,7 @@ import TopArea from "@/shared/components/TopArea";
 import { getRecipientInfoItems } from "@/features/remembrance/recipient-view/utils/getRecipientInfoItems";
 import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
+import { toast } from "react-toastify";
 
 import SkeletonLetterContent from "@/shared/components/skeleton/SkeletonLetterContent";
 import SkeletonCommentArea from "@/shared/components/skeleton/membersView/SkeletonCommentArea";
@@ -118,6 +119,7 @@ export default function RecipientView() {
                       console.log("전달되는 비밀번호:", password);
 
                       await deleteLetter(Number(letterSeq), { letterPasscode: password });
+                      toast.success("편지가 삭제되었습니다.");
                       navigate(`/remembrance/recipients`);
                     }
                   } catch (err) {

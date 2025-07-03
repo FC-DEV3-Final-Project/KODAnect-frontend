@@ -23,6 +23,7 @@ import TopArea from "@/shared/components/TopArea";
 import { getHeavenInfoItems } from "@/features/remembrance/letter-view/utils/getHeavenInfoItems";
 import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
+import { toast } from "react-toastify";
 
 import SkeletonLetterContent from "@/shared/components/skeleton/SkeletonLetterContent";
 import SkeletonCommentArea from "@/shared/components/skeleton/membersView/SkeletonCommentArea";
@@ -114,6 +115,7 @@ export default function LetterView() {
                       navigate(`/remembrance/letters-form/${letter.letterSeq}`, { state: letter });
                     } else {
                       await deleteHeavenLetter(Number(letterSeq), { letterPasscode: password });
+                      toast.success("편지가 삭제되었습니다.");
                       navigate(`/remembrance/letters`);
                     }
                   } catch (err) {

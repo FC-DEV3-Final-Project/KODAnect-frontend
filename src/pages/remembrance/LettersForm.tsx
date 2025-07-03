@@ -19,6 +19,7 @@ import Pagination from "@/shared/components/Pagination";
 import Captcha from "@/shared/components/Captcha";
 import Button from "@/shared/components/Button";
 import CustomUploadAdapterPlugin from "@/shared/utils/ckeditor/CustomUploadAdapterPlugin";
+import { toast } from "react-toastify";
 
 interface Donor {
   donateSeq: number;
@@ -170,6 +171,7 @@ export default function LettersForm() {
         },
       });
       console.log(`${isEdit ? "수정" : "등록"} 성공:`, response.data);
+      toast.success(`${isEdit ? "편지가 수정" : "편지가 등록"} 되었습니다.`);
       navigate(`${isEdit ? `/remembrance/letters-view/${letterSeq}` : "/remembrance/letters"}`);
     } catch (error) {
       console.error(error);
