@@ -23,6 +23,10 @@ import TopArea from "@/shared/components/TopArea";
 import { getStoryInfoItems } from "@/features/remembrance/story-view/utils/getStoryInfoItems";
 import { Modal } from "@/shared/components/Modal";
 import { withData } from "@/shared/utils/withData";
+import { toast } from "react-toastify";
+
+import SkeletonLetterContent from "@/shared/components/skeleton/SkeletonLetterContent";
+import SkeletonCommentArea from "@/shared/components/skeleton/membersView/SkeletonCommentArea";
 
 export default function StoryView() {
   const { storySeq } = useParams<{ storySeq: string }>();
@@ -55,7 +59,10 @@ export default function StoryView() {
         <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS} />
 
         {isLoading ? (
-          <p className="mt-10 text-center">불러오는 중...</p>
+          <>
+            <SkeletonLetterContent />
+            <SkeletonCommentArea />
+          </>
         ) : story ? (
           <>
             <LetterContent
@@ -108,6 +115,7 @@ export default function StoryView() {
                       navigate(`/remembrance/stories-form/${story.storySeq}`, { state: story });
                     } else {
                       await deleteStoryLetter(Number(storySeq), { storyPasscode: password });
+                      toast.success("편지가 삭제되었습니다.");
                       navigate(`/remembrance/stories`);
                     }
                   } catch (err) {

@@ -187,3 +187,15 @@
   color: #555;
   font-style: italic;
 }
+
+/* toast */
+
+/* 성공 토스트 진행바 색상 */
+.Toastify__toast--success .Toastify__progress-bar {
+  background: #063a74;
+}
+
+/* 성공 토스트 체크 아이콘 색상 */
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: #063a74;
+}

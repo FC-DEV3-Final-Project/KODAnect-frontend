@@ -5,6 +5,7 @@ import type { Comment as CommentType } from "@/shared/api/recipient-view/comment
 
 import OptionIcon from "@/assets/icon/ellipsis-vertical.svg?react";
 import { Modal } from "@/shared/components/Modal";
+import { toast } from "react-toastify";
 
 interface CommentItemProps {
   comment: CommentType;
@@ -97,6 +98,7 @@ function CommentItem({ comment, isOpen, onToggle, onDelete }: CommentItemProps) 
                 await deleteComment(letterId, commentSeq, {
                   commentPasscode: password,
                 });
+                toast.success("댓글이 삭제되었습니다.");
                 onDelete?.(commentSeq);
               } else {
                 await verifyComment(letterId, commentSeq, {

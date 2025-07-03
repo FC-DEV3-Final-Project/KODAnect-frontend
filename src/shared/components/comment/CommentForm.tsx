@@ -11,6 +11,7 @@ import TextArea from "@/shared/components/Textarea";
 import Captcha from "@/shared/components/Captcha";
 import Button from "@/shared/components/Button";
 import { validateCaptcha } from "react-simple-captcha";
+import { toast } from "react-toastify";
 
 interface CommentFormProps {
   onCommentSubmit?: (newComment: CommentType) => void; // 등록된 댓글 콜백
@@ -60,7 +61,7 @@ function CommentForm({ onCommentSubmit }: CommentFormProps) {
           commentWriter: state.commentWriter,
           contents: state.contents,
         });
-        alert("댓글이 수정되었습니다.");
+        toast.success("댓글이 수정되었습니다.");
 
         onCommentSubmit?.({
           ...editingComment,
@@ -80,13 +81,14 @@ function CommentForm({ onCommentSubmit }: CommentFormProps) {
           contents: state.contents,
           commentPasscode: state.commentPasscode,
         });
-        alert("댓글이 등록되었습니다.");
+        toast.success("댓글이 등록되었습니다.");
         window.location.reload();
       }
 
       dispatch({ type: "RESET" });
       setInputCaptcha("");
     } catch (err) {
+      alert("댓글 등록에 실패하였습니다. 다시 시도해주세요");
       console.error("댓글 등록 실패", err);
     }
   };
