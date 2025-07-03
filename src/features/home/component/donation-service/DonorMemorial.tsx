@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,21 +12,22 @@ import MoreButton from "@/features/home/component/common/MoreButton";
 import { SliderNextArrow } from "@/features/home/component/common/SliderArrow";
 import clsx from "clsx";
 
+// 1. 함수 분리
+async function fetchDonorList() {
+  const response = await api.get("/remembrance", {
+    params: { size: 10 },
+  });
+  return response.data.data.content as DonorData[];
+}
+
 export default function DonorMemorial() {
-  const [donor, setDonor] = useState<DonorData[]>([]);
   const sliderRef = useRef<Slider | null>(null);
 
-  useEffect(() => {
-    const loadData = async () => {
-      const response = await api.get("remembrance", {
-        params: {
-          size: 10,
-        },
-      });
-      setDonor(response.data.data.content);
-    };
-    loadData();
-  }, []);
+  // 2. React Query로 데이터 패칭
+  const { data: donor = [], isError } = useQuery({
+    queryKey: ["donorList", 10],
+    queryFn: fetchDonorList,
+  });
 
   const settings = {
     dots: false,
@@ -36,6 +38,10 @@ export default function DonorMemorial() {
     nextArrow: <SliderNextArrow />,
     prevArrow: <></>,
   };
+
+  if (isError) {
+    return <div>데이터를 불러오지 못했습니다.</div>;
+  }
 
   return (
     <article

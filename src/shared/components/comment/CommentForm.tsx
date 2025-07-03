@@ -12,9 +12,9 @@ import Captcha from "@/shared/components/Captcha";
 import Button from "@/shared/components/Button";
 import { validateCaptcha } from "react-simple-captcha";
 
-type CommentFormProps = {
+interface CommentFormProps {
   onCommentSubmit?: (newComment: CommentType) => void; // 등록된 댓글 콜백
-};
+}
 
 type FormState = Pick<CreateCommentPayload, "commentWriter" | "contents" | "commentPasscode">;
 

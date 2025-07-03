@@ -16,7 +16,7 @@ import {
 } from "@/shared/api/recipient-view/comment/commentApi";
 
 import Description from "@/shared/components/Description";
-import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/recipients-view";
+import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/recipients";
 import LetterContent from "@/features/remembrance/letter-view/components/LetterContent";
 import CommentArea from "@/shared/components/comment/CommentArea";
 import TopArea from "@/shared/components/TopArea";

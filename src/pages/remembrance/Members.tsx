@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { format } from "date-fns";
 import { useIsMobile } from "@/shared/hooks/useIsMobile";
-import { formatDateToYMD } from "@/shared/utils/formatDate";
-import { fetchDonorData } from "@/shared/api/members/donorApi";
-import type { DonorData } from "@/shared/types/remembrance/DonorData.types";
+import { useDonorList } from "@/shared/hooks/useDonorList";
 
 import TopArea from "@/shared/components/TopArea";
 import { Label } from "@/shared/components/Label";
@@ -12,6 +11,7 @@ import DatePicker from "@/shared/components/calendar/DatePicker";
 import TextInput from "@/shared/components/TextInput";
 import Button from "@/shared/components/Button";
 import DonorCard from "@/features/remembrance/members/component/DonorCard";
+import DonorCardSkeletonList from "@/features/remembrance/members/component/DonorCardSkeleton";
 
 import clsx from "clsx";
 import PlusIcon from "@/assets/icon/btn-more.svg?react";
@@ -21,60 +21,34 @@ export default function Members() {
   const isDesktop = !useIsMobile(768);
   const pageSize = isDesktop ? 20 : 16;
 
-  const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
-    from: null,
-    to: null,
-  });
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [keyword, setKeyword] = useState("");
 
-  const [donorData, setDonorData] = useState<DonorData[]>([]);
-  const [hasNext, setHasNext] = useState(false);
-  const [nextCursor, setNextCursor] = useState<{ cursor: number; date: string } | null>(null);
-  const [totalCount, setTotalCount] = useState(0);
-
+  const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
+    from: null,
+    to: null,
+  });
   const fromRef = useRef<HTMLButtonElement>(null);
-  const nextCursorRef = useRef(nextCursor);
 
-  // 데이터 불러오기
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isError, refetch } =
+    useDonorList({ startDate, endDate, keyword, pageSize });
+
+  const donorData = data ? data.pages.flatMap((page) => page.content) : [];
+  const totalCount = data?.pages?.[0]?.totalCount ?? 0;
+
   useEffect(() => {
-    handleLoadMore();
-  }, []);
+    if (isError) navigate("/error");
+  }, [isError, navigate]);
 
   const handleDateChange = (range: { from: Date | null; to: Date | null }) => {
     setRange(range);
-    setStartDate(range.from ? formatDateToYMD(range.from) : "");
-    setEndDate(range.to ? formatDateToYMD(range.to) : "");
+    setStartDate(range.from ? format(range.from, "yyyy-MM-dd") : "");
+    setEndDate(range.to ? format(range.to, "yyyy-MM-dd") : "");
   };
 
-  const fetchAndSetData = async (isLoadMore = false) => {
-    try {
-      const result = await fetchDonorData({
-        startDate,
-        endDate,
-        keyWord: keyword,
-        cursor: isLoadMore ? nextCursorRef.current?.cursor : undefined,
-        date: isLoadMore ? nextCursorRef.current?.date : undefined,
-        size: pageSize,
-      });
-
-      // 더보기라면 기존 데이터에 추가, 아니라면 새로 설정
-      setDonorData((prev) => (isLoadMore ? [...prev, ...result.content] : result.content));
-      setHasNext(result.hasNext);
-      setNextCursor(result.nextCursor);
-      nextCursorRef.current = result.nextCursor;
-      setTotalCount(result.totalCount);
-    } catch (error) {
-      navigate("/error");
-    }
-  };
-
-  // 검색 핸들러
-  const handleSearch = () => fetchAndSetData(false);
-
-  // 더보기 버튼 클릭 시 실행
-  const handleLoadMore = () => fetchAndSetData(true);
+  const handleSearch = () => refetch();
+  const handleLoadMore = () => fetchNextPage();
 
   return (
     <>
@@ -132,7 +106,12 @@ export default function Members() {
             >
               기증일
             </Label>
-            <DatePicker range={range} onRangeChange={handleDateChange} fromRef={fromRef} />
+            <DatePicker
+              range={range}
+              onRangeChange={handleDateChange}
+              fromRef={fromRef}
+              yearRange={{ start: 2020, end: 2025 }}
+            />
           </div>
           <div className="mobile:flex mobile:justify-end">
             <Button
@@ -157,36 +136,42 @@ export default function Members() {
         <div className={clsx("flex flex-col gap-g8", "mobile:gap-g5")}>
           <div
             className={clsx(
-              "flex flex-wrap justify-center gap-g6",
-              "mobile:gap-x-g3 mobile:gap-y-g5",
+              "flex flex-wrap gap-g6",
+              "mobile:justify-center mobile:gap-x-g3 mobile:gap-y-g5",
             )}
           >
-            {donorData.map((item, index) => (
-              <DonorCard
-                key={index}
-                donateSeq={item.donateSeq}
-                donorName={item.donorName}
-                genderFlag={item.genderFlag}
-                donateAge={item.donateAge}
-                donateDate={item.donateDate}
-                commentCount={item.commentCount}
-                letterCount={item.letterCount}
-              />
-            ))}
+            {isLoading ? (
+              <DonorCardSkeletonList count={isDesktop ? 20 : 8} />
+            ) : (
+              donorData.map((item, index) => (
+                <DonorCard
+                  key={index}
+                  donateSeq={item.donateSeq}
+                  donorName={item.donorName}
+                  genderFlag={item.genderFlag}
+                  donateAge={item.donateAge}
+                  donateDate={item.donateDate}
+                  commentCount={item.commentCount}
+                  letterCount={item.letterCount}
+                />
+              ))
+            )}
           </div>
-          {hasNext && (
+          {hasNextPage && (
             <Button
               size={isDesktop ? "large" : "medium"}
               variant="secondary"
               aria-label="추모 카드 더보기"
               className={clsx("flex w-full gap-g2 text-b-lg text-secondary-60", "mobile:text-b-md")}
               onClick={handleLoadMore}
+              disabled={isFetchingNextPage}
             >
-              더보기
+              {isFetchingNextPage ? "로딩 중..." : "더보기"}
               <PlusIcon
                 className={clsx(
                   "h-icon4 w-icon4 text-secondary-50",
                   "mobile:h-icon3 mobile:w-icon3",
+                  isFetchingNextPage && "hidden",
                 )}
                 aria-hidden="true"
                 focusable="false"

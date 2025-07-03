@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useCallback, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useCallback, useEffect } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { getMemberDetail, patchEmotionCount } from "@/shared/api/members-view/member/memberApi";
-import type { MemberDetail, EmotionType } from "@/shared/api/members-view/member/types";
+import type { EmotionType, MemberDetail } from "@/shared/api/members-view/member/types";
 
 import {
   createComment,
@@ -15,75 +15,76 @@ import {
 
 import TopArea from "@/shared/components/TopArea";
 import Description from "@/shared/components/Description";
-import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/members-view";
+import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/members";
 import TributeArea from "@/features/remembrance/members-view/component/TributeArea";
 import CommentArea from "@/shared/components/comment/CommentArea";
 import HeavenLetterList from "@/features/remembrance/members-view/component/HeavenLetterList";
 import { withData } from "@/shared/utils/withData";
+import { EMOTION_COUNT_KEYS } from "@/shared/constant/emotion";
 
 export default function MembersView() {
   const { donateSeq } = useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const {
     data: donor,
     isLoading,
     error,
-    refetch,
   } = useQuery({
     queryKey: ["memberDetail", donateSeq],
     queryFn: () => getMemberDetail(Number(donateSeq)),
     enabled: !!donateSeq,
   });
 
-  const [optimisticDonor, setOptimisticDonor] = useState(donor ?? null);
+  // useMutation으로 낙관적 업데이트
+  const emotionMutation = useMutation({
+    mutationFn: (emotion: EmotionType) => patchEmotionCount(Number(donateSeq), emotion),
 
-  useEffect(() => {
-    if (donor) {
-      setOptimisticDonor(donor);
-    }
-  }, [donor]);
+    // 낙관적 업데이트 (UI 먼저 반영)
+    onMutate: async (emotion) => {
+      await queryClient.cancelQueries({ queryKey: ["memberDetail", donateSeq] });
+
+      const previousData = queryClient.getQueryData(["memberDetail", donateSeq]);
+
+      // 캐시된 데이터에 count + 1 증가
+      queryClient.setQueryData<MemberDetail>(["memberDetail", donateSeq], (old) => {
+        if (!old) return old;
+        const key = EMOTION_COUNT_KEYS[emotion];
+        return {
+          ...old,
+          [key]: (old[key] as number) + 1,
+        };
+      });
+
+      return { previousData };
+    },
+
+    onError: (_err, _emotion, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(["memberDetail", donateSeq], context.previousData);
+      }
+    },
+
+    // 요청 성공, 실패 상관 없이 실행 -> 서버와 데이터 동기화
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["memberDetail", donateSeq] });
+    },
+  });
+
+  const handleEmotionClick = useCallback(
+    (emotion: EmotionType) => {
+      if (!donateSeq) return;
+      emotionMutation.mutate(emotion);
+    },
+    [donateSeq, emotionMutation],
+  );
 
   useEffect(() => {
     if (error) {
       navigate("/error");
     }
   }, [error, navigate]);
-
-  // 이모지 클릭 이벤트 핸들러
-  const handleEmotionClick = useCallback(
-    async (emotion: EmotionType) => {
-      if (!donateSeq) return;
-
-      try {
-        await patchEmotionCount(Number(donateSeq), emotion);
-
-        setOptimisticDonor((prev) => {
-          if (!prev) return prev;
-          const key = emotionCountKeys[emotion];
-          return {
-            ...prev,
-            [key]: (prev[key] as number) + 1,
-          };
-        });
-
-        refetch();
-      } catch (e) {
-        console.error("이모지 업데이트 실패", e);
-      }
-    },
-    [donateSeq, refetch],
-  );
-
-  const emotionCountKeys: Record<EmotionType, keyof MemberDetail> = {
-    flower: "flowerCount",
-    love: "loveCount",
-    see: "seeCount",
-    miss: "missCount",
-    proud: "proudCount",
-    hard: "hardCount",
-    sad: "sadCount",
-  };
 
   return (
     <div className="mx-auto w-full">
@@ -94,7 +95,7 @@ export default function MembersView() {
           <p className="mt-10 text-center">불러오는 중입니다...</p>
         ) : donor ? (
           <>
-            <TributeArea donor={optimisticDonor ?? donor} />
+            <TributeArea donor={donor} />
             <CommentArea
               variant="memorial"
               initialCommentData={donor.memorialCommentResponses}

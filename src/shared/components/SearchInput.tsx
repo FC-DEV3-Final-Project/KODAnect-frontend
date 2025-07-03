@@ -16,10 +16,10 @@ import DeleteIcon from "@/assets/icon/delete.svg?react";
  * }
  */
 
-type SearchInputProps = {
+interface SearchInputProps {
   placeholder: string;
   onSubmit: (query: string) => void;
-};
+}
 
 function SearchInput({ onSubmit, placeholder }: SearchInputProps) {
   const [inputValue, setInputValue] = useState("");

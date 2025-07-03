@@ -15,6 +15,7 @@ import RadioButton from "@/shared/components/RadioButton";
 import Captcha from "@/shared/components/Captcha";
 import Button from "@/shared/components/Button";
 import CustomUploadAdapterPlugin from "@/shared/utils/ckeditor/CustomUploadAdapterPlugin";
+import { AREA_OPTIONS } from "@/shared/constant/stories-form";
 
 export default function StoriesForm() {
   const [areaCode, setAreaCode] = useState("AREA100");
@@ -28,13 +29,6 @@ export default function StoriesForm() {
   const navigate = useNavigate();
   const { storySeq } = useParams<{ storySeq: string }>();
   const isEdit = !!storySeq;
-
-  // 권역
-  const areaOptions = [
-    { label: "1권역 (수도권, 강원, 제주)", value: "AREA100" },
-    { label: "2권역 (충청, 전라)", value: "AREA200" },
-    { label: "3권역 (영남)", value: "AREA300" },
-  ];
 
   // 등록
   const handleSubmit = async (e: React.FormEvent) => {
@@ -191,7 +185,7 @@ export default function StoriesForm() {
               />
               <RadioButton
                 name="area"
-                options={areaOptions}
+                options={AREA_OPTIONS}
                 selectedValue={areaCode}
                 onChange={setAreaCode}
               />

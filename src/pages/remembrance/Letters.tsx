@@ -13,7 +13,7 @@ import SearchInput from "@/shared/components/SearchInput";
 import Button from "@/shared/components/Button";
 import LetterCard from "@/shared/components/LetterCard";
 
-import { START_BEFORE, CHECK_ITEMS } from "@/shared/constant/letters";
+import { START_BEFORE, CHECK_ITEMS_CASE1 } from "@/shared/constant/letters";
 import { DROPDOWN_OPTIONS } from "@/shared/constant/dropdownOptions";
 
 import clsx from "clsx";
@@ -95,7 +95,7 @@ export default function Letters() {
         )}
       >
         {/* 설명 콜아웃 */}
-        <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS} />
+        <Description startBefore={START_BEFORE} checkItems={CHECK_ITEMS_CASE1} />
 
         {/* 검색 영역 */}
         <div className={clsx("my-[26px] flex gap-g5", "mobile:mb-g10 mobile:mt-g7 mobile:gap-g3")}>
